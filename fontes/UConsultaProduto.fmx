@@ -1,0 +1,781 @@
+inherited FConsProduto: TFConsProduto
+  Caption = 'FCadModelo1'
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
+  DesignerMasterStyle = 3
+  inherited LytBase: TLayout
+    inherited TbControlCadModelo: TTabControl
+      Sizes = (
+        330s
+        431s
+        330s
+        431s)
+      inherited TbItemListagem: TTabItem
+        ExplicitSize.cx = 165.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        inherited ToolBarsuperior: TToolBar
+          inherited LblTitulo: TLabel
+            StyledSettings = []
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 18.000000000000000000
+            TextSettings.Font.StyleExt = {04070000000000000004000000}
+            Text = 'Produtos'
+          end
+          inherited SpBVoltar: TSpeedButton
+            OnClick = SpBVoltarClick
+          end
+          object SpdBNovoCadProd: TSpeedButton
+            Align = Right
+            IconTintColor = claNavy
+            Margins.Right = 8.000000000000000000
+            Position.X = 274.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'addtoolbutton'
+            OnClick = SpdBNovoCadProdClick
+          end
+        end
+        object LytListagem: TLayout
+          Align = Client
+          Size.Width = 330.000000000000000000
+          Size.Height = 383.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object EdtFiltroNomeProd: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 0
+            Scale.Y = 1.299999952316284000
+            Size.Width = 330.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Filtrar pelo nome'
+            OnClick = EdtFiltroNomeProdClick
+            object SearchEditButton1: TSearchEditButton
+              CanFocus = False
+              Cursor = crArrow
+              Position.Y = 2.000000000000000000
+              Size.Width = 32.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              OnClick = SearchEditButton1Click
+            end
+          end
+          object EdtFiltroCodProd: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 1
+            KeyboardType = NumberPad
+            Position.Y = 41.599998474121090000
+            Scale.Y = 1.299999952316284000
+            Size.Width = 330.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Filtrar pelo codigo'
+            OnClick = EdtFiltroCodProdClick
+            object SearchEditButton2: TSearchEditButton
+              CanFocus = False
+              Cursor = crArrow
+              Position.Y = 2.000000000000000000
+              Size.Width = 32.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              OnClick = SearchEditButton2Click
+            end
+          end
+          object ListViewConsProd: TListView
+            ItemAppearanceClassName = 'TImageListItemBottomDetailRightButtonAppearance'
+            ItemEditAppearanceClassName = 'TImageListItemBottomDetailRightButtonShowCheckAppearance'
+            HeaderAppearanceClassName = 'TListHeaderObjects'
+            FooterAppearanceClassName = 'TListHeaderObjects'
+            Align = Client
+            Size.Width = 330.000000000000000000
+            Size.Height = 255.800003051757800000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            ItemAppearanceObjects.ItemObjects.TextButton.Font.Family = 'Arial'
+            ItemAppearanceObjects.ItemObjects.TextButton.TextColor = claNavy
+            ItemAppearanceObjects.ItemObjects.TextButton.Text = 'Detalhes'
+            OnItemClick = ListViewConsProdItemClick
+            OnButtonClick = ListViewConsProdButtonClick
+          end
+          object BtnFiltroCodBar: TButton
+            Action = TakePhotoFromCameraAction1
+            Align = Top
+            Enabled = True
+            ImageIndex = -1
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 83.199996948242190000
+            Size.Width = 290.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 3
+            Text = 'Scanear codigo de barras'
+            Visible = True
+          end
+        end
+      end
+      inherited TbItemedicao: TTabItem
+        ExplicitSize.cx = 165.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        object LytFundoEdicao: TLayout
+          Align = Client
+          Size.Width = 330.000000000000000000
+          Size.Height = 431.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object ToolBar1: TToolBar
+            Size.Width = 330.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            TintColor = claSilver
+            object LblTituloEdicao: TLabel
+              Align = Contents
+              StyledSettings = [Size]
+              Size.Width = 330.000000000000000000
+              Size.Height = 48.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Arial'
+              TextSettings.Font.Size = 18.000000000000000000
+              TextSettings.Font.StyleExt = {04070000000000000004000000}
+              TextSettings.FontColor = claNavy
+              TextSettings.HorzAlign = Center
+              Text = 'Detalhes'
+            end
+            object SpBVoltarEdicao: TSpeedButton
+              Align = Left
+              IconTintColor = claNavy
+              Size.Width = 48.000000000000000000
+              Size.Height = 48.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'backtoolbutton'
+              OnClick = SpBVoltarEdicaoClick
+            end
+            object SpBEditarProd: TSpeedButton
+              Align = MostRight
+              StyledSettings = [Family, Size, Style]
+              IconTintColor = claNavy
+              Margins.Right = 8.000000000000000000
+              Position.X = 274.000000000000000000
+              Size.Width = 48.000000000000000000
+              Size.Height = 48.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'composetoolbutton'
+              TextSettings.FontColor = claNavy
+              OnClick = SpBEditarProdClick
+            end
+            object SpBConfirmarProd: TSpeedButton
+              Align = MostRight
+              IconTintColor = claNavy
+              Margins.Right = 8.000000000000000000
+              Position.X = 218.000000000000000000
+              Size.Width = 48.000000000000000000
+              Size.Height = 48.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'donetoolbutton'
+              OnClick = SpBConfirmarProdClick
+            end
+          end
+          object ListBoxEdicaoConsProd: TListBox
+            Align = Client
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Size.Width = 314.000000000000000000
+            Size.Height = 367.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'listboxstyle'
+            TabOrder = 1
+            DisableFocusEffect = True
+            DefaultItemStyles.ItemStyle = ''
+            DefaultItemStyles.GroupHeaderStyle = ''
+            DefaultItemStyles.GroupFooterStyle = ''
+            Viewport.Width = 309.000000000000000000
+            Viewport.Height = 367.000000000000000000
+            object ListBoxItem1: TListBoxItem
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object EdtNomeProd: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 0
+                MaxLength = 65
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Nome Produto'
+                object EdtBNomeProd: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                  OnClick = EdtBNomeProdClick
+                end
+              end
+              object LblNomeProd: TLabel
+                Align = Left
+                StyledSettings = [FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Nome:'
+              end
+            end
+            object ListBoxItem2: TListBoxItem
+              Position.Y = 40.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object EdtDescProd: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 0
+                MaxLength = 20
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 225.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Descricao Produto'
+                object EdtBDescProd: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                  OnClick = EdtBDescProdClick
+                end
+              end
+              object Label2: TLabel
+                Align = Left
+                StyledSettings = [FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 72.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Descricao:'
+              end
+            end
+            object ListBoxItem3: TListBoxItem
+              Position.Y = 80.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 2
+              object EdtUnProd: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 0
+                MaxLength = 4
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Und Produto'
+                object EdtBUnProd: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                  OnClick = EdtBUnProdClick
+                end
+              end
+              object LblUnProd: TLabel
+                Align = Left
+                StyledSettings = [FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Unidade:'
+              end
+            end
+            object ListBoxItem4: TListBoxItem
+              Position.Y = 120.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 3
+              object EdtSiglaGrupoProd: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 0
+                MaxLength = 6
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Sigla Grupo'
+                object EdtBSiglaGrupoProd: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                  OnClick = EdtBSiglaGrupoProdClick
+                end
+              end
+              object LblSiglaProd: TLabel
+                Align = Left
+                StyledSettings = [FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Sigla:'
+              end
+            end
+            object ListBoxItem5: TListBoxItem
+              Position.Y = 160.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 4
+              object EdtGrupoProd: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 0
+                MaxLength = 50
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Grupo Produto'
+                object EdtBGrupoProd: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                  OnClick = EdtBGrupoProdClick
+                end
+              end
+              object LblGrupoProd: TLabel
+                Align = Left
+                StyledSettings = [FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Grupo:'
+              end
+            end
+            object ListBoxItem6: TListBoxItem
+              Position.Y = 200.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 5
+              object EdtCodBarraProd: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 0
+                KeyboardType = NumberPad
+                MaxLength = 13
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 259.399993896484400000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Codigo De barras'
+                object EdtBCodBarraProd: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                  OnClick = EdtBCodBarraProdClick
+                end
+              end
+              object SpBCodBar: TSpeedButton
+                Action = TakePhotoFromCameraAction2
+                Align = Left
+                Enabled = True
+                IconTintColor = claNavy
+                ImageIndex = -1
+                Margins.Left = 4.000000000000000000
+                Position.X = 3.200000047683716000
+                Position.Y = 1.000000000000000000
+                Scale.X = 0.800000011920929000
+                Scale.Y = 0.800000011920929000
+                Size.Width = 48.000000000000000000
+                Size.Height = 48.000000000000000000
+                Size.PlatformDefault = False
+                StyleLookup = 'cameratoolbutton'
+                Visible = True
+              end
+            end
+            object ListBoxItem7: TListBoxItem
+              Position.Y = 240.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 6
+              object EdtVrPrazaProd: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 0
+                KeyboardType = NumbersAndPunctuation
+                MaxLength = 15
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Valor Aprazo'
+                object EdtBVrPrazaProd: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                  OnClick = EdtBVrPrazaProdClick
+                end
+              end
+              object LblVlAprazoProd: TLabel
+                Align = Left
+                StyledSettings = [FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Vl Aprazo:'
+              end
+            end
+            object ListBoxItem8: TListBoxItem
+              Position.Y = 280.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 7
+              object EdtVrVistaProd: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 0
+                KeyboardType = NumbersAndPunctuation
+                MaxLength = 15
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Valor Avista'
+                object EdtBVrVistaProd: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                  OnClick = EdtBVrVistaProdClick
+                end
+              end
+              object LblVlAvistaProd: TLabel
+                Align = Left
+                StyledSettings = [FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Vl Avista:'
+              end
+            end
+            object ListBoxItem9: TListBoxItem
+              Position.Y = 320.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 8
+              object EdtVrPromocaoProd: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 0
+                KeyboardType = NumbersAndPunctuation
+                MaxLength = 15
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 204.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Valor Promocao'
+                object EdtBVrPromocaoProd: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                  OnClick = EdtBVrPromocaoProdClick
+                end
+              end
+              object LblVlPromocaoProd: TLabel
+                Align = Left
+                StyledSettings = [FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 93.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Vl Promocao:'
+              end
+            end
+            object ListBoxItem10: TListBoxItem
+              Position.Y = 360.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 9
+              object LblAtivoProd: TLabel
+                Align = Left
+                StyledSettings = [FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Ativo:'
+              end
+              object RadioBAtivoS: TRadioButton
+                Align = Left
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 73.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 72.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+                Text = 'Sim'
+              end
+              object RadioBAtivoN: TRadioButton
+                Align = Left
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 145.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 80.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 2
+                Text = 'Nao'
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+  inherited ActionList1: TActionList
+    Left = 24
+    Top = 424
+    object TakePhotoFromCameraAction1: TTakePhotoFromCameraAction
+      Category = 'Media Library'
+      OnDidFinishTaking = TakePhotoFromCameraAction1DidFinishTaking
+    end
+    object TakePhotoFromCameraAction2: TTakePhotoFromCameraAction
+      Category = 'Media Library'
+      OnDidFinishTaking = TakePhotoFromCameraAction2DidFinishTaking
+    end
+  end
+  inherited ImageList1: TImageList
+    Left = 24
+    Top = 184
+  end
+  object FObrConsProd: TFObr
+    Left = 24
+    Top = 357
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = DM.FDQConsultaProd
+    ScopeMappings = <>
+    Left = 32
+    Top = 296
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 36
+    Top = 237
+    object LinkListControlToField1: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'produto'
+      Control = ListViewConsProd
+      FillExpressions = <
+        item
+          SourceMemberName = 'vrvenda'
+          ControlMemberName = 'Detail'
+        end>
+      FillHeaderExpressions = <>
+      FillHeaderFieldName = 'codigo'
+      FillBreakGroups = <>
+    end
+    object LinkControlToField1: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'produto'
+      Control = EdtNomeProd
+      Track = False
+    end
+    object LinkControlToField2: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'descricao'
+      Control = EdtDescProd
+      Track = False
+    end
+    object LinkControlToField3: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'un'
+      Control = EdtUnProd
+      Track = False
+    end
+    object LinkControlToField4: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'sigla'
+      Control = EdtSiglaGrupoProd
+      Track = False
+    end
+    object LinkControlToField5: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'grupo'
+      Control = EdtGrupoProd
+      Track = False
+    end
+    object LinkControlToField6: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'CodigoBarra'
+      Control = EdtCodBarraProd
+      Track = False
+    end
+    object LinkControlToField7: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'vrvenda'
+      Control = EdtVrPrazaProd
+      Track = False
+    end
+    object LinkControlToField8: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'VRAVISTA'
+      Control = EdtVrVistaProd
+      Track = False
+    end
+    object LinkControlToField9: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'vrpromocao'
+      Control = EdtVrPromocaoProd
+      Track = False
+    end
+  end
+end

@@ -1,0 +1,179 @@
+inherited FCadCli_Windows: TFCadCli_Windows
+  DesignerMasterStyle = 0
+  inherited LytBase: TLayout
+    inherited TbControlCadModelo: TTabControl
+      Sizes = (
+        361s
+        431s
+        361s
+        431s)
+      inherited TbItemListagem: TTabItem
+        Size.Width = 65.000000000000000000
+        ExplicitSize.cx = 165.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        inherited ToolBarsuperior: TToolBar
+          inherited LblTitulo: TLabel
+            TextSettings.Font.StyleExt = {04070000000000000004000000}
+          end
+          inherited BtnNovoCadCLi: TButton
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+          end
+        end
+        inherited Layout1: TLayout
+          inherited EditFiltroNomeCadCli: TEdit
+            inherited EditButtonPesqNomeCli: TEditButton
+              Size.Height = 33.599998474121090000
+            end
+          end
+          inherited EditFiltroCodCadCli: TEdit
+            inherited EditButtonPesqCodCli: TEditButton
+              Size.Height = 33.599998474121090000
+            end
+          end
+        end
+      end
+      inherited TbItemedicao: TTabItem
+        Size.Width = 55.000000000000000000
+        ExplicitSize.cx = 165.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        inherited ToolBar1: TToolBar
+          inherited lblTituloEdicao: TLabel
+            TextSettings.Font.StyleExt = {04070000000000000004000000}
+          end
+        end
+        inherited ListBoxEdicaoCadCli: TListBox
+          Viewport.Width = 325.000000000000000000
+          Viewport.Height = 363.000000000000000000
+          inherited ListBoxItem1: TListBoxItem
+            Size.Width = 325.000000000000000000
+            inherited EdtNomeCli: TEdit
+              Size.Width = 317.000000000000000000
+            end
+          end
+          inherited ListBoxItem2: TListBoxItem
+            Size.Width = 325.000000000000000000
+            inherited ComboBoxTipoPessoaCli: TComboBox
+              Size.Width = 232.000000000000000000
+            end
+          end
+          inherited ListBoxItem3: TListBoxItem
+            Size.Width = 325.000000000000000000
+            inherited EdtCpfCli: TEdit
+              Size.Width = 317.000000000000000000
+            end
+          end
+          inherited ListBoxItem4: TListBoxItem
+            Size.Width = 325.000000000000000000
+            inherited EdtRgCli: TEdit
+              Size.Width = 317.000000000000000000
+            end
+          end
+          inherited ListBoxItem5: TListBoxItem
+            Size.Width = 325.000000000000000000
+            inherited EdtApelidoCli: TEdit
+              Size.Width = 317.000000000000000000
+            end
+          end
+          inherited ListBoxItem6: TListBoxItem
+            Size.Width = 325.000000000000000000
+            inherited EdtFoneCli: TEdit
+              Size.Width = 317.000000000000000000
+            end
+          end
+          inherited ListBoxItem7: TListBoxItem
+            Size.Width = 325.000000000000000000
+            inherited EdtEnderecoCli: TEdit
+              Size.Width = 317.000000000000000000
+            end
+          end
+          inherited ListBoxItem8: TListBoxItem
+            Size.Width = 325.000000000000000000
+            inherited EdtNumCli: TEdit
+              Size.Width = 317.000000000000000000
+            end
+          end
+          inherited ListBoxItem9: TListBoxItem
+            Size.Width = 325.000000000000000000
+            inherited EdtCompCli: TEdit
+              Size.Width = 317.000000000000000000
+            end
+          end
+          inherited ListBoxItem10: TListBoxItem
+            Size.Width = 325.000000000000000000
+            inherited EdtBairroCli: TEdit
+              Size.Width = 317.000000000000000000
+              inherited EdtBBairroCli: TEditButton
+                Size.Height = 50.000000000000000000
+              end
+            end
+          end
+          inherited ListBoxItem11: TListBoxItem
+            Size.Width = 325.000000000000000000
+            inherited EdtCepCli: TEdit
+              Size.Width = 317.000000000000000000
+              inherited EdtBCepCli: TEditButton
+                Size.Height = 50.000000000000000000
+              end
+            end
+          end
+          inherited ListBoxItem12: TListBoxItem
+            Size.Width = 325.000000000000000000
+            inherited EdtCidadeCli: TEdit
+              Size.Width = 317.000000000000000000
+              inherited EdtBCidadeCli: TEditButton
+                Size.Height = 50.000000000000000000
+              end
+            end
+          end
+          inherited ListBoxItem13: TListBoxItem
+            Size.Width = 325.000000000000000000
+            inherited EdtUfCli: TEdit
+              Size.Width = 317.000000000000000000
+              inherited EdtBUfCli: TEditButton
+                Size.Height = 50.000000000000000000
+              end
+            end
+          end
+          inherited ListBoxItem14: TListBoxItem
+            Size.Width = 325.000000000000000000
+            inherited EdtEmailCli: TEdit
+              Size.Width = 317.000000000000000000
+              inherited EdtBEmailCli: TEditButton
+                Size.Height = 50.000000000000000000
+              end
+            end
+          end
+          inherited ListBoxItem15: TListBoxItem
+            Size.Width = 325.000000000000000000
+          end
+          inherited ListBoxItem16: TListBoxItem
+            Size.Width = 325.000000000000000000
+            inherited LblObsCli: TLabel
+              Visible = False
+            end
+            inherited MemoObsCadCli: TMemo
+              Size.Width = 317.000000000000000000
+              Viewport.Width = 317.000000000000000000
+              Viewport.Height = 58.000000000000000000
+            end
+          end
+          inherited ListBoxItem17: TListBoxItem
+            Size.Width = 325.000000000000000000
+            inherited EdtDataCadCli: TEdit
+              Size.Width = 317.000000000000000000
+            end
+          end
+          inherited ListBoxItem18: TListBoxItem
+            Size.Width = 325.000000000000000000
+            inherited LytFotoCli: TLayout
+              Size.Width = 317.000000000000000000
+              inherited ImgCadCli: TImage
+                Size.Width = 313.000000000000000000
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

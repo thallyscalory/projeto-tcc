@@ -1,0 +1,151 @@
+object FCadModelo: TFCadModelo
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 480
+  ClientWidth = 330
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 3
+  object LytBase: TLayout
+    Align = Client
+    Size.Width = 330.000000000000000000
+    Size.Height = 480.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object TbControlCadModelo: TTabControl
+      Align = Client
+      Size.Width = 330.000000000000000000
+      Size.Height = 480.000000000000000000
+      Size.PlatformDefault = False
+      TabHeight = 49.000000000000000000
+      TabIndex = 0
+      TabOrder = 0
+      TabPosition = PlatformDefault
+      Sizes = (
+        330s
+        431s
+        330s
+        431s)
+      object TbItemListagem: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = True
+        Size.Width = 165.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'listagem'
+        ExplicitSize.cx = 165.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        object ToolBarsuperior: TToolBar
+          Size.Width = 330.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          TintColor = claSilver
+          object LblTitulo: TLabel
+            Align = Contents
+            StyledSettings = [Family, Size, Style]
+            Size.Width = 330.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = claNavy
+            TextSettings.HorzAlign = Center
+            Text = 'LblTitulo'
+          end
+          object SpBVoltar: TSpeedButton
+            Align = Left
+            IconTintColor = claNavy
+            Margins.Left = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'backtoolbutton'
+          end
+        end
+      end
+      object TbItemedicao: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 165.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'edi'#231#227'o'
+        ExplicitSize.cx = 165.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+      end
+    end
+  end
+  object ActionList1: TActionList
+    Left = 144
+    Top = 240
+    object ActMudarAba: TChangeTabAction
+      Category = 'Tab'
+    end
+  end
+  object ImageList1: TImageList
+    Source = <
+      item
+        MultiResBitmap.Height = 100
+        MultiResBitmap.Width = 100
+        MultiResBitmap.LoadSize = 2
+        MultiResBitmap = <
+          item
+            Width = 100
+            Height = 100
+            PNG = {
+              89504E470D0A1A0A0000000D494844520000006400000064080600000070E295
+              54000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              031D49444154785EED9DC16E02310C4497FEFF3FD35295AAA594D8F1389E7807
+              89136C327E2FCE660F88CB711CD78FB75E2404DE487228C6170109215B0A1222
+              216404C8E2A843C8845C763B655DAFBE43E1E5722B719F17B5102F7C2B766649
+              5442B2048C443109A2105225E25114839852212C2298C494086115C12066A990
+              5D44548A59226457111562D21F0CBBC8B8C959514BAA9015058C8EB4E8CFB36B
+              4AD9B2B243A321CF8E97714C8677C85964646D615021679271EF2A74CD3021E8
+              60B3DB48C575C8DA214290812A8022E64431080B41054140A91E03C122240411
+              A01A227AFE2893901074311AEF38A68544574267F81136534222137616F1B3B6
+              59466E21B3139D4544548A5BC819C1AEACD92544DDE157E365E612E28FA32BBC
+              04CC42BCA6BD413A7FDFC3CE2CA43330A6DA4C423C86998A63CA62656812C254
+              58F72C1242667828C4DA6A647551C6B1B01C0AA1ACAC7128092193FB5288A5C5
+              C8EAA18F3362AA0E21532821124246802C8E3A641721A39B0F591D5BC579C556
+              1D42A6524224848C00591C7588849011208BA30E911032026471D42112424680
+              2C8E3A4442C80890C5F9B743327EF24B567B599C576CB5659569793EB1844808
+              1901B238EA909D84E8C68EB73562AA0EC1330F8D2821217CF88B8742462D868F
+              D477440BCBA190BE78382B9310322F2621965623AB8B2E8E95A149085D758D03
+              9985580D3766355D9A879D59C8741A5DE822E012E231ED4AD1F8CB5E662E218D
+              B9D194E616E2354E5369419019566E21B7BA66262AE0513AE52CA3292192F2DA
+              F5AC8CDBA8D3424A975FE3C94342222BA12BD3289390106D5DBF975554066CCB
+              4204D9BD63500CC21D7207890AB4A31864ED302167DDBE9032605BD6CF558D0E
+              C8DC3119B5A6FCC3CE1D62D79F566788B833836E598FAB39337855E764D7942A
+              A4DB7D255BC627AF8FB7EFFFB0034B73D72D6C8588EFD3EA4A21BBDD5B568A28
+              15C22EA64204851036319522A884548B61104129E4F1BC9075086012F0E751A1
+              E2A61E38A8B9FF209819FE330E4B8FBD111167B936FDC1F02C2051754A088A24
+              681C090181440D23212892A07124040412358C84A04882C691101048D430EF44
+              87ACA3ED1662910000000049454E44AE426082}
+            FileName = 'C:\projeto tcc\imagens para cria'#231#227'o de software\mascara.png'
+          end>
+        Name = 'Item 0'
+      end>
+    Destination = <
+      item
+        Layers = <
+          item
+            Name = 'Item 0'
+            SourceRect.Right = 100.000000000000000000
+            SourceRect.Bottom = 100.000000000000000000
+          end>
+      end>
+    Left = 112
+    Top = 152
+  end
+end
