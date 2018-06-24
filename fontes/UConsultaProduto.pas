@@ -113,8 +113,9 @@ type
     procedure TakePhotoFromCameraAction2DidFinishTaking(Image: TBitmap);
     procedure SpdBNovoCadProdClick(Sender: TObject);
     procedure SpBVoltarClick(Sender: TObject);
-    procedure ListViewConsProdItemClick(const Sender: TObject;
-      const AItem: TListViewItem);
+    procedure ListViewConsProdGesture(Sender: TObject;
+      const EventInfo: TGestureEventInfo; var Handled: Boolean);
+    procedure ListViewConsProdDblClick(Sender: TObject);
   private
     crud: String;
 
@@ -296,12 +297,9 @@ begin
 
 end;
 
-procedure TFConsProduto.ListViewConsProdItemClick(const Sender: TObject;
-  const AItem: TListViewItem);
+procedure TFConsProduto.ListViewConsProdDblClick(Sender: TObject);
 var
-
-  y: integer;
-
+y : integer;
 begin
   inherited;
   if venda = 'S' then
@@ -317,7 +315,7 @@ begin
               y := 100;
               SetLength(x, y);
               SetLength(qtd, y);
-              InputBox('Informe a quantidade:', 'qteitem', '1',
+              InputBox('Informe a quantidade:', '', '1',
                 procedure(const AResult: TModalResult; const AValue: string)
                 begin
                   case AResult of
@@ -343,6 +341,58 @@ begin
             end;
         end;
       end);
+  end;
+end;
+
+procedure TFConsProduto.ListViewConsProdGesture(Sender: TObject;
+const EventInfo: TGestureEventInfo; var Handled: Boolean);
+var
+  y: integer;
+begin
+  inherited;
+  if EventInfo.GestureID = igiDoubleTap then
+  begin
+    if venda = 'S' then
+    begin
+      MessageDlg('Você deseja adicionar este item ao pedido?',
+        System.UITypes.TMsgDlgType.mtInformation,
+        [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
+        procedure(const AResult: System.UITypes.TModalResult)
+        begin
+          case AResult of
+            mrYES: // caso sim
+              begin
+                y := 100;
+                SetLength(x, y);
+                SetLength(qtd, y);
+                InputBox('Informe a quantidade:', '', '1',
+                  procedure(const AResult: TModalResult; const AValue: string)
+                  begin
+                    case AResult of
+                      { Detect which button was pushed and show a different message }
+                      mrOk:
+                        begin
+                          // AValue is the result of the inputbox dialog
+                          qtdItem := AValue;
+                          x[contItem] := DM.FDQConsultaProdcodigo.AsString;
+                          qtd[contItem] := qtdItem;
+                          contItem := contItem + 1;
+                        end;
+                      mrCancel:
+                        begin
+                          exit
+                        end;
+                    end;
+                  end);
+              end;
+            mrNo:
+              begin
+                // caso não
+                exit
+              end;
+          end;
+        end);
+    end;
   end;
 
 end;

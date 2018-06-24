@@ -150,10 +150,9 @@ type
     procedure FormVirtualKeyboardShown(Sender: TObject;
       KeyboardVisible: Boolean; const Bounds: TRect);
     procedure SpdBNovoCadCliClick(Sender: TObject);
-    procedure ListViewCadCliItemClick(const Sender: TObject;
-      const AItem: TListViewItem);
     procedure ListViewCadCliGesture(Sender: TObject;
       const EventInfo: TGestureEventInfo; var Handled: Boolean);
+    procedure ListViewCadCliDblClick(Sender: TObject);
   private
     clickBotao: Boolean;
     DataHora: TDateTime;
@@ -170,7 +169,7 @@ type
 
 var
   FCadCli: TFCadCli;
-  nomeCliente: string;
+  nomeCliente, codCliente: string;
 
 implementation
 
@@ -336,8 +335,10 @@ begin
   TbControlCadModelo.ActiveTab := TbItemListagem;
   TbControlCadModelo.TabPosition := TTabPosition.None;
   if venda = 'S' then
+  begin
     SpBVoltar.Visible := False;
-  LblTitulo.Visible := False;
+    LblTitulo.Visible := False;
+  end;
 end;
 
 procedure TFCadCli.FormKeyDown(Sender: TObject; var Key: Word;
@@ -457,12 +458,9 @@ begin
   MudarAbaModelo(TbItemedicao, Sender);
 end;
 
-procedure TFCadCli.ListViewCadCliGesture(Sender: TObject;
-  const EventInfo: TGestureEventInfo; var Handled: Boolean);
+procedure TFCadCli.ListViewCadCliDblClick(Sender: TObject);
 begin
   inherited;
-  if EventInfo.GestureID = igiDoubleTap then
-  begin
   if venda = 'S' then
   begin
     MessageDlg('Você deseja adicionar este cliente ao pedido?',
@@ -475,6 +473,7 @@ begin
             begin
               // caso sim
               nomeCliente := DM.FDQFiltroCadCLinome_cli.AsString;
+              codCliente := DM.FDQFiltroCadCLiid_cli.AsString;
             end;
           mrNo:
             begin
@@ -483,36 +482,37 @@ begin
         end;
       end);
   end;
-  end;
-
 end;
 
-procedure TFCadCli.ListViewCadCliItemClick(const Sender: TObject;
-  const AItem: TListViewItem);
+procedure TFCadCli.ListViewCadCliGesture(Sender: TObject;
+const EventInfo: TGestureEventInfo; var Handled: Boolean);
 begin
   inherited;
-{  if venda = 'S' then
+  if EventInfo.GestureID = igiDoubleTap then
   begin
-    MessageDlg('Você deseja adicionar este cliente ao pedido?',
-      System.UITypes.TMsgDlgType.mtInformation,
-      [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
-      procedure(const AResult: System.UITypes.TModalResult)
-      begin
-        case AResult of
-          mrYES:
-            begin
-              // caso sim
-              nomeCliente := DM.FDQFiltroCadCLinome_cli.AsString;
-            end;
-          mrNo:
-            begin
-              // caso não
-            end;
-        end;
-      end);
+    if venda = 'S' then
+    begin
+      MessageDlg('Você deseja adicionar este cliente ao pedido?',
+        System.UITypes.TMsgDlgType.mtInformation,
+        [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
+        procedure(const AResult: System.UITypes.TModalResult)
+        begin
+          case AResult of
+            mrYES:
+              begin
+                // caso sim
+                nomeCliente := DM.FDQFiltroCadCLinome_cli.AsString;
+                codCliente := DM.FDQFiltroCadCLiid_cli.AsString;
+              end;
+            mrNo:
+              begin
+                // caso não
+              end;
+          end;
+        end);
+    end;
   end;
-  clickBotao := True;
-  qtdClickItem := 1;}
+
 end;
 
 procedure TFCadCli.SpBVoltarClick(Sender: TObject);

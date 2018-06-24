@@ -87,6 +87,8 @@ inherited FConsProduto: TFConsProduto
             end
           end
           object ListViewConsProd: TListView
+            Touch.InteractiveGestures = [DoubleTap]
+            OnGesture = ListViewConsProdGesture
             ItemAppearanceClassName = 'TImageListItemBottomDetailRightButtonAppearance'
             ItemEditAppearanceClassName = 'TImageListItemBottomDetailRightButtonShowCheckAppearance'
             HeaderAppearanceClassName = 'TListHeaderObjects'
@@ -99,7 +101,7 @@ inherited FConsProduto: TFConsProduto
             ItemAppearanceObjects.ItemObjects.TextButton.Font.Family = 'Arial'
             ItemAppearanceObjects.ItemObjects.TextButton.TextColor = claNavy
             ItemAppearanceObjects.ItemObjects.TextButton.Text = 'Detalhes'
-            OnItemClick = ListViewConsProdItemClick
+            OnDblClick = ListViewConsProdDblClick
             OnButtonClick = ListViewConsProdButtonClick
           end
           object BtnFiltroCodBar: TButton

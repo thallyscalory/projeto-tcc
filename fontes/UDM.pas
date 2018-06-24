@@ -179,7 +179,8 @@ end;
 
 function TDM.GetItemPedido(Aparam: String): integer;
 const
-_sql = 'select * from produto where codigo in %s';
+_sql = 'select * from produto where codigo = %s';
+    //_sql = 'select * from produto where codigo in %s';
 begin
   FDQProdItemPedido.Active := False;
   FDQProdItemPedido.SQL.Text := Format(_sql, [Aparam]);

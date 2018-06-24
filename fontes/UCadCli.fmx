@@ -123,7 +123,7 @@ inherited FCadCli: TFCadCli
           ItemAppearanceObjects.ItemObjects.TextButton.Font.Family = 'Arial'
           ItemAppearanceObjects.ItemObjects.TextButton.TextColor = claNavy
           ItemAppearanceObjects.ItemObjects.TextButton.Text = 'Detalhes'
-          OnItemClick = ListViewCadCliItemClick
+          OnDblClick = ListViewCadCliDblClick
           OnButtonClick = ListViewCadCliButtonClick
         end
       end

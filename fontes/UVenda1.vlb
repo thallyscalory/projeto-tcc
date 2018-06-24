@@ -192,7 +192,7 @@ Coordinates=-10,210,167,58
 LayerNames=NewLayer0
 
 [ListBoxItemValorTotalVenda]
-Coordinates=180,340,178,58
+Coordinates=130,330,178,58
 ExplicitSubNodes=ItemData.Detail
 LayerNames=NewLayer0
 
@@ -259,8 +259,8 @@ Visible=False
 
 [Module Settings]
 ModelLayerNames=NewLayer0;NewLayer1
-ActiveLayerNames=NewLayer0
-EditingLayerName=NewLayer0
+ActiveLayerNames=NewLayer1
+EditingLayerName=NewLayer1
 
 [BindSourceDB3]
 Coordinates=50,470,144,322
@@ -273,6 +273,12 @@ Coordinates=647,489,67,36
 Coordinates=888,274,169,36
 
 [ToolBarSupApoioVenda]
-Coordinates=586,434,67,36
+Coordinates=586,434,152,36
 Visible=False
+
+[BtnConfirmaApoioVenda]
+Coordinates=261,408,156,58
+
+[LblSupApoioVenda]
+Coordinates=0,0,124,58
 

@@ -21,7 +21,7 @@ object FVenda1: TFVenda1
       Size.Height = 480.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 1
+      TabIndex = 3
       TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
@@ -152,7 +152,7 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 82.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -201,6 +201,7 @@ object FVenda1: TFVenda1
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'donetoolbutton'
+            OnClick = SpdBSalvarVendaClick
           end
           object SpdBEditarVenda: TSpeedButton
             Align = Right
@@ -211,6 +212,7 @@ object FVenda1: TFVenda1
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'composetoolbutton'
+            OnClick = SpdBEditarVendaClick
           end
         end
         object ListBox1: TListBox
@@ -256,8 +258,8 @@ object FVenda1: TFVenda1
             end
             object SpdBPesqCliVenda: TSpeedButton
               Align = Right
-              Margins.Right = 16.000000000000000000
-              Position.X = 282.000000000000000000
+              Margins.Right = 8.000000000000000000
+              Position.X = 290.000000000000000000
               Position.Y = 6.000000000000000000
               Size.Width = 32.000000000000000000
               Size.Height = 32.000000000000000000
@@ -272,8 +274,16 @@ object FVenda1: TFVenda1
               Enabled = False
               Margins.Top = 8.000000000000000000
               Margins.Bottom = 8.000000000000000000
-              Size.Width = 217.000000000000000000
+              Size.Width = 167.000000000000000000
               Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+            end
+            object LblCodCliPedido: TLabel
+              Align = Left
+              Margins.Right = 2.000000000000000000
+              Position.X = 65.000000000000000000
+              Size.Width = 56.000000000000000000
+              Size.Height = 44.000000000000000000
               Size.PlatformDefault = False
             end
           end
@@ -373,7 +383,8 @@ object FVenda1: TFVenda1
               Size.Width = 213.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
-              OnChange = EdtNumParcelaPedidoChange
+              OnTyping = EdtNumParcelaPedidoTyping
+              OnExit = EdtNumParcelaPedidoExit
             end
           end
           object ListBoxItem5: TListBoxItem
@@ -485,13 +496,15 @@ object FVenda1: TFVenda1
           Size.Height = 383.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
+          ItemAppearanceObjects.HeaderObjects.Text.Opacity = 1.500000000000000000
+          OnItemClick = ListViewItemPedidoItemClick
         end
       end
       object TbItemApoioVenda: TTabItem
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 84.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -620,24 +633,6 @@ object FVenda1: TFVenda1
       FieldName = 'nome_cli'
       Control = EdtCliVenda
       Track = False
-    end
-    object LinkListControlToField2: TLinkListControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB3
-      FieldName = 'produto'
-      Control = ListViewItemPedido
-      FillExpressions = <
-        item
-          SourceMemberName = 'vrvenda'
-          ControlMemberName = 'Detail2'
-        end
-        item
-          SourceMemberName = 'VRAVISTA'
-          ControlMemberName = 'Detail3'
-        end>
-      FillHeaderExpressions = <>
-      FillHeaderFieldName = 'codigo'
-      FillBreakGroups = <>
     end
   end
   object ActionList1: TActionList
