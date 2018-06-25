@@ -14,7 +14,7 @@ uses
   FMX.VirtualKeyboard,
   FMX.Platform, FMX.ListBox, FMX.ScrollBox, FMX.Memo, FMX.StdActns,
   FMX.MediaLibrary.Actions, FMX.Objects, System.Math, System.ImageList,
-  FMX.ImgList, FMX.Gestures;
+  FMX.ImgList, FMX.Gestures, MultiDetailAppearanceU;
 
 type
   TFCadCli = class(TFCadModelo)
@@ -153,6 +153,9 @@ type
     procedure ListViewCadCliGesture(Sender: TObject;
       const EventInfo: TGestureEventInfo; var Handled: Boolean);
     procedure ListViewCadCliDblClick(Sender: TObject);
+    procedure ListViewCadCliItemClickEx(const Sender: TObject;
+      ItemIndex: Integer; const LocalClickPos: TPointF;
+      const ItemObject: TListItemDrawable);
   private
     clickBotao: Boolean;
     DataHora: TDateTime;
@@ -432,63 +435,120 @@ end;
 
 procedure TFCadCli.ListViewCadCliButtonClick(const Sender: TObject;
   const AItem: TListItem; const AObject: TListItemSimpleControl);
-var
-  bmp: TBitmap;
+//var
+  //bmp: TBitmap;
 begin
   inherited;
-  clickBotao := False;
-  lblTituloEdicao.Text := 'Detalhes';
-  SpdBEditar.Enabled := True;
-  SpdBEditar.Visible := True;
-  SpdBConfirmar.Enabled := False;
-  SpdBConfirmar.Visible := False;
-  EdtDataCadCli.Text := DM.FDQFiltroCadCLidata_cad_cli.AsString;
-  if DM.FDQFiltroCadCLitipo_cli.AsString = 'F' then
-    ComboBoxTipoPessoaCli.ItemIndex := 0
-  else
-    ComboBoxTipoPessoaCli.ItemIndex := 1;
-  if DM.FDQFiltroCadCLiliberaaprazo_cli.AsString = 'S' then
-    RadioBLiberaAprazoS.IsChecked := True
-  else
-    RadioBLiberaAprazoN.IsChecked := True;
-  EditFiltroNomeCadCli.Text := EmptyStr;
-  EditFiltroCodCadCli.Text := EmptyStr;
-  EdtNomeCli.SetFocus;
-  DesabilitaCampos;
-  MudarAbaModelo(TbItemedicao, Sender);
+  //clickBotao := False;
+  //lblTituloEdicao.Text := 'Detalhes';
+  //SpdBEditar.Enabled := True;
+  //SpdBEditar.Visible := True;
+  //SpdBConfirmar.Enabled := False;
+  //SpdBConfirmar.Visible := False;
+  //EdtDataCadCli.Text := DM.FDQFiltroCadCLidata_cad_cli.AsString;
+  //if DM.FDQFiltroCadCLitipo_cli.AsString = 'F' then
+    //ComboBoxTipoPessoaCli.ItemIndex := 0
+  //else
+    //ComboBoxTipoPessoaCli.ItemIndex := 1;
+  //if DM.FDQFiltroCadCLiliberaaprazo_cli.AsString = 'S' then
+    //RadioBLiberaAprazoS.IsChecked := True
+  //else
+    //RadioBLiberaAprazoN.IsChecked := True;
+  //EditFiltroNomeCadCli.Text := EmptyStr;
+  //EditFiltroCodCadCli.Text := EmptyStr;
+  //EdtNomeCli.SetFocus;
+  //DesabilitaCampos;
+  //MudarAbaModelo(TbItemedicao, Sender);
 end;
 
 procedure TFCadCli.ListViewCadCliDblClick(Sender: TObject);
 begin
   inherited;
-  if venda = 'S' then
-  begin
-    MessageDlg('Você deseja adicionar este cliente ao pedido?',
-      System.UITypes.TMsgDlgType.mtInformation,
-      [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
-      procedure(const AResult: System.UITypes.TModalResult)
-      begin
-        case AResult of
-          mrYES:
-            begin
-              // caso sim
-              nomeCliente := DM.FDQFiltroCadCLinome_cli.AsString;
-              codCliente := DM.FDQFiltroCadCLiid_cli.AsString;
-            end;
-          mrNo:
-            begin
-              // caso não
-            end;
-        end;
-      end);
-  end;
+  //if venda = 'S' then
+    //begin
+      //MessageDlg('Você deseja adicionar este cliente ao pedido?',
+        //System.UITypes.TMsgDlgType.mtInformation,
+        //[System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
+        //procedure(const AResult: System.UITypes.TModalResult)
+        //begin
+          //case AResult of
+            //mrYES:
+              //begin
+                // caso sim
+                //nomeCliente := DM.FDQFiltroCadCLinome_cli.AsString;
+                //codCliente := DM.FDQFiltroCadCLiid_cli.AsString;
+              //end;
+            //mrNo:
+              //begin
+                // caso não
+              //end;
+          //end;
+        //end);
+    //end;
 end;
 
 procedure TFCadCli.ListViewCadCliGesture(Sender: TObject;
 const EventInfo: TGestureEventInfo; var Handled: Boolean);
 begin
   inherited;
-  if EventInfo.GestureID = igiDoubleTap then
+  //if EventInfo.GestureID = igiDoubleTap then
+  //begin
+    //if venda = 'S' then
+    //begin
+      //MessageDlg('Você deseja adicionar este cliente ao pedido?',
+        //System.UITypes.TMsgDlgType.mtInformation,
+        //[System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
+        //procedure(const AResult: System.UITypes.TModalResult)
+        //begin
+          //case AResult of
+            //mrYES:
+              //begin
+                // caso sim
+                //nomeCliente := DM.FDQFiltroCadCLinome_cli.AsString;
+                //codCliente := DM.FDQFiltroCadCLiid_cli.AsString;
+              //end;
+            //mrNo:
+              //begin
+                // caso não
+              //end;
+          //end;
+        //end);
+    //end;
+  //end;
+
+end;
+
+procedure TFCadCli.ListViewCadCliItemClickEx(const Sender: TObject;
+ItemIndex: Integer; const LocalClickPos: TPointF;
+const ItemObject: TListItemDrawable);
+var
+  bmp: TBitmap;
+begin
+  inherited;
+  if ItemObject is TListItemAccessory then
+  begin
+    clickBotao := False;
+    lblTituloEdicao.Text := 'Detalhes';
+    SpdBEditar.Enabled := True;
+    SpdBEditar.Visible := True;
+    SpdBConfirmar.Enabled := False;
+    SpdBConfirmar.Visible := False;
+    EdtDataCadCli.Text := DM.FDQFiltroCadCLidata_cad_cli.AsString;
+    if DM.FDQFiltroCadCLitipo_cli.AsString = 'F' then
+      ComboBoxTipoPessoaCli.ItemIndex := 0
+    else
+      ComboBoxTipoPessoaCli.ItemIndex := 1;
+    if DM.FDQFiltroCadCLiliberaaprazo_cli.AsString = 'S' then
+      RadioBLiberaAprazoS.IsChecked := True
+    else
+      RadioBLiberaAprazoN.IsChecked := True;
+    EditFiltroNomeCadCli.Text := EmptyStr;
+    EditFiltroCodCadCli.Text := EmptyStr;
+    EdtNomeCli.SetFocus;
+    DesabilitaCampos;
+    MudarAbaModelo(TbItemedicao, Sender);
+  end
+  else
   begin
     if venda = 'S' then
     begin
@@ -512,7 +572,6 @@ begin
         end);
     end;
   end;
-
 end;
 
 procedure TFCadCli.SpBVoltarClick(Sender: TObject);
@@ -536,7 +595,7 @@ end;
 procedure TFCadCli.SpdBConfirmarClick(Sender: TObject);
 var
   sql, LiberaAprazo, TipoPessoa, DataHora: string;
-  MaxId: integer;
+  MaxId: Integer;
   Data: TDateTime;
   data1: string;
 begin
@@ -688,6 +747,7 @@ begin
   EsconderTeclado;
   FotoCli := Image;
   ImgFotoCli.Bitmap.Assign(Image);
+  ListBoxEdicaoCadCli.Align := TAlignLayout.Client;
 
 end;
 

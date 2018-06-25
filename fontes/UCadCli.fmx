@@ -107,8 +107,8 @@ inherited FCadCli: TFCadCli
           Touch.GestureManager = GestureManager1
           Touch.InteractiveGestures = [DoubleTap]
           OnGesture = ListViewCadCliGesture
-          ItemAppearanceClassName = 'TImageListItemBottomDetailRightButtonAppearance'
-          ItemEditAppearanceClassName = 'TImageListItemBottomDetailRightButtonShowCheckAppearance'
+          ItemAppearanceClassName = 'TMultiDetailItemAppearance'
+          ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
           HeaderAppearanceClassName = 'TListHeaderObjects'
           FooterAppearanceClassName = 'TListHeaderObjects'
           Align = Client
@@ -120,10 +120,9 @@ inherited FCadCli: TFCadCli
           Size.Height = 294.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
-          ItemAppearanceObjects.ItemObjects.TextButton.Font.Family = 'Arial'
-          ItemAppearanceObjects.ItemObjects.TextButton.TextColor = claNavy
-          ItemAppearanceObjects.ItemObjects.TextButton.Text = 'Detalhes'
+          ItemAppearanceObjects.ItemEditObjects.Image.Visible = True
           OnDblClick = ListViewCadCliDblClick
+          OnItemClickEx = ListViewCadCliItemClickEx
           OnButtonClick = ListViewCadCliButtonClick
         end
       end
@@ -1005,8 +1004,12 @@ inherited FCadCli: TFCadCli
       Control = ListViewCadCli
       FillExpressions = <
         item
+          SourceMemberName = 'cpf_cnpj_cli'
+          ControlMemberName = 'Detail1'
+        end
+        item
           SourceMemberName = 'fone_cli'
-          ControlMemberName = 'Detail'
+          ControlMemberName = 'Detail2'
         end>
       FillHeaderExpressions = <>
       FillHeaderFieldName = 'id_cli'

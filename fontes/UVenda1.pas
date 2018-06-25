@@ -32,7 +32,7 @@ type
     ToolBarSupApoioVenda: TToolBar;
     LblVendaEdicao: TLabel;
     SpdBVoltarVendaEdicao: TSpeedButton;
-    ListBox1: TListBox;
+    ListBoxPedido: TListBox;
     ListBoxItemNumPedidoVenda: TListBoxItem;
     ListBoxItem2: TListBoxItem;
     LblCliVenda: TLabel;
@@ -100,6 +100,10 @@ type
     procedure SpdBSalvarVendaClick(Sender: TObject);
     procedure EdtNumParcelaPedidoTyping(Sender: TObject);
     procedure SpdBDescontoPedidoClick(Sender: TObject);
+    procedure FormVirtualKeyboardHidden(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
+    procedure FormVirtualKeyboardShown(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
   private
     { Private declarations }
   public
@@ -307,6 +311,19 @@ begin
   TbControlVenda.TabPosition := TTabPosition.None;
 end;
 
+procedure TFVenda1.FormVirtualKeyboardHidden(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
+begin
+  ListBoxPedido.Align := TAlignLayout.Client;
+end;
+
+procedure TFVenda1.FormVirtualKeyboardShown(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
+begin
+  ListBoxPedido.Align := TAlignLayout.Top;
+  ListBoxPedido.Height := ((Self.Height) - (Self.Height * 0.43));
+end;
+
 procedure TFVenda1.HabilitaCampos;
 begin
   EdtCliVenda.Enabled := True;
@@ -413,7 +430,10 @@ end;
 procedure TFVenda1.SpdBDescontoPedidoClick(Sender: TObject);
 var
   valorDesc: Double;
+  vlItem, qtdItem: string;
+  I: integer;
 begin
+  listCountItem := ListViewItemPedido.ItemCount;
   if not EdtDescontoMoedaPedido.Text.IsEmpty then
   begin
     if StrToFloat(EdtDescontoMoedaPedido.Text) >=
@@ -422,15 +442,34 @@ begin
       EdtDescontoMoedaPedido.Text := EmptyStr;
       ShowMessage('Desconto não pode ser maior ou igual ao valor total');
     end
-    else
+    else if listCountItem > 0 then
     begin
-      valorDesc := StrToFloat(ListBoxItemValorTotalVenda.ItemData.Detail) -
-        StrToFloat(EdtDescontoMoedaPedido.Text);
+      vlTotalAtual := 0;
+      qtdTotalAtual := 0;
+      for I := 0 to listCountItem - 1 do
+      begin
+        vlItem := ListViewItemPedido.Items[I].Data
+          [TMultiDetailAppearanceNames.Detail2].AsString;
+        qtdItem := ListViewItemPedido.Items[I].Data
+          [TMultiDetailAppearanceNames.Detail1].AsString;
+        vlTotalItemAtual := StrToFloat(qtdItem) * StrToFloat(vlItem);
+
+        qtdTotalAtual := qtdTotalAtual + StrToFloat(qtdItem);
+        vlTotalAtual := vlTotalAtual + vlTotalItemAtual;
+      end;
+
+      valorDesc := vlTotalAtual - StrToFloat(EdtDescontoMoedaPedido.Text);
       ListBoxItemValorTotalVenda.ItemData.Detail := FloatToStr(valorDesc);
+
       if not EdtNumParcelaPedido.Text.IsEmpty then
       begin
         EdtNumParcelaPedidoTyping(Sender);
       end;
+    end
+    else if listCountItem = 0 then
+    begin
+      EdtDescontoMoedaPedido.Text := EmptyStr;
+      ShowMessage('Faltar informar algum produto');
     end;
 
   end;

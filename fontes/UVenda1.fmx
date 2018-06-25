@@ -8,6 +8,8 @@ object FVenda1: TFVenda1
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
   DesignerMasterStyle = 3
   object LytBase: TLayout
     Align = Client
@@ -215,7 +217,7 @@ object FVenda1: TFVenda1
             OnClick = SpdBEditarVendaClick
           end
         end
-        object ListBox1: TListBox
+        object ListBoxPedido: TListBox
           Align = Client
           Size.Width = 330.000000000000000000
           Size.Height = 383.000000000000000000

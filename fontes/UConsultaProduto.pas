@@ -12,7 +12,7 @@ uses
   System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.EngExt,
   FMX.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope, FMX.Edit,
   FMX.StdActns, FMX.MediaLibrary.Actions, Winsoft.FireMonkey.Obr, FMX.ListBox,
-  System.ImageList, FMX.ImgList;
+  System.ImageList, FMX.ImgList, MultiDetailAppearanceU;
 
 type
   TFConsProduto = class(TFCadModelo)
@@ -116,6 +116,9 @@ type
     procedure ListViewConsProdGesture(Sender: TObject;
       const EventInfo: TGestureEventInfo; var Handled: Boolean);
     procedure ListViewConsProdDblClick(Sender: TObject);
+    procedure ListViewConsProdItemClickEx(const Sender: TObject;
+      ItemIndex: Integer; const LocalClickPos: TPointF;
+      const ItemObject: TListItemDrawable);
   private
     crud: String;
 
@@ -280,77 +283,165 @@ procedure TFConsProduto.ListViewConsProdButtonClick(const Sender: TObject;
   const AItem: TListItem; const AObject: TListItemSimpleControl);
 begin
   inherited;
-  SpBEditarProd.Enabled := True;
-  SpBEditarProd.Visible := True;
-  SpBConfirmarProd.Enabled := False;
-  SpBConfirmarProd.Visible := False;
-  LblTituloEdicao.Text := 'Detalhes';
-  DesabilitaCampos;
-  EdtNomeProd.SetFocus;
-  if DM.FDQConsultaProdativo.AsString = 'S' then
-    RadioBAtivoS.IsChecked := True
-  else
-    RadioBAtivoN.IsChecked := True;
-  EdtFiltroNomeProd.Text := EmptyStr;
-  EdtFiltroCodProd.Text := EmptyStr;
-  MudarAbaModelo(TbItemedicao, Sender);
+  //SpBEditarProd.Enabled := True;
+  //SpBEditarProd.Visible := True;
+  //SpBConfirmarProd.Enabled := False;
+  //SpBConfirmarProd.Visible := False;
+  //LblTituloEdicao.Text := 'Detalhes';
+  //DesabilitaCampos;
+  //EdtNomeProd.SetFocus;
+  //if DM.FDQConsultaProdativo.AsString = 'S' then
+    //RadioBAtivoS.IsChecked := True
+  //else
+    //RadioBAtivoN.IsChecked := True;
+  //EdtFiltroNomeProd.Text := EmptyStr;
+  //EdtFiltroCodProd.Text := EmptyStr;
+  //MudarAbaModelo(TbItemedicao, Sender);
 
 end;
 
 procedure TFConsProduto.ListViewConsProdDblClick(Sender: TObject);
-var
-  y: integer;
+//var
+  //y: Integer;
 begin
   inherited;
-  if venda = 'S' then
-  begin
-    MessageDlg('Você deseja adicionar este item ao pedido?',
-      System.UITypes.TMsgDlgType.mtInformation,
-      [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
-      procedure(const AResult: System.UITypes.TModalResult)
-      begin
-        case AResult of
-          mrYES: // caso sim
-            begin
-              y := 100;
-              SetLength(x, y);
-              SetLength(qtd, y);
-              InputBox('Informe a quantidade:', '', '1',
-                procedure(const AResult: TModalResult; const AValue: string)
-                begin
-                  case AResult of
-                    { Detect which button was pushed and show a different message }
-                    mrOk:
-                      begin
-                        // AValue is the result of the inputbox dialog
-                        qtdItem := AValue;
-                        x[contItem] := DM.FDQConsultaProdcodigo.AsString;
-                        qtd[contItem] := qtdItem;
-                        contItem := contItem + 1;
-                      end;
-                    mrCancel:
-                      begin
-                        EdtFiltroNomeProd.SetFocus;
-                      end;
-                  end;
-                end);
-            end;
-          mrNo:
-            begin
-              // caso não
-            end;
-        end;
-      end);
-  end;
+ //if venda = 'S' then
+    //begin
+      //MessageDlg('Você deseja adicionar este item ao pedido?',
+        //System.UITypes.TMsgDlgType.mtInformation,
+        //[System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
+        //procedure(const AResult: System.UITypes.TModalResult)
+        //begin
+          //case AResult of
+            //mrYES: // caso sim
+              //begin
+                //y := 100;
+                //SetLength(x, y);
+                //SetLength(qtd, y);
+                //InputBox('Informe a quantidade:', '', '1',
+                  //procedure(const AResult: TModalResult; const AValue: string)
+                  //begin
+                    //case AResult of
+                      //{ Detect which button was pushed and show a different message }
+                      //mrOk:
+                        //begin
+                          // AValue is the result of the inputbox dialog
+                          //if StrToFloat(AValue) = 0 then
+                          //begin
+                            //ShowMessage('Quantidade invalida!');
+                            // exit
+                          //end
+                          //else
+                          //begin
+                            //qtdItem := AValue;
+                            //x[contItem] := DM.FDQConsultaProdcodigo.AsString;
+                            //qtd[contItem] := qtdItem;
+                            //contItem := contItem + 1;
+                          //end;
+                        //end;
+                      //mrCancel:
+                        //begin
+                          //exit
+                        //end;
+                    //end;
+                  //end);
+              //end;
+            //mrNo:
+              //begin
+                // caso não
+                //exit
+              //end;
+          //end;
+        //end);
+    //end;
 end;
 
 procedure TFConsProduto.ListViewConsProdGesture(Sender: TObject;
 const EventInfo: TGestureEventInfo; var Handled: Boolean);
-var
-  y: integer;
+//var
+  //y: Integer;
 begin
   inherited;
-  if EventInfo.GestureID = igiDoubleTap then
+  //if EventInfo.GestureID = igiDoubleTap then
+  //begin
+    //if venda = 'S' then
+    //begin
+      //MessageDlg('Você deseja adicionar este item ao pedido?',
+        //System.UITypes.TMsgDlgType.mtInformation,
+        //[System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
+        //procedure(const AResult: System.UITypes.TModalResult)
+        //begin
+          //case AResult of
+            //mrYES: // caso sim
+              //begin
+                //y := 100;
+                //SetLength(x, y);
+                //SetLength(qtd, y);
+                //InputBox('Informe a quantidade:', '', '1',
+                  //procedure(const AResult: TModalResult; const AValue: string)
+                  //begin
+                    //case AResult of
+                      //{ Detect which button was pushed and show a different message }
+                      //mrOk:
+                        //begin
+                          // AValue is the result of the inputbox dialog
+                          //if StrToFloat(AValue) = 0 then
+                          //begin
+                            //ShowMessage('Quantidade invalida!');
+                            // exit
+                          //end
+                          //else
+                          //begin
+                            //qtdItem := AValue;
+                            //x[contItem] := DM.FDQConsultaProdcodigo.AsString;
+                            //qtd[contItem] := qtdItem;
+                            //contItem := contItem + 1;
+                          //end;
+                        //end;
+                      //mrCancel:
+                        //begin
+                          //exit
+                        //end;
+                    //end;
+                  //end);
+              //end;
+            //mrNo:
+              //begin
+                // caso não
+                //exit
+              //end;
+          //end;
+        //end);
+    //end;
+  //end;
+
+end;
+
+procedure TFConsProduto.ListViewConsProdItemClickEx(const Sender: TObject;
+ItemIndex: Integer; const LocalClickPos: TPointF;
+const ItemObject: TListItemDrawable);
+var
+  y: Integer;
+begin
+  inherited;
+  if ItemObject is TListItemAccessory then
+  begin
+    SpBEditarProd.Enabled := True;
+    SpBEditarProd.Visible := True;
+    SpBConfirmarProd.Enabled := False;
+    SpBConfirmarProd.Visible := False;
+    LblTituloEdicao.Text := 'Detalhes';
+    DesabilitaCampos;
+    EdtNomeProd.SetFocus;
+    if DM.FDQConsultaProdativo.AsString = 'S' then
+      RadioBAtivoS.IsChecked := True
+    else
+      RadioBAtivoN.IsChecked := True;
+    EdtFiltroNomeProd.Text := EmptyStr;
+    EdtFiltroCodProd.Text := EmptyStr;
+    MudarAbaModelo(TbItemedicao, Sender);
+  end
+  else
   begin
     if venda = 'S' then
     begin
@@ -376,7 +467,7 @@ begin
                           if StrToFloat(AValue) = 0 then
                           begin
                             ShowMessage('Quantidade invalida!');
-                            //exit
+                            // exit
                           end
                           else
                           begin
@@ -402,7 +493,6 @@ begin
         end);
     end;
   end;
-
 end;
 
 procedure TFConsProduto.SearchEditButton1Click(Sender: TObject);
@@ -445,7 +535,7 @@ end;
 procedure TFConsProduto.SpBConfirmarProdClick(Sender: TObject);
 var
   ativo: string;
-  maxIdProd: integer;
+  maxIdProd: Integer;
 begin
   inherited;
   EdtNomeProd.SetFocus;
@@ -562,7 +652,7 @@ end;
 procedure TFConsProduto.TakePhotoFromCameraAction1DidFinishTaking
   (Image: TBitmap);
 var
-  I: integer;
+  I: Integer;
   barcode: TObrSymbol;
   lista: TListViewItem;
 begin
@@ -597,7 +687,7 @@ end;
 procedure TFConsProduto.TakePhotoFromCameraAction2DidFinishTaking
   (Image: TBitmap);
 var
-  I: integer;
+  I: Integer;
   barcode: TObrSymbol;
 begin
   inherited;

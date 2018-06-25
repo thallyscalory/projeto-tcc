@@ -23,10 +23,6 @@ Coordinates=170,-10,107,278
 Visible=True
 LayerNames=NewLayer0
 
-[ListBox1]
-Coordinates=127,10,64,36
-Visible=False
-
 [TbItemListagemVenda]
 Coordinates=738,434,143,36
 Visible=False
@@ -281,4 +277,8 @@ Coordinates=261,408,156,58
 
 [LblSupApoioVenda]
 Coordinates=0,0,124,58
+
+[ListBoxPedido]
+Coordinates=127,10,64,36
+Visible=False
 
