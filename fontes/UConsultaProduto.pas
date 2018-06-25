@@ -299,7 +299,7 @@ end;
 
 procedure TFConsProduto.ListViewConsProdDblClick(Sender: TObject);
 var
-y : integer;
+  y: integer;
 begin
   inherited;
   if venda = 'S' then
@@ -373,10 +373,18 @@ begin
                       mrOk:
                         begin
                           // AValue is the result of the inputbox dialog
-                          qtdItem := AValue;
-                          x[contItem] := DM.FDQConsultaProdcodigo.AsString;
-                          qtd[contItem] := qtdItem;
-                          contItem := contItem + 1;
+                          if StrToFloat(AValue) = 0 then
+                          begin
+                            ShowMessage('Quantidade invalida!');
+                            //exit
+                          end
+                          else
+                          begin
+                            qtdItem := AValue;
+                            x[contItem] := DM.FDQConsultaProdcodigo.AsString;
+                            qtd[contItem] := qtdItem;
+                            contItem := contItem + 1;
+                          end;
                         end;
                       mrCancel:
                         begin

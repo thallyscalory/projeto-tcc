@@ -21,7 +21,7 @@ object FVenda1: TFVenda1
       Size.Height = 480.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 3
+      TabIndex = 0
       TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
@@ -37,7 +37,7 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 82.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -293,7 +293,6 @@ object FVenda1: TFVenda1
             StyledSettings = [Style, FontColor, Other]
             Position.Y = 88.000000000000000000
             TabOrder = 6
-            Text = 'Produto:'
             object SpdBPesqItemPedido: TSpeedButton
               Align = Right
               Margins.Left = 15.000000000000000000
@@ -314,6 +313,35 @@ object FVenda1: TFVenda1
               Size.PlatformDefault = False
               StyleLookup = 'additembutton'
               OnClick = SpdBAdicionaItemPedidoClick
+            end
+            object LblProdutoPedido: TLabel
+              Align = Left
+              StyledSettings = [Style, FontColor]
+              Margins.Left = 4.000000000000000000
+              Margins.Top = 4.000000000000000000
+              Margins.Bottom = 4.000000000000000000
+              Position.X = 4.000000000000000000
+              Position.Y = 4.000000000000000000
+              Size.Width = 61.000000000000000000
+              Size.Height = 36.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Arial'
+              TextSettings.Font.Size = 14.000000000000000000
+              Text = 'Produto:'
+            end
+            object LblQtdItemPedido: TLabel
+              Align = Left
+              StyledSettings = [Style]
+              Margins.Left = 4.000000000000000000
+              Margins.Top = 4.000000000000000000
+              Margins.Bottom = 4.000000000000000000
+              Position.X = 69.000000000000000000
+              Position.Y = 4.000000000000000000
+              Size.Width = 132.000000000000000000
+              Size.Height = 36.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Arial'
+              TextSettings.FontColor = claSilver
             end
           end
           object ListBoxItem3: TListBoxItem
@@ -384,7 +412,6 @@ object FVenda1: TFVenda1
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               OnTyping = EdtNumParcelaPedidoTyping
-              OnExit = EdtNumParcelaPedidoExit
             end
           end
           object ListBoxItem5: TListBoxItem
@@ -412,9 +439,19 @@ object FVenda1: TFVenda1
               Margins.Top = 8.000000000000000000
               Margins.Right = 4.000000000000000000
               Margins.Bottom = 8.000000000000000000
-              Size.Width = 213.000000000000000000
+              Size.Width = 157.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
+            end
+            object SpdBDescontoPedido: TSpeedButton
+              Align = Right
+              Margins.Right = 8.000000000000000000
+              Position.X = 274.000000000000000000
+              Size.Width = 48.000000000000000000
+              Size.Height = 48.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'arrowrighttoolbutton'
+              OnClick = SpdBDescontoPedidoClick
             end
           end
           object ListBoxItemValorTotalVenda: TListBoxItem
@@ -504,7 +541,7 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 84.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False

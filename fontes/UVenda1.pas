@@ -78,6 +78,9 @@ type
     BtnConfirmaApoioVenda: TButton;
     LblSupApoioVenda: TLabel;
     LblCodCliPedido: TLabel;
+    LblProdutoPedido: TLabel;
+    LblQtdItemPedido: TLabel;
+    SpdBDescontoPedido: TSpeedButton;
     procedure SpBVoltarClick(Sender: TObject);
     procedure SpdBNovoVendaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -93,10 +96,10 @@ type
     procedure BtnConfirmaApoioVendaClick(Sender: TObject);
     procedure ListViewItemPedidoItemClick(const Sender: TObject;
       const AItem: TListViewItem);
-    procedure EdtNumParcelaPedidoExit(Sender: TObject);
     procedure SpdBEditarVendaClick(Sender: TObject);
     procedure SpdBSalvarVendaClick(Sender: TObject);
     procedure EdtNumParcelaPedidoTyping(Sender: TObject);
+    procedure SpdBDescontoPedidoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -149,7 +152,7 @@ end;
 
 procedure TFVenda1.BtnConfirmaApoioVendaClick(Sender: TObject);
 var
-  paramSql, numParcela: string;
+  paramSql: string;
   I: integer;
   listaItemPedido: TListViewItem;
   qtdItemTotal, vlItemTotal, vlTotalPedido: Double;
@@ -184,34 +187,53 @@ begin
       begin
         paramSql := x[I];
         DM.GetItemPedido(paramSql);
-        listaItemPedido := ListViewItemPedido.Items.Add;
-        listaItemPedido.Detail := DM.FDQProdItemPedidocodigo.AsString;
-        listaItemPedido.Text := DM.FDQProdItemPedidoproduto.AsString;
-        listaItemPedido.Data[TMultiDetailAppearanceNames.Detail1] := qtd[I];
-        listaItemPedido.Data[TMultiDetailAppearanceNames.Detail2] :=
-          DM.FDQProdItemPedidovrvenda.AsString;
-        listaItemPedido.Data[TMultiDetailAppearanceNames.Detail3] :=
-          DM.FDQProdItemPedidoVRAVISTA.AsString;
-        listaItemPedido.EndUpdate;
+        if not DM.FDQProdItemPedido.IsEmpty then
+        begin
+          listaItemPedido := ListViewItemPedido.Items.Add;
+          listaItemPedido.Detail := DM.FDQProdItemPedidocodigo.AsString;
+          listaItemPedido.Text := DM.FDQProdItemPedidoproduto.AsString;
+          listaItemPedido.Data[TMultiDetailAppearanceNames.Detail1] := qtd[I];
+          listaItemPedido.Data[TMultiDetailAppearanceNames.Detail2] :=
+            DM.FDQProdItemPedidovrvenda.AsString;
+          listaItemPedido.Data[TMultiDetailAppearanceNames.Detail3] :=
+            DM.FDQProdItemPedidoVRAVISTA.AsString;
+          listaItemPedido.EndUpdate;
 
-        qtdItemTotal := qtdItemTotal + StrToFloat(qtd[I]);
-        vlItemTotal := StrToFloat(qtd[I]) * DM.FDQProdItemPedidovrvenda.AsFloat;
-        vlTotalPedido := vlTotalPedido + vlItemTotal;
+          qtdItemTotal := qtdItemTotal + StrToFloat(qtd[I]);
+          vlItemTotal := StrToFloat(qtd[I]) *
+            DM.FDQProdItemPedidovrvenda.AsFloat;
+          vlTotalPedido := vlTotalPedido + vlItemTotal;
 
-        { ListViewItemPedido.BeginUpdate;
-          ListViewItemPedido.Items[I].Data[TMultiDetailAppearanceNames.Detail1] := 'Qtd: ' + qtd[I];
-          ListViewItemPedido.EndUpdate; }
-        // ListViewItemPedido.Items[I].Detail := 'Qtd: ' + qtdItem;
+          { ListViewItemPedido.BeginUpdate;
+            ListViewItemPedido.Items[I].Data[TMultiDetailAppearanceNames.Detail1] := 'Qtd: ' + qtd[I];
+            ListViewItemPedido.EndUpdate; }
+          // ListViewItemPedido.Items[I].Detail := 'Qtd: ' + qtdItem;
+        end;
       end;
-      ListBoxItemValorTotalVenda.ItemData.Detail := FloatToStr(vlTotalPedido);
+      if not DM.FDQProdItemPedido.IsEmpty then
+      begin
+        ListBoxItemValorTotalVenda.ItemData.Detail := FloatToStr(vlTotalPedido);
+        if (qtdItemTotal > 1) or (qtdItemTotal < 0) then
+        begin
+          LblQtdItemPedido.Text := FloatToStr(qtdItemTotal) +
+            ' itens adicionados';
+        end
+        else if qtdItemTotal = 1 then
+        begin
+          LblQtdItemPedido.Text := FloatToStr(qtdItemTotal) +
+            ' item adicionado';
+        end;
+        if not EdtNumParcelaPedido.Text.IsEmpty then
+        begin
+          EdtNumParcelaPedidoTyping(Sender);
+        end;
+        if not EdtDescontoMoedaPedido.Text.IsEmpty then
+        begin
+          SpdBDescontoPedidoClick(Sender);
+        end;
+      end;
     finally
       ListViewItemPedido.EndUpdate;
-    end;
-    if not EdtNumParcelaPedido.Text.IsEmpty then
-    begin
-      numParcela := EdtNumParcelaPedido.Text;
-      EdtNumParcelaPedido.Text := '';
-      EdtNumParcelaPedido.Text := numParcela;
     end;
   end
   else if CliPedido = 'S' then
@@ -256,21 +278,27 @@ begin
 
 end;
 
-procedure TFVenda1.EdtNumParcelaPedidoExit(Sender: TObject);
-begin
-  valorParc := StrToFloat(ListBoxItemValorTotalVenda.ItemData.Detail) /
-    StrToFloat(EdtNumParcelaPedido.Text);
-  ListBoxItemParcelasVenda.Text := EdtNumParcelaPedido.Text + 'X';
-  ListBoxItemParcelasVenda.ItemData.Detail := FloatToStr(valorParc);
-
-end;
-
 procedure TFVenda1.EdtNumParcelaPedidoTyping(Sender: TObject);
 begin
-valorParc := StrToFloat(ListBoxItemValorTotalVenda.ItemData.Detail) /
-    StrToFloat(EdtNumParcelaPedido.Text);
-  ListBoxItemParcelasVenda.Text := EdtNumParcelaPedido.Text + 'X';
-  ListBoxItemParcelasVenda.ItemData.Detail := FloatToStr(valorParc);
+  if not EdtNumParcelaPedido.Text.IsEmpty then
+  begin
+    if not ListBoxItemValorTotalVenda.ItemData.Detail.IsEmpty then
+    begin
+      valorParc := StrToFloat(ListBoxItemValorTotalVenda.ItemData.Detail) /
+        StrToFloat(EdtNumParcelaPedido.Text);
+    end
+    else
+    begin
+      valorParc := 0;
+    end;
+    ListBoxItemParcelasVenda.Text := EdtNumParcelaPedido.Text + 'X';
+    ListBoxItemParcelasVenda.ItemData.Detail := FloatToStr(valorParc);
+  end
+  else
+  begin
+    ListBoxItemParcelasVenda.Text := EmptyStr;
+    ListBoxItemParcelasVenda.ItemData.Detail := EmptyStr;
+  end;
 end;
 
 procedure TFVenda1.FormCreate(Sender: TObject);
@@ -302,6 +330,7 @@ begin
   ListBoxItemParcelasVenda.Text := EmptyStr;
   ListBoxItemParcelasVenda.ItemData.Detail := EmptyStr;
   ListViewItemPedido.Items.Clear;
+  LblQtdItemPedido.Text := EmptyStr;
 end;
 
 procedure TFVenda1.ListViewItemPedidoItemClick(const Sender: TObject;
@@ -379,6 +408,33 @@ begin
 
   AbrirFormVenda(TFConsProduto);
   MudarAbaVenda(TbItemApoioVenda, Sender);
+end;
+
+procedure TFVenda1.SpdBDescontoPedidoClick(Sender: TObject);
+var
+  valorDesc: Double;
+begin
+  if not EdtDescontoMoedaPedido.Text.IsEmpty then
+  begin
+    if StrToFloat(EdtDescontoMoedaPedido.Text) >=
+      StrToFloat(ListBoxItemValorTotalVenda.ItemData.Detail) then
+    begin
+      EdtDescontoMoedaPedido.Text := EmptyStr;
+      ShowMessage('Desconto não pode ser maior ou igual ao valor total');
+    end
+    else
+    begin
+      valorDesc := StrToFloat(ListBoxItemValorTotalVenda.ItemData.Detail) -
+        StrToFloat(EdtDescontoMoedaPedido.Text);
+      ListBoxItemValorTotalVenda.ItemData.Detail := FloatToStr(valorDesc);
+      if not EdtNumParcelaPedido.Text.IsEmpty then
+      begin
+        EdtNumParcelaPedidoTyping(Sender);
+      end;
+    end;
+
+  end;
+
 end;
 
 procedure TFVenda1.SpdBEditarVendaClick(Sender: TObject);
