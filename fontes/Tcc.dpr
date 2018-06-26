@@ -20,6 +20,5 @@ begin
   Application.CreateForm(TFSplash, FSplash);
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TFPrincipal, FPrincipal);
-  Application.CreateForm(TFVenda1, FVenda1);
   Application.Run;
 end.

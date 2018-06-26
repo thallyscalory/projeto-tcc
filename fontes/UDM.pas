@@ -143,6 +143,12 @@ type
     FDQProdItemPedidovrpromocao: TFloatField;
     FDQProdItemPedidoVRAVISTA: TFloatField;
     FDQProdItemPedidoativo: TStringField;
+    FDQConsAtendente: TFDQuery;
+    FDQConsAtendenteid_funcionario: TIntegerField;
+    FDQConsAtendentenome_funcionario: TStringField;
+    FDQConsAtendentecpf: TStringField;
+    FDQConsAtendenteusuario: TStringField;
+    FDQConsAtendentesenha: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

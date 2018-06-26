@@ -23,7 +23,7 @@ object FVenda1: TFVenda1
       Size.Height = 480.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
@@ -39,7 +39,7 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 82.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -154,7 +154,7 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 82.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -227,7 +227,7 @@ object FVenda1: TFVenda1
           DefaultItemStyles.ItemStyle = ''
           DefaultItemStyles.GroupHeaderStyle = ''
           DefaultItemStyles.GroupFooterStyle = ''
-          Viewport.Width = 330.000000000000000000
+          Viewport.Width = 325.000000000000000000
           Viewport.Height = 383.000000000000000000
           object ListBoxItemNumPedidoVenda: TListBoxItem
             TextSettings.Font.Family = 'Arial'
@@ -261,7 +261,7 @@ object FVenda1: TFVenda1
             object SpdBPesqCliVenda: TSpeedButton
               Align = Right
               Margins.Right = 8.000000000000000000
-              Position.X = 290.000000000000000000
+              Position.X = 285.000000000000000000
               Position.Y = 6.000000000000000000
               Size.Width = 32.000000000000000000
               Size.Height = 32.000000000000000000
@@ -276,7 +276,7 @@ object FVenda1: TFVenda1
               Enabled = False
               Margins.Top = 8.000000000000000000
               Margins.Bottom = 8.000000000000000000
-              Size.Width = 167.000000000000000000
+              Size.Width = 162.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
             end
@@ -298,7 +298,7 @@ object FVenda1: TFVenda1
             object SpdBPesqItemPedido: TSpeedButton
               Align = Right
               Margins.Left = 15.000000000000000000
-              Position.X = 211.000000000000000000
+              Position.X = 206.000000000000000000
               Size.Width = 48.000000000000000000
               Size.Height = 48.000000000000000000
               Size.PlatformDefault = False
@@ -309,7 +309,7 @@ object FVenda1: TFVenda1
               Align = Right
               Margins.Left = 15.000000000000000000
               Margins.Right = 8.000000000000000000
-              Position.X = 274.000000000000000000
+              Position.X = 269.000000000000000000
               Size.Width = 48.000000000000000000
               Size.Height = 48.000000000000000000
               Size.PlatformDefault = False
@@ -369,7 +369,7 @@ object FVenda1: TFVenda1
               Margins.Top = 8.000000000000000000
               Margins.Right = 4.000000000000000000
               Margins.Bottom = 8.000000000000000000
-              Size.Width = 181.000000000000000000
+              Size.Width = 176.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 1
@@ -378,7 +378,7 @@ object FVenda1: TFVenda1
             object SpdBNovoFormaPag: TSpeedButton
               Align = Right
               Margins.Right = 8.000000000000000000
-              Position.X = 274.000000000000000000
+              Position.X = 269.000000000000000000
               Size.Width = 48.000000000000000000
               Size.Height = 48.000000000000000000
               Size.PlatformDefault = False
@@ -407,10 +407,11 @@ object FVenda1: TFVenda1
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 1
+              KeyboardType = NumberPad
               Margins.Top = 8.000000000000000000
               Margins.Right = 4.000000000000000000
               Margins.Bottom = 8.000000000000000000
-              Size.Width = 213.000000000000000000
+              Size.Width = 208.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               OnTyping = EdtNumParcelaPedidoTyping
@@ -438,17 +439,18 @@ object FVenda1: TFVenda1
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
+              KeyboardType = NumbersAndPunctuation
               Margins.Top = 8.000000000000000000
               Margins.Right = 4.000000000000000000
               Margins.Bottom = 8.000000000000000000
-              Size.Width = 157.000000000000000000
+              Size.Width = 152.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
             end
             object SpdBDescontoPedido: TSpeedButton
               Align = Right
               Margins.Right = 8.000000000000000000
-              Position.X = 274.000000000000000000
+              Position.X = 269.000000000000000000
               Size.Width = 48.000000000000000000
               Size.Height = 48.000000000000000000
               Size.PlatformDefault = False
@@ -475,6 +477,41 @@ object FVenda1: TFVenda1
             Position.Y = 308.000000000000000000
             StyleLookup = 'listboxitemrightdetail'
             TabOrder = 7
+          end
+          object ListBoxItem1: TListBoxItem
+            Position.Y = 352.000000000000000000
+            TabOrder = 8
+            object LblAtendentePedido: TLabel
+              Align = Left
+              StyledSettings = [Style, FontColor]
+              Margins.Left = 4.000000000000000000
+              Margins.Top = 4.000000000000000000
+              Margins.Bottom = 4.000000000000000000
+              Position.X = 4.000000000000000000
+              Position.Y = 4.000000000000000000
+              Size.Width = 85.000000000000000000
+              Size.Height = 36.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Arial'
+              TextSettings.Font.Size = 14.000000000000000000
+              Text = 'Atendente:'
+            end
+            object ComboBoxAtendentePedido: TComboBox
+              Align = Client
+              Margins.Top = 8.000000000000000000
+              Margins.Right = 4.000000000000000000
+              Margins.Bottom = 8.000000000000000000
+              Size.Width = 232.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              OnChange = ComboBoxAtendentePedidoChange
+              OnEnter = ComboBoxAtendentePedidoEnter
+            end
+          end
+          object ListBoxItem6: TListBoxItem
+            Position.Y = 396.000000000000000000
+            TabOrder = 9
           end
         end
       end
@@ -577,12 +614,12 @@ object FVenda1: TFVenda1
               TextSettings.HorzAlign = Center
             end
             object BtnConfirmaApoioVenda: TButton
-              Align = Left
+              Align = Right
               StyledSettings = [Style]
-              Margins.Left = 8.000000000000000000
               Margins.Top = 8.000000000000000000
+              Margins.Right = 8.000000000000000000
               Margins.Bottom = 8.000000000000000000
-              Position.X = 8.000000000000000000
+              Position.X = 232.000000000000000000
               Position.Y = 8.000000000000000000
               Size.Width = 90.000000000000000000
               Size.Height = 32.000000000000000000
@@ -657,21 +694,28 @@ object FVenda1: TFVenda1
       Control = EdtNumParcelaPedido
       Track = False
     end
-    object LinkListControlToField3: TLinkListControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB1
-      FieldName = 'descricao_forma_pag'
-      Control = ComboBoxFormaPagVenda
-      FillExpressions = <>
-      FillHeaderExpressions = <>
-      FillBreakGroups = <>
-    end
     object LinkControlToField2: TLinkControlToField
       Category = 'Quick Bindings'
       DataSource = BindSourceDB1
       FieldName = 'nome_cli'
       Control = EdtCliVenda
       Track = False
+    end
+    object LinkListControlToField2: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB4
+      FieldName = 'usuario'
+      Control = ComboBoxAtendentePedido
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+    object LinkPropertyToFieldText: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'id_cli'
+      Component = LblCodCliPedido
+      ComponentProperty = 'Text'
     end
   end
   object ActionList1: TActionList
@@ -692,5 +736,11 @@ object FVenda1: TFVenda1
     ScopeMappings = <>
     Left = 16
     Top = 288
+  end
+  object BindSourceDB4: TBindSourceDB
+    DataSet = DM.FDQConsAtendente
+    ScopeMappings = <>
+    Left = 152
+    Top = 224
   end
 end

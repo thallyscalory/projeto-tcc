@@ -67,7 +67,6 @@ type
     LinkPropertyToFieldItemDataDetail: TLinkPropertyToField;
     LinkPropertyToFieldItemDataDetail2: TLinkPropertyToField;
     LinkControlToField1: TLinkControlToField;
-    LinkListControlToField3: TLinkListControlToField;
     BindSourceDB2: TBindSourceDB;
     EdtCliVenda: TEdit;
     LinkControlToField2: TLinkControlToField;
@@ -81,6 +80,13 @@ type
     LblProdutoPedido: TLabel;
     LblQtdItemPedido: TLabel;
     SpdBDescontoPedido: TSpeedButton;
+    ListBoxItem1: TListBoxItem;
+    ListBoxItem6: TListBoxItem;
+    LblAtendentePedido: TLabel;
+    ComboBoxAtendentePedido: TComboBox;
+    BindSourceDB4: TBindSourceDB;
+    LinkListControlToField2: TLinkListControlToField;
+    LinkPropertyToFieldText: TLinkPropertyToField;
     procedure SpBVoltarClick(Sender: TObject);
     procedure SpdBNovoVendaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -104,6 +110,8 @@ type
       KeyboardVisible: Boolean; const Bounds: TRect);
     procedure FormVirtualKeyboardShown(Sender: TObject;
       KeyboardVisible: Boolean; const Bounds: TRect);
+    procedure ComboBoxAtendentePedidoEnter(Sender: TObject);
+    procedure ComboBoxAtendentePedidoChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -199,8 +207,9 @@ begin
           listaItemPedido.Data[TMultiDetailAppearanceNames.Detail1] := qtd[I];
           listaItemPedido.Data[TMultiDetailAppearanceNames.Detail2] :=
             DM.FDQProdItemPedidovrvenda.AsString;
-          listaItemPedido.Data[TMultiDetailAppearanceNames.Detail3] :=
-            DM.FDQProdItemPedidoVRAVISTA.AsString;
+          if not ComboBoxAtendentePedido.Items.Text.IsEmpty then
+            listaItemPedido.Data[TMultiDetailAppearanceNames.Detail3] :=
+              ComboBoxAtendentePedido.Items.Text;
           listaItemPedido.EndUpdate;
 
           qtdItemTotal := qtdItemTotal + StrToFloat(qtd[I]);
@@ -250,6 +259,32 @@ begin
   FPrincipal.ksLoadingIndicator1.HideLoading;
 end;
 
+procedure TFVenda1.ComboBoxAtendentePedidoChange(Sender: TObject);
+var
+  I: integer;
+begin
+  for I := 0 to ListViewItemPedido.ItemCount - 1 do
+  begin
+    ListViewItemPedido.BeginUpdate;
+    ListViewItemPedido.Items[I].Data[TMultiDetailAppearanceNames.Detail3] :=
+      ComboBoxAtendentePedido.Items.Text;
+    ListViewItemPedido.EndUpdate;
+  end;
+
+end;
+
+procedure TFVenda1.ComboBoxAtendentePedidoEnter(Sender: TObject);
+var
+  I: integer;
+begin
+  ComboBoxAtendentePedido.Items.Clear;
+  DM.FDQConsAtendente.Active := False;
+  DM.FDQConsAtendente.Close;
+  DM.FDQConsAtendente.ParamByName('PIdAtendente').Value := '%';
+  DM.FDQConsAtendente.Open();
+  DM.FDQConsAtendente.Active := True;
+end;
+
 procedure TFVenda1.ComboBoxFormaPagVendaEnter(Sender: TObject);
 var
   I: integer;
@@ -279,6 +314,7 @@ begin
   SpdBPesqCliVenda.Enabled := False;
   SpdBAdicionaItemPedido.Enabled := False;
   SpdBPesqItemPedido.Enabled := True;
+  ComboBoxAtendentePedido.Enabled := False;
 
 end;
 
@@ -334,13 +370,14 @@ begin
   SpdBPesqCliVenda.Enabled := True;
   SpdBAdicionaItemPedido.Enabled := True;
   SpdBPesqItemPedido.Enabled := True;
+  ComboBoxAtendentePedido.Enabled := True;
 end;
 
 procedure TFVenda1.LimpaCampos;
 begin
   LblCodCliPedido.Text := EmptyStr;
   EdtCliVenda.Text := EmptyStr;
-  ComboBoxFormaPagVenda.ItemIndex := -1;
+  ComboBoxFormaPagVenda.Items.Clear;
   EdtNumParcelaPedido.Text := EmptyStr;
   EdtDescontoMoedaPedido.Text := EmptyStr;
   ListBoxItemValorTotalVenda.ItemData.Detail := EmptyStr;
@@ -348,6 +385,7 @@ begin
   ListBoxItemParcelasVenda.ItemData.Detail := EmptyStr;
   ListViewItemPedido.Items.Clear;
   LblQtdItemPedido.Text := EmptyStr;
+  ComboBoxAtendentePedido.Items.Clear;
 end;
 
 procedure TFVenda1.ListViewItemPedidoItemClick(const Sender: TObject;
@@ -362,8 +400,10 @@ begin
   venda := 'S';
   SpdBEditarVenda.Visible := True;
   SpdBSalvarVenda.Visible := False;
+  ComboBoxFormaPagVenda.Items.Text := DM.FDQPedidodescricao_forma_pag.AsString;
   DesabilitaCampos;
   MudarAbaVenda(TbItemedicaoVenda, Sender);
+
 end;
 
 procedure TFVenda1.MudarAbaVenda(ATabItemVenda: TTabItem; Sender: TObject);
@@ -422,9 +462,15 @@ begin
       vlTotalAtual := vlTotalAtual + vlTotalItemAtual;
     end;
   end;
-
   AbrirFormVenda(TFConsProduto);
   MudarAbaVenda(TbItemApoioVenda, Sender);
+
+  { if not Assigned(FConsProduto) then
+    FConsProduto := TFConsProduto.Create(nil);
+    FConsProduto.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+    end); }
 end;
 
 procedure TFVenda1.SpdBDescontoPedidoClick(Sender: TObject);
@@ -486,9 +532,12 @@ end;
 
 procedure TFVenda1.SpdBNovoVendaClick(Sender: TObject);
 begin
+  DM.FDQPedido.Active := False;
   crud := 'inserir';
   SpdBEditarVenda.Visible := False;
   SpdBSalvarVenda.Visible := True;
+  nomeCliente := EmptyStr;
+  codCliente := EmptyStr;
   venda := 'S';
   LimpaCampos;
   HabilitaCampos;
@@ -506,6 +555,13 @@ begin
   CliPedido := 'S';
   AbrirFormVenda(TFCadCli);
   MudarAbaVenda(TbItemApoioVenda, Sender);
+
+  { if not Assigned(FCadCli) then
+    FCadCli := TFCadCli.Create(nil);
+    FCadCli.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+    end); }
 end;
 
 procedure TFVenda1.SpdBPesqItemPedidoClick(Sender: TObject);
@@ -518,6 +574,8 @@ begin
   SpdBEditarVenda.Visible := True;
   SpdBSalvarVenda.Visible := False;
   DesabilitaCampos;
+  CliPedido := EmptyStr;
+  itemPedido := EmptyStr;
 end;
 
 procedure TFVenda1.SpdBVoltarItemVendaClick(Sender: TObject);
@@ -527,6 +585,10 @@ end;
 
 procedure TFVenda1.SpdBVoltarVendaEdicaoClick(Sender: TObject);
 begin
+  nomeCliente := EmptyStr;
+  codCliente := EmptyStr;
+  CliPedido := EmptyStr;
+  itemPedido := EmptyStr;
   DM.FDQPedido.Active := False;
   DM.FDQConsFormaPag.Active := False;
   LimpaCampos;

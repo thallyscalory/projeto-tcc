@@ -83,19 +83,19 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Condition="'$(Config)'=='Release'">
-            <RemoteDir>Tcc\res\drawable-small\</RemoteDir>
-            <RemoteName>splash_image.png</RemoteName>
-            <DeployClass>Android_SplashImage426</DeployClass>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>Tcc\res\drawable-ldpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon36</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png" Condition="'$(Config)'=='Release'">
-            <RemoteDir>Tcc\res\drawable-ldpi\</RemoteDir>
-            <RemoteName>ic_launcher.png</RemoteName>
-            <DeployClass>Android_LauncherIcon36</DeployClass>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Condition="'$(Config)'=='Release'">
+            <RemoteDir>Tcc\res\drawable-small\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <DeployClass>Android_SplashImage426</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
@@ -146,19 +146,19 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="..\imagens para criação de software\icone aplicativo\logocalory144.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Tcc\res\drawable-xxhdpi\</RemoteDir>
-            <RemoteName>ic_launcher.png</RemoteName>
-            <DeployClass>Android_LauncherIcon144</DeployClass>
+        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Tcc\res\drawable-small\</RemoteDir>
+            <RemoteName>splash_image.png</RemoteName>
+            <DeployClass>Android_SplashImage426</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>Tcc\res\drawable-small\</RemoteDir>
-            <RemoteName>splash_image.png</RemoteName>
-            <DeployClass>Android_SplashImage426</DeployClass>
+        <DeployFile Include="..\imagens para criação de software\icone aplicativo\logocalory144.png" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Tcc\res\drawable-xxhdpi\</RemoteDir>
+            <RemoteName>ic_launcher.png</RemoteName>
+            <DeployClass>Android_LauncherIcon144</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>

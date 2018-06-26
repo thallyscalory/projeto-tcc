@@ -811,4 +811,49 @@ object DM: TDM
       Size = 1
     end
   end
+  object FDQConsAtendente: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      
+        'select * from funcionario where id_funcionario like :PIdAtendent' +
+        'e;')
+    Left = 592
+    Top = 8
+    ParamData = <
+      item
+        Name = 'PIDATENDENTE'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 20
+      end>
+    object FDQConsAtendenteid_funcionario: TIntegerField
+      FieldName = 'id_funcionario'
+      Origin = 'id_funcionario'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQConsAtendentenome_funcionario: TStringField
+      FieldName = 'nome_funcionario'
+      Origin = 'nome_funcionario'
+      Required = True
+      Size = 60
+    end
+    object FDQConsAtendentecpf: TStringField
+      FieldName = 'cpf'
+      Origin = 'cpf'
+      Size = 14
+    end
+    object FDQConsAtendenteusuario: TStringField
+      FieldName = 'usuario'
+      Origin = 'usuario'
+      Required = True
+      Size = 10
+    end
+    object FDQConsAtendentesenha: TStringField
+      FieldName = 'senha'
+      Origin = 'senha'
+      Required = True
+      Size = 15
+    end
+  end
 end

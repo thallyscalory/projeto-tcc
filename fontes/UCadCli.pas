@@ -338,10 +338,10 @@ begin
   TbControlCadModelo.ActiveTab := TbItemListagem;
   TbControlCadModelo.TabPosition := TTabPosition.None;
   if venda = 'S' then
-  begin
+    begin
     SpBVoltar.Visible := False;
     LblTitulo.Visible := False;
-  end;
+    end;
 end;
 
 procedure TFCadCli.FormKeyDown(Sender: TObject; var Key: Word;
@@ -435,92 +435,92 @@ end;
 
 procedure TFCadCli.ListViewCadCliButtonClick(const Sender: TObject;
   const AItem: TListItem; const AObject: TListItemSimpleControl);
-//var
-  //bmp: TBitmap;
+// var
+// bmp: TBitmap;
 begin
   inherited;
-  //clickBotao := False;
-  //lblTituloEdicao.Text := 'Detalhes';
-  //SpdBEditar.Enabled := True;
-  //SpdBEditar.Visible := True;
-  //SpdBConfirmar.Enabled := False;
-  //SpdBConfirmar.Visible := False;
-  //EdtDataCadCli.Text := DM.FDQFiltroCadCLidata_cad_cli.AsString;
-  //if DM.FDQFiltroCadCLitipo_cli.AsString = 'F' then
-    //ComboBoxTipoPessoaCli.ItemIndex := 0
-  //else
-    //ComboBoxTipoPessoaCli.ItemIndex := 1;
-  //if DM.FDQFiltroCadCLiliberaaprazo_cli.AsString = 'S' then
-    //RadioBLiberaAprazoS.IsChecked := True
-  //else
-    //RadioBLiberaAprazoN.IsChecked := True;
-  //EditFiltroNomeCadCli.Text := EmptyStr;
-  //EditFiltroCodCadCli.Text := EmptyStr;
-  //EdtNomeCli.SetFocus;
-  //DesabilitaCampos;
-  //MudarAbaModelo(TbItemedicao, Sender);
+  // clickBotao := False;
+  // lblTituloEdicao.Text := 'Detalhes';
+  // SpdBEditar.Enabled := True;
+  // SpdBEditar.Visible := True;
+  // SpdBConfirmar.Enabled := False;
+  // SpdBConfirmar.Visible := False;
+  // EdtDataCadCli.Text := DM.FDQFiltroCadCLidata_cad_cli.AsString;
+  // if DM.FDQFiltroCadCLitipo_cli.AsString = 'F' then
+  // ComboBoxTipoPessoaCli.ItemIndex := 0
+  // else
+  // ComboBoxTipoPessoaCli.ItemIndex := 1;
+  // if DM.FDQFiltroCadCLiliberaaprazo_cli.AsString = 'S' then
+  // RadioBLiberaAprazoS.IsChecked := True
+  // else
+  // RadioBLiberaAprazoN.IsChecked := True;
+  // EditFiltroNomeCadCli.Text := EmptyStr;
+  // EditFiltroCodCadCli.Text := EmptyStr;
+  // EdtNomeCli.SetFocus;
+  // DesabilitaCampos;
+  // MudarAbaModelo(TbItemedicao, Sender);
 end;
 
 procedure TFCadCli.ListViewCadCliDblClick(Sender: TObject);
 begin
   inherited;
-  //if venda = 'S' then
-    //begin
-      //MessageDlg('Você deseja adicionar este cliente ao pedido?',
-        //System.UITypes.TMsgDlgType.mtInformation,
-        //[System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
-        //procedure(const AResult: System.UITypes.TModalResult)
-        //begin
-          //case AResult of
-            //mrYES:
-              //begin
-                // caso sim
-                //nomeCliente := DM.FDQFiltroCadCLinome_cli.AsString;
-                //codCliente := DM.FDQFiltroCadCLiid_cli.AsString;
-              //end;
-            //mrNo:
-              //begin
-                // caso não
-              //end;
-          //end;
-        //end);
-    //end;
+  // if venda = 'S' then
+  // begin
+  // MessageDlg('Você deseja adicionar este cliente ao pedido?',
+  // System.UITypes.TMsgDlgType.mtInformation,
+  // [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
+  // procedure(const AResult: System.UITypes.TModalResult)
+  // begin
+  // case AResult of
+  // mrYES:
+  // begin
+  // caso sim
+  // nomeCliente := DM.FDQFiltroCadCLinome_cli.AsString;
+  // codCliente := DM.FDQFiltroCadCLiid_cli.AsString;
+  // end;
+  // mrNo:
+  // begin
+  // caso não
+  // end;
+  // end;
+  // end);
+  // end;
 end;
 
 procedure TFCadCli.ListViewCadCliGesture(Sender: TObject;
-const EventInfo: TGestureEventInfo; var Handled: Boolean);
+  const EventInfo: TGestureEventInfo; var Handled: Boolean);
 begin
   inherited;
-  //if EventInfo.GestureID = igiDoubleTap then
-  //begin
-    //if venda = 'S' then
-    //begin
-      //MessageDlg('Você deseja adicionar este cliente ao pedido?',
-        //System.UITypes.TMsgDlgType.mtInformation,
-        //[System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
-        //procedure(const AResult: System.UITypes.TModalResult)
-        //begin
-          //case AResult of
-            //mrYES:
-              //begin
-                // caso sim
-                //nomeCliente := DM.FDQFiltroCadCLinome_cli.AsString;
-                //codCliente := DM.FDQFiltroCadCLiid_cli.AsString;
-              //end;
-            //mrNo:
-              //begin
-                // caso não
-              //end;
-          //end;
-        //end);
-    //end;
-  //end;
+  // if EventInfo.GestureID = igiDoubleTap then
+  // begin
+  // if venda = 'S' then
+  // begin
+  // MessageDlg('Você deseja adicionar este cliente ao pedido?',
+  // System.UITypes.TMsgDlgType.mtInformation,
+  // [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
+  // procedure(const AResult: System.UITypes.TModalResult)
+  // begin
+  // case AResult of
+  // mrYES:
+  // begin
+  // caso sim
+  // nomeCliente := DM.FDQFiltroCadCLinome_cli.AsString;
+  // codCliente := DM.FDQFiltroCadCLiid_cli.AsString;
+  // end;
+  // mrNo:
+  // begin
+  // caso não
+  // end;
+  // end;
+  // end);
+  // end;
+  // end;
 
 end;
 
 procedure TFCadCli.ListViewCadCliItemClickEx(const Sender: TObject;
-ItemIndex: Integer; const LocalClickPos: TPointF;
-const ItemObject: TListItemDrawable);
+  ItemIndex: Integer; const LocalClickPos: TPointF;
+  const ItemObject: TListItemDrawable);
 var
   bmp: TBitmap;
 begin
@@ -580,7 +580,20 @@ begin
   DM.FDQFiltroCadCLi.Active := False;
   EditFiltroNomeCadCli.Text := EmptyStr;
   EditFiltroCodCadCli.Text := EmptyStr;
+  { if CliPedido = 'S' then
+    begin
+    if not Assigned(FVenda1) then
+    FVenda1 := TFVenda1.Create(nil);
+    FVenda1.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
+    end }
+    //else
+    //begin
   FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
+    //end;
 end;
 
 procedure TFCadCli.SpBVoltarEdicaoClick(Sender: TObject);
