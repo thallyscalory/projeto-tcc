@@ -5,14 +5,12 @@ inherited FConsProduto: TFConsProduto
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
-      TabIndex = 1
       Sizes = (
         330s
         431s
         330s
         431s)
       inherited TbItemListagem: TTabItem
-        IsSelected = False
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         inherited ToolBarsuperior: TToolBar
@@ -47,46 +45,34 @@ inherited FConsProduto: TFConsProduto
           object EdtFiltroNomeProd: TEdit
             Touch.InteractiveGestures = [LongTap, DoubleTap]
             Align = Top
+            StyleLookup = 'searchedit'
             TabOrder = 0
+            ReturnKeyType = Done
             Scale.Y = 1.299999952316284000
             Size.Width = 330.000000000000000000
             Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
             TextPrompt = 'Filtrar pelo nome'
+            KillFocusByReturn = True
+            OnTyping = EdtFiltroNomeProdTyping
             OnClick = EdtFiltroNomeProdClick
-            object SearchEditButton1: TSearchEditButton
-              CanFocus = False
-              Cursor = crArrow
-              Position.Y = 2.000000000000000000
-              Size.Width = 32.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TabOrder = 0
-              OnClick = SearchEditButton1Click
-            end
           end
           object EdtFiltroCodProd: TEdit
             Touch.InteractiveGestures = [LongTap, DoubleTap]
             Align = Top
+            StyleLookup = 'searchedit'
             TabOrder = 1
             KeyboardType = NumberPad
+            ReturnKeyType = Done
             Position.Y = 41.599998474121090000
             Scale.Y = 1.299999952316284000
             Size.Width = 330.000000000000000000
             Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
             TextPrompt = 'Filtrar pelo codigo'
+            KillFocusByReturn = True
+            OnTyping = EdtFiltroCodProdTyping
             OnClick = EdtFiltroCodProdClick
-            object SearchEditButton2: TSearchEditButton
-              CanFocus = False
-              Cursor = crArrow
-              Position.Y = 2.000000000000000000
-              Size.Width = 32.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TabOrder = 0
-              OnClick = SearchEditButton2Click
-            end
           end
           object ListViewConsProd: TListView
             Touch.InteractiveGestures = [DoubleTap]
@@ -97,7 +83,7 @@ inherited FConsProduto: TFConsProduto
             FooterAppearanceClassName = 'TListHeaderObjects'
             Align = Client
             Size.Width = 330.000000000000000000
-            Size.Height = 255.800003051757800000
+            Size.Height = 211.800003051757800000
             Size.PlatformDefault = False
             TabOrder = 2
             ItemAppearanceObjects.ItemEditObjects.Image.Visible = True
@@ -113,18 +99,30 @@ inherited FConsProduto: TFConsProduto
             Margins.Left = 20.000000000000000000
             Margins.Right = 20.000000000000000000
             Position.X = 20.000000000000000000
+            Position.Y = 127.199996948242200000
+            Size.Width = 290.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 4
+            Text = 'Scanear codigo de barras'
+            Visible = True
+          end
+          object BtnFiltrarProd: TButton
+            Align = Top
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
             Position.Y = 83.199996948242190000
             Size.Width = 290.000000000000000000
             Size.Height = 44.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 3
-            Text = 'Scanear codigo de barras'
-            Visible = True
+            Text = 'Filtrar Todos'
+            OnClick = BtnFiltrarProdClick
           end
         end
       end
       inherited TbItemedicao: TTabItem
-        IsSelected = True
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object LytFundoEdicao: TLayout
@@ -212,6 +210,7 @@ inherited FConsProduto: TFConsProduto
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                ReturnKeyType = Next
                 MaxLength = 65
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 4.000000000000000000
@@ -221,6 +220,7 @@ inherited FConsProduto: TFConsProduto
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Nome Produto'
+                OnKeyUp = EdtNomeProdKeyUp
                 object EdtBNomeProd: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -258,6 +258,7 @@ inherited FConsProduto: TFConsProduto
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                ReturnKeyType = Next
                 MaxLength = 20
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 4.000000000000000000
@@ -267,6 +268,7 @@ inherited FConsProduto: TFConsProduto
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Descricao Produto'
+                OnKeyUp = EdtDescProdKeyUp
                 object EdtBDescProd: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -304,6 +306,7 @@ inherited FConsProduto: TFConsProduto
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                ReturnKeyType = Next
                 MaxLength = 4
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 4.000000000000000000
@@ -313,6 +316,7 @@ inherited FConsProduto: TFConsProduto
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Und Produto'
+                OnKeyUp = EdtUnProdKeyUp
                 object EdtBUnProd: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -350,6 +354,7 @@ inherited FConsProduto: TFConsProduto
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                ReturnKeyType = Next
                 MaxLength = 6
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 4.000000000000000000
@@ -359,6 +364,7 @@ inherited FConsProduto: TFConsProduto
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Sigla Grupo'
+                OnKeyUp = EdtSiglaGrupoProdKeyUp
                 object EdtBSiglaGrupoProd: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -396,6 +402,7 @@ inherited FConsProduto: TFConsProduto
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                ReturnKeyType = Next
                 MaxLength = 50
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 4.000000000000000000
@@ -405,6 +412,7 @@ inherited FConsProduto: TFConsProduto
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Grupo Produto'
+                OnKeyUp = EdtGrupoProdKeyUp
                 object EdtBGrupoProd: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -443,6 +451,7 @@ inherited FConsProduto: TFConsProduto
                 Align = Client
                 TabOrder = 0
                 KeyboardType = NumberPad
+                ReturnKeyType = Next
                 MaxLength = 13
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 4.000000000000000000
@@ -452,6 +461,7 @@ inherited FConsProduto: TFConsProduto
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Codigo De barras'
+                OnKeyUp = EdtCodBarraProdKeyUp
                 object EdtBCodBarraProd: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -492,6 +502,7 @@ inherited FConsProduto: TFConsProduto
                 Align = Client
                 TabOrder = 0
                 KeyboardType = NumbersAndPunctuation
+                ReturnKeyType = Next
                 MaxLength = 15
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 4.000000000000000000
@@ -501,6 +512,8 @@ inherited FConsProduto: TFConsProduto
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Valor Aprazo'
+                OnKeyUp = EdtVrPrazaProdKeyUp
+                OnExit = EdtVrPrazaProdExit
                 object EdtBVrPrazaProd: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -539,6 +552,7 @@ inherited FConsProduto: TFConsProduto
                 Align = Client
                 TabOrder = 0
                 KeyboardType = NumbersAndPunctuation
+                ReturnKeyType = Next
                 MaxLength = 15
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 4.000000000000000000
@@ -548,6 +562,8 @@ inherited FConsProduto: TFConsProduto
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Valor Avista'
+                OnKeyUp = EdtVrVistaProdKeyUp
+                OnExit = EdtVrVistaProdExit
                 object EdtBVrVistaProd: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -586,6 +602,7 @@ inherited FConsProduto: TFConsProduto
                 Align = Client
                 TabOrder = 0
                 KeyboardType = NumbersAndPunctuation
+                ReturnKeyType = Done
                 MaxLength = 15
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 4.000000000000000000
@@ -595,6 +612,8 @@ inherited FConsProduto: TFConsProduto
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Valor Promocao'
+                KillFocusByReturn = True
+                OnExit = EdtVrPromocaoProdExit
                 object EdtBVrPromocaoProd: TEditButton
                   CanFocus = False
                   Cursor = crArrow

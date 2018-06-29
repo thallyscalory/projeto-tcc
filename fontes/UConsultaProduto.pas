@@ -18,9 +18,7 @@ type
   TFConsProduto = class(TFCadModelo)
     LytListagem: TLayout;
     EdtFiltroNomeProd: TEdit;
-    SearchEditButton1: TSearchEditButton;
     EdtFiltroCodProd: TEdit;
-    SearchEditButton2: TSearchEditButton;
     ListViewConsProd: TListView;
     BtnFiltroCodBar: TButton;
     TakePhotoFromCameraAction1: TTakePhotoFromCameraAction;
@@ -86,11 +84,10 @@ type
     LblVlAvistaProd: TLabel;
     LblVlPromocaoProd: TLabel;
     SpdBNovoCadProd: TSpeedButton;
+    BtnFiltrarProd: TButton;
     procedure TakePhotoFromCameraAction1DidFinishTaking(Image: TBitmap);
     procedure EdtFiltroNomeProdClick(Sender: TObject);
     procedure EdtFiltroCodProdClick(Sender: TObject);
-    procedure SearchEditButton1Click(Sender: TObject);
-    procedure SearchEditButton2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure SpBVoltarEdicaoClick(Sender: TObject);
     procedure EdtBNomeProdClick(Sender: TObject);
@@ -119,6 +116,28 @@ type
     procedure ListViewConsProdItemClickEx(const Sender: TObject;
       ItemIndex: Integer; const LocalClickPos: TPointF;
       const ItemObject: TListItemDrawable);
+    procedure EdtVrPrazaProdExit(Sender: TObject);
+    procedure EdtVrVistaProdExit(Sender: TObject);
+    procedure EdtVrPromocaoProdExit(Sender: TObject);
+    procedure EdtNomeProdKeyUp(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
+    procedure EdtDescProdKeyUp(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
+    procedure EdtUnProdKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure EdtSiglaGrupoProdKeyUp(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
+    procedure EdtGrupoProdKeyUp(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
+    procedure EdtCodBarraProdKeyUp(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
+    procedure EdtVrPrazaProdKeyUp(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
+    procedure EdtVrVistaProdKeyUp(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
+    procedure EdtFiltroNomeProdTyping(Sender: TObject);
+    procedure EdtFiltroCodProdTyping(Sender: TObject);
+    procedure BtnFiltrarProdClick(Sender: TObject);
   private
     crud: String;
 
@@ -141,6 +160,22 @@ implementation
 {$R *.fmx}
 
 uses UDM, UPrincipal, UVenda1;
+
+procedure TFConsProduto.BtnFiltrarProdClick(Sender: TObject);
+begin
+  inherited;
+  EdtFiltroNomeProd.Text := EmptyStr;
+  EdtFiltroCodProd.Text := EmptyStr;
+  DM.FDQConsultaProd.Active := False;
+  DM.FDQConsultaProd.Close;
+
+  DM.FDQConsultaProd.ParamByName('PNomeProd').Value := '%';
+  DM.FDQConsultaProd.ParamByName('PCodProd').Value := Null;
+  DM.FDQConsultaProd.ParamByName('PCodBar').Value := Null;
+
+  DM.FDQConsultaProd.Open();
+  DM.FDQConsultaProd.Active := True;
+end;
 
 procedure TFConsProduto.DesabilitaCampos;
 begin
@@ -212,16 +247,165 @@ begin
   EdtVrPromocaoProd.SetFocus;
 end;
 
+procedure TFConsProduto.EdtCodBarraProdKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtVrPrazaProd.SetFocus;
+end;
+
+procedure TFConsProduto.EdtDescProdKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtUnProd.SetFocus;
+end;
+
 procedure TFConsProduto.EdtFiltroCodProdClick(Sender: TObject);
 begin
   inherited;
   MostrarTeclado(EdtFiltroCodProd);
 end;
 
+procedure TFConsProduto.EdtFiltroCodProdTyping(Sender: TObject);
+begin
+  inherited;
+  EdtFiltroNomeProd.Text := EmptyStr;
+  DM.FDQConsultaProd.Active := False;
+  DM.FDQConsultaProd.Close;
+  if EdtFiltroCodProd.Text.IsEmpty then
+  begin
+    DM.FDQConsultaProd.ParamByName('PCodProd').Value := Null;
+    DM.FDQConsultaProd.ParamByName('PNomeProd').Value := Null;
+    DM.FDQConsultaProd.ParamByName('PCodBar').Value := Null;
+  end
+  else
+  begin
+    DM.FDQConsultaProd.ParamByName('PCodProd').Value := EdtFiltroCodProd.Text;
+    DM.FDQConsultaProd.ParamByName('PNomeProd').Value := Null;
+    DM.FDQConsultaProd.ParamByName('PCodBar').Value := Null;
+  end;
+  DM.FDQConsultaProd.Open();
+  DM.FDQConsultaProd.Active := True;
+end;
+
 procedure TFConsProduto.EdtFiltroNomeProdClick(Sender: TObject);
 begin
   inherited;
   MostrarTeclado(EdtFiltroNomeProd);
+end;
+
+procedure TFConsProduto.EdtFiltroNomeProdTyping(Sender: TObject);
+begin
+  inherited;
+  EdtFiltroCodProd.Text := EmptyStr;
+  DM.FDQConsultaProd.Active := False;
+  DM.FDQConsultaProd.Close;
+  if EdtFiltroNomeProd.Text.IsEmpty then
+  begin
+    DM.FDQConsultaProd.ParamByName('PNomeProd').Value := Null;
+    DM.FDQConsultaProd.ParamByName('PCodProd').Value := Null;
+    DM.FDQConsultaProd.ParamByName('PCodBar').Value := Null;
+  end
+  else
+  begin
+    DM.FDQConsultaProd.ParamByName('PNomeProd').Value :=
+      '%' + EdtFiltroNomeProd.Text + '%';
+    DM.FDQConsultaProd.ParamByName('PCodProd').Value := Null;
+    DM.FDQConsultaProd.ParamByName('PCodBar').Value := Null;
+  end;
+  DM.FDQConsultaProd.Open();
+  DM.FDQConsultaProd.Active := True;
+end;
+
+procedure TFConsProduto.EdtGrupoProdKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtCodBarraProd.SetFocus;
+end;
+
+procedure TFConsProduto.EdtNomeProdKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtDescProd.SetFocus;
+
+end;
+
+procedure TFConsProduto.EdtSiglaGrupoProdKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtGrupoProd.SetFocus;
+end;
+
+procedure TFConsProduto.EdtUnProdKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtSiglaGrupoProd.SetFocus;
+end;
+
+procedure TFConsProduto.EdtVrPrazaProdExit(Sender: TObject);
+var
+  iAuxPrazo: Double;
+begin
+  inherited;
+  if (EdtVrPrazaProd.Text = EmptyStr) then
+    EdtVrPrazaProd.Text := '0';
+
+  if TryStrToFloat(EdtVrPrazaProd.Text, iAuxPrazo) then
+    EdtVrPrazaProd.Text := DisplayFormatter(StrToFloat(EdtVrPrazaProd.Text),
+      ('#0.00'));
+end;
+
+procedure TFConsProduto.EdtVrPrazaProdKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtVrVistaProd.SetFocus;
+end;
+
+procedure TFConsProduto.EdtVrPromocaoProdExit(Sender: TObject);
+var
+  iAuxPromocao: Double;
+begin
+  inherited;
+  if (EdtVrPromocaoProd.Text = EmptyStr) then
+    EdtVrPromocaoProd.Text := '0';
+
+  if TryStrToFloat(EdtVrPromocaoProd.Text, iAuxPromocao) then
+    EdtVrPromocaoProd.Text :=
+      DisplayFormatter(StrToFloat(EdtVrPromocaoProd.Text), ('#0.00'));
+end;
+
+procedure TFConsProduto.EdtVrVistaProdExit(Sender: TObject);
+var
+  iAuxAvista: Double;
+begin
+  inherited;
+  if (EdtVrVistaProd.Text = EmptyStr) then
+    EdtVrVistaProd.Text := '0';
+
+  if TryStrToFloat(EdtVrVistaProd.Text, iAuxAvista) then
+    EdtVrVistaProd.Text := DisplayFormatter(StrToFloat(EdtVrVistaProd.Text),
+      ('#0.00'));
+end;
+
+procedure TFConsProduto.EdtVrVistaProdKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtVrPromocaoProd.SetFocus;
 end;
 
 procedure TFConsProduto.FormCreate(Sender: TObject);
@@ -439,8 +623,8 @@ begin
       RadioBAtivoS.IsChecked := True
     else
       RadioBAtivoN.IsChecked := True;
-    EdtFiltroNomeProd.Text := EmptyStr;
-    EdtFiltroCodProd.Text := EmptyStr;
+    // EdtFiltroNomeProd.Text := EmptyStr;
+    // EdtFiltroCodProd.Text := EmptyStr;
     MudarAbaModelo(TbItemedicao, Sender);
   end
   else
@@ -497,42 +681,7 @@ begin
   end;
 end;
 
-procedure TFConsProduto.SearchEditButton1Click(Sender: TObject);
-begin
-  inherited;
-  EdtFiltroCodProd.Text := EmptyStr;
-  DM.FDQConsultaProd.Active := False;
-  DM.FDQConsultaProd.Close;
-  DM.FDQConsultaProd.ParamByName('PNomeProd').Value :=
-    '%' + EdtFiltroNomeProd.Text + '%';
-  DM.FDQConsultaProd.ParamByName('PCodProd').Value := Null;
-  DM.FDQConsultaProd.ParamByName('PCodBar').Value := Null;
-  DM.FDQConsultaProd.Open();
-  DM.FDQConsultaProd.Active := True;
-  if DM.FDQConsultaProd.IsEmpty then
-  begin
-    ShowMessage('Nao encotrado nenhum produto com este nome!');
-    EdtFiltroNomeProd.SetFocus;
-  end;
-end;
 
-procedure TFConsProduto.SearchEditButton2Click(Sender: TObject);
-begin
-  inherited;
-  EdtFiltroNomeProd.Text := EmptyStr;
-  DM.FDQConsultaProd.Active := False;
-  DM.FDQConsultaProd.Close;
-  DM.FDQConsultaProd.ParamByName('PCodProd').Value := EdtFiltroCodProd.Text;
-  DM.FDQConsultaProd.ParamByName('PNomeProd').Value := Null;
-  DM.FDQConsultaProd.ParamByName('PCodBar').Value := Null;
-  DM.FDQConsultaProd.Open();
-  DM.FDQConsultaProd.Active := True;
-  if DM.FDQConsultaProd.IsEmpty then
-  begin
-    ShowMessage('Nao encotrado nenhum produto com este codigo!');
-    EdtFiltroCodProd.SetFocus;
-  end;
-end;
 
 procedure TFConsProduto.SpBConfirmarProdClick(Sender: TObject);
 var
@@ -558,18 +707,18 @@ begin
       DM.FDQCadProdproduto.AsString := EdtNomeProd.Text;
       DM.FDQCadProddescricao.AsString := EdtDescProd.Text;
       DM.FDQCadProdun.AsString := EdtUnProd.Text;
-      if EdtVrPrazaProd.Text = '' then
+      if EdtVrPrazaProd.Text.IsEmpty then
         DM.FDQCadProdvrvenda.AsFloat := 0
       else
         DM.FDQCadProdvrvenda.AsFloat := StrToFloat(EdtVrPrazaProd.Text);
       DM.FDQCadProdsigla.AsString := EdtSiglaGrupoProd.Text;
       DM.FDQCadProdgrupo.AsString := EdtGrupoProd.Text;
       DM.FDQCadProdCodigoBarra.AsString := EdtCodBarraProd.Text;
-      if EdtVrPromocaoProd.Text = '' then
+      if EdtVrPromocaoProd.Text.IsEmpty then
         DM.FDQCadProdvrpromocao.AsFloat := 0
       else
         DM.FDQCadProdvrpromocao.AsFloat := StrToFloat(EdtVrPromocaoProd.Text);
-      if EdtVrVistaProd.Text = '' then
+      if EdtVrVistaProd.Text.IsEmpty then
         DM.FDQCadProdVRAVISTA.AsFloat := 0
       else
         DM.FDQCadProdVRAVISTA.AsFloat := StrToFloat(EdtVrVistaProd.Text);
@@ -577,7 +726,7 @@ begin
       DM.FDQCadProd.Post;
     except
       on E: Exception do
-        ShowMessage('Houve algum erro, processo cancelado!');
+        ShowMessage('Erro!  ' + E.Message);
     end;
   end
   else if crud = 'editar' then
@@ -587,18 +736,27 @@ begin
       DM.FDQConsultaProdproduto.AsString := EdtNomeProd.Text;
       DM.FDQConsultaProddescricao.AsString := EdtDescProd.Text;
       DM.FDQConsultaProdun.AsString := EdtUnProd.Text;
-      DM.FDQConsultaProdvrvenda.AsFloat := StrToFloat(EdtVrPrazaProd.Text);
+      if EdtVrPrazaProd.Text.IsEmpty then
+        DM.FDQConsultaProdvrvenda.AsFloat := 0
+      else
+        DM.FDQConsultaProdvrvenda.AsFloat := StrToFloat(EdtVrPrazaProd.Text);
       DM.FDQConsultaProdsigla.AsString := EdtSiglaGrupoProd.Text;
       DM.FDQConsultaProdgrupo.AsString := EdtGrupoProd.Text;
       DM.FDQConsultaProdCodigoBarra.AsString := EdtCodBarraProd.Text;
-      DM.FDQConsultaProdvrpromocao.AsFloat :=
-        StrToFloat(EdtVrPromocaoProd.Text);
-      DM.FDQConsultaProdVRAVISTA.AsFloat := StrToFloat(EdtVrVistaProd.Text);
+      if EdtVrPromocaoProd.Text.IsEmpty then
+        DM.FDQConsultaProdvrpromocao.AsFloat := 0
+      else
+        DM.FDQConsultaProdvrpromocao.AsFloat :=
+          StrToFloat(EdtVrPromocaoProd.Text);
+      if EdtVrVistaProd.Text.IsEmpty then
+        DM.FDQConsultaProdVRAVISTA.AsFloat := 0
+      else
+        DM.FDQConsultaProdVRAVISTA.AsFloat := StrToFloat(EdtVrVistaProd.Text);
       DM.FDQConsultaProdativo.AsString := ativo;
       DM.FDQConsultaProd.Post;
     except
       on E: Exception do
-        ShowMessage('Houve algum erro, processo cancelado!');
+        ShowMessage('Erro!  ' + E.Message);
     end;
   end;
   DM.FDConnection1.CommitRetaining;
@@ -634,18 +792,18 @@ begin
 
     end);
     end }
-    //else
-    //begin
+  // else
+  // begin
   FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
-    //end;
+  // end;
 end;
 
 procedure TFConsProduto.SpBVoltarEdicaoClick(Sender: TObject);
 begin
   inherited;
-  EdtFiltroNomeProd.Text := EmptyStr;
-  EdtFiltroCodProd.Text := EmptyStr;
-  DM.FDQConsultaProd.Active := False;
+  // EdtFiltroNomeProd.Text := EmptyStr;
+  // EdtFiltroCodProd.Text := EmptyStr;
+  // DM.FDQConsultaProd.Active := False;
   MudarAbaModelo(TbItemListagem, Sender);
 end;
 

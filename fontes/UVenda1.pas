@@ -111,7 +111,9 @@ type
     procedure FormVirtualKeyboardShown(Sender: TObject;
       KeyboardVisible: Boolean; const Bounds: TRect);
     procedure ComboBoxAtendentePedidoEnter(Sender: TObject);
-    procedure ComboBoxAtendentePedidoChange(Sender: TObject);
+    procedure ComboBoxAtendentePedidoClosePopup(Sender: TObject);
+    procedure EdtNumParcelaPedidoKeyUp(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -124,6 +126,7 @@ type
     procedure LimpaCampos;
     procedure HabilitaCampos;
     procedure DesabilitaCampos;
+    procedure default;
     { Public declarations }
   end;
 
@@ -209,7 +212,7 @@ begin
             DM.FDQProdItemPedidovrvenda.AsString;
           if not ComboBoxAtendentePedido.Items.Text.IsEmpty then
             listaItemPedido.Data[TMultiDetailAppearanceNames.Detail3] :=
-              ComboBoxAtendentePedido.Items.Text;
+              ComboBoxAtendentePedido.Selected.Text;
           listaItemPedido.EndUpdate;
 
           qtdItemTotal := qtdItemTotal + StrToFloat(qtd[I]);
@@ -259,7 +262,7 @@ begin
   FPrincipal.ksLoadingIndicator1.HideLoading;
 end;
 
-procedure TFVenda1.ComboBoxAtendentePedidoChange(Sender: TObject);
+procedure TFVenda1.ComboBoxAtendentePedidoClosePopup(Sender: TObject);
 var
   I: integer;
 begin
@@ -267,7 +270,7 @@ begin
   begin
     ListViewItemPedido.BeginUpdate;
     ListViewItemPedido.Items[I].Data[TMultiDetailAppearanceNames.Detail3] :=
-      ComboBoxAtendentePedido.Items.Text;
+      ComboBoxAtendentePedido.Selected.Text;
     ListViewItemPedido.EndUpdate;
   end;
 
@@ -304,6 +307,34 @@ begin
   DM.FDQConsFormaPag.Active := True;
 end;
 
+procedure TFVenda1.default;
+var
+  I: integer;
+begin
+  DM.FDQMaxIdPedido.Close;
+  DM.FDQMaxIdPedido.Open();
+  ListBoxItemNumPedidoVenda.ItemData.Detail :=
+    IntToStr(DM.FDQMaxIdPedidomaxIdPedido.AsInteger + 1);
+
+  ComboBoxFormaPagVenda.Items.Clear;
+  DM.FDQConsFormaPag.Close;
+  DM.FDQConsFormaPag.ParamByName('PIdFormaPag').Value := '%';
+  DM.FDQConsFormaPag.Open();
+  for I := 1 to DM.FDQConsFormaPag.RowsAffected do
+  begin
+    DM.FDQConsFormaPag.Close;
+    DM.FDQConsFormaPag.ParamByName('PIdFormaPag').Value := IntToStr(I);
+    DM.FDQConsFormaPag.Open();
+    ComboBoxFormaPagVenda.Items.Add
+      (DM.FDQConsFormaPagdescricao_forma_pag.AsString);
+  end;
+  DM.FDQConsFormaPag.Active := True;
+  ComboBoxFormaPagVenda.ItemIndex := 0;
+  EdtNumParcelaPedido.Text := '1';
+  EdtDescontoMoedaPedido.Text := '0,00';
+
+end;
+
 procedure TFVenda1.DesabilitaCampos;
 begin
   EdtCliVenda.Enabled := False;
@@ -316,6 +347,13 @@ begin
   SpdBPesqItemPedido.Enabled := True;
   ComboBoxAtendentePedido.Enabled := False;
 
+end;
+
+procedure TFVenda1.EdtNumParcelaPedidoKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+if Key = vkReturn then
+    EdtDescontoMoedaPedido.SetFocus;
 end;
 
 procedure TFVenda1.EdtNumParcelaPedidoTyping(Sender: TObject);
@@ -414,16 +452,32 @@ end;
 
 procedure TFVenda1.SpBFiltrarPedidoClick(Sender: TObject);
 var
-  FiltroPedido: string;
+  filtroFormaPag, filtroStatus, filtroStatusCond: string;
 begin
   inherited;
   if ComboBoxFiltroPedido.ItemIndex = 0 then
-    FiltroPedido := 'N'
-  else
-    FiltroPedido := 'S';
+  begin
+    filtroFormaPag := EmptyStr;
+    filtroStatusCond := EmptyStr;
+    filtroStatus := 'F';
+  end
+  else if ComboBoxFiltroPedido.ItemIndex = 1 then
+  begin
+    filtroFormaPag := EmptyStr;
+    filtroStatusCond := EmptyStr;
+    filtroStatus := 'A';
+  end
+  else if ComboBoxFiltroPedido.ItemIndex = 2 then
+  begin
+    filtroFormaPag := 'S';
+    filtroStatusCond := 'F';
+    filtroStatus := EmptyStr;
+  end;
   DM.FDQPedido.Active := False;
   DM.FDQPedido.Close;
-  DM.FDQPedido.ParamByName('PFormaPag').Value := FiltroPedido;
+  DM.FDQPedido.ParamByName('PFormaPag').Value := filtroFormaPag;
+  DM.FDQPedido.ParamByName('PStatusPedCond').Value := filtroStatusCond;
+  DM.FDQPedido.ParamByName('PStatusPedido').Value := filtroStatus;
   DM.FDQPedido.Open();
   DM.FDQPedido.Active := True;
 end;
@@ -542,10 +596,7 @@ begin
   LimpaCampos;
   HabilitaCampos;
   MudarAbaVenda(TbItemedicaoVenda, Sender);
-  DM.FDQMaxIdPedido.Close;
-  DM.FDQMaxIdPedido.Open();
-  ListBoxItemNumPedidoVenda.ItemData.Detail :=
-    IntToStr(DM.FDQMaxIdPedidomaxIdPedido.AsInteger + 1);
+  default;
 end;
 
 procedure TFVenda1.SpdBPesqCliVendaClick(Sender: TObject);

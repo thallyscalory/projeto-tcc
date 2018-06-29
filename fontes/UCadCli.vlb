@@ -10,7 +10,7 @@ Coordinates=11,141,70,33
 Visible=False
 
 []
-Coordinates=107,319,119,36
+Coordinates=1044,1,124,33
 Visible=False
 LayerNames=NewLayer0
 
@@ -83,14 +83,6 @@ Visible=False
 
 [SpdBEditar]
 Coordinates=197,908,70,51
-
-[EditButtonPesqCodCli]
-Coordinates=1044,1,124,33
-Visible=False
-
-[EditButtonPesqNomeCli]
-Coordinates=1044,221,133,33
-Visible=False
 
 [EditFiltroCodCadCli]
 Coordinates=0,0,112,33
@@ -393,4 +385,7 @@ Coordinates=563,865,138,267
 
 [GestureManager1]
 Coordinates=137,671,101,33
+
+[DM.FDQConsAtendente]
+Visible=False
 

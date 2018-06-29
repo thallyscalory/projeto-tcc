@@ -26,7 +26,7 @@ Coordinates=319,56,81,33
 Coordinates=590,1470,119,33
 
 []
-Coordinates=388,298,91,58
+Coordinates=630,773,107,33
 Visible=True
 
 [DM.FDQFiltroCadCLi]
@@ -59,12 +59,6 @@ Coordinates=459,938,108,51
 
 [LytListagem]
 Coordinates=500,780,75,33
-
-[SearchEditButton2]
-Coordinates=630,773,107,33
-
-[SearchEditButton1]
-Coordinates=630,883,107,33
 
 [FObrConsProd]
 Coordinates=309,243,88,33
@@ -277,4 +271,7 @@ Coordinates=333,1,109,51
 
 [LblVlPromocaoProd]
 Coordinates=51,379,113,51
+
+[DM.FDQConsAtendente]
+Visible=False
 

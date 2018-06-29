@@ -23,7 +23,7 @@ object FVenda1: TFVenda1
       Size.Height = 480.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 1
+      TabIndex = 3
       TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
@@ -113,7 +113,8 @@ object FVenda1: TFVenda1
           object ComboBoxFiltroPedido: TComboBox
             Align = Client
             Items.Strings = (
-              'Vendas'
+              'Pedidos fechados'
+              'Pedidos Abertos'
               'Condicionais')
             ItemIndex = 0
             Margins.Top = 4.000000000000000000
@@ -154,7 +155,7 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 82.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -408,6 +409,7 @@ object FVenda1: TFVenda1
               Align = Client
               TabOrder = 1
               KeyboardType = NumberPad
+              ReturnKeyType = Done
               Margins.Top = 8.000000000000000000
               Margins.Right = 4.000000000000000000
               Margins.Bottom = 8.000000000000000000
@@ -415,6 +417,7 @@ object FVenda1: TFVenda1
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               OnTyping = EdtNumParcelaPedidoTyping
+              OnKeyUp = EdtNumParcelaPedidoKeyUp
             end
           end
           object ListBoxItem5: TListBoxItem
@@ -440,12 +443,14 @@ object FVenda1: TFVenda1
               Align = Client
               TabOrder = 0
               KeyboardType = NumbersAndPunctuation
+              ReturnKeyType = Done
               Margins.Top = 8.000000000000000000
               Margins.Right = 4.000000000000000000
               Margins.Bottom = 8.000000000000000000
               Size.Width = 152.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
+              KillFocusByReturn = True
             end
             object SpdBDescontoPedido: TSpeedButton
               Align = Right
@@ -505,7 +510,7 @@ object FVenda1: TFVenda1
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 0
-              OnChange = ComboBoxAtendentePedidoChange
+              OnClosePopup = ComboBoxAtendentePedidoClosePopup
               OnEnter = ComboBoxAtendentePedidoEnter
             end
           end
@@ -580,7 +585,7 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 84.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False

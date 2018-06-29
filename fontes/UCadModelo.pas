@@ -29,10 +29,11 @@ type
   public
     { Public declarations }
   protected
-     FActiveForm: TForm;
+    FActiveForm: TForm;
 
+    function DisplayFormatter(AValue: double; ADisplayFormar: String): String;
     procedure MudarAbaModelo(ATabItem: TTabItem; Sender: TObject);
-       // procedure AbrirFormModelo(AFormClass: TComponentClass);
+    // procedure AbrirFormModelo(AFormClass: TComponentClass);
     procedure EsconderTeclado;
     procedure MostrarTeclado(const AControl: TFmxObject);
   end;
@@ -46,25 +47,31 @@ implementation
 
 uses UDM, UPrincipal, UVenda;
 
-      {procedure TFCadModelo.AbrirFormModelo(AFormClass: TComponentClass);
-      var
-        LayoutBase, BotaoMenu: TComponent;
-      begin
-        if Assigned(FActiveForm) then
-        begin
-          if FActiveForm.ClassType = AFormClass then
-            Exit
-          else
-          begin
-            FActiveForm.DisposeOf;
-            FActiveForm := nil;
-          end;
-        end;
-        Application.CreateForm(AFormClass, FActiveForm);
-        LayoutBase := FActiveForm.FindComponent('LytBase');
-        if Assigned(LayoutBase) then
-          LytApoio.AddObject(TLayout(LayoutBase));
-      end;}
+{ procedure TFCadModelo.AbrirFormModelo(AFormClass: TComponentClass);
+  var
+  LayoutBase, BotaoMenu: TComponent;
+  begin
+  if Assigned(FActiveForm) then
+  begin
+  if FActiveForm.ClassType = AFormClass then
+  Exit
+  else
+  begin
+  FActiveForm.DisposeOf;
+  FActiveForm := nil;
+  end;
+  end;
+  Application.CreateForm(AFormClass, FActiveForm);
+  LayoutBase := FActiveForm.FindComponent('LytBase');
+  if Assigned(LayoutBase) then
+  LytApoio.AddObject(TLayout(LayoutBase));
+  end; }
+
+function TFCadModelo.DisplayFormatter(AValue: double;
+  ADisplayFormar: String): String;
+begin
+Result := FormatFloat(ADisplayFormar, AValue);
+end;
 
 procedure TFCadModelo.EsconderTeclado;
 var
@@ -78,8 +85,8 @@ end;
 
 procedure TFCadModelo.FormCreate(Sender: TObject);
 begin
-TbControlCadModelo.ActiveTab := TbItemListagem;
-TbControlCadModelo.TabPosition := TTabPosition.None;
+  TbControlCadModelo.ActiveTab := TbItemListagem;
+  TbControlCadModelo.TabPosition := TTabPosition.None;
 end;
 
 procedure TFCadModelo.MostrarTeclado(const AControl: TFmxObject);

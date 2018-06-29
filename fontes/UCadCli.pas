@@ -24,9 +24,7 @@ type
     TakePhotoFromCameraAction1: TTakePhotoFromCameraAction;
     LinkFillControlToField1: TLinkFillControlToField;
     EditFiltroNomeCadCli: TEdit;
-    EditButtonPesqNomeCli: TEditButton;
     EditFiltroCodCadCli: TEdit;
-    EditButtonPesqCodCli: TEditButton;
     ListViewCadCli: TListView;
     lblTituloEdicao: TLabel;
     SpdBEditar: TSpeedButton;
@@ -118,10 +116,9 @@ type
     LblEmailCli: TLabel;
     SpdBNovoCadCli: TSpeedButton;
     GestureManager1: TGestureManager;
+    BtnFiltrarCli: TButton;
     procedure FormCreate(Sender: TObject);
     procedure SpBVoltarEdicaoClick(Sender: TObject);
-    procedure EditButtonPesqNomeCliClick(Sender: TObject);
-    procedure EditButtonPesqCodCliClick(Sender: TObject);
     procedure SpBVoltarClick(Sender: TObject);
     procedure EditFiltroNomeCadCliClick(Sender: TObject);
     procedure EditFiltroCodCadCliClick(Sender: TObject);
@@ -156,6 +153,35 @@ type
     procedure ListViewCadCliItemClickEx(const Sender: TObject;
       ItemIndex: Integer; const LocalClickPos: TPointF;
       const ItemObject: TListItemDrawable);
+    procedure EdtNomeCliKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure EdtCpfCliKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure EdtRgCliKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure EdtApelidoCliKeyUp(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
+    procedure EdtFoneCliKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure EdtEnderecoCliKeyUp(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
+    procedure EdtNumCliKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure EdtCompCliKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure EdtBairroCliKeyUp(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
+    procedure EdtCepCliKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure EdtCidadeCliKeyUp(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
+    procedure EdtUfCliKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure EdtEmailCliKeyUp(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
+    procedure EditFiltroNomeCadCliTyping(Sender: TObject);
+    procedure EditFiltroCodCadCliTyping(Sender: TObject);
+    procedure BtnFiltrarCliClick(Sender: TObject);
   private
     clickBotao: Boolean;
     DataHora: TDateTime;
@@ -179,6 +205,19 @@ implementation
 {$R *.fmx}
 
 uses UDM, UPrincipal, UVenda1;
+
+procedure TFCadCli.BtnFiltrarCliClick(Sender: TObject);
+begin
+  inherited;
+  EditFiltroNomeCadCli.Text := EmptyStr;
+  EditFiltroCodCadCli.Text := EmptyStr;
+  DM.FDQFiltroCadCLi.Active := False;
+  DM.FDQFiltroCadCLi.Close;
+  DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := '%';
+  DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
+  DM.FDQFiltroCadCLi.Open();
+  DM.FDQFiltroCadCLi.Active := True;
+end;
 
 procedure TFCadCli.DesabilitaCampos;
 begin
@@ -206,52 +245,74 @@ begin
   EdtDataCadCli.Enabled := False;
 end;
 
-procedure TFCadCli.EditButtonPesqCodCliClick(Sender: TObject);
-
-begin
-  inherited;
-  EditFiltroNomeCadCli.Text := EmptyStr;
-  DM.FDQFiltroCadCLi.Active := False;
-  DM.FDQFiltroCadCLi.Close;
-  DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value :=
-    EditFiltroCodCadCli.Text;
-  DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := Null;
-  DM.FDQFiltroCadCLi.Open();
-  DM.FDQFiltroCadCLi.Active := True;
-  if DM.FDQFiltroCadCLi.IsEmpty then
-    ShowMessage('Não encontrado nenhum cliente com este codigo!');
-  EsconderTeclado;
-end;
-
-procedure TFCadCli.EditButtonPesqNomeCliClick(Sender: TObject);
-begin
-  inherited;
-  EditFiltroCodCadCli.Text := EmptyStr;
-  DM.FDQFiltroCadCLi.Active := False;
-  DM.FDQFiltroCadCLi.Close;
-  DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value :=
-    '%' + EditFiltroNomeCadCli.Text + '%';
-  DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
-  DM.FDQFiltroCadCLi.Open();
-  DM.FDQFiltroCadCLi.Active := True;
-  if DM.FDQFiltroCadCLi.IsEmpty then
-  begin
-    ShowMessage('Não encontrado nenhum cliente com este nome!');
-    EditFiltroNomeCadCli.SetFocus;
-  end;
-  EsconderTeclado;
-end;
-
 procedure TFCadCli.EditFiltroCodCadCliClick(Sender: TObject);
 begin
   inherited;
   MostrarTeclado(EditFiltroCodCadCli);
 end;
 
+procedure TFCadCli.EditFiltroCodCadCliTyping(Sender: TObject);
+begin
+  inherited;
+  EditFiltroNomeCadCli.Text := EmptyStr;
+  DM.FDQFiltroCadCLi.Active := False;
+  DM.FDQFiltroCadCLi.Close;
+  if EditFiltroCodCadCli.Text.IsEmpty then
+  begin
+    DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
+    DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := Null;
+  end
+  else
+  begin
+    DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value :=
+      EditFiltroCodCadCli.Text;
+    DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := Null;
+  end;
+  DM.FDQFiltroCadCLi.Open();
+  DM.FDQFiltroCadCLi.Active := True;
+end;
+
 procedure TFCadCli.EditFiltroNomeCadCliClick(Sender: TObject);
 begin
   inherited;
   MostrarTeclado(EditFiltroNomeCadCli);
+end;
+
+procedure TFCadCli.EditFiltroNomeCadCliTyping(Sender: TObject);
+begin
+  inherited;
+  EditFiltroCodCadCli.Text := EmptyStr;
+  DM.FDQFiltroCadCLi.Active := False;
+  DM.FDQFiltroCadCLi.Close;
+  if EditFiltroNomeCadCli.Text.IsEmpty then
+  begin
+    DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := Null;
+    DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
+  end
+  else
+  begin
+    DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value :=
+      '%' + EditFiltroNomeCadCli.Text + '%';
+    DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
+  end;
+  DM.FDQFiltroCadCLi.Open();
+  DM.FDQFiltroCadCLi.Active := True;
+end;
+
+procedure TFCadCli.EdtApelidoCliKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtFoneCli.SetFocus;
+end;
+
+procedure TFCadCli.EdtBairroCliKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtCepCli.SetFocus;
 end;
 
 procedure TFCadCli.EdtBApelidoCliClick(Sender: TObject);
@@ -293,6 +354,7 @@ end;
 procedure TFCadCli.EdtBEmailCliClick(Sender: TObject);
 begin
   inherited;
+  EdtEmailCli.SetFocus;
   MemoObsCadCli.SetFocus;
 end;
 
@@ -332,16 +394,104 @@ begin
   EdtEmailCli.SetFocus;
 end;
 
+procedure TFCadCli.EdtCepCliKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtCidadeCli.SetFocus;
+end;
+
+procedure TFCadCli.EdtCidadeCliKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtUfCli.SetFocus;
+end;
+
+procedure TFCadCli.EdtCompCliKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtBairroCli.SetFocus;
+end;
+
+procedure TFCadCli.EdtCpfCliKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtRgCli.SetFocus;
+end;
+
+procedure TFCadCli.EdtEmailCliKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    MemoObsCadCli.SetFocus;
+end;
+
+procedure TFCadCli.EdtEnderecoCliKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtNumCli.SetFocus;
+end;
+
+procedure TFCadCli.EdtFoneCliKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtEnderecoCli.SetFocus;
+end;
+
+procedure TFCadCli.EdtNomeCliKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtCpfCli.SetFocus;
+end;
+
+procedure TFCadCli.EdtNumCliKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtCompCli.SetFocus;
+end;
+
+procedure TFCadCli.EdtRgCliKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtApelidoCli.SetFocus;
+end;
+
+procedure TFCadCli.EdtUfCliKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  inherited;
+  if Key = vkReturn then
+    EdtEmailCli.SetFocus;
+end;
+
 procedure TFCadCli.FormCreate(Sender: TObject);
 begin
   inherited;
   TbControlCadModelo.ActiveTab := TbItemListagem;
   TbControlCadModelo.TabPosition := TTabPosition.None;
   if venda = 'S' then
-    begin
+  begin
     SpBVoltar.Visible := False;
     LblTitulo.Visible := False;
-    end;
+  end;
 end;
 
 procedure TFCadCli.FormKeyDown(Sender: TObject; var Key: Word;
@@ -527,7 +677,6 @@ begin
   inherited;
   if ItemObject is TListItemAccessory then
   begin
-    clickBotao := False;
     lblTituloEdicao.Text := 'Detalhes';
     SpdBEditar.Enabled := True;
     SpdBEditar.Visible := True;
@@ -542,8 +691,8 @@ begin
       RadioBLiberaAprazoS.IsChecked := True
     else
       RadioBLiberaAprazoN.IsChecked := True;
-    EditFiltroNomeCadCli.Text := EmptyStr;
-    EditFiltroCodCadCli.Text := EmptyStr;
+    // EditFiltroNomeCadCli.Text := EmptyStr;
+    // EditFiltroCodCadCli.Text := EmptyStr;
     EdtNomeCli.SetFocus;
     DesabilitaCampos;
     MudarAbaModelo(TbItemedicao, Sender);
@@ -590,16 +739,16 @@ begin
 
     end);
     end }
-    //else
-    //begin
+  // else
+  // begin
   FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
-    //end;
+  // end;
 end;
 
 procedure TFCadCli.SpBVoltarEdicaoClick(Sender: TObject);
 begin
   inherited;
-  DM.FDQFiltroCadCLi.Active := False;
+  // DM.FDQFiltroCadCLi.Active := False;
   LimpaCampos;
   MudarAbaModelo(TbItemListagem, Sender);
 
@@ -757,7 +906,6 @@ end;
 procedure TFCadCli.TakePhotoFromCameraAction1DidFinishTaking(Image: TBitmap);
 begin
   inherited;
-  EsconderTeclado;
   FotoCli := Image;
   ImgFotoCli.Bitmap.Assign(Image);
   ListBoxEdicaoCadCli.Align := TAlignLayout.Client;

@@ -562,10 +562,15 @@ object DM: TDM
       'p.datahora_pedido, '
       'p.valor_pedido, '
       'p.nrparcela_pedido, '
+      'p.descmoeda_pedido, '
+      'p.descpercent_pedido, '
+      'p.obs_pedido, '
+      'p.status_pedido, '
       'c.id_cli, '
       'c.nome_cli, '
       'c.cpf_cnpj_cli, '
       'c.foto_cli, '
+      'fp.id_forma_pag, '
       'fp.descricao_forma_pag, '
       'fp.condicional_forma_pag '
       'from pedido p '
@@ -573,7 +578,9 @@ object DM: TDM
       
         'inner join forma_pag fp on (p.id_formapag_pedido = fp.id_forma_p' +
         'ag) '
-      'where fp.condicional_forma_pag = :PFormaPag;')
+      
+        'where (fp.condicional_forma_pag = :PFormaPag and p.status_pedido' +
+        ' = :PStatusPedCond) or p.status_pedido = :PStatusPedido;')
     Left = 384
     Top = 8
     ParamData = <
@@ -581,7 +588,19 @@ object DM: TDM
         Name = 'PFORMAPAG'
         DataType = ftString
         ParamType = ptInput
-        Size = 10
+        Size = 1
+      end
+      item
+        Name = 'PSTATUSPEDCOND'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 1
+      end
+      item
+        Name = 'PSTATUSPEDIDO'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 1
       end>
     object FDQPedidoid_pedido: TIntegerField
       FieldName = 'id_pedido'

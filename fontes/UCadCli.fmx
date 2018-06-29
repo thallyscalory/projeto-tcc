@@ -9,12 +9,14 @@ inherited FCadCli: TFCadCli
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
+      TabIndex = 1
       Sizes = (
         330s
         431s
         330s
         431s)
       inherited TbItemListagem: TTabItem
+        IsSelected = False
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         inherited ToolBarsuperior: TToolBar
@@ -44,14 +46,15 @@ inherited FCadCli: TFCadCli
           Align = Top
           Position.Y = 48.000000000000000000
           Size.Width = 330.000000000000000000
-          Size.Height = 81.000000000000000000
+          Size.Height = 124.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           object EditFiltroNomeCadCli: TEdit
             Touch.InteractiveGestures = [LongTap, DoubleTap]
             Align = Top
-            StyleLookup = 'editstyle'
+            StyleLookup = 'searchedit'
             TabOrder = 0
+            ReturnKeyType = Done
             Position.X = 4.000000000000000000
             Margins.Left = 4.000000000000000000
             Margins.Right = 4.000000000000000000
@@ -60,25 +63,17 @@ inherited FCadCli: TFCadCli
             Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
             TextPrompt = 'Filtrar pelo nome'
+            KillFocusByReturn = True
+            OnTyping = EditFiltroNomeCadCliTyping
             OnClick = EditFiltroNomeCadCliClick
-            object EditButtonPesqNomeCli: TEditButton
-              CanFocus = False
-              Cursor = crArrow
-              Position.Y = 1.000000000000000000
-              Size.Width = 32.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              StyleLookup = 'searcheditbutton'
-              TabOrder = 0
-              OnClick = EditButtonPesqNomeCliClick
-            end
           end
           object EditFiltroCodCadCli: TEdit
             Touch.InteractiveGestures = [LongTap, DoubleTap]
             Align = Top
-            StyleLookup = 'editstyle'
+            StyleLookup = 'searchedit'
             TabOrder = 1
             KeyboardType = NumberPad
+            ReturnKeyType = Done
             Position.X = 4.000000000000000000
             Position.Y = 38.400001525878910000
             ClipParent = True
@@ -89,18 +84,22 @@ inherited FCadCli: TFCadCli
             Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
             TextPrompt = 'Filtrar pelo c'#243'digo'
+            KillFocusByReturn = True
+            OnTyping = EditFiltroCodCadCliTyping
             OnClick = EditFiltroCodCadCliClick
-            object EditButtonPesqCodCli: TEditButton
-              CanFocus = False
-              Cursor = crArrow
-              Position.Y = 1.000000000000000000
-              Size.Width = 32.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              StyleLookup = 'searcheditbutton'
-              TabOrder = 0
-              OnClick = EditButtonPesqCodCliClick
-            end
+          end
+          object BtnFiltrarCli: TButton
+            Align = Top
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 76.800003051757810000
+            Size.Width = 290.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            Text = 'Filtrar Todos'
+            OnClick = BtnFiltrarCliClick
           end
         end
         object ListViewCadCli: TListView
@@ -117,7 +116,7 @@ inherited FCadCli: TFCadCli
           Margins.Right = 4.000000000000000000
           Margins.Bottom = 4.000000000000000000
           Size.Width = 322.000000000000000000
-          Size.Height = 294.000000000000000000
+          Size.Height = 251.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
           ItemAppearanceObjects.ItemEditObjects.Image.Visible = True
@@ -127,6 +126,7 @@ inherited FCadCli: TFCadCli
         end
       end
       inherited TbItemedicao: TTabItem
+        IsSelected = True
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object ToolBar1: TToolBar
@@ -219,6 +219,7 @@ inherited FCadCli: TFCadCli
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
+              ReturnKeyType = Next
               MaxLength = 60
               Margins.Left = 4.000000000000000000
               Margins.Top = 4.000000000000000000
@@ -228,6 +229,7 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Nome / Razao Social'
+              OnKeyUp = EdtNomeCliKeyUp
               object EdtBNomeCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -265,7 +267,7 @@ inherited FCadCli: TFCadCli
               Items.Strings = (
                 'Fisica'
                 'Juridica')
-              ItemIndex = 1
+              ItemIndex = 0
               Margins.Top = 4.000000000000000000
               Margins.Right = 4.000000000000000000
               Margins.Bottom = 4.000000000000000000
@@ -300,6 +302,7 @@ inherited FCadCli: TFCadCli
               Align = Client
               TabOrder = 0
               KeyboardType = NumberPad
+              ReturnKeyType = Next
               MaxLength = 20
               Margins.Left = 4.000000000000000000
               Margins.Top = 4.000000000000000000
@@ -309,6 +312,7 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Cpf / Cnpj'
+              OnKeyUp = EdtCpfCliKeyUp
               object EdtBCpfCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -345,6 +349,7 @@ inherited FCadCli: TFCadCli
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
+              ReturnKeyType = Next
               MaxLength = 20
               Margins.Left = 4.000000000000000000
               Margins.Top = 4.000000000000000000
@@ -354,6 +359,7 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Rg / I.E'
+              OnKeyUp = EdtRgCliKeyUp
               object EdtBRgCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -390,6 +396,7 @@ inherited FCadCli: TFCadCli
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
+              ReturnKeyType = Next
               MaxLength = 30
               Margins.Left = 4.000000000000000000
               Margins.Top = 4.000000000000000000
@@ -399,6 +406,7 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Apelido / Nome Fantasia'
+              OnKeyUp = EdtApelidoCliKeyUp
               object EdtBApelidoCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -436,6 +444,7 @@ inherited FCadCli: TFCadCli
               Align = Client
               TabOrder = 0
               KeyboardType = NumberPad
+              ReturnKeyType = Next
               MaxLength = 15
               Margins.Left = 4.000000000000000000
               Margins.Top = 4.000000000000000000
@@ -445,6 +454,7 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Telefone / Celular'
+              OnKeyUp = EdtFoneCliKeyUp
               object EdtBFoneCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -481,6 +491,7 @@ inherited FCadCli: TFCadCli
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
+              ReturnKeyType = Next
               MaxLength = 50
               Margins.Left = 4.000000000000000000
               Margins.Top = 4.000000000000000000
@@ -490,6 +501,7 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Endereco'
+              OnKeyUp = EdtEnderecoCliKeyUp
               object EdtBEndCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -526,6 +538,7 @@ inherited FCadCli: TFCadCli
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
+              ReturnKeyType = Next
               MaxLength = 10
               Margins.Left = 4.000000000000000000
               Margins.Top = 4.000000000000000000
@@ -535,6 +548,7 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Numero'
+              OnKeyUp = EdtNumCliKeyUp
               object EdtBNumCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -571,6 +585,7 @@ inherited FCadCli: TFCadCli
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
+              ReturnKeyType = Next
               MaxLength = 30
               Margins.Left = 4.000000000000000000
               Margins.Top = 4.000000000000000000
@@ -580,6 +595,7 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Complemento'
+              OnKeyUp = EdtCompCliKeyUp
               object EdtBCompCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -616,6 +632,7 @@ inherited FCadCli: TFCadCli
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
+              ReturnKeyType = Next
               MaxLength = 50
               Margins.Left = 4.000000000000000000
               Margins.Top = 4.000000000000000000
@@ -625,6 +642,7 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Bairro'
+              OnKeyUp = EdtBairroCliKeyUp
               object EdtBBairroCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -662,6 +680,7 @@ inherited FCadCli: TFCadCli
               Align = Client
               TabOrder = 1
               KeyboardType = NumberPad
+              ReturnKeyType = Next
               MaxLength = 15
               Margins.Left = 4.000000000000000000
               Margins.Top = 4.000000000000000000
@@ -671,6 +690,7 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Cep'
+              OnKeyUp = EdtCepCliKeyUp
               object EdtBCepCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -707,6 +727,7 @@ inherited FCadCli: TFCadCli
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 1
+              ReturnKeyType = Next
               MaxLength = 30
               Margins.Left = 4.000000000000000000
               Margins.Top = 4.000000000000000000
@@ -716,6 +737,7 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Cidade'
+              OnKeyUp = EdtCidadeCliKeyUp
               object EdtBCidadeCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -752,6 +774,7 @@ inherited FCadCli: TFCadCli
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 1
+              ReturnKeyType = Next
               MaxLength = 2
               Margins.Left = 4.000000000000000000
               Margins.Top = 4.000000000000000000
@@ -761,6 +784,7 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Uf'
+              OnKeyUp = EdtUfCliKeyUp
               object EdtBUfCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -798,6 +822,7 @@ inherited FCadCli: TFCadCli
               Align = Client
               TabOrder = 1
               KeyboardType = EmailAddress
+              ReturnKeyType = Next
               MaxLength = 60
               Margins.Left = 4.000000000000000000
               Margins.Top = 4.000000000000000000
@@ -807,6 +832,7 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Email'
+              OnKeyUp = EdtEmailCliKeyUp
               object EdtBEmailCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
