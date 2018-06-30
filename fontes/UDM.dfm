@@ -9,6 +9,7 @@ object DM: TDM
       'OpenMode=ReadWrite'
       'LockingMode=Normal'
       'DriverID=SQLite')
+    Connected = True
     LoginPrompt = False
     Left = 40
     Top = 8
@@ -559,11 +560,13 @@ object DM: TDM
     SQL.Strings = (
       'select '
       'p.id_pedido, '
+      'p.id_cli_pedido, '
       'p.datahora_pedido, '
       'p.valor_pedido, '
-      'p.nrparcela_pedido, '
       'p.descmoeda_pedido, '
       'p.descpercent_pedido, '
+      'p.id_formapag_pedido, '
+      'p.nrparcela_pedido, '
       'p.obs_pedido, '
       'p.status_pedido, '
       'c.id_cli, '
@@ -581,7 +584,7 @@ object DM: TDM
       
         'where (fp.condicional_forma_pag = :PFormaPag and p.status_pedido' +
         ' = :PStatusPedCond) or p.status_pedido = :PStatusPedido;')
-    Left = 384
+    Left = 368
     Top = 8
     ParamData = <
       item
@@ -608,6 +611,10 @@ object DM: TDM
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
+    object FDQPedidoid_cli_pedido: TIntegerField
+      FieldName = 'id_cli_pedido'
+      Origin = 'id_cli_pedido'
+    end
     object FDQPedidodatahora_pedido: TDateTimeField
       FieldName = 'datahora_pedido'
       Origin = 'datahora_pedido'
@@ -620,10 +627,35 @@ object DM: TDM
       Precision = 8
       Size = 2
     end
+    object FDQPedidodescmoeda_pedido: TFloatField
+      FieldName = 'descmoeda_pedido'
+      Origin = 'descmoeda_pedido'
+    end
+    object FDQPedidodescpercent_pedido: TFloatField
+      FieldName = 'descpercent_pedido'
+      Origin = 'descpercent_pedido'
+    end
+    object FDQPedidoid_formapag_pedido: TIntegerField
+      FieldName = 'id_formapag_pedido'
+      Origin = 'id_formapag_pedido'
+      Required = True
+    end
     object FDQPedidonrparcela_pedido: TIntegerField
       FieldName = 'nrparcela_pedido'
       Origin = 'nrparcela_pedido'
       Required = True
+    end
+    object FDQPedidoobs_pedido: TWideMemoField
+      FieldName = 'obs_pedido'
+      Origin = 'obs_pedido'
+      BlobType = ftWideMemo
+    end
+    object FDQPedidostatus_pedido: TStringField
+      FieldName = 'status_pedido'
+      Origin = 'status_pedido'
+      Required = True
+      FixedChar = True
+      Size = 1
     end
     object FDQPedidoid_cli: TIntegerField
       AutoGenerateValue = arDefault
@@ -654,6 +686,13 @@ object DM: TDM
       ProviderFlags = []
       ReadOnly = True
     end
+    object FDQPedidoid_forma_pag: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'id_forma_pag'
+      Origin = 'id_forma_pag'
+      ProviderFlags = []
+      ReadOnly = True
+    end
     object FDQPedidodescricao_forma_pag: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'descricao_forma_pag'
@@ -676,7 +715,7 @@ object DM: TDM
     Connection = FDConnection1
     SQL.Strings = (
       'select max(Id_pedido) as maxIdPedido from pedido;')
-    Left = 384
+    Left = 368
     Top = 72
     object FDQMaxIdPedidomaxIdPedido: TLargeintField
       AutoGenerateValue = arDefault
@@ -689,8 +728,10 @@ object DM: TDM
   object FDQConsFormaPag: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
-      'select * from forma_pag where id_forma_pag like :PIdFormaPag;')
-    Left = 488
+      
+        'select * from forma_pag where id_forma_pag like :PIdFormaPag or ' +
+        'descricao_forma_pag = :PDescricaoFormaPag;')
+    Left = 584
     Top = 8
     ParamData = <
       item
@@ -698,6 +739,12 @@ object DM: TDM
         DataType = ftString
         ParamType = ptInput
         Size = 20
+      end
+      item
+        Name = 'PDESCRICAOFORMAPAG'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 30
       end>
     object FDQConsFormaPagid_forma_pag: TIntegerField
       FieldName = 'id_forma_pag'
@@ -734,7 +781,7 @@ object DM: TDM
     Connection = FDConnection1
     SQL.Strings = (
       'select * from forma_pag;')
-    Left = 488
+    Left = 584
     Top = 72
     object FDQCadFormaPagid_forma_pag: TIntegerField
       FieldName = 'id_forma_pag'
@@ -835,8 +882,8 @@ object DM: TDM
     SQL.Strings = (
       
         'select * from funcionario where id_funcionario like :PIdAtendent' +
-        'e;')
-    Left = 592
+        'e or usuario = :PUsuario;')
+    Left = 688
     Top = 8
     ParamData = <
       item
@@ -844,6 +891,12 @@ object DM: TDM
         DataType = ftString
         ParamType = ptInput
         Size = 20
+      end
+      item
+        Name = 'PUSUARIO'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 10
       end>
     object FDQConsAtendenteid_funcionario: TIntegerField
       FieldName = 'id_funcionario'
@@ -873,6 +926,181 @@ object DM: TDM
       Origin = 'senha'
       Required = True
       Size = 15
+    end
+  end
+  object FDQCadPedido: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from pedido;')
+    Left = 368
+    Top = 144
+    object FDQCadPedidoid_pedido: TIntegerField
+      FieldName = 'id_pedido'
+      Origin = 'id_pedido'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQCadPedidoid_cli_pedido: TIntegerField
+      FieldName = 'id_cli_pedido'
+      Origin = 'id_cli_pedido'
+      Required = True
+    end
+    object FDQCadPedidodatahora_pedido: TDateTimeField
+      FieldName = 'datahora_pedido'
+      Origin = 'datahora_pedido'
+      Required = True
+    end
+    object FDQCadPedidovalor_pedido: TBCDField
+      FieldName = 'valor_pedido'
+      Origin = 'valor_pedido'
+      Required = True
+      Precision = 8
+      Size = 2
+    end
+    object FDQCadPedidodescmoeda_pedido: TFloatField
+      FieldName = 'descmoeda_pedido'
+      Origin = 'descmoeda_pedido'
+    end
+    object FDQCadPedidodescpercent_pedido: TFloatField
+      FieldName = 'descpercent_pedido'
+      Origin = 'descpercent_pedido'
+    end
+    object FDQCadPedidoid_formapag_pedido: TIntegerField
+      FieldName = 'id_formapag_pedido'
+      Origin = 'id_formapag_pedido'
+      Required = True
+    end
+    object FDQCadPedidonrparcela_pedido: TIntegerField
+      FieldName = 'nrparcela_pedido'
+      Origin = 'nrparcela_pedido'
+      Required = True
+    end
+    object FDQCadPedidoobs_pedido: TWideMemoField
+      FieldName = 'obs_pedido'
+      Origin = 'obs_pedido'
+      BlobType = ftWideMemo
+    end
+    object FDQCadPedidostatus_pedido: TStringField
+      FieldName = 'status_pedido'
+      Origin = 'status_pedido'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object FDQConsItemPedido: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from item_pedido where id_pedido_item = :PIdPedido;')
+    Left = 480
+    Top = 8
+    ParamData = <
+      item
+        Name = 'PIDPEDIDO'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 20
+      end>
+    object FDQConsItemPedidoid_item_pedido: TIntegerField
+      FieldName = 'id_item_pedido'
+      Origin = 'id_item_pedido'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQConsItemPedidoid_pedido_item: TIntegerField
+      FieldName = 'id_pedido_item'
+      Origin = 'id_pedido_item'
+      Required = True
+    end
+    object FDQConsItemPedidoid_produto_item: TIntegerField
+      FieldName = 'id_produto_item'
+      Origin = 'id_produto_item'
+      Required = True
+    end
+    object FDQConsItemPedidoqte_item_pedido: TFloatField
+      FieldName = 'qte_item_pedido'
+      Origin = 'qte_item_pedido'
+      Required = True
+    end
+    object FDQConsItemPedidovalor_item_pedido: TBCDField
+      FieldName = 'valor_item_pedido'
+      Origin = 'valor_item_pedido'
+      Required = True
+      Precision = 8
+      Size = 2
+    end
+    object FDQConsItemPedidodescmoeda_item_pedido: TFloatField
+      FieldName = 'descmoeda_item_pedido'
+      Origin = 'descmoeda_item_pedido'
+    end
+    object FDQConsItemPedidodescpercent_item_pedido: TFloatField
+      FieldName = 'descpercent_item_pedido'
+      Origin = 'descpercent_item_pedido'
+    end
+    object FDQConsItemPedidoid_atendente_item: TIntegerField
+      FieldName = 'id_atendente_item'
+      Origin = 'id_atendente_item'
+    end
+  end
+  object FDQCadItemPedido: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from item_pedido;')
+    Left = 480
+    Top = 144
+    object FDQCadItemPedidoid_item_pedido: TIntegerField
+      FieldName = 'id_item_pedido'
+      Origin = 'id_item_pedido'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQCadItemPedidoid_pedido_item: TIntegerField
+      FieldName = 'id_pedido_item'
+      Origin = 'id_pedido_item'
+      Required = True
+    end
+    object FDQCadItemPedidoid_produto_item: TIntegerField
+      FieldName = 'id_produto_item'
+      Origin = 'id_produto_item'
+      Required = True
+    end
+    object FDQCadItemPedidoqte_item_pedido: TFloatField
+      FieldName = 'qte_item_pedido'
+      Origin = 'qte_item_pedido'
+      Required = True
+    end
+    object FDQCadItemPedidovalor_item_pedido: TBCDField
+      FieldName = 'valor_item_pedido'
+      Origin = 'valor_item_pedido'
+      Required = True
+      Precision = 8
+      Size = 2
+    end
+    object FDQCadItemPedidodescmoeda_item_pedido: TFloatField
+      FieldName = 'descmoeda_item_pedido'
+      Origin = 'descmoeda_item_pedido'
+    end
+    object FDQCadItemPedidodescpercent_item_pedido: TFloatField
+      FieldName = 'descpercent_item_pedido'
+      Origin = 'descpercent_item_pedido'
+    end
+    object FDQCadItemPedidoid_atendente_item: TIntegerField
+      FieldName = 'id_atendente_item'
+      Origin = 'id_atendente_item'
+    end
+  end
+  object FDQMaxIdItemPedido: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select max(id_item_pedido) as maxId from item_pedido;')
+    Left = 480
+    Top = 72
+    object FDQMaxIdItemPedidomaxId: TLargeintField
+      AutoGenerateValue = arDefault
+      FieldName = 'maxId'
+      Origin = 'maxId'
+      ProviderFlags = []
+      ReadOnly = True
     end
   end
 end
