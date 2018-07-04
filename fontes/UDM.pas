@@ -169,13 +169,6 @@ type
     FDQPedidocondicional_forma_pag: TStringField;
     FDQConsItemPedido: TFDQuery;
     FDQCadItemPedido: TFDQuery;
-    FDQConsItemPedidoid_item_pedido: TIntegerField;
-    FDQConsItemPedidoid_pedido_item: TIntegerField;
-    FDQConsItemPedidoid_produto_item: TIntegerField;
-    FDQConsItemPedidoqte_item_pedido: TFloatField;
-    FDQConsItemPedidovalor_item_pedido: TBCDField;
-    FDQConsItemPedidodescmoeda_item_pedido: TFloatField;
-    FDQConsItemPedidodescpercent_item_pedido: TFloatField;
     FDQCadItemPedidoid_item_pedido: TIntegerField;
     FDQCadItemPedidoid_pedido_item: TIntegerField;
     FDQCadItemPedidoid_produto_item: TIntegerField;
@@ -183,10 +176,22 @@ type
     FDQCadItemPedidovalor_item_pedido: TBCDField;
     FDQCadItemPedidodescmoeda_item_pedido: TFloatField;
     FDQCadItemPedidodescpercent_item_pedido: TFloatField;
-    FDQConsItemPedidoid_atendente_item: TIntegerField;
     FDQCadItemPedidoid_atendente_item: TIntegerField;
     FDQMaxIdItemPedido: TFDQuery;
     FDQMaxIdItemPedidomaxId: TLargeintField;
+    FDQConsItemPedidoid_item_pedido: TIntegerField;
+    FDQConsItemPedidoid_pedido_item: TIntegerField;
+    FDQConsItemPedidoid_produto_item: TIntegerField;
+    FDQConsItemPedidoqte_item_pedido: TFloatField;
+    FDQConsItemPedidovalor_item_pedido: TBCDField;
+    FDQConsItemPedidodescmoeda_item_pedido: TFloatField;
+    FDQConsItemPedidodescpercent_item_pedido: TFloatField;
+    FDQConsItemPedidoid_atendente_item: TIntegerField;
+    FDQConsItemPedidocodigo: TStringField;
+    FDQConsItemPedidoproduto: TStringField;
+    FDQConsItemPedidoid_funcionario: TIntegerField;
+    FDQConsItemPedidousuario: TStringField;
+    FDQConsItemPedidoid_pedido: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

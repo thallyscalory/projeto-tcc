@@ -9,7 +9,6 @@ object DM: TDM
       'OpenMode=ReadWrite'
       'LockingMode=Normal'
       'DriverID=SQLite')
-    Connected = True
     LoginPrompt = False
     Left = 40
     Top = 8
@@ -991,7 +990,27 @@ object DM: TDM
   object FDQConsItemPedido: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
-      'select * from item_pedido where id_pedido_item = :PIdPedido;')
+      'select '
+      'ip.id_item_pedido, '
+      'ip.id_pedido_item, '
+      'ip.id_produto_item, '
+      'ip.qte_item_pedido, '
+      'ip.valor_item_pedido, '
+      'ip.descmoeda_item_pedido, '
+      'ip.descpercent_item_pedido, '
+      'ip.id_atendente_item, '
+      'p.codigo, '
+      'p.produto, '
+      'f.id_funcionario, '
+      'f.usuario, '
+      'ped.id_pedido '
+      'from item_pedido ip '
+      'inner join pedido ped on ip.id_pedido_item = ped.id_pedido '
+      'inner join produto p on ip.id_produto_item = p.codigo '
+      
+        'inner join funcionario f on ip.id_atendente_item = f.id_funciona' +
+        'rio '
+      'where ip.id_pedido_item = :PIdPedido order by ip.id_item_pedido;')
     Left = 480
     Top = 8
     ParamData = <
@@ -1040,6 +1059,44 @@ object DM: TDM
     object FDQConsItemPedidoid_atendente_item: TIntegerField
       FieldName = 'id_atendente_item'
       Origin = 'id_atendente_item'
+    end
+    object FDQConsItemPedidocodigo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'codigo'
+      Origin = 'codigo'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 30
+    end
+    object FDQConsItemPedidoproduto: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'produto'
+      Origin = 'produto'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 65
+    end
+    object FDQConsItemPedidoid_funcionario: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'id_funcionario'
+      Origin = 'id_funcionario'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object FDQConsItemPedidousuario: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'usuario'
+      Origin = 'usuario'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 10
+    end
+    object FDQConsItemPedidoid_pedido: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'id_pedido'
+      Origin = 'id_pedido'
+      ProviderFlags = []
+      ReadOnly = True
     end
   end
   object FDQCadItemPedido: TFDQuery
