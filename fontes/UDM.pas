@@ -192,6 +192,7 @@ type
     FDQConsItemPedidoid_funcionario: TIntegerField;
     FDQConsItemPedidousuario: TStringField;
     FDQConsItemPedidoid_pedido: TIntegerField;
+    FDQAuxiliar: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

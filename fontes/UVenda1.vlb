@@ -1,112 +1,112 @@
 ﻿[ListBoxItem4]
-Coordinates=80,480,79,33
+Coordinates=80,480,89,36
 Visible=False
 
 [SpBFiltrarPedido]
-Coordinates=670,10,98,33
+Coordinates=670,10,112,36
 Visible=False
 
 [SpdBVoltarVendaEdicao]
-Coordinates=10,366,135,33
+Coordinates=10,366,156,36
 Visible=False
 
 [Layout1]
-Coordinates=10,480,53,33
+Coordinates=10,480,60,36
 Visible=False
 
 [LblVendaEdicao]
-Coordinates=494,298,94,33
+Coordinates=494,298,108,36
 Visible=False
 
 [ListViewPedido]
-Coordinates=170,-10,90,231
+Coordinates=170,-10,107,278
 Visible=True
 LayerNames=Pedido
 
 [TbItemListagemVenda]
-Coordinates=738,434,124,33
+Coordinates=738,434,143,36
 Visible=False
 
 [LblCliVenda]
-Coordinates=155,298,73,33
+Coordinates=155,298,84,36
 Visible=False
 
 [SpdBNovoVenda]
-Coordinates=763,298,97,33
+Coordinates=763,298,112,36
 Visible=False
 
 [Label1]
-Coordinates=323,298,46,33
+Coordinates=323,298,53,36
 Visible=False
 
 [SpdBPesqCliVenda]
-Coordinates=792,10,109,33
+Coordinates=792,10,127,36
 Visible=False
 
 [LytApoio]
-Coordinates=663,434,58,33
+Coordinates=663,434,65,36
 Visible=True
 
 [SpdBVoltarItemVenda]
-Coordinates=612,298,122,33
+Coordinates=612,298,141,36
 Visible=False
 
 [TbItemPedidoItemVenda]
-Coordinates=420,434,134,33
+Coordinates=420,434,156,36
 Visible=False
 
 [Label2]
-Coordinates=544,10,46,33
+Coordinates=544,10,53,36
 Visible=False
 
 [ToolBar2]
-Coordinates=343,434,58,33
+Coordinates=343,434,67,36
 Visible=False
 
 [ToolBarsuperior]
-Coordinates=227,434,94,33
+Coordinates=227,434,106,36
 Visible=False
 
 [ListBoxItem3]
-Coordinates=128,434,79,33
+Coordinates=128,434,89,36
 Visible=False
 
 [TbControlVenda]
-Coordinates=10,434,94,33
+Coordinates=10,434,108,36
 Visible=False
 
 [LblTitulo]
-Coordinates=249,298,57,33
+Coordinates=249,298,64,36
 Visible=False
 
 [TbItemedicaoVenda]
-Coordinates=676,366,111,33
+Coordinates=676,366,129,36
 Visible=False
 
 [LytBase]
-Coordinates=605,366,54,33
+Coordinates=605,366,61,36
 Visible=False
 
 [ComboBoxFiltroPedido]
-Coordinates=276,10,129,33
+Coordinates=276,10,147,36
 Visible=False
 
 [TbItemApoioVenda]
-Coordinates=471,366,108,33
+Coordinates=471,366,124,36
 Visible=False
 
 [ListBoxItemNumPedidoVenda]
-Coordinates=590,0,161,51
+Coordinates=590,0,186,58
 Visible=True
 ExplicitSubNodes=ItemData.Detail
 LayerNames=Pedido
 
 [ListBoxItem2]
-Coordinates=176,366,79,33
+Coordinates=176,366,89,36
 Visible=False
 
 [SpBVoltar]
-Coordinates=73,298,64,33
+Coordinates=73,298,72,36
 Visible=False
 
 []
@@ -115,138 +115,138 @@ Visible=True
 
 [DM.FDQFiltroCadCLi]
 Visible=False
-Coordinates=443,842,116,33
+Coordinates=443,842,136,36
 
 [DM.FDQMaxIdCli]
-Coordinates=38,691,97,33
+Coordinates=38,691,115,36
 Visible=False
 
 [DM.FDQCadCli]
-Coordinates=850,380,87,393
+Coordinates=850,380,103,476
 
 [FCadCli.BindSourceDB1]
 Coordinates=690,140,156,58
 
 [DM.FDQCadProd]
-Coordinates=910,330,97,249
+Coordinates=910,330,115,300
 
 [DM.FDQMaxIdPedido]
-Coordinates=870,340,118,69
+Coordinates=870,340,140,80
 
 [DM.FDQConsFormaPag]
-Coordinates=860,10,131,33
+Coordinates=860,10,154,36
 Visible=False
 
 [DM.FDQCadFormaPag]
-Coordinates=840,430,124,141
+Coordinates=840,430,148,168
 
 [DM.FDQDetalheProdCodBar]
-Coordinates=430,480,152,33
+Coordinates=430,480,179,36
 Visible=False
 
 [FCadCli.BindSourceDB2]
 Coordinates=443,842,156,498
 
 [DM.FDQConsultaProd]
-Coordinates=540,20,122,33
+Coordinates=540,20,143,36
 Visible=False
 
 [DM.FDQuery1]
-Coordinates=910,380,82,249
+Coordinates=910,380,97,300
 
 [DM.FDQPedido]
-Coordinates=160,0,89,33
+Coordinates=160,0,105,36
 Visible=False
 
 [DM.FDQMaxIdProd]
-Coordinates=443,754,107,33
+Coordinates=443,754,127,36
 Visible=False
 
 [BindSourceDB1]
-Coordinates=390,0,112,429
+Coordinates=390,0,134,496
 LayerNames=Pedido
 
 [BindingsList1]
-Coordinates=119,260,82,33
+Coordinates=119,260,91,36
 
 [LblFormaPagVenda]
-Coordinates=10,298,111,33
+Coordinates=10,298,128,36
 Visible=False
 
 [LblNumParcelasVenda]
-Coordinates=607,10,125,33
+Coordinates=607,10,146,36
 Visible=False
 
 [ActMudarAbaVenda]
-Coordinates=721,109,112,33
+Coordinates=721,109,129,36
 
 [ActionList1]
-Coordinates=332,175,70,33
+Coordinates=332,175,78,36
 
 [EdtDescontoMoedaPedido]
-Coordinates=-10,210,144,51
+Coordinates=-10,210,167,58
 LayerNames=Pedido
 
 [ListBoxItemValorTotalVenda]
-Coordinates=130,330,154,51
+Coordinates=130,330,178,58
 ExplicitSubNodes=ItemData.Detail
 LayerNames=Pedido
 
 [SpdBPesqItemPedido]
-Coordinates=721,669,121,33
+Coordinates=721,669,140,36
 Visible=False
 
 [SpdBNovoFormaPag]
-Coordinates=136,563,117,33
+Coordinates=136,563,135,36
 Visible=False
 
 [ListBoxItemprodutoVenda]
-Coordinates=892,219,143,33
+Coordinates=892,219,162,36
 Visible=False
 
 [SpdBAdicionaItemPedido]
-Coordinates=892,87,140,33
+Coordinates=892,87,160,36
 Visible=False
 
 [ListBoxItem5]
-Coordinates=162,758,79,33
+Coordinates=162,758,89,36
 Visible=False
 
 [ComboBoxFormaPagVenda]
-Coordinates=600,60,150,123
+Coordinates=600,60,174,146
 LayerNames=Pedido
 
 [LblDescMoedaPedido]
-Coordinates=721,746,121,33
+Coordinates=721,746,140,36
 Visible=False
 
 [SpdBEditarVenda]
-Coordinates=17,563,101,33
+Coordinates=17,563,116,36
 Visible=False
 
 [SpdBSalvarVenda]
-Coordinates=332,230,103,33
+Coordinates=332,230,119,36
 Visible=False
 
 [EdtNumParcelaPedido]
-Coordinates=550,370,124,51
+Coordinates=550,370,144,58
 Visible=True
 LayerNames=Pedido
 
 [BindSourceDB2]
-Coordinates=860,10,119,159
+Coordinates=860,10,142,190
 
 [EdtCliVenda]
-Coordinates=630,230,74,51
+Coordinates=630,230,86,58
 LayerNames=Pedido
 
 [ListViewItemPedido]
-Coordinates=220,470,111,231
+Coordinates=220,470,128,278
 Visible=True
 LayerNames=
 
 [DM.FDQProdItemPedido]
-Coordinates=50,530,133,33
+Coordinates=50,530,157,36
 Visible=False
 
 [FConsProduto.BindSourceDB1]
@@ -255,81 +255,84 @@ Visible=False
 
 [Module Settings]
 ModelLayerNames=Atendente;Pedido
-ActiveLayerNames=
-EditingLayerName=Atendente
+ActiveLayerNames=Pedido
+EditingLayerName=Pedido
 
 [BindSourceDB3]
-Coordinates=-10,120,120,267
+Coordinates=-10,120,144,322
 LayerNames=
 
 [ToolBar3]
-Coordinates=647,489,58,33
+Coordinates=647,489,67,36
 
 [ListBoxItemParcelasVenda]
-Coordinates=888,274,146,33
+Coordinates=888,274,169,36
 Visible=True
 
 [ToolBarSupApoioVenda]
-Coordinates=586,434,132,33
+Coordinates=586,434,152,36
 Visible=False
 
 [BtnConfirmaApoioVenda]
-Coordinates=261,408,136,51
+Coordinates=261,408,156,58
 
 [LblSupApoioVenda]
-Coordinates=0,0,109,51
+Coordinates=0,0,124,58
 
 [ListBoxPedido]
-Coordinates=127,10,86,33
+Coordinates=127,10,97,36
 Visible=False
 
 [LblAtendentePedido]
-Coordinates=532,408,114,51
+Coordinates=532,408,130,58
 
 [LblProdutoPedido]
-Coordinates=461,1,103,51
+Coordinates=461,1,117,58
 
 [SpdBDescontoPedido]
-Coordinates=1095,1,122,51
+Coordinates=1095,1,140,58
 
 [LblCodCliPedido]
-Coordinates=570,300,97,51
+Coordinates=570,300,110,58
 
 [ComboBoxAtendentePedido]
-Coordinates=680,560,153,123
+Coordinates=680,560,176,146
 LayerNames=Atendente
 
 [LblQtdItemPedido]
-Coordinates=461,78,103,51
+Coordinates=461,78,117,58
 
 [ListBoxItem1]
-Coordinates=351,371,79,33
+Coordinates=351,371,89,36
 
 [ListBoxItem6]
-Coordinates=957,699,79,33
+Coordinates=957,699,89,36
 
 [DM.FDQConsAtendente]
-Coordinates=390,550,131,33
+Coordinates=390,550,153,36
 Visible=False
 
 [BindSourceDB4]
-Coordinates=530,550,117,159
+Coordinates=530,550,140,190
 LayerNames=Atendente
 
 [DM.FDQCadPedido]
-Coordinates=562,1,108,231
+Coordinates=562,1,128,278
 
 [DM.FDQConsItemPedido]
-Coordinates=30,460,136,33
+Coordinates=30,460,160,36
 Visible=False
 
 [DM.FDQCadItemPedido]
-Coordinates=281,786,129,195
+Coordinates=281,786,153,234
 
 [DM.FDQMaxIdItemPedido]
-Coordinates=679,818,139,69
+Coordinates=679,818,165,80
 
 [BindSourceDB5]
-Coordinates=30,460,124,303
+Coordinates=30,460,148,366
 LayerNames=
+
+[DM.FDQAuxiliar]
+Coordinates=0,0,107,58
 

@@ -1160,4 +1160,9 @@ object DM: TDM
       ReadOnly = True
     end
   end
+  object FDQAuxiliar: TFDQuery
+    Connection = FDConnection1
+    Left = 40
+    Top = 128
+  end
 end

@@ -681,15 +681,12 @@ begin
   end;
 end;
 
-
-
 procedure TFConsProduto.SpBConfirmarProdClick(Sender: TObject);
 var
   ativo: string;
   maxIdProd: Integer;
 begin
   inherited;
-  EdtNomeProd.SetFocus;
   if RadioBAtivoS.IsChecked then
     ativo := 'S'
   else
@@ -732,28 +729,41 @@ begin
   else if crud = 'editar' then
   begin
     try
-      DM.FDQConsultaProd.Edit;
-      DM.FDQConsultaProdproduto.AsString := EdtNomeProd.Text;
-      DM.FDQConsultaProddescricao.AsString := EdtDescProd.Text;
-      DM.FDQConsultaProdun.AsString := EdtUnProd.Text;
-      if EdtVrPrazaProd.Text.IsEmpty then
-        DM.FDQConsultaProdvrvenda.AsFloat := 0
-      else
-        DM.FDQConsultaProdvrvenda.AsFloat := StrToFloat(EdtVrPrazaProd.Text);
-      DM.FDQConsultaProdsigla.AsString := EdtSiglaGrupoProd.Text;
-      DM.FDQConsultaProdgrupo.AsString := EdtGrupoProd.Text;
-      DM.FDQConsultaProdCodigoBarra.AsString := EdtCodBarraProd.Text;
-      if EdtVrPromocaoProd.Text.IsEmpty then
-        DM.FDQConsultaProdvrpromocao.AsFloat := 0
-      else
-        DM.FDQConsultaProdvrpromocao.AsFloat :=
-          StrToFloat(EdtVrPromocaoProd.Text);
-      if EdtVrVistaProd.Text.IsEmpty then
-        DM.FDQConsultaProdVRAVISTA.AsFloat := 0
-      else
-        DM.FDQConsultaProdVRAVISTA.AsFloat := StrToFloat(EdtVrVistaProd.Text);
-      DM.FDQConsultaProdativo.AsString := ativo;
-      DM.FDQConsultaProd.Post;
+      DM.FDQAuxiliar.SQL.Clear;
+
+      DM.FDQAuxiliar.SQL.Add('update produto');
+      DM.FDQAuxiliar.SQL.Add(' set produto = :Produto,');
+      DM.FDQAuxiliar.SQL.Add(' descricao = :Descricao,');
+      DM.FDQAuxiliar.SQL.Add(' un = :Un,');
+      DM.FDQAuxiliar.SQL.Add(' vrvenda = :VrVenda,');
+      DM.FDQAuxiliar.SQL.Add(' sigla = :Sigla,');
+      DM.FDQAuxiliar.SQL.Add(' grupo = :Grupo,');
+      DM.FDQAuxiliar.SQL.Add(' CodigoBarra = :CodBarra,');
+      DM.FDQAuxiliar.SQL.Add(' vrpromocao = :VrPromocao,');
+      DM.FDQAuxiliar.SQL.Add(' VRAVISTA = :VrAvista,');
+      DM.FDQAuxiliar.SQL.Add(' ativo = :Ativo');
+      DM.FDQAuxiliar.SQL.Add(' where codigo = :Codigo');
+
+      DM.FDQAuxiliar.Params.ParamByName('Produto').AsString := EdtNomeProd.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Descricao').AsString :=
+        EdtDescProd.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Un').AsString := EdtUnProd.Text;
+      DM.FDQAuxiliar.Params.ParamByName('VrVenda').AsFloat :=
+        StrToFloat(EdtVrPrazaProd.Text);
+      DM.FDQAuxiliar.Params.ParamByName('Sigla').AsString :=
+        EdtSiglaGrupoProd.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Grupo').AsString := EdtGrupoProd.Text;
+      DM.FDQAuxiliar.Params.ParamByName('CodBarra').AsString :=
+        EdtCodBarraProd.Text;
+      DM.FDQAuxiliar.Params.ParamByName('VrPromocao').AsFloat :=
+        StrToFloat(EdtVrPromocaoProd.Text);
+      DM.FDQAuxiliar.Params.ParamByName('VrAvista').AsFloat :=
+        StrToFloat(EdtVrVistaProd.Text);
+      DM.FDQAuxiliar.Params.ParamByName('Ativo').AsString := ativo;
+      DM.FDQAuxiliar.Params.ParamByName('Codigo').AsInteger :=
+        DM.FDQConsultaProdcodigo.AsInteger;
+
+      DM.FDQAuxiliar.ExecSQL;
     except
       on E: Exception do
         ShowMessage('Erro!  ' + E.Message);

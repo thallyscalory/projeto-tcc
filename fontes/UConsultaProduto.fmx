@@ -732,6 +732,14 @@ inherited FConsProduto: TFConsProduto
         item
           SourceMemberName = 'vrvenda'
           ControlMemberName = 'Detail1'
+        end
+        item
+          SourceMemberName = 'VRAVISTA'
+          ControlMemberName = 'Detail2'
+        end
+        item
+          SourceMemberName = 'grupo'
+          ControlMemberName = 'Detail3'
         end>
       FillHeaderExpressions = <>
       FillHeaderFieldName = 'codigo'

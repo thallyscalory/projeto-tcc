@@ -88,6 +88,7 @@ type
     LinkListControlToField2: TLinkListControlToField;
     LinkPropertyToFieldText: TLinkPropertyToField;
     BindSourceDB5: TBindSourceDB;
+    LinkControlToField3: TLinkControlToField;
     procedure SpBVoltarClick(Sender: TObject);
     procedure SpdBNovoVendaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -430,49 +431,125 @@ var
   listaItem: TListViewItem;
   qteCount: Double;
 begin
-  ListViewItemPedido.Items.Clear;
-
-  DM.FDQConsItemPedido.Close;
-  DM.FDQConsItemPedido.ParamByName('PIdPedido').Value :=
-    ListBoxItemNumPedidoVenda.ItemData.Detail;
-  DM.FDQConsItemPedido.Open();
-
-  if not DM.FDQConsItemPedido.IsEmpty then
+  if ComboBoxFiltroPedido.ItemIndex = 0 then
   begin
-    qteCount := 0;
-    DM.FDQConsItemPedido.First;
-    while not DM.FDQConsItemPedido.Eof do
+    MessageDlg('Pedido já fechado! Deseja visualizar?',
+      System.UITypes.TMsgDlgType.mtInformation,
+      [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
+      procedure(const AResult: System.UITypes.TModalResult)
+      begin
+        case AResult of
+          mrYES:
+            begin
+              // caso sim
+
+              ListViewItemPedido.Items.Clear;
+
+              DM.FDQConsItemPedido.Close;
+              DM.FDQConsItemPedido.ParamByName('PIdPedido').Value :=
+                ListBoxItemNumPedidoVenda.ItemData.Detail;
+              DM.FDQConsItemPedido.Open();
+
+              if not DM.FDQConsItemPedido.IsEmpty then
+              begin
+                qteCount := 0;
+                DM.FDQConsItemPedido.First;
+                while not DM.FDQConsItemPedido.Eof do
+                begin
+                  listaItem := ListViewItemPedido.Items.Add;
+                  listaItem.Text := DM.FDQConsItemPedidoproduto.AsString;
+                  listaItem.Data[TMultiDetailAppearanceNames.Detail1] :=
+                    DM.FDQConsItemPedidoqte_item_pedido.AsString;
+                  listaItem.Data[TMultiDetailAppearanceNames.Detail2] :=
+                    DM.FDQConsItemPedidovalor_item_pedido.AsString;
+                  listaItem.Data[TMultiDetailAppearanceNames.Detail3] :=
+                    DM.FDQConsItemPedidousuario.AsString;
+                  listaItem.ButtonText :=
+                    DM.FDQConsItemPedidoid_item_pedido.AsString;
+                  listaItem.Detail :=
+                    DM.FDQConsItemPedidoid_produto_item.AsString;
+                  DM.FDQConsItemPedido.Next;
+
+                  qteCount := qteCount +
+                    DM.FDQConsItemPedidoqte_item_pedido.AsFloat;
+                end;
+                if qteCount = 1 then
+                  LblQtdItemPedido.Text := FloatToStr(qteCount) +
+                    ' item adicionado'
+                else
+                  LblQtdItemPedido.Text := FloatToStr(qteCount) +
+                    ' itens adicionados';
+              end;
+
+              ComboBoxFormaPagVenda.Items.Add
+                (DM.FDQPedidodescricao_forma_pag.AsString);
+              ComboBoxAtendentePedidoEnter(Sender);
+              ComboBoxFormaPagVenda.ItemIndex := 0;
+              ComboBoxAtendentePedido.ItemIndex := 0;
+              if EdtDescontoMoedaPedido.Text.IsEmpty then
+                EdtDescontoMoedaPedido.Text := '0';
+              crud := EmptyStr;
+              venda := 'S';
+              SpdBEditarVenda.Visible := True;
+              SpdBSalvarVenda.Visible := False;
+              DesabilitaCampos;
+              MudarAbaVenda(TbItemedicaoVenda, Sender);
+            end;
+          mrNo:
+            begin
+              // caso não
+            end;
+        end;
+      end);
+  end
+  else
+  begin
+    ListViewItemPedido.Items.Clear;
+
+    DM.FDQConsItemPedido.Close;
+    DM.FDQConsItemPedido.ParamByName('PIdPedido').Value :=
+      ListBoxItemNumPedidoVenda.ItemData.Detail;
+    DM.FDQConsItemPedido.Open();
+
+    if not DM.FDQConsItemPedido.IsEmpty then
     begin
-      listaItem := ListViewItemPedido.Items.Add;
-      listaItem.Text := DM.FDQConsItemPedidoproduto.AsString;
-      listaItem.Data[TMultiDetailAppearanceNames.Detail1] :=
-        DM.FDQConsItemPedidoqte_item_pedido.AsString;
-      listaItem.Data[TMultiDetailAppearanceNames.Detail2] :=
-        DM.FDQConsItemPedidovalor_item_pedido.AsString;
-      listaItem.Data[TMultiDetailAppearanceNames.Detail3] :=
-        DM.FDQConsItemPedidousuario.AsString;
-      listaItem.ButtonText := DM.FDQConsItemPedidoid_item_pedido.AsString;
-      listaItem.Detail := DM.FDQConsItemPedidoid_produto_item.AsString;
-      DM.FDQConsItemPedido.Next;
+      qteCount := 0;
+      DM.FDQConsItemPedido.First;
+      while not DM.FDQConsItemPedido.Eof do
+      begin
+        listaItem := ListViewItemPedido.Items.Add;
+        listaItem.Text := DM.FDQConsItemPedidoproduto.AsString;
+        listaItem.Data[TMultiDetailAppearanceNames.Detail1] :=
+          DM.FDQConsItemPedidoqte_item_pedido.AsString;
+        listaItem.Data[TMultiDetailAppearanceNames.Detail2] :=
+          DM.FDQConsItemPedidovalor_item_pedido.AsString;
+        listaItem.Data[TMultiDetailAppearanceNames.Detail3] :=
+          DM.FDQConsItemPedidousuario.AsString;
+        listaItem.ButtonText := DM.FDQConsItemPedidoid_item_pedido.AsString;
+        listaItem.Detail := DM.FDQConsItemPedidoid_produto_item.AsString;
+        DM.FDQConsItemPedido.Next;
 
-      qteCount := qteCount + DM.FDQConsItemPedidoqte_item_pedido.AsFloat;
+        qteCount := qteCount + DM.FDQConsItemPedidoqte_item_pedido.AsFloat;
+      end;
+      if qteCount = 1 then
+        LblQtdItemPedido.Text := FloatToStr(qteCount) + ' item adicionado'
+      else
+        LblQtdItemPedido.Text := FloatToStr(qteCount) + ' itens adicionados';
     end;
-    if qteCount = 1 then
-      LblQtdItemPedido.Text := FloatToStr(qteCount) + ' item adicionado'
-    else
-      LblQtdItemPedido.Text := FloatToStr(qteCount) + ' itens adicionados';
-  end;
 
-  ComboBoxFormaPagVenda.Items.Add(DM.FDQPedidodescricao_forma_pag.AsString);
-  ComboBoxAtendentePedidoEnter(Sender);
-  ComboBoxFormaPagVenda.ItemIndex := 0;
-  ComboBoxAtendentePedido.ItemIndex := 0;
-  crud := EmptyStr;
-  venda := 'S';
-  SpdBEditarVenda.Visible := True;
-  SpdBSalvarVenda.Visible := False;
-  DesabilitaCampos;
-  MudarAbaVenda(TbItemedicaoVenda, Sender);
+    ComboBoxFormaPagVenda.Items.Add(DM.FDQPedidodescricao_forma_pag.AsString);
+    ComboBoxAtendentePedidoEnter(Sender);
+    ComboBoxFormaPagVenda.ItemIndex := 0;
+    ComboBoxAtendentePedido.ItemIndex := 0;
+    if EdtDescontoMoedaPedido.Text.IsEmpty then
+      EdtDescontoMoedaPedido.Text := '0';
+    crud := EmptyStr;
+    venda := 'S';
+    SpdBEditarVenda.Visible := True;
+    SpdBSalvarVenda.Visible := False;
+    DesabilitaCampos;
+    MudarAbaVenda(TbItemedicaoVenda, Sender);
+  end;
 
 end;
 
@@ -654,12 +731,262 @@ begin
 end;
 
 procedure TFVenda1.SpdBSalvarVendaClick(Sender: TObject);
+var
+  DataHora, sql: string;
+  maxIdPedido, maxIdItemPedido: integer;
+  sqlpedido, sqlItemPedido: TStrings;
 begin
-  SpdBEditarVenda.Visible := True;
-  SpdBSalvarVenda.Visible := False;
-  DesabilitaCampos;
-  CliPedido := EmptyStr;
-  itemPedido := EmptyStr;
+  MessageDlg('Deseja finalizar o pedido?',
+    System.UITypes.TMsgDlgType.mtInformation, [System.UITypes.TMsgDlgBtn.mbYes,
+    System.UITypes.TMsgDlgBtn.mbNo], 0,
+    procedure(const AResult: System.UITypes.TModalResult)
+    var
+      I: integer;
+    begin
+      case AResult of
+        mrYES:
+          begin
+            // caso sim
+            try
+              if (ListViewItemPedido.ItemCount > 0) and (LblCodCliPedido.Text <> '')
+              then
+              begin
+                if crud = 'inserir' then
+                begin
+                  // PEDIDO
+                  DM.FDQMaxIdPedido.Close;
+                  DM.FDQMaxIdPedido.Open();
+                  maxIdPedido := DM.FDQMaxIdPedidomaxIdPedido.AsInteger + 1;
+                  DataHora := DateTimeToStr(Now);
+                  DM.FDQConsFormaPag.Close;
+                  DM.FDQConsFormaPag.ParamByName('PDescricaoFormaPag').Value :=
+                    ComboBoxFormaPagVenda.Selected.Text;
+                  DM.FDQConsFormaPag.ParamByName('PIdFormaPag').Value := Null;
+                  DM.FDQConsFormaPag.Open();
+
+                  DM.FDQCadPedido.Close;
+                  DM.FDQCadPedido.Open();
+                  DM.FDQCadPedido.Append;
+                  DM.FDQCadPedidoid_pedido.AsInteger := maxIdPedido;
+                  DM.FDQCadPedidoid_cli_pedido.AsInteger :=
+                    StrToInt(LblCodCliPedido.Text);
+                  DM.FDQCadPedidodatahora_pedido.AsDateTime :=
+                    StrToDateTime(DataHora);
+                  DM.FDQCadPedidovalor_pedido.AsFloat :=
+                    StrToFloat(ListBoxItemValorTotalVenda.ItemData.Detail);
+                  if EdtDescontoMoedaPedido.Text.IsEmpty then
+                  begin
+                    DM.FDQCadPedidodescmoeda_pedido.AsFloat := 0;
+                  end
+                  else
+                  begin
+                    DM.FDQCadPedidodescmoeda_pedido.AsFloat :=
+                      StrToFloat(EdtDescontoMoedaPedido.Text);
+                  end;
+                  DM.FDQCadPedidodescpercent_pedido.AsFloat := 0;
+                  DM.FDQCadPedidoid_formapag_pedido.AsInteger :=
+                    DM.FDQConsFormaPagid_forma_pag.AsInteger;
+                  DM.FDQCadPedidonrparcela_pedido.AsInteger :=
+                    StrToInt(EdtNumParcelaPedido.Text);
+                  DM.FDQCadPedidoobs_pedido.AsString := EmptyStr;
+                  DM.FDQCadPedidostatus_pedido.AsString := 'F';
+                  DM.FDQCadPedido.Post;
+
+                  // ITEM PEDIDO
+                  for I := 0 to ListViewItemPedido.ItemCount - 1 do
+                  begin
+                    DM.FDQMaxIdItemPedido.Close;
+                    DM.FDQMaxIdItemPedido.Open();
+                    maxIdItemPedido := DM.FDQMaxIdItemPedidomaxId.AsInteger + 1;
+
+                    DM.FDQConsAtendente.Close;
+                    DM.FDQConsAtendente.ParamByName('PUsuario').Value :=
+                      ListViewItemPedido.Items[I].Data
+                      [TMultiDetailAppearanceNames.Detail3].AsString;
+                    DM.FDQConsAtendente.ParamByName('PIdAtendente')
+                      .Value := Null;
+                    DM.FDQConsAtendente.Open();
+
+                    DM.FDQCadItemPedido.Close;
+                    DM.FDQCadItemPedido.Open();
+                    DM.FDQCadItemPedido.Append;
+                    DM.FDQCadItemPedidoid_item_pedido.AsInteger :=
+                      maxIdItemPedido;
+                    DM.FDQCadItemPedidoid_pedido_item.AsInteger := maxIdPedido;
+                    DM.FDQCadItemPedidoid_produto_item.AsInteger :=
+                      StrToInt(ListViewItemPedido.Items[I].Detail);
+                    DM.FDQCadItemPedidoqte_item_pedido.AsFloat :=
+                      StrToFloat(ListViewItemPedido.Items[I].Data
+                      [TMultiDetailAppearanceNames.Detail1].AsString);
+                    DM.FDQCadItemPedidovalor_item_pedido.AsFloat :=
+                      StrToFloat(ListViewItemPedido.Items[I].Data
+                      [TMultiDetailAppearanceNames.Detail2].AsString);
+                    DM.FDQCadItemPedidodescmoeda_item_pedido.AsFloat := 0;
+                    DM.FDQCadItemPedidodescpercent_item_pedido.AsFloat := 0;
+                    if not DM.FDQConsAtendente.IsEmpty then
+                    begin
+                      DM.FDQCadItemPedidoid_atendente_item.AsInteger :=
+                        DM.FDQConsAtendenteid_funcionario.AsInteger;
+                    end;
+                    DM.FDQCadItemPedido.Post;
+                  end;
+
+                end
+                else if crud = 'editar' then
+                begin
+                  // PEDIDO
+                  DM.FDQConsFormaPag.Close;
+                  DM.FDQConsFormaPag.ParamByName('PDescricaoFormaPag').Value :=
+                    ComboBoxFormaPagVenda.Selected.Text;
+                  DM.FDQConsFormaPag.ParamByName('PIdFormaPag').Value := Null;
+                  DM.FDQConsFormaPag.Open();
+
+                  DM.FDQAuxiliar.sql.Clear;
+                  DM.FDQAuxiliar.sql.Add('update pedido');
+                  DM.FDQAuxiliar.sql.Add(' set id_cli_pedido = :IdCli,');
+                  DM.FDQAuxiliar.sql.Add(' valor_pedido = :ValorPedido,');
+                  DM.FDQAuxiliar.sql.Add(' descmoeda_pedido = :DescMoeda,');
+                  DM.FDQAuxiliar.sql.Add(' descpercent_pedido = :DescPercent,');
+                  DM.FDQAuxiliar.sql.Add(' id_formapag_pedido = :IdFormaPag,');
+                  DM.FDQAuxiliar.sql.Add(' nrparcela_pedido = :NrParcela,');
+                  DM.FDQAuxiliar.sql.Add(' obs_pedido = :Obs,');
+                  DM.FDQAuxiliar.sql.Add(' status_pedido = :Status');
+                  DM.FDQAuxiliar.sql.Add(' where id_pedido = :IdPedido');
+
+                  DM.FDQAuxiliar.Params.ParamByName('IdCli').AsInteger :=
+                    StrToInt(LblCodCliPedido.Text);
+                  DM.FDQAuxiliar.Params.ParamByName('ValorPedido').AsFloat :=
+                    StrToFloat(ListBoxItemValorTotalVenda.ItemData.Detail);
+                  DM.FDQAuxiliar.Params.ParamByName('DescMoeda').AsFloat :=
+                    StrToFloat(EdtDescontoMoedaPedido.Text);
+                  DM.FDQAuxiliar.Params.ParamByName('DescPercent').AsFloat := 0;
+                  DM.FDQAuxiliar.Params.ParamByName('IdFormaPag').AsInteger :=
+                    DM.FDQConsFormaPagid_forma_pag.AsInteger;
+                  DM.FDQAuxiliar.Params.ParamByName('NrParcela').AsInteger :=
+                    StrToInt(EdtNumParcelaPedido.Text);
+                  DM.FDQAuxiliar.Params.ParamByName('Obs').AsString := EmptyStr;
+                  DM.FDQAuxiliar.Params.ParamByName('Status').AsString := 'F';
+                  DM.FDQAuxiliar.Params.ParamByName('IdPedido').AsInteger :=
+                    StrToInt(ListBoxItemNumPedidoVenda.ItemData.Detail);
+
+                  DM.FDQAuxiliar.ExecSQL;
+
+                  // ITEM PEDIDO
+                  for I := 0 to ListViewItemPedido.ItemCount - 1 do
+                  begin
+                    if not ListViewItemPedido.Items[I].ButtonText.IsEmpty then
+                    begin
+                      DM.FDQConsAtendente.Close;
+                      DM.FDQConsAtendente.ParamByName('PUsuario').Value :=
+                        ListViewItemPedido.Items[I].Data
+                        [TMultiDetailAppearanceNames.Detail3].AsString;
+                      DM.FDQConsAtendente.ParamByName('PIdAtendente')
+                        .Value := Null;
+                      DM.FDQConsAtendente.Open();
+
+                      DM.FDQAuxiliar.sql.Clear;
+                      DM.FDQAuxiliar.sql.Add('update item_pedido');
+                      DM.FDQAuxiliar.sql.Add
+                        (' set qte_item_pedido = :QteItem,');
+                      DM.FDQAuxiliar.sql.Add
+                        (' valor_item_pedido = :ValorItem,');
+                      DM.FDQAuxiliar.sql.Add
+                        (' descmoeda_item_pedido = :DescMoeda,');
+                      DM.FDQAuxiliar.sql.Add
+                        (' descpercent_item_pedido = :DescPercent,');
+                      DM.FDQAuxiliar.sql.Add
+                        (' id_atendente_item = :IdAtendente');
+                      DM.FDQAuxiliar.sql.Add(' where id_item_pedido = :IdItem');
+
+                      DM.FDQAuxiliar.Params.ParamByName('QteItem').AsFloat :=
+                        StrToFloat(ListViewItemPedido.Items[I].Data
+                        [TMultiDetailAppearanceNames.Detail1].ToString);
+                      DM.FDQAuxiliar.Params.ParamByName('ValorItem').AsFloat :=
+                        StrToFloat(ListViewItemPedido.Items[I].Data
+                        [TMultiDetailAppearanceNames.Detail2].ToString);
+                      DM.FDQAuxiliar.Params.ParamByName('DescMoeda')
+                        .AsFloat := 0;
+                      DM.FDQAuxiliar.Params.ParamByName('DescPercent')
+                        .AsFloat := 0;
+                      DM.FDQAuxiliar.Params.ParamByName('IdAtendente').AsInteger
+                        := DM.FDQConsAtendenteid_funcionario.AsInteger;
+                      DM.FDQAuxiliar.Params.ParamByName('IdItem').AsInteger :=
+                        StrToInt(ListViewItemPedido.Items[I].ButtonText);
+
+                      DM.FDQAuxiliar.ExecSQL;
+                    end
+                    else
+                    begin
+                      DM.FDQMaxIdItemPedido.Close;
+                      DM.FDQMaxIdItemPedido.Open();
+                      maxIdItemPedido :=
+                        DM.FDQMaxIdItemPedidomaxId.AsInteger + 1;
+
+                      DM.FDQConsAtendente.Close;
+                      DM.FDQConsAtendente.ParamByName('PUsuario').Value :=
+                        ListViewItemPedido.Items[I].Data
+                        [TMultiDetailAppearanceNames.Detail3].AsString;
+                      DM.FDQConsAtendente.ParamByName('PIdAtendente')
+                        .Value := Null;
+                      DM.FDQConsAtendente.Open();
+
+                      DM.FDQCadItemPedido.Close;
+                      DM.FDQCadItemPedido.Open();
+                      DM.FDQCadItemPedido.Append;
+                      DM.FDQCadItemPedidoid_item_pedido.AsInteger :=
+                        maxIdItemPedido;
+                      DM.FDQCadItemPedidoid_pedido_item.AsInteger :=
+                        StrToInt(ListBoxItemNumPedidoVenda.ItemData.Detail);
+                      DM.FDQCadItemPedidoid_produto_item.AsInteger :=
+                        StrToInt(ListViewItemPedido.Items[I].Detail);
+                      DM.FDQCadItemPedidoqte_item_pedido.AsFloat :=
+                        StrToFloat(ListViewItemPedido.Items[I].Data
+                        [TMultiDetailAppearanceNames.Detail1].AsString);
+                      DM.FDQCadItemPedidovalor_item_pedido.AsFloat :=
+                        StrToFloat(ListViewItemPedido.Items[I].Data
+                        [TMultiDetailAppearanceNames.Detail2].AsString);
+                      DM.FDQCadItemPedidodescmoeda_item_pedido.AsFloat := 0;
+                      DM.FDQCadItemPedidodescpercent_item_pedido.AsFloat := 0;
+                      if not DM.FDQConsAtendente.IsEmpty then
+                      begin
+                        DM.FDQCadItemPedidoid_atendente_item.AsInteger :=
+                          DM.FDQConsAtendenteid_funcionario.AsInteger;
+                      end;
+                      DM.FDQCadItemPedido.Post;
+                    end;
+                  end;
+
+                end;
+
+                DM.FDConnection1.CommitRetaining;
+                nomeCliente := EmptyStr;
+                codCliente := EmptyStr;
+                CliPedido := EmptyStr;
+                itemPedido := EmptyStr;
+                DM.FDQPedido.Active := False;
+                DM.FDQConsFormaPag.Active := False;
+                LimpaCampos;
+                DesabilitaCampos;
+                MudarAbaVenda(TbItemListagemVenda, Sender);
+              end
+              else
+              begin
+                ShowMessage
+                  ('Processo cancelado!  Para finalizar o pedido é necessario informar um cliente e um produto');
+              end;
+
+            except
+              on E: Exception do
+                ShowMessage('Erro!  ' + E.Message);
+            end;
+
+          end;
+        mrNo:
+          begin
+            // caso não
+          end;
+      end;
+    end);
 end;
 
 procedure TFVenda1.SpdBVoltarItemVendaClick(Sender: TObject);
@@ -669,10 +996,11 @@ end;
 
 procedure TFVenda1.SpdBVoltarVendaEdicaoClick(Sender: TObject);
 var
-  DataHora: string;
+  DataHora, sql: string;
   maxIdPedido, maxIdItemPedido: integer;
+  sqlpedido, sqlItemPedido: TStrings;
 begin
-  MessageDlg('Você deseja fechar este pedido?',
+  MessageDlg('Deseja sair deste pedido?',
     System.UITypes.TMsgDlgType.mtInformation, [System.UITypes.TMsgDlgBtn.mbYes,
     System.UITypes.TMsgDlgBtn.mbNo], 0,
     procedure(const AResult: System.UITypes.TModalResult)
@@ -732,14 +1060,8 @@ begin
                   begin
                     DM.FDQMaxIdItemPedido.Close;
                     DM.FDQMaxIdItemPedido.Open();
-                    // if DM.FDQMaxIdItemPedidomaxId.AsInteger = StrToInt('') then
-                    // begin
-                    // maxIdItemPedido := 1;
-                    // end
-                    // else
-                    // begin
                     maxIdItemPedido := DM.FDQMaxIdItemPedidomaxId.AsInteger + 1;
-                    // end;
+
                     DM.FDQConsAtendente.Close;
                     DM.FDQConsAtendente.ParamByName('PUsuario').Value :=
                       ListViewItemPedido.Items[I].Data
@@ -782,28 +1104,120 @@ begin
                   DM.FDQConsFormaPag.ParamByName('PIdFormaPag').Value := Null;
                   DM.FDQConsFormaPag.Open();
 
-                  DM.FDQPedido.Edit;
-                  DM.FDQPedidoid_cli_pedido.AsInteger :=
+                  DM.FDQAuxiliar.sql.Clear;
+                  DM.FDQAuxiliar.sql.Add('update pedido');
+                  DM.FDQAuxiliar.sql.Add(' set id_cli_pedido = :IdCli,');
+                  DM.FDQAuxiliar.sql.Add(' valor_pedido = :ValorPedido,');
+                  DM.FDQAuxiliar.sql.Add(' descmoeda_pedido = :DescMoeda,');
+                  DM.FDQAuxiliar.sql.Add(' descpercent_pedido = :DescPercent,');
+                  DM.FDQAuxiliar.sql.Add(' id_formapag_pedido = :IdFormaPag,');
+                  DM.FDQAuxiliar.sql.Add(' nrparcela_pedido = :NrParcela,');
+                  DM.FDQAuxiliar.sql.Add(' obs_pedido = :Obs,');
+                  DM.FDQAuxiliar.sql.Add(' status_pedido = :Status');
+                  DM.FDQAuxiliar.sql.Add(' where id_pedido = :IdPedido');
+
+                  DM.FDQAuxiliar.Params.ParamByName('IdCli').AsInteger :=
                     StrToInt(LblCodCliPedido.Text);
-                  DM.FDQPedidovalor_pedido.AsFloat :=
+                  DM.FDQAuxiliar.Params.ParamByName('ValorPedido').AsFloat :=
                     StrToFloat(ListBoxItemValorTotalVenda.ItemData.Detail);
-                  if EdtDescontoMoedaPedido.Text.IsEmpty then
-                  begin
-                    DM.FDQPedidodescmoeda_pedido.AsFloat := 0;
-                  end
-                  else
-                  begin
-                    DM.FDQPedidodescmoeda_pedido.AsFloat :=
-                      StrToFloat(EdtDescontoMoedaPedido.Text);
-                  end;
-                  DM.FDQPedidodescpercent_pedido.AsFloat := 0;
-                  DM.FDQPedidoid_formapag_pedido.AsInteger :=
+                  DM.FDQAuxiliar.Params.ParamByName('DescMoeda').AsFloat :=
+                    StrToFloat(EdtDescontoMoedaPedido.Text);
+                  DM.FDQAuxiliar.Params.ParamByName('DescPercent').AsFloat := 0;
+                  DM.FDQAuxiliar.Params.ParamByName('IdFormaPag').AsInteger :=
                     DM.FDQConsFormaPagid_forma_pag.AsInteger;
-                  DM.FDQPedidonrparcela_pedido.AsInteger :=
+                  DM.FDQAuxiliar.Params.ParamByName('NrParcela').AsInteger :=
                     StrToInt(EdtNumParcelaPedido.Text);
-                  DM.FDQPedidoobs_pedido.AsString := EmptyStr;
-                  DM.FDQPedidostatus_pedido.AsString := 'A';
-                  DM.FDQPedido.Post;
+                  DM.FDQAuxiliar.Params.ParamByName('Obs').AsString := EmptyStr;
+                  DM.FDQAuxiliar.Params.ParamByName('Status').AsString := 'A';
+                  DM.FDQAuxiliar.Params.ParamByName('IdPedido').AsInteger :=
+                    StrToInt(ListBoxItemNumPedidoVenda.ItemData.Detail);
+
+                  DM.FDQAuxiliar.ExecSQL;
+
+                  // ITEM PEDIDO
+                  for I := 0 to ListViewItemPedido.ItemCount - 1 do
+                  begin
+                    if not ListViewItemPedido.Items[I].ButtonText.IsEmpty then
+                    begin
+                      DM.FDQConsAtendente.Close;
+                      DM.FDQConsAtendente.ParamByName('PUsuario').Value :=
+                        ListViewItemPedido.Items[I].Data
+                        [TMultiDetailAppearanceNames.Detail3].AsString;
+                      DM.FDQConsAtendente.ParamByName('PIdAtendente')
+                        .Value := Null;
+                      DM.FDQConsAtendente.Open();
+
+                      DM.FDQAuxiliar.sql.Clear;
+                      DM.FDQAuxiliar.sql.Add('update item_pedido');
+                      DM.FDQAuxiliar.sql.Add
+                        (' set qte_item_pedido = :QteItem,');
+                      DM.FDQAuxiliar.sql.Add
+                        (' valor_item_pedido = :ValorItem,');
+                      DM.FDQAuxiliar.sql.Add
+                        (' descmoeda_item_pedido = :DescMoeda,');
+                      DM.FDQAuxiliar.sql.Add
+                        (' descpercent_item_pedido = :DescPercent,');
+                      DM.FDQAuxiliar.sql.Add
+                        (' id_atendente_item = :IdAtendente');
+                      DM.FDQAuxiliar.sql.Add(' where id_item_pedido = :IdItem');
+
+                      DM.FDQAuxiliar.Params.ParamByName('QteItem').AsFloat :=
+                        StrToFloat(ListViewItemPedido.Items[I].Data
+                        [TMultiDetailAppearanceNames.Detail1].ToString);
+                      DM.FDQAuxiliar.Params.ParamByName('ValorItem').AsFloat :=
+                        StrToFloat(ListViewItemPedido.Items[I].Data
+                        [TMultiDetailAppearanceNames.Detail2].ToString);
+                      DM.FDQAuxiliar.Params.ParamByName('DescMoeda')
+                        .AsFloat := 0;
+                      DM.FDQAuxiliar.Params.ParamByName('DescPercent')
+                        .AsFloat := 0;
+                      DM.FDQAuxiliar.Params.ParamByName('IdAtendente').AsInteger
+                        := DM.FDQConsAtendenteid_funcionario.AsInteger;
+                      DM.FDQAuxiliar.Params.ParamByName('IdItem').AsInteger :=
+                        StrToInt(ListViewItemPedido.Items[I].ButtonText);
+
+                      DM.FDQAuxiliar.ExecSQL;
+                    end
+                    else
+                    begin
+                      DM.FDQMaxIdItemPedido.Close;
+                      DM.FDQMaxIdItemPedido.Open();
+                      maxIdItemPedido :=
+                        DM.FDQMaxIdItemPedidomaxId.AsInteger + 1;
+
+                      DM.FDQConsAtendente.Close;
+                      DM.FDQConsAtendente.ParamByName('PUsuario').Value :=
+                        ListViewItemPedido.Items[I].Data
+                        [TMultiDetailAppearanceNames.Detail3].AsString;
+                      DM.FDQConsAtendente.ParamByName('PIdAtendente')
+                        .Value := Null;
+                      DM.FDQConsAtendente.Open();
+
+                      DM.FDQCadItemPedido.Close;
+                      DM.FDQCadItemPedido.Open();
+                      DM.FDQCadItemPedido.Append;
+                      DM.FDQCadItemPedidoid_item_pedido.AsInteger :=
+                        maxIdItemPedido;
+                      DM.FDQCadItemPedidoid_pedido_item.AsInteger :=
+                        StrToInt(ListBoxItemNumPedidoVenda.ItemData.Detail);
+                      DM.FDQCadItemPedidoid_produto_item.AsInteger :=
+                        StrToInt(ListViewItemPedido.Items[I].Detail);
+                      DM.FDQCadItemPedidoqte_item_pedido.AsFloat :=
+                        StrToFloat(ListViewItemPedido.Items[I].Data
+                        [TMultiDetailAppearanceNames.Detail1].AsString);
+                      DM.FDQCadItemPedidovalor_item_pedido.AsFloat :=
+                        StrToFloat(ListViewItemPedido.Items[I].Data
+                        [TMultiDetailAppearanceNames.Detail2].AsString);
+                      DM.FDQCadItemPedidodescmoeda_item_pedido.AsFloat := 0;
+                      DM.FDQCadItemPedidodescpercent_item_pedido.AsFloat := 0;
+                      if not DM.FDQConsAtendente.IsEmpty then
+                      begin
+                        DM.FDQCadItemPedidoid_atendente_item.AsInteger :=
+                          DM.FDQConsAtendenteid_funcionario.AsInteger;
+                      end;
+                      DM.FDQCadItemPedido.Post;
+                    end;
+                  end;
 
                 end;
 

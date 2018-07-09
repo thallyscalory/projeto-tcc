@@ -358,19 +358,19 @@ object FVenda1: TFVenda1
               Margins.Bottom = 4.000000000000000000
               Position.X = 4.000000000000000000
               Position.Y = 4.000000000000000000
-              Size.Width = 85.000000000000000000
+              Size.Width = 101.000000000000000000
               Size.Height = 36.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Family = 'Arial'
               TextSettings.Font.Size = 14.000000000000000000
-              Text = 'Forma Pag:'
+              Text = 'Tipo de receita'
             end
             object ComboBoxFormaPagVenda: TComboBox
               Align = Client
               Margins.Top = 8.000000000000000000
               Margins.Right = 4.000000000000000000
               Margins.Bottom = 8.000000000000000000
-              Size.Width = 176.000000000000000000
+              Size.Width = 160.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 1
@@ -722,6 +722,13 @@ object FVenda1: TFVenda1
       Component = LblCodCliPedido
       ComponentProperty = 'Text'
     end
+    object LinkControlToField3: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'descmoeda_pedido'
+      Control = EdtDescontoMoedaPedido
+      Track = False
+    end
   end
   object ActionList1: TActionList
     Left = 16
@@ -745,13 +752,13 @@ object FVenda1: TFVenda1
   object BindSourceDB4: TBindSourceDB
     DataSet = DM.FDQConsAtendente
     ScopeMappings = <>
-    Left = 152
-    Top = 224
+    Left = 24
+    Top = 232
   end
   object BindSourceDB5: TBindSourceDB
     DataSet = DM.FDQConsItemPedido
     ScopeMappings = <>
-    Left = 160
-    Top = 232
+    Left = 16
+    Top = 176
   end
 end
