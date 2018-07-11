@@ -15,9 +15,9 @@ Visible=False
 LayerNames=NewLayer0
 
 [Module Settings]
-ModelLayerNames=NewLayer0
-ActiveLayerNames=NewLayer0
-EditingLayerName=NewLayer0
+ModelLayerNames="filtro cliente"
+ActiveLayerNames="filtro cliente"
+EditingLayerName=
 
 [DM.FDQDetalheProd]
 Coordinates=730,400,115,123
@@ -34,12 +34,12 @@ Coordinates=118,170,82,33
 Visible=False
 
 [BindSourceDB2]
-Coordinates=9838,1800,104,465
-LayerNames=NewLayer0
+Coordinates=-170,-230,104,483
+LayerNames="filtro cliente"
 
 [DM.FDQFiltroCadCLi]
-Coordinates=9964,1810,116,33
-Visible=True
+Coordinates=-170,-230,116,33
+Visible=False
 
 [DM.]
 Coordinates=118,267,112,51
@@ -66,9 +66,9 @@ Coordinates=117,77,88,33
 Visible=False
 
 [ListViewCadCli]
-Coordinates=400,-40,89,231
+Coordinates=-340,-220,89,231
 Visible=True
-LayerNames=NewLayer0
+LayerNames="filtro cliente"
 
 [DM.FDQDetalheProdCodBar]
 Coordinates=563,1,152,33
@@ -133,8 +133,8 @@ Coordinates=82,1150,84,33
 Coordinates=880,1126,79,33
 
 [EdtCpfCli]
-Coordinates=850,-30,61,51
-LayerNames=NewLayer0
+Coordinates=100,-220,61,51
+LayerNames="filtro cliente"
 
 [ListBoxItem4]
 Coordinates=880,1181,79,33
@@ -152,8 +152,8 @@ Coordinates=880,1291,79,33
 Coordinates=880,1346,79,33
 
 [EdtCepCli]
-Coordinates=860,260,63,51
-LayerNames=NewLayer0
+Coordinates=110,70,63,51
+LayerNames="filtro cliente"
 
 [ListBoxItem10]
 Coordinates=880,1511,84,33
@@ -168,8 +168,8 @@ Coordinates=1057,796,123,33
 Coordinates=780,826,62,33
 
 [EdtEnderecoCli]
-Coordinates=840,110,91,51
-LayerNames=NewLayer0
+Coordinates=90,-80,91,51
+LayerNames="filtro cliente"
 
 [EdtBCompCli]
 Coordinates=780,881,80,33
@@ -193,28 +193,29 @@ Coordinates=1057,906,81,33
 Coordinates=21,884,65,33
 
 [EdtRgCli]
-Coordinates=740,40,57,51
-LayerNames=NewLayer0
+Coordinates=-10,-150,57,51
+LayerNames="filtro cliente"
 
 [EdtUfCli]
-Coordinates=860,340,54,51
-LayerNames=NewLayer0
+Coordinates=110,150,54,51
+LayerNames="filtro cliente"
 
 [EdtNomeCli]
-Coordinates=740,-30,72,51
-LayerNames=NewLayer0
+Coordinates=-10,-220,72,51
+LayerNames="filtro cliente"
 
 [LblObsCli]
-Coordinates=710,670,62,51
-LayerNames=NewLayer0
+Coordinates=-11760,-1530,62,33
+LayerNames="filtro cliente"
+Visible=False
 
 [EdtNumCli]
-Coordinates=740,180,66,51
-LayerNames=NewLayer0
+Coordinates=-10,-10,66,51
+LayerNames="filtro cliente"
 
 [EdtBairroCli]
-Coordinates=740,260,74,51
-LayerNames=NewLayer0
+Coordinates=-10,70,74,51
+LayerNames="filtro cliente"
 
 [ListBoxItem6]
 Coordinates=1057,1071,79,33
@@ -223,8 +224,8 @@ Coordinates=1057,1071,79,33
 Coordinates=1057,741,74,33
 
 [EdtCidadeCli]
-Coordinates=740,330,78,51
-LayerNames=NewLayer0
+Coordinates=-10,140,78,51
+LayerNames="filtro cliente"
 
 [LblTipoPessoaCli]
 Coordinates=880,1049,100,51
@@ -236,14 +237,14 @@ Coordinates=151,1040,85,51
 Coordinates=1057,1126,84,33
 
 [MemoObsCadCli]
-Coordinates=850,420,96,51
+Coordinates=-340,240,96,51
 
 [EdtBEmailCli]
 Coordinates=1057,1236,79,33
 
 [EdtEmailCli]
-Coordinates=740,420,71,51
-LayerNames=NewLayer0
+Coordinates=-10,230,71,51
+LayerNames="filtro cliente"
 
 [EdtBNomeCli]
 Coordinates=1057,1291,80,33
@@ -258,8 +259,8 @@ Coordinates=1057,961,70,33
 Coordinates=957,802,84,33
 
 [EdtCompCli]
-Coordinates=850,180,73,51
-LayerNames=NewLayer0
+Coordinates=100,-10,73,51
+LayerNames="filtro cliente"
 
 [ListBoxItem11]
 Coordinates=957,857,84,33
@@ -286,12 +287,12 @@ Coordinates=1334,796,123,33
 Coordinates=740,1004,79,33
 
 [EdtFoneCli]
-Coordinates=750,110,68,51
-LayerNames=NewLayer0
+Coordinates=0,-80,68,51
+LayerNames="filtro cliente"
 
 [EdtApelidoCli]
-Coordinates=840,40,81,51
-LayerNames=NewLayer0
+Coordinates=90,-150,81,51
+LayerNames="filtro cliente"
 
 [EdtBEndCli]
 Coordinates=651,1004,70,33
@@ -313,7 +314,7 @@ Coordinates=283,394,94,36
 Coordinates=235,276,107,69
 
 [ImgFotoCli]
-Coordinates=400,360,68,51
+Coordinates=-310,130,68,51
 
 [DM.FDQConsFormaPag]
 Visible=False
@@ -326,7 +327,7 @@ Coordinates=294,465,67,51
 Coordinates=175,465,118,69
 
 [FVenda1.BindSourceDB2]
-Coordinates=196,268,138,159
+Coordinates=256,644,138,159
 
 [LblBairroCli]
 Coordinates=116,211,73,51
@@ -356,7 +357,7 @@ Coordinates=0,414,99,51
 Coordinates=464,644,56,51
 
 [FVenda1.BindSourceDB1]
-Coordinates=215,1,138,249
+Coordinates=134,1,138,375
 
 [DM.FDQCadFormaPag]
 Coordinates=363,465,124,141
@@ -381,11 +382,37 @@ Visible=False
 Coordinates=780,497,133,33
 
 [FVenda1.BindSourceDB3]
-Coordinates=563,865,138,267
+Coordinates=780,497,138,267
 
 [GestureManager1]
 Coordinates=137,671,101,33
 
 [DM.FDQConsAtendente]
 Visible=False
+Coordinates=267,452,131,33
+
+[DM.FDQCadPedido]
+Coordinates=661,936,108,231
+
+[BtnFiltrarCli]
+Coordinates=780,816,73,51
+
+[DM.FDQAuxiliar]
+Coordinates=147,671,92,51
+
+[DM.FDQCadItemPedido]
+Coordinates=423,320,129,195
+
+[DM.FDQMaxIdItemPedido]
+Coordinates=861,337,139,69
+
+[DM.FDQConsItemPedido]
+Coordinates=225,1,136,33
+Visible=False
+
+[FVenda1.BindSourceDB4]
+Coordinates=267,452,138,159
+
+[FVenda1.BindSourceDB5]
+Coordinates=225,1,138,303
 

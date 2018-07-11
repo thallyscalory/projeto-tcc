@@ -26,7 +26,6 @@ type
     Layout1: TLayout;
     Label1: TLabel;
     ComboBoxFiltroPedido: TComboBox;
-    SpBFiltrarPedido: TSpeedButton;
     ListViewPedido: TListView;
     TbItemedicaoVenda: TTabItem;
     ToolBarSupApoioVenda: TToolBar;
@@ -89,12 +88,23 @@ type
     LinkPropertyToFieldText: TLinkPropertyToField;
     BindSourceDB5: TBindSourceDB;
     LinkControlToField3: TLinkControlToField;
+    LytAtendenteItem: TLayout;
+    LytNomeItem: TLayout;
+    LytQteItem: TLayout;
+    LytValorItem: TLayout;
+    LblQteItem: TLabel;
+    LblValorItem: TLabel;
+    LblAtendenteItem: TLabel;
+    LblNomeItem: TLabel;
+    EdtQteItem: TEdit;
+    EdtValorItem: TEdit;
+    ComboBoxAtendenteItem: TComboBox;
+    SpdBCofirmaItem: TSpeedButton;
     procedure SpBVoltarClick(Sender: TObject);
     procedure SpdBNovoVendaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure ListViewPedidoItemClick(const Sender: TObject;
       const AItem: TListViewItem);
-    procedure SpBFiltrarPedidoClick(Sender: TObject);
     procedure SpdBPesqCliVendaClick(Sender: TObject);
     procedure SpdBPesqItemPedidoClick(Sender: TObject);
     procedure SpdBAdicionaItemPedidoClick(Sender: TObject);
@@ -102,8 +112,6 @@ type
     procedure SpdBVoltarItemVendaClick(Sender: TObject);
     procedure ComboBoxFormaPagVendaEnter(Sender: TObject);
     procedure BtnConfirmaApoioVendaClick(Sender: TObject);
-    procedure ListViewItemPedidoItemClick(const Sender: TObject;
-      const AItem: TListViewItem);
     procedure SpdBEditarVendaClick(Sender: TObject);
     procedure SpdBSalvarVendaClick(Sender: TObject);
     procedure EdtNumParcelaPedidoTyping(Sender: TObject);
@@ -116,12 +124,18 @@ type
     procedure ComboBoxAtendentePedidoClosePopup(Sender: TObject);
     procedure EdtNumParcelaPedidoKeyUp(Sender: TObject; var Key: Word;
       var KeyChar: Char; Shift: TShiftState);
+    procedure ComboBoxAtendenteItemEnter(Sender: TObject);
+    procedure ListViewItemPedidoGesture(Sender: TObject;
+      const EventInfo: TGestureEventInfo; var Handled: Boolean);
+    procedure SpdBCofirmaItemClick(Sender: TObject);
+    procedure ComboBoxFiltroPedidoClosePopup(Sender: TObject);
   private
     { Private declarations }
   public
     valorParc: Double;
     crud: string;
     FActiveForm: TForm;
+    itemIndexList: integer;
 
     procedure AbrirFormVenda(AFormClass: TComponentClass);
     procedure MudarAbaVenda(ATabItemVenda: TTabItem; Sender: TObject);
@@ -221,11 +235,6 @@ begin
           vlItemTotal := StrToFloat(qtd[I]) *
             DM.FDQProdItemPedidovrvenda.AsFloat;
           vlTotalPedido := vlTotalPedido + vlItemTotal;
-
-          { ListViewItemPedido.BeginUpdate;
-            ListViewItemPedido.Items[I].Data[TMultiDetailAppearanceNames.Detail1] := 'Qtd: ' + qtd[I];
-            ListViewItemPedido.EndUpdate; }
-          // ListViewItemPedido.Items[I].Detail := 'Qtd: ' + qtdItem;
         end;
       end;
       if not DM.FDQProdItemPedido.IsEmpty then
@@ -264,16 +273,42 @@ begin
   FPrincipal.ksLoadingIndicator1.HideLoading;
 end;
 
+procedure TFVenda1.ComboBoxAtendenteItemEnter(Sender: TObject);
+var
+  I: integer;
+begin
+  ComboBoxAtendenteItem.Items.Clear;
+  DM.FDQConsAtendente.Active := False;
+  DM.FDQConsAtendente.Close;
+  DM.FDQConsAtendente.ParamByName('PIdAtendente').Value := '%';
+  DM.FDQConsAtendente.ParamByName('PUsuario').Value := Null;
+  DM.FDQConsAtendente.Open();
+  for I := 1 to DM.FDQConsAtendente.RowsAffected do
+  begin
+    DM.FDQConsAtendente.Active := False;
+    DM.FDQConsAtendente.Close;
+    DM.FDQConsAtendente.ParamByName('PIdAtendente').Value := IntToStr(I);
+    DM.FDQConsAtendente.ParamByName('PUsuario').Value := Null;
+    DM.FDQConsAtendente.Open();
+    ComboBoxAtendenteItem.Items.Add(DM.FDQConsAtendenteusuario.AsString);
+  end;
+
+end;
+
 procedure TFVenda1.ComboBoxAtendentePedidoClosePopup(Sender: TObject);
 var
   I: integer;
 begin
   for I := 0 to ListViewItemPedido.ItemCount - 1 do
   begin
-    ListViewItemPedido.BeginUpdate;
-    ListViewItemPedido.Items[I].Data[TMultiDetailAppearanceNames.Detail3] :=
-      ComboBoxAtendentePedido.Selected.Text;
-    ListViewItemPedido.EndUpdate;
+    if ListViewItemPedido.Items[I].Data[TMultiDetailAppearanceNames.Detail3]
+      .ToString.IsEmpty then
+    begin
+      ListViewItemPedido.BeginUpdate;
+      ListViewItemPedido.Items[I].Data[TMultiDetailAppearanceNames.Detail3] :=
+        ComboBoxAtendentePedido.Selected.Text;
+      ListViewItemPedido.EndUpdate;
+    end;
   end;
 
 end;
@@ -287,6 +322,38 @@ begin
   DM.FDQConsAtendente.ParamByName('PUsuario').Value := Null;
   DM.FDQConsAtendente.Open();
   DM.FDQConsAtendente.Active := True;
+end;
+
+procedure TFVenda1.ComboBoxFiltroPedidoClosePopup(Sender: TObject);
+var
+  filtroFormaPag, filtroStatus, filtroStatusCond: string;
+begin
+  if ComboBoxFiltroPedido.ItemIndex = 0 then
+  begin
+    filtroFormaPag := EmptyStr;
+    filtroStatusCond := EmptyStr;
+    filtroStatus := 'F';
+  end
+  else if ComboBoxFiltroPedido.ItemIndex = 1 then
+  begin
+    filtroFormaPag := EmptyStr;
+    filtroStatusCond := EmptyStr;
+    filtroStatus := 'A';
+  end
+  else if ComboBoxFiltroPedido.ItemIndex = 2 then
+  begin
+    filtroFormaPag := 'S';
+    filtroStatusCond := 'F';
+    filtroStatus := EmptyStr;
+  end;
+
+  DM.FDQPedido.Active := False;
+  DM.FDQPedido.Close;
+  DM.FDQPedido.ParamByName('PFormaPag').Value := filtroFormaPag;
+  DM.FDQPedido.ParamByName('PStatusPedCond').Value := filtroStatusCond;
+  DM.FDQPedido.ParamByName('PStatusPedido').Value := filtroStatus;
+  DM.FDQPedido.Open();
+  DM.FDQPedido.Active := True;
 end;
 
 procedure TFVenda1.ComboBoxFormaPagVendaEnter(Sender: TObject);
@@ -330,7 +397,7 @@ begin
   ComboBoxFormaPagVenda.Enabled := False;
   EdtNumParcelaPedido.Enabled := False;
   EdtDescontoMoedaPedido.Enabled := False;
-  ListViewItemPedido.Enabled := False;
+  ListViewItemPedido.Locked := True;
   SpdBPesqCliVenda.Enabled := False;
   SpdBAdicionaItemPedido.Enabled := False;
   SpdBPesqItemPedido.Enabled := True;
@@ -351,6 +418,7 @@ begin
   begin
     if not ListBoxItemValorTotalVenda.ItemData.Detail.IsEmpty then
     begin
+      ShowMessage(ListBoxItemValorTotalVenda.ItemData.Detail);
       valorParc := StrToFloat(ListBoxItemValorTotalVenda.ItemData.Detail) /
         StrToFloat(EdtNumParcelaPedido.Text);
     end
@@ -393,7 +461,7 @@ begin
   ComboBoxFormaPagVenda.Enabled := True;
   EdtNumParcelaPedido.Enabled := True;
   EdtDescontoMoedaPedido.Enabled := True;
-  ListViewItemPedido.Enabled := True;
+  ListViewItemPedido.Locked := False;
   SpdBPesqCliVenda.Enabled := True;
   SpdBAdicionaItemPedido.Enabled := True;
   SpdBPesqItemPedido.Enabled := True;
@@ -415,14 +483,30 @@ begin
   ComboBoxAtendentePedido.Items.Clear;
 end;
 
-procedure TFVenda1.ListViewItemPedidoItemClick(const Sender: TObject;
-  const AItem: TListViewItem);
-begin
-  ShowMessage('detalhe  ' + ListViewItemPedido.Items
-    [ListViewItemPedido.ItemIndex].Detail);
-  ShowMessage('botão  ' + ListViewItemPedido.Items[ListViewItemPedido.ItemIndex]
-    .ButtonText);
+procedure TFVenda1.ListViewItemPedidoGesture(Sender: TObject;
+  const EventInfo: TGestureEventInfo; var Handled: Boolean);
 
+begin
+  if EventInfo.GestureID = igiLongTap then
+  begin
+    itemIndexList := ListViewItemPedido.ItemIndex;
+    LblNomeItem.Text := ListViewItemPedido.Items
+      [ListViewItemPedido.ItemIndex].Text;
+    EdtQteItem.Text := ListViewItemPedido.Items[ListViewItemPedido.ItemIndex]
+      .Data[TMultiDetailAppearanceNames.Detail1].ToString;
+    EdtValorItem.Text := ListViewItemPedido.Items[ListViewItemPedido.ItemIndex]
+      .Data[TMultiDetailAppearanceNames.Detail2].ToString;
+    ComboBoxAtendenteItem.Items.Clear;
+    ComboBoxAtendenteItem.Items.Add(ListViewItemPedido.Items
+      [ListViewItemPedido.ItemIndex].Data[TMultiDetailAppearanceNames.Detail3]
+      .ToString);
+    ComboBoxAtendenteItem.ItemIndex := 0;
+    SpdBCofirmaItem.Visible := True;
+    LytAtendenteItem.Visible := True;
+    LytValorItem.Visible := True;
+    LytQteItem.Visible := True;
+    LytNomeItem.Visible := True;
+  end;
 end;
 
 procedure TFVenda1.ListViewPedidoItemClick(const Sender: TObject;
@@ -559,39 +643,6 @@ begin
   ActMudarAbaVenda.ExecuteTarget(Sender);
 end;
 
-procedure TFVenda1.SpBFiltrarPedidoClick(Sender: TObject);
-var
-  filtroFormaPag, filtroStatus, filtroStatusCond: string;
-begin
-  inherited;
-  if ComboBoxFiltroPedido.ItemIndex = 0 then
-  begin
-    filtroFormaPag := EmptyStr;
-    filtroStatusCond := EmptyStr;
-    filtroStatus := 'F';
-  end
-  else if ComboBoxFiltroPedido.ItemIndex = 1 then
-  begin
-    filtroFormaPag := EmptyStr;
-    filtroStatusCond := EmptyStr;
-    filtroStatus := 'A';
-  end
-  else if ComboBoxFiltroPedido.ItemIndex = 2 then
-  begin
-    filtroFormaPag := 'S';
-    filtroStatusCond := 'F';
-    filtroStatus := EmptyStr;
-  end;
-
-  DM.FDQPedido.Active := False;
-  DM.FDQPedido.Close;
-  DM.FDQPedido.ParamByName('PFormaPag').Value := filtroFormaPag;
-  DM.FDQPedido.ParamByName('PStatusPedCond').Value := filtroStatusCond;
-  DM.FDQPedido.ParamByName('PStatusPedido').Value := filtroStatus;
-  DM.FDQPedido.Open();
-  DM.FDQPedido.Active := True;
-end;
-
 procedure TFVenda1.SpBVoltarClick(Sender: TObject);
 begin
   CliPedido := EmptyStr;
@@ -635,6 +686,59 @@ begin
     procedure(modalResult: TModalResult)
     begin
     end); }
+end;
+
+procedure TFVenda1.SpdBCofirmaItemClick(Sender: TObject);
+var
+  I: integer;
+  vlItemEditado, qtdItemEditado: string;
+begin
+  ListViewItemPedido.BeginUpdate;
+  ListViewItemPedido.Items[itemIndexList].Data
+    [TMultiDetailAppearanceNames.Detail1] := EdtQteItem.Text;
+  ListViewItemPedido.Items[itemIndexList].Data
+    [TMultiDetailAppearanceNames.Detail2] := EdtValorItem.Text;
+  ListViewItemPedido.Items[itemIndexList].Data
+    [TMultiDetailAppearanceNames.Detail3] :=
+    ComboBoxAtendenteItem.Selected.Text;
+  ListViewItemPedido.EndUpdate;
+  LytNomeItem.Visible := False;
+  LytQteItem.Visible := False;
+  LytValorItem.Visible := False;
+  LytAtendenteItem.Visible := False;
+  SpdBCofirmaItem.Visible := False;
+
+  vlTotalAtual := 0;
+  qtdTotalAtual := 0;
+  for I := 0 to ListViewItemPedido.ItemCount - 1 do
+  begin
+    vlItemEditado := ListViewItemPedido.Items[I].Data
+      [TMultiDetailAppearanceNames.Detail2].AsString;
+    qtdItemEditado := ListViewItemPedido.Items[I].Data
+      [TMultiDetailAppearanceNames.Detail1].AsString;
+    vlTotalItemAtual := StrToFloat(qtdItemEditado) * StrToFloat(vlItemEditado);
+
+    qtdTotalAtual := qtdTotalAtual + StrToFloat(qtdItemEditado);
+    vlTotalAtual := vlTotalAtual + vlTotalItemAtual;
+  end;
+
+  ListBoxItemValorTotalVenda.ItemData.Detail := FloatToStr(vlTotalAtual);
+  if (qtdTotalAtual > 1) or (qtdTotalAtual < 0) then
+  begin
+    LblQtdItemPedido.Text := FloatToStr(qtdTotalAtual) + ' itens adicionados';
+  end
+  else if qtdTotalAtual = 1 then
+  begin
+    LblQtdItemPedido.Text := FloatToStr(qtdTotalAtual) + ' item adicionado';
+  end;
+  if not EdtNumParcelaPedido.Text.IsEmpty then
+  begin
+    EdtNumParcelaPedidoTyping(Sender);
+  end;
+  if not EdtDescontoMoedaPedido.Text.IsEmpty then
+  begin
+    SpdBDescontoPedidoClick(Sender);
+  end;
 end;
 
 procedure TFVenda1.SpdBDescontoPedidoClick(Sender: TObject);
@@ -748,8 +852,8 @@ begin
           begin
             // caso sim
             try
-              if (ListViewItemPedido.ItemCount > 0) and (LblCodCliPedido.Text <> '')
-              then
+              if (ListViewItemPedido.ItemCount > 0) and
+                (LblCodCliPedido.Text <> '') then
               begin
                 if crud = 'inserir' then
                 begin

@@ -240,7 +240,7 @@ begin
   RadioBLiberaAprazoS.Enabled := False;
   RadioBLiberaAprazoN.Enabled := False;
   LblObsCli.Enabled := False;
-  MemoObsCadCli.Enabled := False;
+  MemoObsCadCli.ReadOnly := True;
   SpdBFotoCli.Enabled := False;
   EdtDataCadCli.Enabled := False;
 end;
@@ -555,7 +555,7 @@ begin
   EdtEmailCli.Enabled := True;
   RadioBLiberaAprazoS.Enabled := True;
   RadioBLiberaAprazoN.Enabled := True;
-  MemoObsCadCli.Enabled := True;
+  MemoObsCadCli.ReadOnly := False;
   SpdBFotoCli.Enabled := True;
   EdtDataCadCli.Enabled := False;
 end;
@@ -748,7 +748,6 @@ end;
 procedure TFCadCli.SpBVoltarEdicaoClick(Sender: TObject);
 begin
   inherited;
-  // DM.FDQFiltroCadCLi.Active := False;
   LimpaCampos;
   MudarAbaModelo(TbItemListagem, Sender);
 
@@ -762,7 +761,6 @@ var
   data1: string;
 begin
   inherited;
-  EdtNomeCli.SetFocus;
   EsconderTeclado;
   FPrincipal.ksLoadingIndicator1.ShowLoading;
   DataHora := DateTimeToStr(Now);
@@ -776,17 +774,10 @@ begin
     TipoPessoa := 'F';
   if crud = 'iserir' then
   begin
-    DM.FDQMaxIdCli.Close;
-    DM.FDQMaxIdCli.Open();
-    MaxId := DM.FDQMaxIdClimax.AsInteger + 1;
     try
-      { dm.FDQImgCli.Close;
-        dm.FDQImgCli.Open();
-        dm.FDQImgCli.Append;
-        dm.FDQImgCliid_cli.AsInteger := MaxId;
-        dm.FDQImgClinome_cli.AsString := EdtNomeCli.Text;
-        dm.FDQImgClifoto_cli.Assign(FotoCli);
-        dm.FDQImgCli.Post; }
+      DM.FDQMaxIdCli.Close;
+      DM.FDQMaxIdCli.Open();
+      MaxId := DM.FDQMaxIdClimax.AsInteger + 1;
 
       DM.FDQCadCli.Close;
       DM.FDQCadCli.Open();
@@ -814,58 +805,66 @@ begin
 
     except
       on E: Exception do
-        ShowMessage('Houve um erro, processo Cancelado!');
+        ShowMessage('Erro!  ' + E.Message);
     end;
   end
   else if crud = 'editar' then
   begin
     try
-      DM.FDQFiltroCadCLi.Edit;
-      DM.FDQFiltroCadCLitipo_cli.AsString := TipoPessoa;
-      DM.FDQFiltroCadCLinome_cli.AsString := EdtNomeCli.Text;
-      DM.FDQFiltroCadCLicpf_cnpj_cli.AsString := EdtCpfCli.Text;
-      DM.FDQFiltroCadCLirg_ie_cli.AsString := EdtRgCli.Text;
-      DM.FDQFiltroCadCLiapelido_cli.AsString := EdtApelidoCli.Text;
-      DM.FDQFiltroCadCLifone_cli.AsString := EdtFoneCli.Text;
-      DM.FDQFiltroCadCLiendereco_cli.AsString := EdtEnderecoCli.Text;
-      DM.FDQFiltroCadCLinum_cli.AsString := EdtNumCli.Text;
-      DM.FDQFiltroCadCLicomplemento_cli.AsString := EdtCompCli.Text;
-      DM.FDQFiltroCadCLibairro_cli.AsString := EdtBairroCli.Text;
-      DM.FDQFiltroCadCLicep_cli.AsString := EdtCepCli.Text;
-      DM.FDQFiltroCadCLicidade_cli.AsString := EdtCidadeCli.Text;
-      DM.FDQFiltroCadCLiuf_cli.AsString := EdtUfCli.Text;
-      DM.FDQFiltroCadCLiemail_cli.AsString := EdtEmailCli.Text;
-      DM.FDQFiltroCadCLiliberaaprazo_cli.AsString := LiberaAprazo;
-      DM.FDQFiltroCadCLiobs_cli.AsString := MemoObsCadCli.Text;
-      if not FotoCli.IsEmpty then
-        DM.FDQFiltroCadCLifoto_cli.Assign(FotoCli);
-      DM.FDQFiltroCadCLi.Post;
+      DM.FDQAuxiliar.sql.Clear;
 
-      { sql := 'update cliente set ' +//
-        'tipo_cli = ' + QuotedStr(TipoPessoa) +//
-        ', nome_cli = ' + QuotedStr(EdtNomeCli.Text) +//
-        ', cpf_cnpj_cli = ' + QuotedStr(EdtCpfCli.Text) +//
-        ', rg_ie_cli = ' + QuotedStr(EdtRgCli.Text) +//
-        ', apelido_cli = ' + QuotedStr(EdtApelidoCli.Text) +//
-        ', fone_cli = ' + QuotedStr(EdtFoneCli.Text) +//
-        ', endereco_cli = ' + QuotedStr(EdtEnderecoCli.Text) +//
-        ', num_cli = ' + QuotedStr(EdtNumCli.Text) +//
-        ', complemento_cli = ' + QuotedStr(EdtCompCli.Text) +//
-        ', bairro_cli = ' + QuotedStr(EdtBairroCli.Text) +//
-        ', cep_cli = ' + QuotedStr(EdtCepCli.Text) +//
-        ', cidade_cli = ' + QuotedStr(EdtCidadeCli.Text) +//
-        ', uf_cli = ' + QuotedStr(EdtUfCli.Text) +//
-        ', email_cli = ' + QuotedStr(EdtEmailCli.Text) +//
-        ', liberaaprazo_cli = ' + QuotedStr(LiberaAprazo) +//
-        ', obs_cli = ' + QuotedStr(MemoObsCli.Text) +//
-        ' where ' +//
-        'id_cli = ' + DM.FDQFiltroCadCLiid_cli.AsString; }
+      DM.FDQAuxiliar.sql.Add('update cliente');
+      DM.FDQAuxiliar.sql.Add(' set tipo_cli = :TipoCli,');
+      DM.FDQAuxiliar.sql.Add(' nome_cli = :Nome,');
+      DM.FDQAuxiliar.sql.Add(' cpf_cnpj_cli = :Cpf,');
+      DM.FDQAuxiliar.sql.Add(' rg_ie_cli = :Rg,');
+      DM.FDQAuxiliar.sql.Add(' apelido_cli = :Apelido,');
+      DM.FDQAuxiliar.sql.Add(' fone_cli = :Fone,');
+      DM.FDQAuxiliar.sql.Add(' endereco_cli = :Endereco,');
+      DM.FDQAuxiliar.sql.Add(' num_cli = :Num,');
+      DM.FDQAuxiliar.sql.Add(' complemento_cli = :Complemento,');
+      DM.FDQAuxiliar.sql.Add(' bairro_cli = :Bairro,');
+      DM.FDQAuxiliar.sql.Add(' cep_cli = :Cep,');
+      DM.FDQAuxiliar.sql.Add(' cidade_cli = :Cidade,');
+      DM.FDQAuxiliar.sql.Add(' uf_cli = :Uf,');
+      DM.FDQAuxiliar.sql.Add(' email_cli = :Email,');
+      DM.FDQAuxiliar.sql.Add(' liberaaprazo_cli = :LiberaAprazo,');
+      DM.FDQAuxiliar.sql.Add(' obs_cli = :Obs,');
+      DM.FDQAuxiliar.sql.Add(' foto_cli = :Foto');
+      DM.FDQAuxiliar.sql.Add(' where id_cli = :IdCli');
+
+      DM.FDQAuxiliar.Params.ParamByName('TipoCli').AsString := TipoPessoa;
+      DM.FDQAuxiliar.Params.ParamByName('Nome').AsString := EdtNomeCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Cpf').AsString := EdtCpfCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Rg').AsString := EdtRgCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Apelido').AsString :=
+        EdtApelidoCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Fone').AsString := EdtFoneCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Endereco').AsString :=
+        EdtEnderecoCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Num').AsString := EdtNumCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Complemento').AsString :=
+        EdtCompCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Bairro').AsString := EdtBairroCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Cep').AsString := EdtCepCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Cidade').AsString := EdtCidadeCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Uf').AsString := EdtUfCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Email').AsString := EdtEmailCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('LiberaAprazo').AsString :=
+        LiberaAprazo;
+      DM.FDQAuxiliar.Params.ParamByName('Obs').AsString :=
+        MemoObsCadCli.Lines.Text;
+      if not FotoCli.IsEmpty then
+        DM.FDQAuxiliar.Params.ParamByName('Foto').Assign(FotoCli);
+      DM.FDQAuxiliar.Params.ParamByName('IdCli').AsInteger :=
+        DM.FDQFiltroCadCLiid_cli.AsInteger;
+      DM.FDQAuxiliar.ExecSQL;
+
     except
       on E: Exception do
-        ShowMessage('Houve um erro, processo Cancelado!');
+        ShowMessage('Erro!  ' + E.Message);
     end;
   end;
-  // DM.FDConnection1.ExecSQL(sql);
   DM.FDConnection1.CommitRetaining;
   DM.FDQFiltroCadCLi.Active := False;
   MudarAbaModelo(TbItemListagem, Sender);

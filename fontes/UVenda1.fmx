@@ -118,21 +118,13 @@ object FVenda1: TFVenda1
               'Condicionais')
             ItemIndex = 0
             Margins.Top = 4.000000000000000000
+            Margins.Right = 8.000000000000000000
             Margins.Bottom = 4.000000000000000000
-            Size.Width = 205.000000000000000000
+            Size.Width = 253.000000000000000000
             Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
-          end
-          object SpBFiltrarPedido: TSpeedButton
-            Align = Right
-            Margins.Right = 8.000000000000000000
-            Position.X = 274.000000000000000000
-            Size.Width = 48.000000000000000000
-            Size.Height = 48.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'searchtoolbutton'
-            OnClick = SpBFiltrarPedidoClick
+            OnClosePopup = ComboBoxFiltroPedidoClosePopup
           end
         end
         object ListViewPedido: TListView
@@ -564,8 +556,22 @@ object FVenda1: TFVenda1
             Text = 'Voltar'
             OnClick = SpdBVoltarItemVendaClick
           end
+          object SpdBCofirmaItem: TSpeedButton
+            Align = Right
+            IconTintColor = claNavy
+            Margins.Right = 8.000000000000000000
+            Position.X = 274.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'donetoolbutton'
+            Visible = False
+            OnClick = SpdBCofirmaItemClick
+          end
         end
         object ListViewItemPedido: TListView
+          Touch.InteractiveGestures = [LongTap]
+          OnGesture = ListViewItemPedidoGesture
           ItemAppearanceClassName = 'TMultiDetailItemAppearance'
           ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
           HeaderAppearanceClassName = 'TListHeaderObjects'
@@ -578,7 +584,136 @@ object FVenda1: TFVenda1
           Size.PlatformDefault = False
           TabOrder = 1
           ItemAppearanceObjects.HeaderObjects.Text.Opacity = 1.500000000000000000
-          OnItemClick = ListViewItemPedidoItemClick
+          PullToRefresh = True
+        end
+        object LytAtendenteItem: TLayout
+          Align = Bottom
+          Position.Y = 381.000000000000000000
+          Size.Width = 330.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Visible = False
+          TabOrder = 5
+          object LblAtendenteItem: TLabel
+            Align = Left
+            StyledSettings = [FontColor]
+            Margins.Left = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Size.Width = 90.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            Text = 'Atendente:'
+          end
+          object ComboBoxAtendenteItem: TComboBox
+            Align = Client
+            Margins.Top = 10.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Size.Width = 224.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 3
+            OnEnter = ComboBoxAtendenteItemEnter
+          end
+        end
+        object LytNomeItem: TLayout
+          Align = Bottom
+          Position.Y = 231.000000000000000000
+          Size.Width = 330.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Visible = False
+          TabOrder = 4
+          object LblNomeItem: TLabel
+            Align = Client
+            StyledSettings = [FontColor]
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Size.Width = 314.000000000000000000
+            Size.Height = 34.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.HorzAlign = Center
+          end
+        end
+        object LytQteItem: TLayout
+          Align = Bottom
+          Position.Y = 281.000000000000000000
+          Size.Width = 330.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Visible = False
+          TabOrder = 3
+          object LblQteItem: TLabel
+            Align = Left
+            StyledSettings = [FontColor]
+            Margins.Left = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Size.Width = 49.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            Text = 'Qte:'
+          end
+          object EdtQteItem: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Client
+            TabOrder = 1
+            KeyboardType = NumbersAndPunctuation
+            ReturnKeyType = Done
+            Margins.Top = 10.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Size.Width = 265.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            KillFocusByReturn = True
+          end
+        end
+        object LytValorItem: TLayout
+          Align = Bottom
+          Position.Y = 331.000000000000000000
+          Size.Width = 330.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Visible = False
+          TabOrder = 2
+          object LblValorItem: TLabel
+            Align = Left
+            StyledSettings = [FontColor]
+            Margins.Left = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Size.Width = 57.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            Text = 'Valor:'
+          end
+          object EdtValorItem: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Client
+            TabOrder = 1
+            KeyboardType = NumbersAndPunctuation
+            ReturnKeyType = Done
+            Margins.Top = 10.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Size.Width = 257.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            KillFocusByReturn = True
+          end
         end
       end
       object TbItemApoioVenda: TTabItem
