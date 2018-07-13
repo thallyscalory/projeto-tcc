@@ -1,0 +1,15 @@
+﻿[DM.FDQPedido]
+Visible=False
+
+[DM.FDQConsFormaPag]
+Visible=False
+
+[DM.FDQProdItemPedido]
+Visible=False
+
+[DM.FDQConsAtendente]
+Visible=False
+
+[DM.FDQConsItemPedido]
+Visible=False
+

@@ -1034,10 +1034,6 @@ inherited FCadCli: TFCadCli
         item
           SourceMemberName = 'fone_cli'
           ControlMemberName = 'Detail2'
-        end
-        item
-          SourceMemberName = 'foto_cli'
-          ControlMemberName = 'Bitmap'
         end>
       FillHeaderExpressions = <>
       FillHeaderFieldName = 'id_cli'

@@ -34,7 +34,7 @@ Coordinates=118,170,82,33
 Visible=False
 
 [BindSourceDB2]
-Coordinates=-170,-230,104,483
+Coordinates=-170,-230,104,465
 LayerNames="filtro cliente"
 
 [DM.FDQFiltroCadCLi]

@@ -11,7 +11,9 @@ uses
   UConsultaProduto in 'UConsultaProduto.pas' {FConsProduto},
   UInfo in 'UInfo.pas' {FInfo},
   UVenda1 in 'UVenda1.pas' {FVenda1},
-  USplash in 'USplash.pas' {FSplash};
+  USplash in 'USplash.pas' {FSplash},
+  UCadContasReceber in 'UCadContasReceber.pas' {FCadContasReceber},
+  UAuxiliar in 'UAuxiliar.pas' {FAuxiliar};
 
 {$R *.res}
 
@@ -20,5 +22,6 @@ begin
   Application.CreateForm(TFSplash, FSplash);
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TFPrincipal, FPrincipal);
+  Application.CreateForm(TFAuxiliar, FAuxiliar);
   Application.Run;
 end.

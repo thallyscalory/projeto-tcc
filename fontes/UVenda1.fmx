@@ -565,7 +565,6 @@ object FVenda1: TFVenda1
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'donetoolbutton'
-            Visible = False
             OnClick = SpdBCofirmaItemClick
           end
         end
@@ -771,6 +770,18 @@ object FVenda1: TFVenda1
               TextSettings.FontColor = claNavy
               OnClick = BtnConfirmaApoioVendaClick
             end
+            object SpdBVoltarCadCOntasReceber: TSpeedButton
+              Align = Left
+              IconTintColor = claNavy
+              Margins.Left = 8.000000000000000000
+              Position.X = 8.000000000000000000
+              Size.Width = 48.000000000000000000
+              Size.Height = 48.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'backtoolbutton'
+              Visible = False
+              OnClick = SpdBVoltarCadCOntasReceberClick
+            end
           end
         end
       end
@@ -820,27 +831,6 @@ object FVenda1: TFVenda1
       Component = ListBoxItemNumPedidoVenda
       ComponentProperty = 'ItemData.Detail'
     end
-    object LinkPropertyToFieldItemDataDetail2: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB1
-      FieldName = 'valor_pedido'
-      Component = ListBoxItemValorTotalVenda
-      ComponentProperty = 'ItemData.Detail'
-    end
-    object LinkControlToField1: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB1
-      FieldName = 'nrparcela_pedido'
-      Control = EdtNumParcelaPedido
-      Track = False
-    end
-    object LinkControlToField2: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB1
-      FieldName = 'nome_cli'
-      Control = EdtCliVenda
-      Track = False
-    end
     object LinkListControlToField2: TLinkListControlToField
       Category = 'Quick Bindings'
       DataSource = BindSourceDB4
@@ -849,20 +839,6 @@ object FVenda1: TFVenda1
       FillExpressions = <>
       FillHeaderExpressions = <>
       FillBreakGroups = <>
-    end
-    object LinkPropertyToFieldText: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB1
-      FieldName = 'id_cli'
-      Component = LblCodCliPedido
-      ComponentProperty = 'Text'
-    end
-    object LinkControlToField3: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB1
-      FieldName = 'descmoeda_pedido'
-      Control = EdtDescontoMoedaPedido
-      Track = False
     end
   end
   object ActionList1: TActionList
