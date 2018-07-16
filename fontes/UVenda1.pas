@@ -145,7 +145,7 @@ type
 
 var
   FVenda1: TFVenda1;
-  CliPedido, itemPedido, venda, finalizaVenda, vlParcela: string;
+  CliPedido, itemPedido, venda, finalizaVenda, vlParcela, tipoReceita: string;
   contItem, listCountItem, numParcela: integer;
   vlTotalAtual, vlTotalItemAtual, qtdTotalAtual: Double;
 
@@ -575,7 +575,7 @@ begin
     ComboBoxFormaPagVenda.Items.Add
       (DM.FDQConsFormaPagdescricao_forma_pag.AsString);
   end;
-  DM.FDQConsFormaPag.Active := True;
+  //DM.FDQConsFormaPag.Active := True;
 end;
 
 procedure TFVenda1.default;
@@ -1080,6 +1080,7 @@ begin
                 finalizaVenda := 'S';
                 numParcela := StrToInt(EdtNumParcelaPedido.Text);
                 vlParcela := ListBoxItemParcelasVenda.ItemData.Detail;
+                tipoReceita := ComboBoxFormaPagVenda.Selected.Text;
 
                 AbrirFormVenda(TFCadContasReceber);
                 MudarAbaVenda(TbItemApoioVenda, Sender);

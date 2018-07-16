@@ -16,8 +16,10 @@ object FCadContasReceber: TFCadContasReceber
     Size.PlatformDefault = False
     TabOrder = 0
     object ListViewCadContasReceber: TListView
-      ItemAppearanceClassName = 'TImageListItemBottomDetailAppearance'
-      ItemEditAppearanceClassName = 'TImageListItemBottomDetailShowCheckAppearance'
+      Touch.InteractiveGestures = [LongTap]
+      OnGesture = ListViewCadContasReceberGesture
+      ItemAppearanceClassName = 'TMultiDetailItemAppearance'
+      ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
       HeaderAppearanceClassName = 'TListHeaderObjects'
       FooterAppearanceClassName = 'TListHeaderObjects'
       Align = Client
@@ -29,8 +31,130 @@ object FCadContasReceber: TFCadContasReceber
       Size.Height = 472.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
-      ItemAppearanceObjects.ItemObjects.Image.Visible = False
-      ItemAppearanceObjects.ItemEditObjects.Image.Visible = False
+    end
+    object Layout1: TLayout
+      Align = MostBottom
+      Position.Y = 408.000000000000000000
+      Size.Width = 330.000000000000000000
+      Size.Height = 72.000000000000000000
+      Size.PlatformDefault = False
+      Visible = False
+      TabOrder = 1
+      object BtnConfirmaCadContasReceber: TButton
+        Align = Contents
+        StyledSettings = [Size]
+        Margins.Left = 30.000000000000000000
+        Margins.Top = 4.000000000000000000
+        Margins.Right = 30.000000000000000000
+        Margins.Bottom = 4.000000000000000000
+        Size.Width = 270.000000000000000000
+        Size.Height = 64.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Confirmar'
+        TextSettings.Font.Family = 'Arial'
+        TextSettings.Font.Size = 18.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.FontColor = claWhite
+        TintColor = claNavy
+        OnClick = BtnConfirmaCadContasReceberClick
+      end
+    end
+    object Layout2: TLayout
+      Align = MostBottom
+      Position.Y = 308.000000000000000000
+      Size.Width = 330.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      Visible = False
+      TabOrder = 2
+      object EdtValorCadContasReceber: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 1
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Size.Width = 257.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object LblValorCadContasReceber: TLabel
+        Align = Left
+        StyledSettings = [FontColor]
+        Margins.Left = 4.000000000000000000
+        Position.X = 4.000000000000000000
+        Size.Width = 61.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Family = 'Arial'
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Valor:'
+      end
+    end
+    object Layout3: TLayout
+      Align = MostBottom
+      Position.Y = 258.000000000000000000
+      Size.Width = 330.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      Visible = False
+      TabOrder = 3
+      object LblDataVencCadContasReceber: TLabel
+        Align = Left
+        StyledSettings = [FontColor]
+        Margins.Left = 4.000000000000000000
+        Position.X = 4.000000000000000000
+        Size.Width = 103.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Family = 'Arial'
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Vencimento:'
+      end
+      object DateEditVencCadContasReceber: TDateEdit
+        Date = 43294.000000000000000000
+        Align = Client
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Size.Width = 215.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+      end
+    end
+    object Layout4: TLayout
+      Align = MostBottom
+      Position.Y = 358.000000000000000000
+      Size.Width = 330.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      Visible = False
+      TabOrder = 4
+      object LblTipoReceitaCadContasReceber: TLabel
+        Align = Left
+        StyledSettings = [FontColor]
+        Margins.Left = 4.000000000000000000
+        Position.X = 4.000000000000000000
+        Size.Width = 109.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Family = 'Arial'
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Text = 'Tipo Receita:'
+      end
+      object ComboBoxTipoReceitaCadContasReceber: TComboBox
+        Align = Client
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 8.000000000000000000
+        Size.Width = 209.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        OnEnter = ComboBoxTipoReceitaCadContasReceberEnter
+      end
     end
   end
 end
