@@ -23,7 +23,7 @@ object FVenda1: TFVenda1
       Size.Height = 480.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 2
+      TabIndex = 1
       TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
@@ -147,7 +147,7 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 82.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -366,6 +366,7 @@ object FVenda1: TFVenda1
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 1
+              OnClosePopup = ComboBoxFormaPagVendaClosePopup
               OnEnter = ComboBoxFormaPagVendaEnter
             end
             object SpdBNovoFormaPag: TSpeedButton
@@ -516,7 +517,7 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 82.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -556,17 +557,6 @@ object FVenda1: TFVenda1
             Text = 'Voltar'
             OnClick = SpdBVoltarItemVendaClick
           end
-          object SpdBCofirmaItem: TSpeedButton
-            Align = Right
-            IconTintColor = claNavy
-            Margins.Right = 8.000000000000000000
-            Position.X = 274.000000000000000000
-            Size.Width = 48.000000000000000000
-            Size.Height = 48.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'donetoolbutton'
-            OnClick = SpdBCofirmaItemClick
-          end
         end
         object ListViewItemPedido: TListView
           Touch.InteractiveGestures = [LongTap]
@@ -581,7 +571,7 @@ object FVenda1: TFVenda1
           Size.Width = 322.000000000000000000
           Size.Height = 383.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 1
+          TabOrder = 2
           ItemAppearanceObjects.HeaderObjects.Text.Opacity = 1.500000000000000000
           PullToRefresh = True
         end
@@ -592,7 +582,7 @@ object FVenda1: TFVenda1
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           Visible = False
-          TabOrder = 5
+          TabOrder = 6
           object LblAtendenteItem: TLabel
             Align = Left
             StyledSettings = [FontColor]
@@ -620,12 +610,12 @@ object FVenda1: TFVenda1
         end
         object LytNomeItem: TLayout
           Align = Bottom
-          Position.Y = 231.000000000000000000
+          Position.Y = 381.000000000000000000
           Size.Width = 330.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           Visible = False
-          TabOrder = 4
+          TabOrder = 5
           object LblNomeItem: TLabel
             Align = Client
             StyledSettings = [FontColor]
@@ -644,12 +634,12 @@ object FVenda1: TFVenda1
         end
         object LytQteItem: TLayout
           Align = Bottom
-          Position.Y = 281.000000000000000000
+          Position.Y = 381.000000000000000000
           Size.Width = 330.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           Visible = False
-          TabOrder = 3
+          TabOrder = 4
           object LblQteItem: TLabel
             Align = Left
             StyledSettings = [FontColor]
@@ -680,12 +670,12 @@ object FVenda1: TFVenda1
         end
         object LytValorItem: TLayout
           Align = Bottom
-          Position.Y = 331.000000000000000000
+          Position.Y = 381.000000000000000000
           Size.Width = 330.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           Visible = False
-          TabOrder = 2
+          TabOrder = 3
           object LblValorItem: TLabel
             Align = Left
             StyledSettings = [FontColor]
@@ -712,6 +702,34 @@ object FVenda1: TFVenda1
             Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
             KillFocusByReturn = True
+          end
+        end
+        object LytBotaoConfirmaItem: TLayout
+          Align = MostBottom
+          Position.Y = 359.000000000000000000
+          Size.Width = 330.000000000000000000
+          Size.Height = 72.000000000000000000
+          Size.PlatformDefault = False
+          Visible = False
+          TabOrder = 1
+          object BtnConfirmaCadContasReceber: TButton
+            Align = Contents
+            StyledSettings = [Size]
+            Margins.Left = 30.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 30.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Size.Width = 270.000000000000000000
+            Size.Height = 64.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            Text = 'Confirmar'
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 18.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TintColor = claNavy
+            OnClick = BtnConfirmaCadContasReceberClick
           end
         end
       end

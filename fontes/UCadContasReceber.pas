@@ -97,17 +97,36 @@ begin
   Layout1.Visible := False;
   dataHoje := Date;
 
+  DM.FDQConsFormaPag.Close;
+  DM.FDQConsFormaPag.ParamByName('PIdFormaPag').Value := Null;
+  DM.FDQConsFormaPag.ParamByName('PDescricaoFormaPag').Value := tipoReceita;
+  DM.FDQConsFormaPag.Open();
+
   ListViewCadContasReceber.Items.Clear;
   for I := 1 to numParcela do
   begin
-    dataVenc := IncMonth(dataHoje, I);
+    if DM.FDQConsFormaPagavista_forma_pag.AsString = 'S' then
+    begin
+      ListViewCadContasReceber.BeginUpdate;
+      listaContasReceber := ListViewCadContasReceber.Items.Add;
+      listaContasReceber.Text := DateTimeToStr(dataHoje);
+      listaContasReceber.Data[TMultiDetailAppearanceNames.Detail1] := vlParcela;
+      listaContasReceber.Data[TMultiDetailAppearanceNames.Detail2] :=
+        tipoReceita;
+      ListViewCadContasReceber.EndUpdate;
+    end
+    else
+    begin
+      dataVenc := IncMonth(dataHoje, I);
 
-    ListViewCadContasReceber.BeginUpdate;
-    listaContasReceber := ListViewCadContasReceber.Items.Add;
-    listaContasReceber.Text := DateTimeToStr(dataVenc);
-    listaContasReceber.Data[TMultiDetailAppearanceNames.Detail1] := vlParcela;
-    listaContasReceber.Data[TMultiDetailAppearanceNames.Detail2] := tipoReceita;
-    ListViewCadContasReceber.EndUpdate;
+      ListViewCadContasReceber.BeginUpdate;
+      listaContasReceber := ListViewCadContasReceber.Items.Add;
+      listaContasReceber.Text := DateTimeToStr(dataVenc);
+      listaContasReceber.Data[TMultiDetailAppearanceNames.Detail1] := vlParcela;
+      listaContasReceber.Data[TMultiDetailAppearanceNames.Detail2] :=
+        tipoReceita;
+      ListViewCadContasReceber.EndUpdate;
+    end;
   end;
 end;
 

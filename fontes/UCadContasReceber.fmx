@@ -72,11 +72,14 @@ object FCadContasReceber: TFCadContasReceber
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Client
         TabOrder = 1
+        KeyboardType = NumbersAndPunctuation
+        ReturnKeyType = Done
         Margins.Top = 10.000000000000000000
         Margins.Right = 8.000000000000000000
         Size.Width = 257.000000000000000000
         Size.Height = 32.000000000000000000
         Size.PlatformDefault = False
+        KillFocusByReturn = True
       end
       object LblValorCadContasReceber: TLabel
         Align = Left

@@ -106,7 +106,7 @@ Coordinates=73,298,72,36
 Visible=False
 
 []
-Coordinates=670,10,98,33
+Coordinates=843,917,116,58
 Visible=False
 
 [DM.FDQFiltroCadCLi]
@@ -362,9 +362,6 @@ Coordinates=843,1148,115,58
 
 [ComboBoxAtendenteItem]
 Coordinates=112,864,161,146
-
-[SpdBCofirmaItem]
-Coordinates=843,917,116,58
 
 [LblNomeItem]
 Coordinates=13,864,91,58
