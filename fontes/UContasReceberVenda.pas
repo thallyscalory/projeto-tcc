@@ -1,4 +1,4 @@
-unit UCadContasReceber;
+unit UContasReceberVenda;
 
 interface
 
@@ -11,7 +11,7 @@ uses
   FMX.DateTimeCtrls, FMX.Edit, FMX.ListBox, MultiDetailAppearanceU;
 
 type
-  TFCadContasReceber = class(TForm)
+  TFContasReceberVenda = class(TForm)
     LytBase: TLayout;
     ListViewCadContasReceber: TListView;
     Layout1: TLayout;
@@ -38,7 +38,7 @@ type
   end;
 
 var
-  FCadContasReceber: TFCadContasReceber;
+  FContasReceberVenda: TFContasReceberVenda;
 
 implementation
 
@@ -46,7 +46,7 @@ implementation
 
 uses UCadCli, UConsultaProduto, UDM, UVenda1;
 
-procedure TFCadContasReceber.BtnConfirmaCadContasReceberClick(Sender: TObject);
+procedure TFContasReceberVenda.BtnConfirmaCadContasReceberClick(Sender: TObject);
 begin
   ListViewCadContasReceber.BeginUpdate;
   ListViewCadContasReceber.Items[itemIndexCostasReceber].Text :=
@@ -64,7 +64,7 @@ begin
   Layout1.Visible := False;
 end;
 
-procedure TFCadContasReceber.ComboBoxTipoReceitaCadContasReceberEnter
+procedure TFContasReceberVenda.ComboBoxTipoReceitaCadContasReceberEnter
   (Sender: TObject);
 var
   I: integer;
@@ -85,7 +85,7 @@ begin
   end;
 end;
 
-procedure TFCadContasReceber.FormCreate(Sender: TObject);
+procedure TFContasReceberVenda.FormCreate(Sender: TObject);
 var
   I: integer;
   dataHoje, dataVenc: TDateTime;
@@ -130,7 +130,7 @@ begin
   end;
 end;
 
-procedure TFCadContasReceber.ListViewCadContasReceberGesture(Sender: TObject;
+procedure TFContasReceberVenda.ListViewCadContasReceberGesture(Sender: TObject;
   const EventInfo: TGestureEventInfo; var Handled: Boolean);
 begin
   if EventInfo.GestureID = igiLongTap then

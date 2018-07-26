@@ -155,7 +155,7 @@ implementation
 
 {$R *.fmx}
 
-uses UCadCli, UConsultaProduto, UDM, UPrincipal, UCadContasReceber, UAuxiliar;
+uses UCadCli, UConsultaProduto, UDM, UPrincipal, UContasReceberVenda, UAuxiliar;
 
 procedure TFVenda1.AbrirFormVenda(AFormClass: TComponentClass);
 var
@@ -181,7 +181,7 @@ end;
 procedure TFVenda1.BtnConfirmaApoioVendaClick(Sender: TObject);
 var
   paramSql, DataHora: string;
-  I, maxIdPedido, maxIdItemPedido: integer;
+  I, maxIdPedido, maxIdItemPedido, maxIdContasReceber: integer;
   listaItemPedido: TListViewItem;
   qtdItemTotal, vlItemTotal, vlTotalPedido: Double;
 begin
@@ -460,6 +460,51 @@ begin
         end;
       end;
 
+    end;
+    for I := 0 to FContasReceberVenda.ListViewCadContasReceber.ItemCount - 1 do
+    begin
+      DM.FDQMaxIdContasReceber.Close;
+      DM.FDQMaxIdContasReceber.Open();
+      maxIdContasReceber := DM.FDQMaxIdContasRecebermaxId.AsInteger + 1;
+
+      DM.FDQConsFormaPag.Close;
+      DM.FDQConsFormaPag.ParamByName('PIdFormaPag').Value := Null;
+      DM.FDQConsFormaPag.ParamByName('PDescricaoFormaPag').Value :=
+        FContasReceberVenda.ListViewCadContasReceber.Items[I].Data
+        [TMultiDetailAppearanceNames.Detail2].ToString;
+      DM.FDQConsFormaPag.Open();
+
+      if DM.FDQConsFormaPagavista_forma_pag.AsString = 'S' then
+      begin
+        DM.FDQCadContasReceber.Close;
+        DM.FDQCadContasReceber.Open();
+        DM.FDQCadContasReceber.Append;
+        DM.FDQCadContasReceberid.AsInteger := maxIdContasReceber;
+        DM.FDQCadContasReceberid_pedido.AsInteger :=
+          StrToInt(ListBoxItemNumPedidoVenda.ItemData.Detail);
+        DM.FDQCadContasReceberid_cliente.AsInteger :=
+          StrToInt(LblCodCliPedido.Text);
+        DM.FDQCadContasReceberid_forma_pag.AsInteger :=
+          DM.FDQConsFormaPagid_forma_pag.AsInteger;
+        DM.FDQCadContasRecebervalor_documento.AsFloat :=
+          StrToFloat(FContasReceberVenda.ListViewCadContasReceber.Items[I].Data
+          [TMultiDetailAppearanceNames.Detail1].ToString);
+        DM.FDQCadContasRecebervalor_pago.AsFloat :=
+          StrToFloat(FContasReceberVenda.ListViewCadContasReceber.Items[I].Data
+          [TMultiDetailAppearanceNames.Detail1].ToString);
+        DM.FDQCadContasRecebervalor_saldo.AsFloat := 0;
+        DM.FDQCadContasReceberdata_venc.AsDateTime :=
+          StrToDateTime(FContasReceberVenda.ListViewCadContasReceber.
+          Items[I].Text);
+        DM.FDQCadContasReceberdata_cad.AsDateTime :=
+          StrToDateTime(FContasReceberVenda.ListViewCadContasReceber.
+          Items[I].Text);
+        DM.FDQCadContasReceberdata_quitacao.AsDateTime :=
+          StrToDateTime(FContasReceberVenda.ListViewCadContasReceber.
+          Items[I].Text);
+        DM.FDQCadContasReceberquitado.AsString := 'S';
+        DM.FDQCadContasReceber.Post;
+      end;
     end;
 
     DM.FDConnection1.CommitRetaining;
@@ -1121,7 +1166,7 @@ begin
                   vlParcela := ListBoxItemParcelasVenda.ItemData.Detail;
                   tipoReceita := ComboBoxFormaPagVenda.Selected.Text;
 
-                  AbrirFormVenda(TFCadContasReceber);
+                  AbrirFormVenda(TFContasReceberVenda);
                   MudarAbaVenda(TbItemApoioVenda, Sender);
                 end
                 else

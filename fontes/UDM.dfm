@@ -2,7 +2,7 @@ object DM: TDM
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   Height = 443
-  Width = 800
+  Width = 970
   object FDConnection1: TFDConnection
     Params.Strings = (
       'Database=C:\projeto tcc\bd\calorytcc.s3db'
@@ -781,7 +781,7 @@ object DM: TDM
     SQL.Strings = (
       'select * from forma_pag;')
     Left = 584
-    Top = 72
+    Top = 144
     object FDQCadFormaPagid_forma_pag: TIntegerField
       FieldName = 'id_forma_pag'
       Origin = 'id_forma_pag'
@@ -1164,5 +1164,157 @@ object DM: TDM
     Connection = FDConnection1
     Left = 40
     Top = 128
+  end
+  object FDQConsContasReceber: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from conta_receber')
+    Left = 812
+    Top = 8
+    object FDQConsContasReceberid: TIntegerField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQConsContasReceberid_pedido: TIntegerField
+      FieldName = 'id_pedido'
+      Origin = 'id_pedido'
+    end
+    object FDQConsContasReceberid_cliente: TIntegerField
+      FieldName = 'id_cliente'
+      Origin = 'id_cliente'
+      Required = True
+    end
+    object FDQConsContasReceberid_forma_pag: TIntegerField
+      FieldName = 'id_forma_pag'
+      Origin = 'id_forma_pag'
+    end
+    object FDQConsContasRecebervalor_documento: TFloatField
+      FieldName = 'valor_documento'
+      Origin = 'valor_documento'
+      Required = True
+    end
+    object FDQConsContasRecebervalor_juro: TFloatField
+      FieldName = 'valor_juro'
+      Origin = 'valor_juro'
+    end
+    object FDQConsContasRecebervalor_desconto: TFloatField
+      FieldName = 'valor_desconto'
+      Origin = 'valor_desconto'
+    end
+    object FDQConsContasRecebervalor_pago: TFloatField
+      FieldName = 'valor_pago'
+      Origin = 'valor_pago'
+    end
+    object FDQConsContasRecebervalor_saldo: TFloatField
+      FieldName = 'valor_saldo'
+      Origin = 'valor_saldo'
+      Required = True
+    end
+    object FDQConsContasReceberdata_venc: TDateField
+      FieldName = 'data_venc'
+      Origin = 'data_venc'
+      Required = True
+    end
+    object FDQConsContasReceberdata_cad: TDateField
+      FieldName = 'data_cad'
+      Origin = 'data_cad'
+      Required = True
+    end
+    object FDQConsContasReceberdata_quitacao: TDateField
+      FieldName = 'data_quitacao'
+      Origin = 'data_quitacao'
+    end
+    object FDQConsContasReceberquitado: TStringField
+      FieldName = 'quitado'
+      Origin = 'quitado'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object FDQMaxIdContasReceber: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select max(id) as maxId from conta_receber')
+    Left = 816
+    Top = 80
+    object FDQMaxIdContasRecebermaxId: TLargeintField
+      AutoGenerateValue = arDefault
+      FieldName = 'maxId'
+      Origin = 'maxId'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+  end
+  object FDQCadContasReceber: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from conta_receber')
+    Left = 816
+    Top = 152
+    object FDQCadContasReceberid: TIntegerField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQCadContasReceberid_pedido: TIntegerField
+      FieldName = 'id_pedido'
+      Origin = 'id_pedido'
+    end
+    object FDQCadContasReceberid_cliente: TIntegerField
+      FieldName = 'id_cliente'
+      Origin = 'id_cliente'
+      Required = True
+    end
+    object FDQCadContasReceberid_forma_pag: TIntegerField
+      FieldName = 'id_forma_pag'
+      Origin = 'id_forma_pag'
+    end
+    object FDQCadContasRecebervalor_documento: TFloatField
+      FieldName = 'valor_documento'
+      Origin = 'valor_documento'
+      Required = True
+    end
+    object FDQCadContasRecebervalor_juro: TFloatField
+      FieldName = 'valor_juro'
+      Origin = 'valor_juro'
+    end
+    object FDQCadContasRecebervalor_desconto: TFloatField
+      FieldName = 'valor_desconto'
+      Origin = 'valor_desconto'
+    end
+    object FDQCadContasRecebervalor_pago: TFloatField
+      FieldName = 'valor_pago'
+      Origin = 'valor_pago'
+    end
+    object FDQCadContasRecebervalor_saldo: TFloatField
+      FieldName = 'valor_saldo'
+      Origin = 'valor_saldo'
+      Required = True
+    end
+    object FDQCadContasReceberdata_venc: TDateField
+      FieldName = 'data_venc'
+      Origin = 'data_venc'
+      Required = True
+    end
+    object FDQCadContasReceberdata_cad: TDateField
+      FieldName = 'data_cad'
+      Origin = 'data_cad'
+      Required = True
+    end
+    object FDQCadContasReceberdata_quitacao: TDateField
+      FieldName = 'data_quitacao'
+      Origin = 'data_quitacao'
+    end
+    object FDQCadContasReceberquitado: TStringField
+      FieldName = 'quitado'
+      Origin = 'quitado'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
   end
 end

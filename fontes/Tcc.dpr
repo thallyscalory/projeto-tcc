@@ -12,7 +12,7 @@ uses
   UInfo in 'UInfo.pas' {FInfo},
   UVenda1 in 'UVenda1.pas' {FVenda1},
   USplash in 'USplash.pas' {FSplash},
-  UCadContasReceber in 'UCadContasReceber.pas' {FCadContasReceber},
+  UContasReceberVenda in 'UContasReceberVenda.pas' {FContasReceberVenda},
   UAuxiliar in 'UAuxiliar.pas' {FAuxiliar};
 
 {$R *.res}

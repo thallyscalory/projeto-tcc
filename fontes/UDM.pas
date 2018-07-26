@@ -193,6 +193,36 @@ type
     FDQConsItemPedidousuario: TStringField;
     FDQConsItemPedidoid_pedido: TIntegerField;
     FDQAuxiliar: TFDQuery;
+    FDQConsContasReceber: TFDQuery;
+    FDQMaxIdContasReceber: TFDQuery;
+    FDQConsContasReceberid: TIntegerField;
+    FDQConsContasReceberid_pedido: TIntegerField;
+    FDQConsContasReceberid_cliente: TIntegerField;
+    FDQConsContasReceberid_forma_pag: TIntegerField;
+    FDQConsContasRecebervalor_documento: TFloatField;
+    FDQConsContasRecebervalor_juro: TFloatField;
+    FDQConsContasRecebervalor_desconto: TFloatField;
+    FDQConsContasRecebervalor_pago: TFloatField;
+    FDQConsContasRecebervalor_saldo: TFloatField;
+    FDQConsContasReceberdata_venc: TDateField;
+    FDQConsContasReceberdata_cad: TDateField;
+    FDQConsContasReceberdata_quitacao: TDateField;
+    FDQConsContasReceberquitado: TStringField;
+    FDQMaxIdContasRecebermaxId: TLargeintField;
+    FDQCadContasReceber: TFDQuery;
+    FDQCadContasReceberid: TIntegerField;
+    FDQCadContasReceberid_pedido: TIntegerField;
+    FDQCadContasReceberid_cliente: TIntegerField;
+    FDQCadContasReceberid_forma_pag: TIntegerField;
+    FDQCadContasRecebervalor_documento: TFloatField;
+    FDQCadContasRecebervalor_juro: TFloatField;
+    FDQCadContasRecebervalor_desconto: TFloatField;
+    FDQCadContasRecebervalor_pago: TFloatField;
+    FDQCadContasRecebervalor_saldo: TFloatField;
+    FDQCadContasReceberdata_venc: TDateField;
+    FDQCadContasReceberdata_cad: TDateField;
+    FDQCadContasReceberdata_quitacao: TDateField;
+    FDQCadContasReceberquitado: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
