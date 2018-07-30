@@ -116,7 +116,7 @@ object FContasReceberVenda: TFContasReceberVenda
         TextSettings.Font.StyleExt = {00070000000000000004000000}
         Text = 'Vencimento:'
       end
-      object DateEditVencCadContasReceber: TDateEdit
+      object EdtDataVencCadContasReceber: TDateEdit
         Date = 43294.000000000000000000
         Align = Client
         Margins.Top = 10.000000000000000000

@@ -184,6 +184,7 @@ var
   I, maxIdPedido, maxIdItemPedido, maxIdContasReceber: integer;
   listaItemPedido: TListViewItem;
   qtdItemTotal, vlItemTotal, vlTotalPedido: Double;
+  dataAgora : TDateTime;
 begin
   FPrincipal.ksLoadingIndicator1.LoadingText.Text := 'Aguarde...';
   FPrincipal.ksLoadingIndicator1.ShowLoading;
@@ -461,7 +462,10 @@ begin
       end;
 
     end;
-    for I := 0 to FContasReceberVenda.ListViewCadContasReceber.ItemCount - 1 do
+
+    dataAgora := Date;
+
+    for I := 0 to itemCountContasReceber - 1 do
     begin
       DM.FDQMaxIdContasReceber.Close;
       DM.FDQMaxIdContasReceber.Open();
@@ -469,9 +473,7 @@ begin
 
       DM.FDQConsFormaPag.Close;
       DM.FDQConsFormaPag.ParamByName('PIdFormaPag').Value := Null;
-      DM.FDQConsFormaPag.ParamByName('PDescricaoFormaPag').Value :=
-        FContasReceberVenda.ListViewCadContasReceber.Items[I].Data
-        [TMultiDetailAppearanceNames.Detail2].ToString;
+      DM.FDQConsFormaPag.ParamByName('PDescricaoFormaPag').Value := tipoR[I];
       DM.FDQConsFormaPag.Open();
 
       if DM.FDQConsFormaPagavista_forma_pag.AsString = 'S' then
@@ -480,29 +482,41 @@ begin
         DM.FDQCadContasReceber.Open();
         DM.FDQCadContasReceber.Append;
         DM.FDQCadContasReceberid.AsInteger := maxIdContasReceber;
-        DM.FDQCadContasReceberid_pedido.AsInteger :=
-          StrToInt(ListBoxItemNumPedidoVenda.ItemData.Detail);
+        DM.FDQCadContasReceberid_pedido.AsInteger := maxIdPedido;
         DM.FDQCadContasReceberid_cliente.AsInteger :=
           StrToInt(LblCodCliPedido.Text);
         DM.FDQCadContasReceberid_forma_pag.AsInteger :=
           DM.FDQConsFormaPagid_forma_pag.AsInteger;
-        DM.FDQCadContasRecebervalor_documento.AsFloat :=
-          StrToFloat(FContasReceberVenda.ListViewCadContasReceber.Items[I].Data
-          [TMultiDetailAppearanceNames.Detail1].ToString);
-        DM.FDQCadContasRecebervalor_pago.AsFloat :=
-          StrToFloat(FContasReceberVenda.ListViewCadContasReceber.Items[I].Data
-          [TMultiDetailAppearanceNames.Detail1].ToString);
+        DM.FDQCadContasRecebervalor_documento.AsFloat := StrToFloat(vlparc[I]);
+        DM.FDQCadContasRecebervalor_pago.AsFloat := StrToFloat(vlparc[I]);
         DM.FDQCadContasRecebervalor_saldo.AsFloat := 0;
         DM.FDQCadContasReceberdata_venc.AsDateTime :=
-          StrToDateTime(FContasReceberVenda.ListViewCadContasReceber.
-          Items[I].Text);
+          StrToDateTime(datavenci[I]);
         DM.FDQCadContasReceberdata_cad.AsDateTime :=
-          StrToDateTime(FContasReceberVenda.ListViewCadContasReceber.
-          Items[I].Text);
+          StrToDateTime(datavenci[I]);
         DM.FDQCadContasReceberdata_quitacao.AsDateTime :=
-          StrToDateTime(FContasReceberVenda.ListViewCadContasReceber.
-          Items[I].Text);
+          StrToDateTime(datavenci[I]);
         DM.FDQCadContasReceberquitado.AsString := 'S';
+        DM.FDQCadContasReceber.Post;
+      end
+      else
+      begin
+        DM.FDQCadContasReceber.Close;
+        DM.FDQCadContasReceber.Open();
+        DM.FDQCadContasReceber.Append;
+        DM.FDQCadContasReceberid.AsInteger := maxIdContasReceber;
+        DM.FDQCadContasReceberid_pedido.AsInteger := maxIdPedido;
+        DM.FDQCadContasReceberid_cliente.AsInteger :=
+          StrToInt(LblCodCliPedido.Text);
+        DM.FDQCadContasReceberid_forma_pag.AsInteger :=
+          DM.FDQConsFormaPagid_forma_pag.AsInteger;
+        DM.FDQCadContasRecebervalor_documento.AsFloat := StrToFloat(vlparc[I]);
+        DM.FDQCadContasRecebervalor_saldo.AsFloat := StrToFloat(vlparc[I]);
+        DM.FDQCadContasReceberdata_venc.AsDateTime :=
+          StrToDateTime(datavenci[I]);
+        DM.FDQCadContasReceberdata_cad.AsDateTime :=
+          dataAgora;
+        DM.FDQCadContasReceberquitado.AsString := 'N';
         DM.FDQCadContasReceber.Post;
       end;
     end;
@@ -1158,6 +1172,7 @@ begin
                   (LblCodCliPedido.Text <> '') and
                   (StrToInt(EdtNumParcelaPedido.Text) > 0) then
                 begin
+                  LblSupApoioVenda.Text := 'Contas a Receber';
                   SpdBVoltarCadCOntasReceber.Visible := True;
                   CliPedido := EmptyStr;
                   itemPedido := EmptyStr;

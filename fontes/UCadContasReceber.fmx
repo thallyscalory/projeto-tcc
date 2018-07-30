@@ -1,0 +1,90 @@
+inherited FCadContasReceber: TFCadContasReceber
+  Caption = 'FCadModelo1'
+  DesignerMasterStyle = 3
+  inherited LytBase: TLayout
+    inherited TbControlCadModelo: TTabControl
+      Sizes = (
+        330s
+        431s
+        330s
+        431s)
+      inherited TbItemListagem: TTabItem
+        ExplicitSize.cx = 165.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        inherited ToolBarsuperior: TToolBar
+          inherited LblTitulo: TLabel
+            Text = 'Contas a Receber'
+          end
+          inherited SpBVoltar: TSpeedButton
+            OnClick = SpBVoltarClick
+          end
+        end
+        object ListViewCadContasReceber: TListView
+          ItemAppearanceClassName = 'TMultiDetailItemAppearance'
+          ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
+          HeaderAppearanceClassName = 'TListHeaderObjects'
+          FooterAppearanceClassName = 'TListHeaderObjects'
+          Align = Client
+          Margins.Left = 4.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 4.000000000000000000
+          Margins.Bottom = 4.000000000000000000
+          Size.Width = 322.000000000000000000
+          Size.Height = 375.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          ItemAppearanceObjects.ItemObjects.Accessory.AccessoryType = Checkmark
+          ItemAppearanceObjects.ItemEditObjects.Accessory.AccessoryType = Checkmark
+          ItemAppearanceObjects.HeaderObjects.Text.Font.Family = 'Arial'
+          ItemAppearanceObjects.HeaderObjects.Text.Font.Size = 16.000000000000000000
+          ItemAppearanceObjects.HeaderObjects.Text.Font.StyleExt = {00070000000000000004000000}
+          ItemAppearanceObjects.HeaderObjects.Text.TextAlign = Center
+          ItemAppearanceObjects.HeaderObjects.Text.WordWrap = True
+          ItemAppearanceObjects.HeaderObjects.Text.TextColor = claNavy
+          ItemAppearanceObjects.HeaderObjects.Text.Align = Center
+          CanSwipeDelete = False
+          ShowSelection = False
+          PullToRefresh = True
+        end
+      end
+      inherited TbItemedicao: TTabItem
+        ExplicitSize.cx = 165.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+      end
+    end
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = DM.FDQConsContasReceber
+    ScopeMappings = <>
+    Left = 152
+    Top = 224
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 20
+    Top = 5
+    object LinkListControlToField1: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'data_venc'
+      Control = ListViewCadContasReceber
+      FillExpressions = <
+        item
+          SourceMemberName = 'valor_saldo'
+          ControlMemberName = 'Detail3'
+        end
+        item
+          SourceMemberName = 'valor_documento'
+          ControlMemberName = 'Detail1'
+        end
+        item
+          SourceMemberName = 'valor_pago'
+          ControlMemberName = 'Detail2'
+        end>
+      FillHeaderExpressions = <>
+      FillHeaderFieldName = 'nome_cli'
+      FillBreakGroups = <>
+    end
+  end
+end

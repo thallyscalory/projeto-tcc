@@ -1168,7 +1168,9 @@ object DM: TDM
   object FDQConsContasReceber: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
-      'select * from conta_receber')
+      'select * from conta_receber cr '
+      'inner join cliente cli on cr.id_cliente = cli.id_cli '
+      'where cr.quitado = '#39'N'#39' order by cr.data_venc;')
     Left = 812
     Top = 8
     object FDQConsContasReceberid: TIntegerField
@@ -1232,6 +1234,156 @@ object DM: TDM
       Required = True
       FixedChar = True
       Size = 1
+    end
+    object FDQConsContasReceberid_cli: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'id_cli'
+      Origin = 'id_cli'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object FDQConsContasRecebertipo_cli: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'tipo_cli'
+      Origin = 'tipo_cli'
+      ProviderFlags = []
+      ReadOnly = True
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsContasRecebernome_cli: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'nome_cli'
+      Origin = 'nome_cli'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 60
+    end
+    object FDQConsContasRecebercpf_cnpj_cli: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cpf_cnpj_cli'
+      Origin = 'cpf_cnpj_cli'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object FDQConsContasReceberrg_ie_cli: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'rg_ie_cli'
+      Origin = 'rg_ie_cli'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object FDQConsContasReceberapelido_cli: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'apelido_cli'
+      Origin = 'apelido_cli'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 15
+    end
+    object FDQConsContasReceberfone_cli: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'fone_cli'
+      Origin = 'fone_cli'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 15
+    end
+    object FDQConsContasReceberendereco_cli: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'endereco_cli'
+      Origin = 'endereco_cli'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object FDQConsContasRecebernum_cli: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'num_cli'
+      Origin = 'num_cli'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 10
+    end
+    object FDQConsContasRecebercomplemento_cli: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'complemento_cli'
+      Origin = 'complemento_cli'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 30
+    end
+    object FDQConsContasReceberbairro_cli: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'bairro_cli'
+      Origin = 'bairro_cli'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object FDQConsContasRecebercep_cli: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cep_cli'
+      Origin = 'cep_cli'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 15
+    end
+    object FDQConsContasRecebercidade_cli: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cidade_cli'
+      Origin = 'cidade_cli'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 30
+    end
+    object FDQConsContasReceberuf_cli: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'uf_cli'
+      Origin = 'uf_cli'
+      ProviderFlags = []
+      ReadOnly = True
+      FixedChar = True
+      Size = 2
+    end
+    object FDQConsContasReceberemail_cli: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'email_cli'
+      Origin = 'email_cli'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 60
+    end
+    object FDQConsContasReceberliberaaprazo_cli: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'liberaaprazo_cli'
+      Origin = 'liberaaprazo_cli'
+      ProviderFlags = []
+      ReadOnly = True
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsContasReceberobs_cli: TWideMemoField
+      AutoGenerateValue = arDefault
+      FieldName = 'obs_cli'
+      Origin = 'obs_cli'
+      ProviderFlags = []
+      ReadOnly = True
+      BlobType = ftWideMemo
+    end
+    object FDQConsContasReceberdata_cad_cli: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'data_cad_cli'
+      Origin = 'data_cad_cli'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object FDQConsContasReceberfoto_cli: TBlobField
+      AutoGenerateValue = arDefault
+      FieldName = 'foto_cli'
+      Origin = 'foto_cli'
+      ProviderFlags = []
+      ReadOnly = True
     end
   end
   object FDQMaxIdContasReceber: TFDQuery

@@ -60,6 +60,8 @@ type
     procedure RoundRectConsProdClick(Sender: TObject);
     procedure ImgConsProdClick(Sender: TObject);
     procedure SpdBInfoClick(Sender: TObject);
+    procedure RoundRectConsAdmClick(Sender: TObject);
+    procedure ImgConsAdmClick(Sender: TObject);
   private
     { Private declarations }
     FActiveForm: TForm;
@@ -77,7 +79,7 @@ implementation
 
 {$R *.fmx}
 
-uses UDM, UVenda, UCadCli, UConsultaProduto, UInfo, UVenda1;
+uses UDM, UVenda, UCadCli, UConsultaProduto, UInfo, UVenda1, UCadContasReceber;
 
 procedure TFPrincipal.AbrirForm(AFormClass: TComponentClass);
 var
@@ -118,6 +120,13 @@ begin
   venda := EmptyStr;
 end;
 
+procedure TFPrincipal.ImgConsAdmClick(Sender: TObject);
+begin
+  AbrirForm(TFCadContasReceber);
+  MudarAba(TbItemApoio, Sender);
+  DM.FDQConsContasReceber.Active := True;
+end;
+
 procedure TFPrincipal.ImgConsProdClick(Sender: TObject);
 begin
   AbrirForm(TFConsProduto);
@@ -143,6 +152,13 @@ begin
   venda := EmptyStr;
 end;
 
+procedure TFPrincipal.RoundRectConsAdmClick(Sender: TObject);
+begin
+  AbrirForm(TFCadContasReceber);
+  MudarAba(TbItemApoio, Sender);
+  DM.FDQConsContasReceber.Active := True;
+end;
+
 procedure TFPrincipal.RoundRectConsProdClick(Sender: TObject);
 begin
   AbrirForm(TFConsProduto);
@@ -157,8 +173,8 @@ end;
 
 procedure TFPrincipal.SpdBInfoClick(Sender: TObject);
 begin
-AbrirForm(TFInfo);
-MudarAba(TbItemApoio, Sender);
+  AbrirForm(TFInfo);
+  MudarAba(TbItemApoio, Sender);
 end;
 
 end.

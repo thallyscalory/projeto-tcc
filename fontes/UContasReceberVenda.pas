@@ -21,7 +21,7 @@ type
     LblValorCadContasReceber: TLabel;
     Layout3: TLayout;
     LblDataVencCadContasReceber: TLabel;
-    DateEditVencCadContasReceber: TDateEdit;
+    EdtDataVencCadContasReceber: TDateEdit;
     Layout4: TLayout;
     LblTipoReceitaCadContasReceber: TLabel;
     ComboBoxTipoReceitaCadContasReceber: TComboBox;
@@ -38,6 +38,8 @@ type
   end;
 
 var
+  tipoR, datavenci, vlparc: array of string;
+  itemCountContasReceber: integer;
   FContasReceberVenda: TFContasReceberVenda;
 
 implementation
@@ -46,17 +48,23 @@ implementation
 
 uses UCadCli, UConsultaProduto, UDM, UVenda1;
 
-procedure TFContasReceberVenda.BtnConfirmaCadContasReceberClick(Sender: TObject);
+procedure TFContasReceberVenda.BtnConfirmaCadContasReceberClick
+  (Sender: TObject);
 begin
   ListViewCadContasReceber.BeginUpdate;
   ListViewCadContasReceber.Items[itemIndexCostasReceber].Text :=
-    DateEditVencCadContasReceber.Text;
+    EdtDataVencCadContasReceber.Text;
   ListViewCadContasReceber.Items[itemIndexCostasReceber].Data
     [TMultiDetailAppearanceNames.Detail1] := EdtValorCadContasReceber.Text;
   ListViewCadContasReceber.Items[itemIndexCostasReceber].Data
     [TMultiDetailAppearanceNames.Detail2] :=
     ComboBoxTipoReceitaCadContasReceber.Selected.Text;
   ListViewCadContasReceber.EndUpdate;
+
+  datavenci[itemIndexCostasReceber] := EdtDataVencCadContasReceber.Text;
+  vlparc[itemIndexCostasReceber] := EdtValorCadContasReceber.Text;
+  tipoR[itemIndexCostasReceber] := ComboBoxTipoReceitaCadContasReceber.
+    Selected.Text;
 
   Layout3.Visible := False;
   Layout2.Visible := False;
@@ -88,7 +96,7 @@ end;
 procedure TFContasReceberVenda.FormCreate(Sender: TObject);
 var
   I: integer;
-  dataHoje, dataVenc: TDateTime;
+  dataHoje, datavenc: TDateTime;
   listaContasReceber: TListViewItem;
 begin
   Layout3.Visible := False;
@@ -117,17 +125,33 @@ begin
     end
     else
     begin
-      dataVenc := IncMonth(dataHoje, I);
+      datavenc := IncMonth(dataHoje, I);
 
       ListViewCadContasReceber.BeginUpdate;
       listaContasReceber := ListViewCadContasReceber.Items.Add;
-      listaContasReceber.Text := DateTimeToStr(dataVenc);
+      listaContasReceber.Text := DateTimeToStr(datavenc);
       listaContasReceber.Data[TMultiDetailAppearanceNames.Detail1] := vlParcela;
       listaContasReceber.Data[TMultiDetailAppearanceNames.Detail2] :=
         tipoReceita;
       ListViewCadContasReceber.EndUpdate;
     end;
   end;
+
+  itemCountContasReceber := ListViewCadContasReceber.ItemCount;
+
+  SetLength(tipoR, ListViewCadContasReceber.ItemCount);
+  SetLength(vlparc, ListViewCadContasReceber.ItemCount);
+  SetLength(datavenci, ListViewCadContasReceber.ItemCount);
+
+  for I := 0 to ListViewCadContasReceber.ItemCount - 1 do
+  begin
+    datavenci[I] := listaContasReceber.Text;
+    vlparc[I] := listaContasReceber.Data
+      [TMultiDetailAppearanceNames.Detail1].ToString;
+    tipoR[I] := listaContasReceber.Data
+      [TMultiDetailAppearanceNames.Detail2].ToString;
+  end;
+
 end;
 
 procedure TFContasReceberVenda.ListViewCadContasReceberGesture(Sender: TObject;
@@ -137,7 +161,7 @@ begin
   begin
     itemIndexCostasReceber := ListViewCadContasReceber.ItemIndex;
 
-    DateEditVencCadContasReceber.Text := ListViewCadContasReceber.Items
+    EdtDataVencCadContasReceber.Text := ListViewCadContasReceber.Items
       [itemIndexCostasReceber].Text;
     EdtValorCadContasReceber.Text := ListViewCadContasReceber.Items
       [itemIndexCostasReceber].Data

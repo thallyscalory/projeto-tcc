@@ -223,6 +223,25 @@ type
     FDQCadContasReceberdata_cad: TDateField;
     FDQCadContasReceberdata_quitacao: TDateField;
     FDQCadContasReceberquitado: TStringField;
+    FDQConsContasReceberid_cli: TIntegerField;
+    FDQConsContasRecebertipo_cli: TStringField;
+    FDQConsContasRecebernome_cli: TStringField;
+    FDQConsContasRecebercpf_cnpj_cli: TStringField;
+    FDQConsContasReceberrg_ie_cli: TStringField;
+    FDQConsContasReceberapelido_cli: TStringField;
+    FDQConsContasReceberfone_cli: TStringField;
+    FDQConsContasReceberendereco_cli: TStringField;
+    FDQConsContasRecebernum_cli: TStringField;
+    FDQConsContasRecebercomplemento_cli: TStringField;
+    FDQConsContasReceberbairro_cli: TStringField;
+    FDQConsContasRecebercep_cli: TStringField;
+    FDQConsContasRecebercidade_cli: TStringField;
+    FDQConsContasReceberuf_cli: TStringField;
+    FDQConsContasReceberemail_cli: TStringField;
+    FDQConsContasReceberliberaaprazo_cli: TStringField;
+    FDQConsContasReceberobs_cli: TWideMemoField;
+    FDQConsContasReceberdata_cad_cli: TDateTimeField;
+    FDQConsContasReceberfoto_cli: TBlobField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
