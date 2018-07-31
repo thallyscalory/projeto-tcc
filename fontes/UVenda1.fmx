@@ -571,165 +571,169 @@ object FVenda1: TFVenda1
           Size.Width = 322.000000000000000000
           Size.Height = 383.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 2
+          TabOrder = 1
           ItemAppearanceObjects.HeaderObjects.Text.Opacity = 1.500000000000000000
           PullToRefresh = True
         end
-        object LytAtendenteItem: TLayout
+        object LytGeralEdicaoItens: TLayout
           Align = Bottom
-          Position.Y = 381.000000000000000000
+          Position.Y = 152.000000000000000000
           Size.Width = 330.000000000000000000
-          Size.Height = 50.000000000000000000
+          Size.Height = 279.000000000000000000
           Size.PlatformDefault = False
           Visible = False
-          TabOrder = 6
-          object LblAtendenteItem: TLabel
-            Align = Left
-            StyledSettings = [FontColor]
-            Margins.Left = 8.000000000000000000
-            Position.X = 8.000000000000000000
-            Size.Width = 90.000000000000000000
+          TabOrder = 2
+          object LytBotaoConfirmaItem: TLayout
+            Align = MostBottom
+            Position.Y = 207.000000000000000000
+            Size.Width = 330.000000000000000000
+            Size.Height = 72.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            object BtnConfirmaCadContasReceber: TButton
+              Align = Contents
+              StyledSettings = [Size]
+              Margins.Left = 30.000000000000000000
+              Margins.Top = 4.000000000000000000
+              Margins.Right = 30.000000000000000000
+              Margins.Bottom = 4.000000000000000000
+              Size.Width = 270.000000000000000000
+              Size.Height = 64.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              Text = 'Confirmar'
+              TextSettings.Font.Family = 'Arial'
+              TextSettings.Font.Size = 18.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              TextSettings.FontColor = claWhite
+              TintColor = claNavy
+              OnClick = BtnConfirmaCadContasReceberClick
+            end
+          end
+          object LytAtendenteItem: TLayout
+            Align = Bottom
+            Position.Y = 157.000000000000000000
+            Size.Width = 330.000000000000000000
             Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
-            TextSettings.Font.Family = 'Arial'
-            TextSettings.Font.Size = 16.000000000000000000
-            TextSettings.Font.StyleExt = {00070000000000000004000000}
-            Text = 'Atendente:'
+            TabOrder = 1
+            object LblAtendenteItem: TLabel
+              Align = Left
+              StyledSettings = [FontColor]
+              Margins.Left = 8.000000000000000000
+              Position.X = 8.000000000000000000
+              Size.Width = 90.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Arial'
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              Text = 'Atendente:'
+            end
+            object ComboBoxAtendenteItem: TComboBox
+              Align = Client
+              Margins.Top = 10.000000000000000000
+              Margins.Right = 8.000000000000000000
+              Margins.Bottom = 10.000000000000000000
+              Size.Width = 224.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 3
+              OnEnter = ComboBoxAtendenteItemEnter
+            end
           end
-          object ComboBoxAtendenteItem: TComboBox
-            Align = Client
-            Margins.Top = 10.000000000000000000
-            Margins.Right = 8.000000000000000000
-            Margins.Bottom = 10.000000000000000000
-            Size.Width = 224.000000000000000000
-            Size.Height = 32.000000000000000000
+          object LytValorItem: TLayout
+            Align = Bottom
+            Position.Y = 107.000000000000000000
+            Size.Width = 330.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            object LblValorItem: TLabel
+              Align = Left
+              StyledSettings = [FontColor]
+              Margins.Left = 8.000000000000000000
+              Position.X = 8.000000000000000000
+              Size.Width = 57.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Arial'
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              Text = 'Valor:'
+            end
+            object EdtValorItem: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Client
+              TabOrder = 1
+              KeyboardType = NumbersAndPunctuation
+              ReturnKeyType = Done
+              Margins.Top = 10.000000000000000000
+              Margins.Right = 8.000000000000000000
+              Margins.Bottom = 10.000000000000000000
+              Size.Width = 257.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              KillFocusByReturn = True
+            end
+          end
+          object LytQteItem: TLayout
+            Align = Bottom
+            Position.Y = 57.000000000000000000
+            Size.Width = 330.000000000000000000
+            Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 3
-            OnEnter = ComboBoxAtendenteItemEnter
+            object LblQteItem: TLabel
+              Align = Left
+              StyledSettings = [FontColor]
+              Margins.Left = 8.000000000000000000
+              Position.X = 8.000000000000000000
+              Size.Width = 49.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Arial'
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              Text = 'Qte:'
+            end
+            object EdtQteItem: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Client
+              TabOrder = 1
+              KeyboardType = NumbersAndPunctuation
+              ReturnKeyType = Done
+              Margins.Top = 10.000000000000000000
+              Margins.Right = 8.000000000000000000
+              Margins.Bottom = 10.000000000000000000
+              Size.Width = 265.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              KillFocusByReturn = True
+            end
           end
-        end
-        object LytNomeItem: TLayout
-          Align = Bottom
-          Position.Y = 381.000000000000000000
-          Size.Width = 330.000000000000000000
-          Size.Height = 50.000000000000000000
-          Size.PlatformDefault = False
-          Visible = False
-          TabOrder = 5
-          object LblNomeItem: TLabel
-            Align = Client
-            StyledSettings = [FontColor]
-            Margins.Left = 8.000000000000000000
-            Margins.Top = 8.000000000000000000
-            Margins.Right = 8.000000000000000000
-            Margins.Bottom = 8.000000000000000000
-            Size.Width = 314.000000000000000000
-            Size.Height = 34.000000000000000000
-            Size.PlatformDefault = False
-            TextSettings.Font.Family = 'Arial'
-            TextSettings.Font.Size = 16.000000000000000000
-            TextSettings.Font.StyleExt = {00070000000000000004000000}
-            TextSettings.HorzAlign = Center
-          end
-        end
-        object LytQteItem: TLayout
-          Align = Bottom
-          Position.Y = 381.000000000000000000
-          Size.Width = 330.000000000000000000
-          Size.Height = 50.000000000000000000
-          Size.PlatformDefault = False
-          Visible = False
-          TabOrder = 4
-          object LblQteItem: TLabel
-            Align = Left
-            StyledSettings = [FontColor]
-            Margins.Left = 8.000000000000000000
-            Position.X = 8.000000000000000000
-            Size.Width = 49.000000000000000000
+          object LytNomeItem: TLayout
+            Align = Bottom
+            Position.Y = 7.000000000000000000
+            Size.Width = 330.000000000000000000
             Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
-            TextSettings.Font.Family = 'Arial'
-            TextSettings.Font.Size = 16.000000000000000000
-            TextSettings.Font.StyleExt = {00070000000000000004000000}
-            Text = 'Qte:'
-          end
-          object EdtQteItem: TEdit
-            Touch.InteractiveGestures = [LongTap, DoubleTap]
-            Align = Client
-            TabOrder = 1
-            KeyboardType = NumbersAndPunctuation
-            ReturnKeyType = Done
-            Margins.Top = 10.000000000000000000
-            Margins.Right = 8.000000000000000000
-            Margins.Bottom = 10.000000000000000000
-            Size.Width = 265.000000000000000000
-            Size.Height = 32.000000000000000000
-            Size.PlatformDefault = False
-            KillFocusByReturn = True
-          end
-        end
-        object LytValorItem: TLayout
-          Align = Bottom
-          Position.Y = 381.000000000000000000
-          Size.Width = 330.000000000000000000
-          Size.Height = 50.000000000000000000
-          Size.PlatformDefault = False
-          Visible = False
-          TabOrder = 3
-          object LblValorItem: TLabel
-            Align = Left
-            StyledSettings = [FontColor]
-            Margins.Left = 8.000000000000000000
-            Position.X = 8.000000000000000000
-            Size.Width = 57.000000000000000000
-            Size.Height = 50.000000000000000000
-            Size.PlatformDefault = False
-            TextSettings.Font.Family = 'Arial'
-            TextSettings.Font.Size = 16.000000000000000000
-            TextSettings.Font.StyleExt = {00070000000000000004000000}
-            Text = 'Valor:'
-          end
-          object EdtValorItem: TEdit
-            Touch.InteractiveGestures = [LongTap, DoubleTap]
-            Align = Client
-            TabOrder = 1
-            KeyboardType = NumbersAndPunctuation
-            ReturnKeyType = Done
-            Margins.Top = 10.000000000000000000
-            Margins.Right = 8.000000000000000000
-            Margins.Bottom = 10.000000000000000000
-            Size.Width = 257.000000000000000000
-            Size.Height = 32.000000000000000000
-            Size.PlatformDefault = False
-            KillFocusByReturn = True
-          end
-        end
-        object LytBotaoConfirmaItem: TLayout
-          Align = MostBottom
-          Position.Y = 359.000000000000000000
-          Size.Width = 330.000000000000000000
-          Size.Height = 72.000000000000000000
-          Size.PlatformDefault = False
-          Visible = False
-          TabOrder = 1
-          object BtnConfirmaCadContasReceber: TButton
-            Align = Contents
-            StyledSettings = [Size]
-            Margins.Left = 30.000000000000000000
-            Margins.Top = 4.000000000000000000
-            Margins.Right = 30.000000000000000000
-            Margins.Bottom = 4.000000000000000000
-            Size.Width = 270.000000000000000000
-            Size.Height = 64.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 1
-            Text = 'Confirmar'
-            TextSettings.Font.Family = 'Arial'
-            TextSettings.Font.Size = 18.000000000000000000
-            TextSettings.Font.StyleExt = {00070000000000000004000000}
-            TextSettings.FontColor = claWhite
-            TintColor = claNavy
-            OnClick = BtnConfirmaCadContasReceberClick
+            TabOrder = 4
+            object LblNomeItem: TLabel
+              Align = Client
+              StyledSettings = [FontColor]
+              Margins.Left = 8.000000000000000000
+              Margins.Top = 8.000000000000000000
+              Margins.Right = 8.000000000000000000
+              Margins.Bottom = 8.000000000000000000
+              Size.Width = 314.000000000000000000
+              Size.Height = 34.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Arial'
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00070000000000000004000000}
+              TextSettings.HorzAlign = Center
+            end
           end
         end
       end

@@ -114,9 +114,9 @@ type
     Cidade: TLabel;
     LblUfCli: TLabel;
     LblEmailCli: TLabel;
-    SpdBNovoCadCli: TSpeedButton;
     GestureManager1: TGestureManager;
     BtnFiltrarCli: TButton;
+    SpdBNovoCadCli: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure SpBVoltarEdicaoClick(Sender: TObject);
     procedure SpBVoltarClick(Sender: TObject);
@@ -146,7 +146,6 @@ type
       KeyboardVisible: Boolean; const Bounds: TRect);
     procedure FormVirtualKeyboardShown(Sender: TObject;
       KeyboardVisible: Boolean; const Bounds: TRect);
-    procedure SpdBNovoCadCliClick(Sender: TObject);
     procedure ListViewCadCliGesture(Sender: TObject;
       const EventInfo: TGestureEventInfo; var Handled: Boolean);
     procedure ListViewCadCliDblClick(Sender: TObject);
@@ -182,6 +181,7 @@ type
     procedure EditFiltroNomeCadCliTyping(Sender: TObject);
     procedure EditFiltroCodCadCliTyping(Sender: TObject);
     procedure BtnFiltrarCliClick(Sender: TObject);
+    procedure SpdBNovoCadCliClick(Sender: TObject);
   private
     clickBotao: Boolean;
     DataHora: TDateTime;

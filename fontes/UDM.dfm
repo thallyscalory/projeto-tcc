@@ -162,7 +162,7 @@ object DM: TDM
     SQL.Strings = (
       
         'select * from cliente where id_cli like :PCodCadCli or nome_cli ' +
-        'like :PNomeCadCli;')
+        'like :PNomeCadCli order by nome_cli;')
     Left = 280
     Top = 8
     ParamData = <
@@ -1170,9 +1170,18 @@ object DM: TDM
     SQL.Strings = (
       'select * from conta_receber cr '
       'inner join cliente cli on cr.id_cliente = cli.id_cli '
-      'where cr.quitado = '#39'N'#39' order by cr.data_venc;')
+      
+        'where cr.quitado = '#39'N'#39' and cli.nome_cli like :PCLienteContasRece' +
+        'ber order by cli.nome_cli;')
     Left = 812
     Top = 8
+    ParamData = <
+      item
+        Name = 'PCLIENTECONTASRECEBER'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 60
+      end>
     object FDQConsContasReceberid: TIntegerField
       FieldName = 'id'
       Origin = 'id'

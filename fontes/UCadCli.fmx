@@ -31,12 +31,13 @@ inherited FCadCli: TFCadCli
           object SpdBNovoCadCli: TSpeedButton
             Align = Right
             IconTintColor = claNavy
+            Margins.Left = 4.000000000000000000
             Margins.Right = 8.000000000000000000
             Position.X = 274.000000000000000000
             Size.Width = 48.000000000000000000
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
-            StyleLookup = 'additembutton'
+            StyleLookup = 'addtoolbutton'
             OnClick = SpdBNovoCadCliClick
           end
         end
@@ -88,6 +89,7 @@ inherited FCadCli: TFCadCli
           end
           object BtnFiltrarCli: TButton
             Align = Top
+            StyledSettings = [Family, Size, Style]
             Margins.Left = 20.000000000000000000
             Margins.Right = 20.000000000000000000
             Position.X = 20.000000000000000000
@@ -97,6 +99,8 @@ inherited FCadCli: TFCadCli
             Size.PlatformDefault = False
             TabOrder = 2
             Text = 'Filtrar Todos'
+            TextSettings.FontColor = claWhite
+            TintColor = claNavy
             OnClick = BtnFiltrarCliClick
           end
         end

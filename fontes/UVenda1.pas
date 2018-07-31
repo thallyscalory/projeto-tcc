@@ -97,6 +97,7 @@ type
     SpdBVoltarCadCOntasReceber: TSpeedButton;
     LytBotaoConfirmaItem: TLayout;
     BtnConfirmaCadContasReceber: TButton;
+    LytGeralEdicaoItens: TLayout;
     procedure SpBVoltarClick(Sender: TObject);
     procedure SpdBNovoVendaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -184,7 +185,7 @@ var
   I, maxIdPedido, maxIdItemPedido, maxIdContasReceber: integer;
   listaItemPedido: TListViewItem;
   qtdItemTotal, vlItemTotal, vlTotalPedido: Double;
-  dataAgora : TDateTime;
+  dataAgora: TDateTime;
 begin
   FPrincipal.ksLoadingIndicator1.LoadingText.Text := 'Aguarde...';
   FPrincipal.ksLoadingIndicator1.ShowLoading;
@@ -514,8 +515,7 @@ begin
         DM.FDQCadContasRecebervalor_saldo.AsFloat := StrToFloat(vlparc[I]);
         DM.FDQCadContasReceberdata_venc.AsDateTime :=
           StrToDateTime(datavenci[I]);
-        DM.FDQCadContasReceberdata_cad.AsDateTime :=
-          dataAgora;
+        DM.FDQCadContasReceberdata_cad.AsDateTime := dataAgora;
         DM.FDQCadContasReceberquitado.AsString := 'N';
         DM.FDQCadContasReceber.Post;
       end;
@@ -549,11 +549,7 @@ begin
     [TMultiDetailAppearanceNames.Detail3] :=
     ComboBoxAtendenteItem.Selected.Text;
   ListViewItemPedido.EndUpdate;
-  LytNomeItem.Visible := False;
-  LytQteItem.Visible := False;
-  LytValorItem.Visible := False;
-  LytAtendenteItem.Visible := False;
-  LytBotaoConfirmaItem.Visible := False;
+  LytGeralEdicaoItens.Visible := False;
 
   vlTotalAtual := 0;
   qtdTotalAtual := 0;
@@ -836,11 +832,7 @@ begin
       [ListViewItemPedido.ItemIndex].Data[TMultiDetailAppearanceNames.Detail3]
       .ToString);
     ComboBoxAtendenteItem.ItemIndex := 0;
-    LytBotaoConfirmaItem.Visible := True;
-    LytAtendenteItem.Visible := True;
-    LytValorItem.Visible := True;
-    LytQteItem.Visible := True;
-    LytNomeItem.Visible := True;
+    LytGeralEdicaoItens.Visible := True;
   end;
 end;
 
@@ -887,6 +879,7 @@ begin
                     DM.FDQConsItemPedidoid_item_pedido.AsString;
                   listaItem.Detail :=
                     DM.FDQConsItemPedidoid_produto_item.AsString;
+
                   DM.FDQConsItemPedido.Next;
 
                   qteCount := qteCount +
@@ -1139,7 +1132,7 @@ end;
 
 procedure TFVenda1.SpdBPesqItemPedidoClick(Sender: TObject);
 begin
-
+  LytGeralEdicaoItens.Visible := False;
   MudarAbaVenda(TbItemPedidoItemVenda, Sender);
 end;
 

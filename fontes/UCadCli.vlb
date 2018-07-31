@@ -10,7 +10,7 @@ Coordinates=11,141,70,33
 Visible=False
 
 []
-Coordinates=1044,1,124,33
+Coordinates=0,414,99,51
 Visible=False
 LayerNames=NewLayer0
 
@@ -349,9 +349,6 @@ Coordinates=116,141,70,51
 
 [LblEndCli]
 Coordinates=116,71,62,51
-
-[SpdBNovoCadCli]
-Coordinates=0,414,99,51
 
 [LblRgCli]
 Coordinates=464,644,56,51

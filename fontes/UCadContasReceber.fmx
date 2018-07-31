@@ -30,7 +30,7 @@ inherited FCadContasReceber: TFCadContasReceber
           Margins.Right = 4.000000000000000000
           Margins.Bottom = 4.000000000000000000
           Size.Width = 322.000000000000000000
-          Size.Height = 375.000000000000000000
+          Size.Height = 325.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
           ItemAppearanceObjects.ItemObjects.Accessory.AccessoryType = Checkmark
@@ -46,6 +46,39 @@ inherited FCadContasReceber: TFCadContasReceber
           ShowSelection = False
           PullToRefresh = True
         end
+        object LytFiltroClienteContasReceber: TLayout
+          Align = Top
+          Position.Y = 48.000000000000000000
+          Size.Width = 330.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object Label1: TLabel
+            Align = Left
+            StyledSettings = [FontColor]
+            Margins.Left = 8.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Position.X = 8.000000000000000000
+            Size.Width = 105.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            Text = 'Filtrar Cliente:'
+          end
+          object ComboBoxFiltroClienteContasReceber: TComboBox
+            Align = Client
+            Margins.Top = 10.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Size.Width = 209.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            OnClosePopup = ComboBoxFiltroClienteContasReceberClosePopup
+            OnEnter = ComboBoxFiltroClienteContasReceberEnter
+          end
+        end
       end
       inherited TbItemedicao: TTabItem
         ExplicitSize.cx = 165.000000000000000000
@@ -53,17 +86,25 @@ inherited FCadContasReceber: TFCadContasReceber
       end
     end
   end
+  inherited ActionList1: TActionList
+    Left = 16
+    Top = 376
+  end
+  inherited ImageList1: TImageList
+    Left = 16
+    Top = 224
+  end
   object BindSourceDB1: TBindSourceDB
     DataSet = DM.FDQConsContasReceber
     ScopeMappings = <>
-    Left = 152
-    Top = 224
+    Left = 24
+    Top = 320
   end
   object BindingsList1: TBindingsList
     Methods = <>
     OutputConverters = <>
     Left = 20
-    Top = 5
+    Top = 429
     object LinkListControlToField1: TLinkListControlToField
       Category = 'Quick Bindings'
       DataSource = BindSourceDB1
@@ -86,5 +127,20 @@ inherited FCadContasReceber: TFCadContasReceber
       FillHeaderFieldName = 'nome_cli'
       FillBreakGroups = <>
     end
+    object LinkListControlToField2: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      FieldName = 'nome_cli'
+      Control = ComboBoxFiltroClienteContasReceber
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+  end
+  object BindSourceDB2: TBindSourceDB
+    DataSet = DM.FDQFiltroCadCLi
+    ScopeMappings = <>
+    Left = 16
+    Top = 272
   end
 end

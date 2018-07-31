@@ -19,3 +19,6 @@ Visible=False
 [DM.FDQConsItemPedido]
 Visible=False
 
+[DM.FDQFiltroCadCLi]
+Visible=False
+

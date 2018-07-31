@@ -25,11 +25,14 @@ type
     Layout4: TLayout;
     LblTipoReceitaCadContasReceber: TLabel;
     ComboBoxTipoReceitaCadContasReceber: TComboBox;
+    LytGeralEdicaoContasReceber: TLayout;
     procedure FormCreate(Sender: TObject);
     procedure ListViewCadContasReceberGesture(Sender: TObject;
       const EventInfo: TGestureEventInfo; var Handled: Boolean);
     procedure ComboBoxTipoReceitaCadContasReceberEnter(Sender: TObject);
     procedure BtnConfirmaCadContasReceberClick(Sender: TObject);
+    procedure ListViewCadContasReceberItemClick(const Sender: TObject;
+      const AItem: TListViewItem);
   private
     { Private declarations }
   public
@@ -66,10 +69,7 @@ begin
   tipoR[itemIndexCostasReceber] := ComboBoxTipoReceitaCadContasReceber.
     Selected.Text;
 
-  Layout3.Visible := False;
-  Layout2.Visible := False;
-  Layout4.Visible := False;
-  Layout1.Visible := False;
+  LytGeralEdicaoContasReceber.Visible := False;
 end;
 
 procedure TFContasReceberVenda.ComboBoxTipoReceitaCadContasReceberEnter
@@ -99,10 +99,7 @@ var
   dataHoje, datavenc: TDateTime;
   listaContasReceber: TListViewItem;
 begin
-  Layout3.Visible := False;
-  Layout2.Visible := False;
-  Layout4.Visible := False;
-  Layout1.Visible := False;
+  LytGeralEdicaoContasReceber.Visible := False;
   dataHoje := Date;
 
   DM.FDQConsFormaPag.Close;
@@ -145,10 +142,10 @@ begin
 
   for I := 0 to ListViewCadContasReceber.ItemCount - 1 do
   begin
-    datavenci[I] := listaContasReceber.Text;
-    vlparc[I] := listaContasReceber.Data
+    datavenci[I] := ListViewCadContasReceber.Items[I].Text;
+    vlparc[I] := ListViewCadContasReceber.Items[I].Data
       [TMultiDetailAppearanceNames.Detail1].ToString;
-    tipoR[I] := listaContasReceber.Data
+    tipoR[I] := ListViewCadContasReceber.Items[I].Data
       [TMultiDetailAppearanceNames.Detail2].ToString;
   end;
 
@@ -171,12 +168,28 @@ begin
       [TMultiDetailAppearanceNames.Detail2].ToString);
     ComboBoxTipoReceitaCadContasReceber.ItemIndex := 0;
 
-    Layout1.Visible := True;
-    Layout4.Visible := True;
-    Layout2.Visible := True;
-    Layout3.Visible := True;
+    LytGeralEdicaoContasReceber.Visible := True;
   end;
 
+end;
+
+procedure TFContasReceberVenda.ListViewCadContasReceberItemClick
+  (const Sender: TObject; const AItem: TListViewItem);
+begin
+  ComboBoxTipoReceitaCadContasReceber.Items.Clear;
+
+  itemIndexCostasReceber := ListViewCadContasReceber.ItemIndex;
+
+  EdtDataVencCadContasReceber.Text := ListViewCadContasReceber.Items
+    [itemIndexCostasReceber].Text;
+  EdtValorCadContasReceber.Text := ListViewCadContasReceber.Items
+    [itemIndexCostasReceber].Data[TMultiDetailAppearanceNames.Detail1].ToString;
+  ComboBoxTipoReceitaCadContasReceber.Items.Add
+    (ListViewCadContasReceber.Items[itemIndexCostasReceber].Data
+    [TMultiDetailAppearanceNames.Detail2].ToString);
+  ComboBoxTipoReceitaCadContasReceber.ItemIndex := 0;
+
+  LytGeralEdicaoContasReceber.Visible := True;
 end;
 
 end.

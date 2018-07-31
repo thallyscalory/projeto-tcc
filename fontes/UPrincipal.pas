@@ -124,7 +124,6 @@ procedure TFPrincipal.ImgConsAdmClick(Sender: TObject);
 begin
   AbrirForm(TFCadContasReceber);
   MudarAba(TbItemApoio, Sender);
-  DM.FDQConsContasReceber.Active := True;
 end;
 
 procedure TFPrincipal.ImgConsProdClick(Sender: TObject);
@@ -156,7 +155,6 @@ procedure TFPrincipal.RoundRectConsAdmClick(Sender: TObject);
 begin
   AbrirForm(TFCadContasReceber);
   MudarAba(TbItemApoio, Sender);
-  DM.FDQConsContasReceber.Active := True;
 end;
 
 procedure TFPrincipal.RoundRectConsProdClick(Sender: TObject);

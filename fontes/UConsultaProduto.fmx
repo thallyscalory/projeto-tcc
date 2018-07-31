@@ -95,6 +95,7 @@ inherited FConsProduto: TFConsProduto
             Action = TakePhotoFromCameraAction1
             Align = Top
             Enabled = True
+            StyledSettings = [Family, Size, Style]
             ImageIndex = -1
             Margins.Left = 20.000000000000000000
             Margins.Right = 20.000000000000000000
@@ -105,10 +106,13 @@ inherited FConsProduto: TFConsProduto
             Size.PlatformDefault = False
             TabOrder = 4
             Text = 'Scanear codigo de barras'
+            TextSettings.FontColor = claWhite
+            TintColor = claNavy
             Visible = True
           end
           object BtnFiltrarProd: TButton
             Align = Top
+            StyledSettings = [Family, Size, Style]
             Margins.Left = 20.000000000000000000
             Margins.Right = 20.000000000000000000
             Position.X = 20.000000000000000000
@@ -118,6 +122,8 @@ inherited FConsProduto: TFConsProduto
             Size.PlatformDefault = False
             TabOrder = 3
             Text = 'Filtrar Todos'
+            TextSettings.FontColor = claWhite
+            TintColor = claNavy
             OnClick = BtnFiltrarProdClick
           end
         end
