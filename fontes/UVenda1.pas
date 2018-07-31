@@ -464,6 +464,7 @@ begin
 
     end;
 
+    //Contas a receber
     dataAgora := Date;
 
     for I := 0 to itemCountContasReceber - 1 do

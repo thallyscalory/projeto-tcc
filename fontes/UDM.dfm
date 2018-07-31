@@ -1171,13 +1171,33 @@ object DM: TDM
       'select * from conta_receber cr '
       'inner join cliente cli on cr.id_cliente = cli.id_cli '
       
-        'where cr.quitado = '#39'N'#39' and cli.nome_cli like :PCLienteContasRece' +
-        'ber order by cli.nome_cli;')
+        'where cr.quitado = '#39'N'#39' and (cli.nome_cli like :PCLienteContasRec' +
+        'eber1 and cr.data_venc between :PDataVencInicio and :PDataVencFi' +
+        'nal or cli.nome_cli like :PCLienteContasReceber2) order by cli.n' +
+        'ome_cli;')
     Left = 812
     Top = 8
     ParamData = <
       item
-        Name = 'PCLIENTECONTASRECEBER'
+        Name = 'PCLIENTECONTASRECEBER1'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 60
+      end
+      item
+        Name = 'PDATAVENCINICIO'
+        DataType = ftDateTime
+        ParamType = ptInput
+        Size = 10
+      end
+      item
+        Name = 'PDATAVENCFINAL'
+        DataType = ftDateTime
+        ParamType = ptInput
+        Size = 10
+      end
+      item
+        Name = 'PCLIENTECONTASRECEBER2'
         DataType = ftString
         ParamType = ptInput
         Size = 60

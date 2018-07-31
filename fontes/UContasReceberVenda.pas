@@ -31,8 +31,6 @@ type
       const EventInfo: TGestureEventInfo; var Handled: Boolean);
     procedure ComboBoxTipoReceitaCadContasReceberEnter(Sender: TObject);
     procedure BtnConfirmaCadContasReceberClick(Sender: TObject);
-    procedure ListViewCadContasReceberItemClick(const Sender: TObject;
-      const AItem: TListViewItem);
   private
     { Private declarations }
   public
@@ -171,25 +169,6 @@ begin
     LytGeralEdicaoContasReceber.Visible := True;
   end;
 
-end;
-
-procedure TFContasReceberVenda.ListViewCadContasReceberItemClick
-  (const Sender: TObject; const AItem: TListViewItem);
-begin
-  ComboBoxTipoReceitaCadContasReceber.Items.Clear;
-
-  itemIndexCostasReceber := ListViewCadContasReceber.ItemIndex;
-
-  EdtDataVencCadContasReceber.Text := ListViewCadContasReceber.Items
-    [itemIndexCostasReceber].Text;
-  EdtValorCadContasReceber.Text := ListViewCadContasReceber.Items
-    [itemIndexCostasReceber].Data[TMultiDetailAppearanceNames.Detail1].ToString;
-  ComboBoxTipoReceitaCadContasReceber.Items.Add
-    (ListViewCadContasReceber.Items[itemIndexCostasReceber].Data
-    [TMultiDetailAppearanceNames.Detail2].ToString);
-  ComboBoxTipoReceitaCadContasReceber.ItemIndex := 0;
-
-  LytGeralEdicaoContasReceber.Visible := True;
 end;
 
 end.

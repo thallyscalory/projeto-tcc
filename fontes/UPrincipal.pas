@@ -79,7 +79,8 @@ implementation
 
 {$R *.fmx}
 
-uses UDM, UVenda, UCadCli, UConsultaProduto, UInfo, UVenda1, UCadContasReceber;
+uses UDM, UVenda, UCadCli, UConsultaProduto, UInfo, UVenda1, UCadContasReceber,
+  UAuxiliar;
 
 procedure TFPrincipal.AbrirForm(AFormClass: TComponentClass);
 var
