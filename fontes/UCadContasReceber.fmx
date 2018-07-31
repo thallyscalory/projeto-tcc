@@ -43,6 +43,7 @@ inherited FCadContasReceber: TFCadContasReceber
           ItemAppearanceObjects.HeaderObjects.Text.TextColor = claNavy
           ItemAppearanceObjects.HeaderObjects.Text.Align = Center
           CanSwipeDelete = False
+          OnItemClick = ListViewCadContasReceberItemClick
           ShowSelection = False
           PullToRefresh = True
         end

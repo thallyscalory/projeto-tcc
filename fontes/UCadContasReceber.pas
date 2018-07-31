@@ -11,7 +11,7 @@ uses
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, MultiDetailAppearanceU,
   FMX.ListView, System.Rtti, System.Bindings.Outputs, FMX.Bind.Editors,
   Data.Bind.EngExt, FMX.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope,
-  FMX.ListBox, FMX.DateTimeCtrls;
+  FMX.ListBox, FMX.DateTimeCtrls, System.UIConsts;
 
 type
   TFCadContasReceber = class(TFCadModelo)
@@ -35,6 +35,8 @@ type
     procedure ComboBoxFiltroClienteContasReceberClosePopup(Sender: TObject);
     procedure DateEdtFiltroVencFinalContasReceberClosePicker(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure ListViewCadContasReceberItemClick(const Sender: TObject;
+      const AItem: TListViewItem);
   private
     { Private declarations }
   public
@@ -157,6 +159,14 @@ begin
   ComboBoxFiltroClienteContasReceberEnter(Sender);
   ComboBoxFiltroClienteContasReceber.ItemIndex :=
     ComboBoxFiltroClienteContasReceber.Count - 1;
+end;
+
+procedure TFCadContasReceber.ListViewCadContasReceberItemClick
+  (const Sender: TObject; const AItem: TListViewItem);
+begin
+  inherited;
+  ShowMessage(IntToStr(ListViewCadContasReceber.ItemIndex));
+  ShowMessage(IntToStr(ListViewCadContasReceber.Items.Count));
 end;
 
 procedure TFCadContasReceber.SpBVoltarClick(Sender: TObject);
