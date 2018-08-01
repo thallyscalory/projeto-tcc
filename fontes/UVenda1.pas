@@ -464,7 +464,7 @@ begin
 
     end;
 
-    //Contas a receber
+    // Contas a receber
     dataAgora := Date;
 
     for I := 0 to itemCountContasReceber - 1 do
@@ -843,6 +843,19 @@ var
   listaItem: TListViewItem;
   qteCount: Double;
 begin
+{$IFDEF MSWINDOWS}
+  ListBoxItem1.Height := 44;
+  ListBoxItemNumPedidoVenda.Height := 44;
+  ListBoxItem2.Height := 44;
+  ListBoxItem3.Height := 44;
+  ListBoxItem4.Height := 44;
+  ListBoxItemValorTotalVenda.Height := 44;
+  ListBoxItem5.Height := 44;
+  ListBoxItemprodutoVenda.Height := 44;
+  ListBoxItemParcelasVenda.Height := 44;
+  ListBoxItem6.Height := 44;
+{$ENDIF}
+
   if ComboBoxFiltroPedido.ItemIndex = 0 then
   begin
     MessageDlg('Pedido já fechado! Deseja visualizar?',
@@ -984,7 +997,6 @@ begin
     DesabilitaCampos;
     MudarAbaVenda(TbItemedicaoVenda, Sender);
   end;
-
 end;
 
 procedure TFVenda1.MudarAbaVenda(ATabItemVenda: TTabItem; Sender: TObject);
@@ -1099,6 +1111,18 @@ end;
 
 procedure TFVenda1.SpdBNovoVendaClick(Sender: TObject);
 begin
+{$IFDEF MSWINDOWS}
+  ListBoxItem1.Height := 44;
+  ListBoxItemNumPedidoVenda.Height := 44;
+  ListBoxItem2.Height := 44;
+  ListBoxItem3.Height := 44;
+  ListBoxItem4.Height := 44;
+  ListBoxItemValorTotalVenda.Height := 44;
+  ListBoxItem5.Height := 44;
+  ListBoxItemprodutoVenda.Height := 44;
+  ListBoxItemParcelasVenda.Height := 44;
+  ListBoxItem6.Height := 44;
+{$ENDIF}
   DM.FDQPedido.Active := False;
   crud := 'inserir';
   SpdBEditarVenda.Visible := False;
@@ -1166,7 +1190,7 @@ begin
                   (LblCodCliPedido.Text <> '') and
                   (StrToInt(EdtNumParcelaPedido.Text) > 0) then
                 begin
-                  LblSupApoioVenda.Text := 'Contas a Receber';
+                  LblSupApoioVenda.Text := 'Receber';
                   SpdBVoltarCadCOntasReceber.Visible := True;
                   CliPedido := EmptyStr;
                   itemPedido := EmptyStr;

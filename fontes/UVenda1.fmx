@@ -23,7 +23,7 @@ object FVenda1: TFVenda1
       Size.Height = 480.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 3
+      TabIndex = 0
       TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
@@ -39,7 +39,7 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 82.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -56,7 +56,7 @@ object FVenda1: TFVenda1
           TintColor = claSilver
           object LblTitulo: TLabel
             Align = Contents
-            StyledSettings = [Family]
+            StyledSettings = []
             Size.Width = 330.000000000000000000
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
@@ -65,7 +65,7 @@ object FVenda1: TFVenda1
             TextSettings.Font.StyleExt = {04070000000000000004000000}
             TextSettings.FontColor = claNavy
             TextSettings.HorzAlign = Center
-            Text = 'Venda'
+            Text = 'Consulta Pedido'
           end
           object SpBVoltar: TSpeedButton
             Align = Left
@@ -742,7 +742,7 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 84.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False

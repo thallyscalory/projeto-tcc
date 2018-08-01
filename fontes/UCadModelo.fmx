@@ -50,10 +50,13 @@ object FCadModelo: TFCadModelo
           TintColor = claSilver
           object LblTitulo: TLabel
             Align = Contents
-            StyledSettings = [Family, Size, Style]
+            StyledSettings = [Size]
             Size.Width = 330.000000000000000000
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 18.000000000000000000
+            TextSettings.Font.StyleExt = {04070000000000000004000000}
             TextSettings.FontColor = claNavy
             TextSettings.HorzAlign = Center
             Text = 'LblTitulo'

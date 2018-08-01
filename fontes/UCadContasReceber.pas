@@ -31,6 +31,16 @@ type
     Label4: TLabel;
     DateEdtFiltroVencFinalContasReceber: TDateEdit;
     BtnBaixaContasReceber: TButton;
+    LytBaixaContasReceberEdicao: TLayout;
+    ListBoxbaixaContasReceberEdicao: TListBox;
+    ListBoxItem1: TListBoxItem;
+    ListBoxItem2: TListBoxItem;
+    ListBoxItem3: TListBoxItem;
+    ListBoxItem4: TListBoxItem;
+    ToolBar1: TToolBar;
+    SpdBVoltarBaixaContasReceberEdicao: TSpeedButton;
+    LblTituloBaixaContasReceberEdicao: TLabel;
+    SpdBConfirmaBaixaContasREceberEdicao: TSpeedButton;
     procedure SpBVoltarClick(Sender: TObject);
     procedure ComboBoxFiltroClienteContasReceberEnter(Sender: TObject);
     procedure ComboBoxFiltroClienteContasReceberClosePopup(Sender: TObject);
@@ -41,6 +51,7 @@ type
     procedure ListViewCadContasReceberItemClick(const Sender: TObject;
       const AItem: TListViewItem);
     procedure BtnBaixaContasReceberClick(Sender: TObject);
+    procedure SpdBVoltarBaixaContasReceberEdicaoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -59,15 +70,16 @@ implementation
 uses UDM, UPrincipal, UAuxiliar;
 
 procedure TFCadContasReceber.BtnBaixaContasReceberClick(Sender: TObject);
-var
-  I: integer;
 begin
   inherited;
-  for I := 0 to contadorArray - 1 do
-  begin
-    if not idContasReceber[I].IsEmpty then
-      ShowMessage(idContasReceber[I]);
-  end;
+{$IFDEF MSWINDOWS}
+  ListBoxItem1.Height := 44;
+  ListBoxItem2.Height := 44;
+  ListBoxItem3.Height := 44;
+  ListBoxItem4.Height := 44;
+{$ENDIF}
+
+  MudarAbaModelo(TbItemedicao, Sender);
 end;
 
 procedure TFCadContasReceber.ComboBoxFiltroClienteContasReceberClosePopup
@@ -263,6 +275,13 @@ begin
   DM.FDQFiltroCadCLi.Active := False;
   FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
   FPrincipal.AbrirForm(TFAuxiliar);
+end;
+
+procedure TFCadContasReceber.SpdBVoltarBaixaContasReceberEdicaoClick
+  (Sender: TObject);
+begin
+  inherited;
+  MudarAbaModelo(TbItemListagem, Sender);
 end;
 
 end.
