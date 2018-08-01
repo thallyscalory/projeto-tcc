@@ -30,16 +30,22 @@ type
     DateEdtFiltroVencInicialContasReceber: TDateEdit;
     Label4: TLabel;
     DateEdtFiltroVencFinalContasReceber: TDateEdit;
+    BtnBaixaContasReceber: TButton;
     procedure SpBVoltarClick(Sender: TObject);
     procedure ComboBoxFiltroClienteContasReceberEnter(Sender: TObject);
     procedure ComboBoxFiltroClienteContasReceberClosePopup(Sender: TObject);
     procedure DateEdtFiltroVencFinalContasReceberClosePicker(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure ListViewCadContasReceberUpdateObjects(const Sender: TObject;
+      const AItem: TListViewItem);
     procedure ListViewCadContasReceberItemClick(const Sender: TObject;
       const AItem: TListViewItem);
+    procedure BtnBaixaContasReceberClick(Sender: TObject);
   private
     { Private declarations }
   public
+    saldoContasReceber, idContasReceber: array of string;
+    tamanhoArray, contadorArray, controleCheckmark: integer;
     { Public declarations }
   end;
 
@@ -51,6 +57,18 @@ implementation
 {$R *.fmx}
 
 uses UDM, UPrincipal, UAuxiliar;
+
+procedure TFCadContasReceber.BtnBaixaContasReceberClick(Sender: TObject);
+var
+  I: integer;
+begin
+  inherited;
+  for I := 0 to contadorArray - 1 do
+  begin
+    if not idContasReceber[I].IsEmpty then
+      ShowMessage(idContasReceber[I]);
+  end;
+end;
 
 procedure TFCadContasReceber.ComboBoxFiltroClienteContasReceberClosePopup
   (Sender: TObject);
@@ -159,14 +177,84 @@ begin
   ComboBoxFiltroClienteContasReceberEnter(Sender);
   ComboBoxFiltroClienteContasReceber.ItemIndex :=
     ComboBoxFiltroClienteContasReceber.Count - 1;
+  DateEdtFiltroVencInicialContasReceber.Date := Date;
+  DateEdtFiltroVencFinalContasReceber.Date := Date;
+
+  tamanhoArray := 0;
+  contadorArray := 0;
+  controleCheckmark := 0;
+  ListViewCadContasReceber.ItemAppearanceObjects.ItemObjects.Accessory.
+    Visible := False;
+  ListViewCadContasReceber.ItemAppearanceObjects.ItemEditObjects.Accessory.
+    Visible := False;
+  BtnBaixaContasReceber.Visible := False;
 end;
 
 procedure TFCadContasReceber.ListViewCadContasReceberItemClick
   (const Sender: TObject; const AItem: TListViewItem);
 begin
   inherited;
-  ShowMessage(IntToStr(ListViewCadContasReceber.ItemIndex));
-  ShowMessage(IntToStr(ListViewCadContasReceber.Items.Count));
+  if AItem.Detail.IsEmpty then
+  begin
+    AItem.Objects.AccessoryObject.Visible := True;
+
+    controleCheckmark := controleCheckmark + 1;
+    tamanhoArray := tamanhoArray + 1;
+    SetLength(saldoContasReceber, tamanhoArray);
+    SetLength(idContasReceber, tamanhoArray);
+
+    saldoContasReceber[contadorArray] :=
+      AItem.Data[TMultiDetailAppearanceNames.Detail3].ToString;
+    idContasReceber[contadorArray] := DM.FDQConsContasReceberid.AsString;
+    AItem.Detail := IntToStr(contadorArray);
+
+    contadorArray := contadorArray + 1;
+
+    BtnBaixaContasReceber.Visible := True;
+
+    AItem.Objects.AccessoryObject.Visible := True;
+  end
+  else
+  begin
+    controleCheckmark := controleCheckmark - 1;
+
+    saldoContasReceber[StrToInt(AItem.Detail)] := EmptyStr;
+    idContasReceber[StrToInt(AItem.Detail)] := EmptyStr;
+    AItem.Detail := EmptyStr;
+
+    AItem.Objects.AccessoryObject.Visible := False;;
+
+    if controleCheckmark = 0 then
+    begin
+      BtnBaixaContasReceber.Visible := False;
+    end;
+  end;
+end;
+
+procedure TFCadContasReceber.ListViewCadContasReceberUpdateObjects
+  (const Sender: TObject; const AItem: TListViewItem);
+var
+  dataVenc, dataAtual: TDateTime;
+  validou: string;
+begin
+  inherited;
+  dataAtual := Date;
+  validou := 'S';
+  try
+    dataVenc := StrToDateTime(AItem.Text);
+  except
+    on E: Exception do
+      validou := 'N';
+  end;
+
+  if validou = 'S' then
+  begin
+    if dataVenc <= dataAtual then
+    begin
+      AItem.Objects.TextObject.TextColor := claRed;
+    end;
+  end;
+
 end;
 
 procedure TFCadContasReceber.SpBVoltarClick(Sender: TObject);

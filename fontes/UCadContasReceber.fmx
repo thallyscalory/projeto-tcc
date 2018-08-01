@@ -24,6 +24,7 @@ inherited FCadContasReceber: TFCadContasReceber
           ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
           HeaderAppearanceClassName = 'TListHeaderObjects'
           FooterAppearanceClassName = 'TListHeaderObjects'
+          OnUpdateObjects = ListViewCadContasReceberUpdateObjects
           Align = Client
           Margins.Left = 4.000000000000000000
           Margins.Top = 4.000000000000000000
@@ -34,7 +35,9 @@ inherited FCadContasReceber: TFCadContasReceber
           Size.PlatformDefault = False
           TabOrder = 1
           ItemAppearanceObjects.ItemObjects.Accessory.AccessoryType = Checkmark
+          ItemAppearanceObjects.ItemObjects.Accessory.Visible = False
           ItemAppearanceObjects.ItemEditObjects.Accessory.AccessoryType = Checkmark
+          ItemAppearanceObjects.ItemEditObjects.Accessory.Visible = False
           ItemAppearanceObjects.HeaderObjects.Text.Font.Family = 'Arial'
           ItemAppearanceObjects.HeaderObjects.Text.Font.Size = 16.000000000000000000
           ItemAppearanceObjects.HeaderObjects.Text.Font.StyleExt = {00070000000000000004000000}
@@ -166,6 +169,27 @@ inherited FCadContasReceber: TFCadContasReceber
             Size.PlatformDefault = False
             TabOrder = 4
           end
+        end
+        object BtnBaixaContasReceber: TButton
+          Align = Bottom
+          StyledSettings = []
+          Margins.Left = 20.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 20.000000000000000000
+          Margins.Bottom = 4.000000000000000000
+          Position.X = 20.000000000000000000
+          Position.Y = 383.000000000000000000
+          Size.Width = 290.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          Text = 'Baixar'
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.FontColor = claWhite
+          TintColor = claNavy
+          Visible = False
+          OnClick = BtnBaixaContasReceberClick
         end
       end
       inherited TbItemedicao: TTabItem
