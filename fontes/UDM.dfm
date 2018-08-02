@@ -266,13 +266,13 @@ object DM: TDM
       Origin = 'obs_cli'
       BlobType = ftWideMemo
     end
-    object FDQFiltroCadCLifoto_cli: TBlobField
-      FieldName = 'foto_cli'
-      Origin = 'foto_cli'
-    end
     object FDQFiltroCadCLidata_cad_cli: TDateTimeField
       FieldName = 'data_cad_cli'
       Origin = 'data_cad_cli'
+    end
+    object FDQFiltroCadCLifoto_cli: TBlobField
+      FieldName = 'foto_cli'
+      Origin = 'foto_cli'
     end
   end
   object FDQMaxIdCli: TFDQuery

@@ -12,7 +12,8 @@ uses
   MultiDetailAppearanceU, Data.Bind.EngExt, FMX.Bind.DBEngExt,
   Data.Bind.Components, Data.Bind.DBScope, System.Rtti, System.Bindings.Outputs,
   FMX.Bind.Editors, FMX.ListBox, System.ImageList, FMX.ImgList, FMX.Edit,
-  ksTypes, ksLoadingIndicator;
+  ksTypes, ksLoadingIndicator, FMX.VirtualKeyboard, System.Math,
+  FMX.Platform;
 
 type
   TFVenda1 = class(TForm)
@@ -75,7 +76,6 @@ type
     LblCodCliPedido: TLabel;
     LblProdutoPedido: TLabel;
     LblQtdItemPedido: TLabel;
-    SpdBDescontoPedido: TSpeedButton;
     ListBoxItem1: TListBoxItem;
     ListBoxItem6: TListBoxItem;
     LblAtendentePedido: TLabel;
@@ -98,6 +98,17 @@ type
     LytBotaoConfirmaItem: TLayout;
     BtnConfirmaCadContasReceber: TButton;
     LytGeralEdicaoItens: TLayout;
+    LytConsultaClienteVendaApoio: TLayout;
+    Layout2: TLayout;
+    EditFiltroNomeCadCliVenda: TEdit;
+    EditFiltroCodCadCliVenda: TEdit;
+    BtnFiltrarCliVenda: TButton;
+    ListViewCadCliVenda: TListView;
+    BindSourceDB6: TBindSourceDB;
+    LinkListControlToField3: TLinkListControlToField;
+    ToolBar1: TToolBar;
+    SpdBVoltarConsCliVendaApoio: TSpeedButton;
+    Label3: TLabel;
     procedure SpBVoltarClick(Sender: TObject);
     procedure SpdBNovoVendaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -129,6 +140,17 @@ type
     procedure SpdBVoltarCadCOntasReceberClick(Sender: TObject);
     procedure BtnConfirmaCadContasReceberClick(Sender: TObject);
     procedure ComboBoxFormaPagVendaClosePopup(Sender: TObject);
+    procedure EditFiltroNomeCadCliVendaClick(Sender: TObject);
+    procedure EditFiltroCodCadCliVendaClick(Sender: TObject);
+    procedure EditFiltroNomeCadCliVendaTyping(Sender: TObject);
+    procedure EditFiltroCodCadCliVendaTyping(Sender: TObject);
+    procedure BtnFiltrarCliVendaClick(Sender: TObject);
+    procedure ListViewCadCliVendaItemClick(const Sender: TObject;
+      const AItem: TListViewItem);
+    procedure SpdBVoltarConsCliVendaApoioClick(Sender: TObject);
+    procedure EdtDescontoMoedaPedidoKeyUp(Sender: TObject; var Key: Word;
+      var KeyChar: Char; Shift: TShiftState);
+    procedure EdtDescontoMoedaPedidoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -137,6 +159,8 @@ type
     FActiveForm: TForm;
     itemIndexList: integer;
 
+    procedure EsconderTeclado;
+    procedure MostrarTeclado(const AControl: TFmxObject);
     procedure AbrirFormVenda(AFormClass: TComponentClass);
     procedure MudarAbaVenda(ATabItemVenda: TTabItem; Sender: TObject);
     procedure LimpaCampos;
@@ -261,13 +285,6 @@ begin
     finally
       ListViewItemPedido.EndUpdate;
     end;
-    MudarAbaVenda(TbItemedicaoVenda, Sender);
-  end
-  else if CliPedido = 'S' then
-  begin
-    EdtCliVenda.Text := nomeCliente;
-    LblCodCliPedido.Text := codCliente;
-    DM.FDQFiltroCadCLi.Active := False;
     MudarAbaVenda(TbItemedicaoVenda, Sender);
   end
   else if finalizaVenda = 'S' then
@@ -585,6 +602,18 @@ begin
   end;
 end;
 
+procedure TFVenda1.BtnFiltrarCliVendaClick(Sender: TObject);
+begin
+  EditFiltroNomeCadCliVenda.Text := EmptyStr;
+  EditFiltroCodCadCliVenda.Text := EmptyStr;
+  DM.FDQFiltroCadCLi.Active := False;
+  DM.FDQFiltroCadCLi.Close;
+  DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := '%';
+  DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
+  DM.FDQFiltroCadCLi.Open();
+  DM.FDQFiltroCadCLi.Active := True;
+end;
+
 procedure TFVenda1.ComboBoxAtendenteItemEnter(Sender: TObject);
 var
   I: integer;
@@ -738,6 +767,114 @@ begin
 
 end;
 
+procedure TFVenda1.EditFiltroCodCadCliVendaClick(Sender: TObject);
+begin
+  MostrarTeclado(EditFiltroCodCadCliVenda);
+end;
+
+procedure TFVenda1.EditFiltroCodCadCliVendaTyping(Sender: TObject);
+begin
+  EditFiltroNomeCadCliVenda.Text := EmptyStr;
+  DM.FDQFiltroCadCLi.Active := False;
+  DM.FDQFiltroCadCLi.Close;
+  if EditFiltroCodCadCliVenda.Text.IsEmpty then
+  begin
+    DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
+    DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := Null;
+  end
+  else
+  begin
+    DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value :=
+      EditFiltroCodCadCliVenda.Text;
+    DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := Null;
+  end;
+  DM.FDQFiltroCadCLi.Open();
+  DM.FDQFiltroCadCLi.Active := True;
+end;
+
+procedure TFVenda1.EditFiltroNomeCadCliVendaClick(Sender: TObject);
+begin
+  MostrarTeclado(EditFiltroNomeCadCliVenda);
+end;
+
+procedure TFVenda1.EditFiltroNomeCadCliVendaTyping(Sender: TObject);
+begin
+  EditFiltroCodCadCliVenda.Text := EmptyStr;
+  DM.FDQFiltroCadCLi.Active := False;
+  DM.FDQFiltroCadCLi.Close;
+  if EditFiltroNomeCadCliVenda.Text.IsEmpty then
+  begin
+    DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := Null;
+    DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
+  end
+  else
+  begin
+    DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value :=
+      '%' + EditFiltroNomeCadCliVenda.Text + '%';
+    DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
+  end;
+  DM.FDQFiltroCadCLi.Open();
+  DM.FDQFiltroCadCLi.Active := True;
+end;
+
+procedure TFVenda1.EdtDescontoMoedaPedidoClick(Sender: TObject);
+begin
+  MostrarTeclado(EdtDescontoMoedaPedido);
+end;
+
+procedure TFVenda1.EdtDescontoMoedaPedidoKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+var
+  valorDesc: Double;
+  vlItem, qtdItem: string;
+  I: integer;
+begin
+  if Key = vkReturn then
+  begin
+    listCountItem := ListViewItemPedido.ItemCount;
+    if not EdtDescontoMoedaPedido.Text.IsEmpty then
+    begin
+      if StrToFloat(EdtDescontoMoedaPedido.Text) >=
+        StrToFloat(ListBoxItemValorTotalVenda.ItemData.Detail) then
+      begin
+        EdtDescontoMoedaPedido.Text := EmptyStr;
+        ShowMessage('Desconto não pode ser maior ou igual ao valor total');
+      end
+      else if listCountItem > 0 then
+      begin
+        vlTotalAtual := 0;
+        qtdTotalAtual := 0;
+        for I := 0 to listCountItem - 1 do
+        begin
+          vlItem := ListViewItemPedido.Items[I].Data
+            [TMultiDetailAppearanceNames.Detail2].AsString;
+          qtdItem := ListViewItemPedido.Items[I].Data
+            [TMultiDetailAppearanceNames.Detail1].AsString;
+          vlTotalItemAtual := StrToFloat(qtdItem) * StrToFloat(vlItem);
+
+          qtdTotalAtual := qtdTotalAtual + StrToFloat(qtdItem);
+          vlTotalAtual := vlTotalAtual + vlTotalItemAtual;
+        end;
+
+        valorDesc := vlTotalAtual - StrToFloat(EdtDescontoMoedaPedido.Text);
+        ListBoxItemValorTotalVenda.ItemData.Detail := FloatToStr(valorDesc);
+
+        if not EdtNumParcelaPedido.Text.IsEmpty then
+        begin
+          EdtNumParcelaPedidoTyping(Sender);
+        end;
+      end
+      else if listCountItem = 0 then
+      begin
+        EdtDescontoMoedaPedido.Text := EmptyStr;
+        ShowMessage('Faltar informar algum produto');
+      end;
+
+    end;
+    EsconderTeclado;
+  end;
+end;
+
 procedure TFVenda1.EdtNumParcelaPedidoKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
@@ -766,6 +903,16 @@ begin
     ListBoxItemParcelasVenda.Text := EmptyStr;
     ListBoxItemParcelasVenda.ItemData.Detail := EmptyStr;
   end;
+end;
+
+procedure TFVenda1.EsconderTeclado;
+var
+  keyboard: IFMXVirtualKeyboardService;
+begin
+  TPlatformServices.Current.SupportsPlatformService(IFMXVirtualKeyboardService,
+    IInterface(keyboard));
+  if (keyboard <> nil) then
+    keyboard.HideVirtualKeyboard;
 end;
 
 procedure TFVenda1.FormCreate(Sender: TObject);
@@ -815,8 +962,33 @@ begin
   ComboBoxAtendentePedido.Items.Clear;
 end;
 
+procedure TFVenda1.ListViewCadCliVendaItemClick(const Sender: TObject;
+  const AItem: TListViewItem);
+begin
+  MessageDlg('Você deseja adicionar este cliente ao pedido?',
+    System.UITypes.TMsgDlgType.mtInformation, [System.UITypes.TMsgDlgBtn.mbYes,
+    System.UITypes.TMsgDlgBtn.mbNo], 0,
+    procedure(const AResult: System.UITypes.TModalResult)
+    begin
+      case AResult of
+        mrYES:
+          begin
+            // caso sim
+            EdtCliVenda.Text := DM.FDQFiltroCadCLinome_cli.AsString;
+            LblCodCliPedido.Text := DM.FDQFiltroCadCLiid_cli.AsString;
+            MudarAbaVenda(TbItemedicaoVenda, Sender);
+            DM.FDQFiltroCadCLi.Active := False;
+          end;
+        mrNo:
+          begin
+            // caso não
+          end;
+      end;
+    end);
+end;
+
 procedure TFVenda1.ListViewItemPedidoGesture(Sender: TObject;
-  const EventInfo: TGestureEventInfo; var Handled: Boolean);
+const EventInfo: TGestureEventInfo; var Handled: Boolean);
 
 begin
   if EventInfo.GestureID = igiLongTap then
@@ -838,7 +1010,7 @@ begin
 end;
 
 procedure TFVenda1.ListViewPedidoItemClick(const Sender: TObject;
-  const AItem: TListViewItem);
+const AItem: TListViewItem);
 var
   listaItem: TListViewItem;
   qteCount: Double;
@@ -855,7 +1027,6 @@ begin
   ListBoxItemParcelasVenda.Height := 44;
   ListBoxItem6.Height := 44;
 {$ENDIF}
-
   if ComboBoxFiltroPedido.ItemIndex = 0 then
   begin
     MessageDlg('Pedido já fechado! Deseja visualizar?',
@@ -999,6 +1170,16 @@ begin
   end;
 end;
 
+procedure TFVenda1.MostrarTeclado(const AControl: TFmxObject);
+var
+  keyboard: IFMXVirtualKeyboardService;
+begin
+  TPlatformServices.Current.SupportsPlatformService(IFMXVirtualKeyboardService,
+    IInterface(keyboard));
+  if (keyboard <> nil) then
+    keyboard.ShowVirtualKeyboard(AControl);
+end;
+
 procedure TFVenda1.MudarAbaVenda(ATabItemVenda: TTabItem; Sender: TObject);
 begin
   ActMudarAbaVenda.Tab := ATabItemVenda;
@@ -1018,6 +1199,9 @@ var
   I: integer;
   vlItem, qtdItem: string;
 begin
+  ToolBar3.Visible := True;
+  LytConsultaClienteVendaApoio.Visible := False;
+
   SpdBVoltarCadCOntasReceber.Visible := False;
   contItem := 0;
   itemPedido := 'S';
@@ -1139,12 +1323,14 @@ end;
 
 procedure TFVenda1.SpdBPesqCliVendaClick(Sender: TObject);
 begin
-  SpdBVoltarCadCOntasReceber.Visible := False;
-  LblSupApoioVenda.Text := 'Clientes';
-  finalizaVenda := EmptyStr;
-  itemPedido := EmptyStr;
-  CliPedido := 'S';
-  AbrirFormVenda(TFCadCli);
+  { SpdBVoltarCadCOntasReceber.Visible := False;
+    LblSupApoioVenda.Text := 'Clientes';
+    finalizaVenda := EmptyStr;
+    itemPedido := EmptyStr;
+    CliPedido := 'S';
+    AbrirFormVenda(TFCadCli); }
+
+  ToolBar3.Visible := False;
   MudarAbaVenda(TbItemApoioVenda, Sender);
 
   { if not Assigned(FCadCli) then
@@ -1199,6 +1385,8 @@ begin
                   vlParcela := ListBoxItemParcelasVenda.ItemData.Detail;
                   tipoReceita := ComboBoxFormaPagVenda.Selected.Text;
 
+                  ToolBar3.Visible := True;
+                  LytConsultaClienteVendaApoio.Visible := False;
                   AbrirFormVenda(TFContasReceberVenda);
                   MudarAbaVenda(TbItemApoioVenda, Sender);
                 end
@@ -1467,6 +1655,12 @@ procedure TFVenda1.SpdBVoltarCadCOntasReceberClick(Sender: TObject);
 begin
   MudarAbaVenda(TbItemedicaoVenda, Sender);
   AbrirFormVenda(TFAuxiliar);
+end;
+
+procedure TFVenda1.SpdBVoltarConsCliVendaApoioClick(Sender: TObject);
+begin
+  DM.FDQFiltroCadCLi.Active := False;
+  MudarAbaVenda(TbItemedicaoVenda, Sender);
 end;
 
 procedure TFVenda1.SpdBVoltarItemVendaClick(Sender: TObject);
