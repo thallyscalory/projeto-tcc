@@ -1,14 +1,15 @@
 object DM: TDM
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 443
-  Width = 970
+  Height = 442
+  Width = 1074
   object FDConnection1: TFDConnection
     Params.Strings = (
       'Database=C:\projeto tcc\bd\calorytcc.s3db'
       'OpenMode=ReadWrite'
       'LockingMode=Normal'
       'DriverID=SQLite')
+    Connected = True
     LoginPrompt = False
     Left = 40
     Top = 8
@@ -1496,6 +1497,53 @@ object DM: TDM
       Required = True
       FixedChar = True
       Size = 1
+    end
+  end
+  object FDQCadBaixaContasReceber: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from baixa_conta_receber;')
+    Left = 960
+    Top = 152
+    object FDQCadBaixaContasReceberid: TIntegerField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQCadBaixaContasReceberid_conta_receber: TIntegerField
+      FieldName = 'id_conta_receber'
+      Origin = 'id_conta_receber'
+      Required = True
+    end
+    object FDQCadBaixaContasReceberdata: TDateField
+      FieldName = 'data'
+      Origin = 'data'
+      Required = True
+    end
+    object FDQCadBaixaContasRecebervalor: TFloatField
+      FieldName = 'valor'
+      Origin = 'valor'
+      Required = True
+    end
+    object FDQCadBaixaContasReceberid_forma_pag: TIntegerField
+      FieldName = 'id_forma_pag'
+      Origin = 'id_forma_pag'
+      Required = True
+    end
+  end
+  object FDQMaxIdBaixaContaReceber: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select max(id) as maxId from baixa_conta_receber;')
+    Left = 960
+    Top = 80
+    object FDQMaxIdBaixaContaRecebermaxId: TLargeintField
+      AutoGenerateValue = arDefault
+      FieldName = 'maxId'
+      Origin = 'maxId'
+      ProviderFlags = []
+      ReadOnly = True
     end
   end
 end

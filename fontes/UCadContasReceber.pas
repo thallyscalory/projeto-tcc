@@ -11,7 +11,7 @@ uses
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, MultiDetailAppearanceU,
   FMX.ListView, System.Rtti, System.Bindings.Outputs, FMX.Bind.Editors,
   Data.Bind.EngExt, FMX.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope,
-  FMX.ListBox, FMX.DateTimeCtrls, System.UIConsts;
+  FMX.ListBox, FMX.DateTimeCtrls, System.UIConsts, FMX.Edit;
 
 type
   TFCadContasReceber = class(TFCadModelo)
@@ -41,6 +41,17 @@ type
     SpdBVoltarBaixaContasReceberEdicao: TSpeedButton;
     LblTituloBaixaContasReceberEdicao: TLabel;
     SpdBConfirmaBaixaContasREceberEdicao: TSpeedButton;
+    LblValorBaixaContasReceberEdicao: TLabel;
+    EditValorReceber: TEdit;
+    LblDescMoedaBaixaContasReceberEdicao: TLabel;
+    LblValorTotalBaixaContasReceberEdicao: TLabel;
+    LblTipoReceitaBaixaContasReceberEdicao: TLabel;
+    EdtDesconto: TEdit;
+    EdtValorTotal: TEdit;
+    ListBoxItem5: TListBoxItem;
+    LblAcrescimoMoedaBaixaContasReceberEdicao: TLabel;
+    EdtAcrescimo: TEdit;
+    ComboBoxTipoReceita: TComboBox;
     procedure SpBVoltarClick(Sender: TObject);
     procedure ComboBoxFiltroClienteContasReceberEnter(Sender: TObject);
     procedure ComboBoxFiltroClienteContasReceberClosePopup(Sender: TObject);
@@ -53,10 +64,13 @@ type
     procedure BtnBaixaContasReceberClick(Sender: TObject);
     procedure SpdBVoltarBaixaContasReceberEdicaoClick(Sender: TObject);
   private
+    saldoContasReceber, idContasReceber, idCliContasReceber: array of string;
+    tamanhoArray, contadorArray, controleCheckmark: integer;
+    saldoTotal: Double;
+    filtro, limpaArray, cliDiferente: string;
     { Private declarations }
   public
-    saldoContasReceber, idContasReceber: array of string;
-    tamanhoArray, contadorArray, controleCheckmark: integer;
+
     { Public declarations }
   end;
 
@@ -70,6 +84,8 @@ implementation
 uses UDM, UPrincipal, UAuxiliar;
 
 procedure TFCadContasReceber.BtnBaixaContasReceberClick(Sender: TObject);
+var
+  I, J: integer;
 begin
   inherited;
 {$IFDEF MSWINDOWS}
@@ -78,6 +94,38 @@ begin
   ListBoxItem3.Height := 44;
   ListBoxItem4.Height := 44;
 {$ENDIF}
+  saldoTotal := 0;
+  for I := 0 to tamanhoArray - 1 do
+  begin
+    if not saldoContasReceber[I].IsEmpty then
+    begin
+      saldoTotal := saldoTotal + StrToFloat(saldoContasReceber[I]);
+    end;
+  end;
+
+  cliDiferente := 'N';
+  for I := 0 to tamanhoArray - 1 do
+  begin
+    for J := 1 to tamanhoArray - 1 do
+    begin
+      if not(idCliContasReceber[I].IsEmpty) or (idCliContasReceber[J].IsEmpty)
+      then
+      begin
+        if idCliContasReceber[I] <> idCliContasReceber[J] then
+        begin
+          cliDiferente := 'S';
+        end;
+      end;
+
+      if cliDiferente = 'S' then
+        Break
+    end;
+
+    if cliDiferente = 'S' then
+      Break
+  end;
+
+
 
   MudarAbaModelo(TbItemedicao, Sender);
 end;
@@ -86,6 +134,8 @@ procedure TFCadContasReceber.ComboBoxFiltroClienteContasReceberClosePopup
   (Sender: TObject);
 begin
   inherited;
+  filtro := 'CLI';
+
   if ComboBoxFiltroClienteContasReceber.Selected.Text = '*Todos*' then
   begin
     DM.FDQConsContasReceber.Active := False;
@@ -135,6 +185,8 @@ var
   dataVencInicio, dataVencFinal: TDateTime;
 begin
   inherited;
+  filtro := 'VENC';
+
   dataVencInicio := StrToDateTime(DateEdtFiltroVencInicialContasReceber.Text);
   dataVencFinal := StrToDateTime(DateEdtFiltroVencFinalContasReceber.Text);
 
@@ -195,6 +247,7 @@ begin
   tamanhoArray := 0;
   contadorArray := 0;
   controleCheckmark := 0;
+  limpaArray := 'N';
   ListViewCadContasReceber.ItemAppearanceObjects.ItemObjects.Accessory.
     Visible := False;
   ListViewCadContasReceber.ItemAppearanceObjects.ItemEditObjects.Accessory.
@@ -206,6 +259,14 @@ procedure TFCadContasReceber.ListViewCadContasReceberItemClick
   (const Sender: TObject; const AItem: TListViewItem);
 begin
   inherited;
+  if limpaArray = 'S' then
+  begin
+    tamanhoArray := 0;
+    contadorArray := 0;
+    controleCheckmark := 0;
+    limpaArray := 'N';
+  end;
+
   if AItem.Detail.IsEmpty then
   begin
     AItem.Objects.AccessoryObject.Visible := True;
@@ -214,10 +275,13 @@ begin
     tamanhoArray := tamanhoArray + 1;
     SetLength(saldoContasReceber, tamanhoArray);
     SetLength(idContasReceber, tamanhoArray);
+    SetLength(idCliContasReceber, tamanhoArray);
 
     saldoContasReceber[contadorArray] :=
       AItem.Data[TMultiDetailAppearanceNames.Detail3].ToString;
     idContasReceber[contadorArray] := DM.FDQConsContasReceberid.AsString;
+    idCliContasReceber[contadorArray] :=
+      DM.FDQConsContasReceberid_cliente.AsString;
     AItem.Detail := IntToStr(contadorArray);
 
     contadorArray := contadorArray + 1;
@@ -232,6 +296,7 @@ begin
 
     saldoContasReceber[StrToInt(AItem.Detail)] := EmptyStr;
     idContasReceber[StrToInt(AItem.Detail)] := EmptyStr;
+    idCliContasReceber[StrToInt(AItem.Detail)] := EmptyStr;
     AItem.Detail := EmptyStr;
 
     AItem.Objects.AccessoryObject.Visible := False;;
@@ -281,6 +346,22 @@ procedure TFCadContasReceber.SpdBVoltarBaixaContasReceberEdicaoClick
   (Sender: TObject);
 begin
   inherited;
+  SetLength(saldoContasReceber, 0);
+  SetLength(idContasReceber, 0);
+  SetLength(idCliContasReceber, 0);
+  limpaArray := 'S';
+
+  if filtro = 'CLI' then
+  begin
+    ComboBoxFiltroClienteContasReceberClosePopup(Sender);
+  end
+  else if filtro = 'VENC' then
+  begin
+    DateEdtFiltroVencFinalContasReceberClosePicker(Sender);
+  end;
+
+  BtnBaixaContasReceber.Visible := False;
+
   MudarAbaModelo(TbItemListagem, Sender);
 end;
 

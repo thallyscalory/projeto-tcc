@@ -9,12 +9,14 @@ inherited FCadCli: TFCadCli
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
+      TabIndex = 1
       Sizes = (
         330s
         431s
         330s
         431s)
       inherited TbItemListagem: TTabItem
+        IsSelected = False
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         inherited ToolBarsuperior: TToolBar
@@ -126,6 +128,7 @@ inherited FCadCli: TFCadCli
         end
       end
       inherited TbItemedicao: TTabItem
+        IsSelected = True
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object ToolBar1: TToolBar

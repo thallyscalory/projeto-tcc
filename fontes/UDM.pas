@@ -242,6 +242,14 @@ type
     FDQFiltroCadCLiobs_cli: TWideMemoField;
     FDQFiltroCadCLidata_cad_cli: TDateTimeField;
     FDQFiltroCadCLifoto_cli: TBlobField;
+    FDQCadBaixaContasReceber: TFDQuery;
+    FDQMaxIdBaixaContaReceber: TFDQuery;
+    FDQMaxIdBaixaContaRecebermaxId: TLargeintField;
+    FDQCadBaixaContasReceberid: TIntegerField;
+    FDQCadBaixaContasReceberid_conta_receber: TIntegerField;
+    FDQCadBaixaContasReceberdata: TDateField;
+    FDQCadBaixaContasRecebervalor: TFloatField;
+    FDQCadBaixaContasReceberid_forma_pag: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
