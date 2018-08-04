@@ -287,5 +287,9 @@ LayerNames="tipo de receita baixa"
 [Module Settings]
 ModelLayerNames="tipo de receita baixa";"contas receber";"filtro cliente"
 ActiveLayerNames=
-EditingLayerName=tipo de receita baixa
+EditingLayerName=
+
+[DM.FDQConsContasReceberBaixa]
+Coordinates=149,250,216,36
+Visible=False
 
