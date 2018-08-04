@@ -52,6 +52,8 @@ type
     LblAcrescimoMoedaBaixaContasReceberEdicao: TLabel;
     EdtAcrescimo: TEdit;
     ComboBoxTipoReceita: TComboBox;
+    BindSourceDB3: TBindSourceDB;
+    LinkListControlToField3: TLinkListControlToField;
     procedure SpBVoltarClick(Sender: TObject);
     procedure ComboBoxFiltroClienteContasReceberEnter(Sender: TObject);
     procedure ComboBoxFiltroClienteContasReceberClosePopup(Sender: TObject);
@@ -63,6 +65,11 @@ type
       const AItem: TListViewItem);
     procedure BtnBaixaContasReceberClick(Sender: TObject);
     procedure SpdBVoltarBaixaContasReceberEdicaoClick(Sender: TObject);
+    procedure ComboBoxTipoReceitaEnter(Sender: TObject);
+    procedure EdtAcrescimoTyping(Sender: TObject);
+    procedure EdtDescontoTyping(Sender: TObject);
+    procedure EditValorReceberTyping(Sender: TObject);
+    procedure SpdBConfirmaBaixaContasREceberEdicaoClick(Sender: TObject);
   private
     saldoContasReceber, idContasReceber, idCliContasReceber: array of string;
     tamanhoArray, contadorArray, controleCheckmark: integer;
@@ -93,6 +100,7 @@ begin
   ListBoxItem2.Height := 44;
   ListBoxItem3.Height := 44;
   ListBoxItem4.Height := 44;
+  ListBoxItem5.Height := 44;
 {$ENDIF}
   saldoTotal := 0;
   for I := 0 to tamanhoArray - 1 do
@@ -125,7 +133,10 @@ begin
       Break
   end;
 
-
+  EditValorReceber.Text := FloatToStr(saldoTotal);
+  EdtDesconto.Text := EmptyStr;
+  EdtAcrescimo.Text := EmptyStr;
+  EdtValorTotal.Text := FloatToStr(saldoTotal);
 
   MudarAbaModelo(TbItemedicao, Sender);
 end;
@@ -177,6 +188,15 @@ begin
   DM.FDQFiltroCadCLi.Active := True;
 
   ComboBoxFiltroClienteContasReceber.Items.Add('*Todos*');
+end;
+
+procedure TFCadContasReceber.ComboBoxTipoReceitaEnter(Sender: TObject);
+begin
+  inherited;
+  DM.FDQConsAvistaFormaPag.Active := False;
+  DM.FDQConsAvistaFormaPag.Close;
+  DM.FDQConsAvistaFormaPag.Open();
+  DM.FDQConsAvistaFormaPag.Active := True;
 end;
 
 procedure TFCadContasReceber.DateEdtFiltroVencFinalContasReceberClosePicker
@@ -235,6 +255,65 @@ begin
   end;
 end;
 
+procedure TFCadContasReceber.EditValorReceberTyping(Sender: TObject);
+begin
+  inherited;
+  if not EditValorReceber.Text.IsEmpty then
+  begin
+    if not EdtAcrescimo.Text.IsEmpty then
+    begin
+      EdtAcrescimoTyping(Sender);
+    end
+    else if not EdtDesconto.Text.IsEmpty then
+    begin
+      EdtDescontoTyping(Sender);
+    end
+    else
+    begin
+      EdtValorTotal.Text := EditValorReceber.Text;
+    end;
+  end;
+
+end;
+
+procedure TFCadContasReceber.EdtAcrescimoTyping(Sender: TObject);
+var
+  result: integer;
+begin
+  inherited;
+  result := 0;
+  if not EdtAcrescimo.Text.IsEmpty then
+  begin
+    result := StrToInt(EditValorReceber.Text) + StrToInt(EdtAcrescimo.Text);
+    EdtValorTotal.Text := IntToStr(result);
+  end
+  else
+  begin
+    EdtValorTotal.Text := EditValorReceber.Text;
+  end;
+
+  EdtDesconto.Text := EmptyStr;
+end;
+
+procedure TFCadContasReceber.EdtDescontoTyping(Sender: TObject);
+var
+  result: integer;
+begin
+  inherited;
+  result := 0;
+  if not EdtDesconto.Text.IsEmpty then
+  begin
+    result := StrToInt(EditValorReceber.Text) - StrToInt(EdtDesconto.Text);
+    EdtValorTotal.Text := IntToStr(result);
+  end
+  else
+  begin
+    EdtValorTotal.Text := EditValorReceber.Text;
+  end;
+
+  EdtAcrescimo.Text := EmptyStr;
+end;
+
 procedure TFCadContasReceber.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -253,6 +332,8 @@ begin
   ListViewCadContasReceber.ItemAppearanceObjects.ItemEditObjects.Accessory.
     Visible := False;
   BtnBaixaContasReceber.Visible := False;
+
+  DM.FDQConsAvistaFormaPag.Active := False;
 end;
 
 procedure TFCadContasReceber.ListViewCadContasReceberItemClick
@@ -342,6 +423,43 @@ begin
   FPrincipal.AbrirForm(TFAuxiliar);
 end;
 
+procedure TFCadContasReceber.SpdBConfirmaBaixaContasREceberEdicaoClick
+  (Sender: TObject);
+var
+  valorTotal: Double;
+  I: integer;
+  data : TDate;
+begin
+  inherited;
+  data := Date;
+  valorTotal := StrToFloat(EdtValorTotal.Text);
+
+  if cliDiferente = 'S' then
+  begin
+    if saldoTotal > valorTotal then
+    begin
+      ShowMessage
+        ('Processo cancelado! Não é permitido baixa parcial com mais de 1 cliente filtrado.');
+    end
+    else
+    begin
+      for I := 0 to tamanhoArray - 1 do
+      begin
+        if not idContasReceber[I].IsEmpty then
+        begin
+          DM.FDQConsContasReceberBaixa.Close;
+          DM.FDQConsContasReceberBaixa.ParamByName('PIdContaReceber').Value :=
+            idContasReceber[I];
+          DM.FDQConsContasReceberBaixa.Open();
+
+
+        end;
+
+      end;
+    end;
+  end;
+end;
+
 procedure TFCadContasReceber.SpdBVoltarBaixaContasReceberEdicaoClick
   (Sender: TObject);
 begin
@@ -361,6 +479,8 @@ begin
   end;
 
   BtnBaixaContasReceber.Visible := False;
+
+  DM.FDQConsAvistaFormaPag.Active := False;
 
   MudarAbaModelo(TbItemListagem, Sender);
 end;

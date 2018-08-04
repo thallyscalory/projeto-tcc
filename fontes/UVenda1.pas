@@ -131,8 +131,6 @@ type
       KeyboardVisible: Boolean; const Bounds: TRect);
     procedure ComboBoxAtendentePedidoEnter(Sender: TObject);
     procedure ComboBoxAtendentePedidoClosePopup(Sender: TObject);
-    procedure EdtNumParcelaPedidoKeyUp(Sender: TObject; var Key: Word;
-      var KeyChar: Char; Shift: TShiftState);
     procedure ComboBoxAtendenteItemEnter(Sender: TObject);
     procedure ListViewItemPedidoGesture(Sender: TObject;
       const EventInfo: TGestureEventInfo; var Handled: Boolean);
@@ -873,13 +871,6 @@ begin
     end;
     EsconderTeclado;
   end;
-end;
-
-procedure TFVenda1.EdtNumParcelaPedidoKeyUp(Sender: TObject; var Key: Word;
-  var KeyChar: Char; Shift: TShiftState);
-begin
-  if Key = vkReturn then
-    EdtDescontoMoedaPedido.SetFocus;
 end;
 
 procedure TFVenda1.EdtNumParcelaPedidoTyping(Sender: TObject);

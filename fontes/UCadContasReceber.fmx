@@ -3,12 +3,14 @@ inherited FCadContasReceber: TFCadContasReceber
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
+      TabIndex = 1
       Sizes = (
         330s
         431s
         330s
         431s)
       inherited TbItemListagem: TTabItem
+        IsSelected = False
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         inherited ToolBarsuperior: TToolBar
@@ -194,6 +196,7 @@ inherited FCadContasReceber: TFCadContasReceber
         end
       end
       inherited TbItemedicao: TTabItem
+        IsSelected = True
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object LytBaixaContasReceberEdicao: TLayout
@@ -239,43 +242,20 @@ inherited FCadContasReceber: TFCadContasReceber
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
+                KeyboardType = NumbersAndPunctuation
+                ReturnKeyType = Done
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 8.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Size.Width = 198.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
-              end
-            end
-            object ListBoxItem2: TListBoxItem
-              Position.Y = 44.000000000000000000
-              TabOrder = 1
-              object LblDescMoedaBaixaContasReceberEdicao: TLabel
-                Align = Left
-                StyledSettings = [Style, FontColor]
-                Margins.Left = 4.000000000000000000
-                Position.X = 4.000000000000000000
-                Size.Width = 69.000000000000000000
-                Size.Height = 44.000000000000000000
-                Size.PlatformDefault = False
-                TextSettings.Font.Family = 'Arial'
-                TextSettings.Font.Size = 14.000000000000000000
-                Text = 'Desconto:'
-              end
-              object EdtDesconto: TEdit
-                Touch.InteractiveGestures = [LongTap, DoubleTap]
-                Align = Client
-                TabOrder = 1
-                Margins.Left = 4.000000000000000000
-                Margins.Top = 8.000000000000000000
-                Margins.Right = 4.000000000000000000
-                Size.Width = 241.000000000000000000
-                Size.Height = 32.000000000000000000
-                Size.PlatformDefault = False
+                KillFocusByReturn = True
+                OnTyping = EditValorReceberTyping
               end
             end
             object ListBoxItem5: TListBoxItem
-              Position.Y = 88.000000000000000000
+              Position.Y = 44.000000000000000000
               TabOrder = 4
               object LblAcrescimoMoedaBaixaContasReceberEdicao: TLabel
                 Align = Left
@@ -293,12 +273,49 @@ inherited FCadContasReceber: TFCadContasReceber
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
+                KeyboardType = NumbersAndPunctuation
+                ReturnKeyType = Done
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 8.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Size.Width = 234.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
+                TextPrompt = '0,00'
+                KillFocusByReturn = True
+                OnTyping = EdtAcrescimoTyping
+              end
+            end
+            object ListBoxItem2: TListBoxItem
+              Position.Y = 88.000000000000000000
+              TabOrder = 1
+              object LblDescMoedaBaixaContasReceberEdicao: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 44.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Desconto:'
+              end
+              object EdtDesconto: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                KeyboardType = NumbersAndPunctuation
+                ReturnKeyType = Done
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Size.Width = 241.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = '0,00'
+                KillFocusByReturn = True
+                OnTyping = EdtDescontoTyping
               end
             end
             object ListBoxItem3: TListBoxItem
@@ -320,6 +337,7 @@ inherited FCadContasReceber: TFCadContasReceber
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
+                Enabled = False
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 8.000000000000000000
                 Margins.Right = 4.000000000000000000
@@ -352,6 +370,7 @@ inherited FCadContasReceber: TFCadContasReceber
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TabOrder = 2
+                OnEnter = ComboBoxTipoReceitaEnter
               end
             end
           end
@@ -394,6 +413,7 @@ inherited FCadContasReceber: TFCadContasReceber
               Size.Height = 48.000000000000000000
               Size.PlatformDefault = False
               StyleLookup = 'donetoolbutton'
+              OnClick = SpdBConfirmaBaixaContasREceberEdicaoClick
             end
           end
         end
@@ -450,11 +470,26 @@ inherited FCadContasReceber: TFCadContasReceber
       FillHeaderExpressions = <>
       FillBreakGroups = <>
     end
+    object LinkListControlToField3: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB3
+      FieldName = 'descricao_forma_pag'
+      Control = ComboBoxTipoReceita
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
   end
   object BindSourceDB2: TBindSourceDB
     DataSet = DM.FDQFiltroCadCLi
     ScopeMappings = <>
     Left = 16
     Top = 272
+  end
+  object BindSourceDB3: TBindSourceDB
+    DataSet = DM.FDQConsAvistaFormaPag
+    ScopeMappings = <>
+    Left = 152
+    Top = 224
   end
 end

@@ -1174,8 +1174,9 @@ object DM: TDM
       
         'where cr.quitado = '#39'N'#39' and (cli.nome_cli like :PCLienteContasRec' +
         'eber1 and cr.data_venc between :PDataVencInicio and :PDataVencFi' +
-        'nal or cli.nome_cli like :PCLienteContasReceber2) order by cli.n' +
-        'ome_cli;')
+        'nal '
+      'or cli.nome_cli like :PCLienteContasReceber2) '
+      'order by cli.nome_cli;')
     Left = 812
     Top = 8
     ParamData = <
@@ -1544,6 +1545,121 @@ object DM: TDM
       Origin = 'maxId'
       ProviderFlags = []
       ReadOnly = True
+    end
+  end
+  object FDQConsAvistaFormaPag: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      
+        'select * from forma_pag where geraconta_forma_pag = '#39'S'#39' and avis' +
+        'ta_forma_pag = '#39'S'#39';')
+    Left = 584
+    Top = 216
+    object FDQConsAvistaFormaPagid_forma_pag: TIntegerField
+      FieldName = 'id_forma_pag'
+      Origin = 'id_forma_pag'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQConsAvistaFormaPagdescricao_forma_pag: TStringField
+      FieldName = 'descricao_forma_pag'
+      Origin = 'descricao_forma_pag'
+      Required = True
+      Size = 30
+    end
+    object FDQConsAvistaFormaPaggeraconta_forma_pag: TStringField
+      FieldName = 'geraconta_forma_pag'
+      Origin = 'geraconta_forma_pag'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsAvistaFormaPagavista_forma_pag: TStringField
+      FieldName = 'avista_forma_pag'
+      Origin = 'avista_forma_pag'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsAvistaFormaPagcondicional_forma_pag: TStringField
+      FieldName = 'condicional_forma_pag'
+      Origin = 'condicional_forma_pag'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object FDQConsContasReceberBaixa: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from conta_receber where id = :PIdContaReceber;')
+    Left = 816
+    Top = 216
+    ParamData = <
+      item
+        Name = 'PIDCONTARECEBER'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 30
+      end>
+    object FDQConsContasReceberBaixaid: TIntegerField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQConsContasReceberBaixaid_pedido: TIntegerField
+      FieldName = 'id_pedido'
+      Origin = 'id_pedido'
+    end
+    object FDQConsContasReceberBaixaid_cliente: TIntegerField
+      FieldName = 'id_cliente'
+      Origin = 'id_cliente'
+      Required = True
+    end
+    object FDQConsContasReceberBaixaid_forma_pag: TIntegerField
+      FieldName = 'id_forma_pag'
+      Origin = 'id_forma_pag'
+    end
+    object FDQConsContasReceberBaixavalor_documento: TFloatField
+      FieldName = 'valor_documento'
+      Origin = 'valor_documento'
+      Required = True
+    end
+    object FDQConsContasReceberBaixavalor_juro: TFloatField
+      FieldName = 'valor_juro'
+      Origin = 'valor_juro'
+    end
+    object FDQConsContasReceberBaixavalor_desconto: TFloatField
+      FieldName = 'valor_desconto'
+      Origin = 'valor_desconto'
+    end
+    object FDQConsContasReceberBaixavalor_pago: TFloatField
+      FieldName = 'valor_pago'
+      Origin = 'valor_pago'
+    end
+    object FDQConsContasReceberBaixavalor_saldo: TFloatField
+      FieldName = 'valor_saldo'
+      Origin = 'valor_saldo'
+      Required = True
+    end
+    object FDQConsContasReceberBaixadata_venc: TDateField
+      FieldName = 'data_venc'
+      Origin = 'data_venc'
+      Required = True
+    end
+    object FDQConsContasReceberBaixadata_cad: TDateField
+      FieldName = 'data_cad'
+      Origin = 'data_cad'
+      Required = True
+    end
+    object FDQConsContasReceberBaixadata_quitacao: TDateField
+      FieldName = 'data_quitacao'
+      Origin = 'data_quitacao'
+    end
+    object FDQConsContasReceberBaixaquitado: TStringField
+      FieldName = 'quitado'
+      Origin = 'quitado'
+      Required = True
+      FixedChar = True
+      Size = 1
     end
   end
 end

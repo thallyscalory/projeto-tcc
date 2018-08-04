@@ -250,6 +250,26 @@ type
     FDQCadBaixaContasReceberdata: TDateField;
     FDQCadBaixaContasRecebervalor: TFloatField;
     FDQCadBaixaContasReceberid_forma_pag: TIntegerField;
+    FDQConsAvistaFormaPag: TFDQuery;
+    FDQConsAvistaFormaPagid_forma_pag: TIntegerField;
+    FDQConsAvistaFormaPagdescricao_forma_pag: TStringField;
+    FDQConsAvistaFormaPaggeraconta_forma_pag: TStringField;
+    FDQConsAvistaFormaPagavista_forma_pag: TStringField;
+    FDQConsAvistaFormaPagcondicional_forma_pag: TStringField;
+    FDQConsContasReceberBaixa: TFDQuery;
+    FDQConsContasReceberBaixaid: TIntegerField;
+    FDQConsContasReceberBaixaid_pedido: TIntegerField;
+    FDQConsContasReceberBaixaid_cliente: TIntegerField;
+    FDQConsContasReceberBaixaid_forma_pag: TIntegerField;
+    FDQConsContasReceberBaixavalor_documento: TFloatField;
+    FDQConsContasReceberBaixavalor_juro: TFloatField;
+    FDQConsContasReceberBaixavalor_desconto: TFloatField;
+    FDQConsContasReceberBaixavalor_pago: TFloatField;
+    FDQConsContasReceberBaixavalor_saldo: TFloatField;
+    FDQConsContasReceberBaixadata_venc: TDateField;
+    FDQConsContasReceberBaixadata_cad: TDateField;
+    FDQConsContasReceberBaixadata_quitacao: TDateField;
+    FDQConsContasReceberBaixaquitado: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

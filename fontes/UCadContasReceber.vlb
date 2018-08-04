@@ -1,165 +1,291 @@
 ﻿[ActMudarAba]
-Coordinates=174,1,81,33
+Coordinates=174,1,92,36
 
 [LytBase]
-Coordinates=272,298,54,33
+Coordinates=272,298,61,36
 Visible=False
 
 [ToolBarsuperior]
-Coordinates=156,298,94,33
+Coordinates=156,298,106,36
 Visible=False
 
 [ImageList1]
-Coordinates=193,111,68,33
+Coordinates=193,111,77,36
 
 [ActionList1]
-Coordinates=174,151,70,33
+Coordinates=174,151,78,36
 
 [TbControlCadModelo]
-Coordinates=10,298,119,33
+Coordinates=10,298,136,36
 Visible=False
 
 [TbItemedicao]
-Coordinates=468,10,80,33
+Coordinates=468,10,92,36
 Visible=False
 
 [TbItemListagem]
-Coordinates=351,10,93,33
+Coordinates=351,10,107,36
 Visible=False
 
 [SpBVoltar]
-Coordinates=269,10,64,33
+Coordinates=269,10,72,36
 Visible=False
 
 [LblTitulo]
-Coordinates=195,10,57,33
+Coordinates=195,10,64,36
 Visible=False
 
 [ListViewCadContasReceber]
-Coordinates=10,10,151,231
+Coordinates=10,10,175,278
 Visible=True
+LayerNames="contas receber"
 
 []
 Coordinates=75,185,91,36
 
 [DM.FDQCadContasReceber]
-Coordinates=636,1,149,285
+Coordinates=636,1,177,36
+Visible=False
 
 [DM.FDQCadProd]
-Coordinates=0,0,97,33
+Coordinates=0,0,115,36
 Visible=False
 
 [DM.FDQDetalheProdCodBar]
-Coordinates=390,980,152,33
+Coordinates=390,980,179,36
 Visible=False
 
 [DM.FDQMaxIdContasReceber]
-Coordinates=823,1,159,69
+Coordinates=823,1,189,36
+Visible=False
 
 [DM.FDQPedido]
-Coordinates=465,580,89,33
+Coordinates=465,580,105,36
 Visible=False
 
 [DM.FDQMaxIdPedido]
-Coordinates=636,535,118,69
+Coordinates=636,535,140,36
+Visible=False
 
 [DM.FDQCadItemPedido]
-Coordinates=220,970,129,33
+Coordinates=220,970,153,36
 Visible=False
 
 [DM.FDQMaxIdCli]
-Coordinates=636,711,97,69
+Coordinates=636,711,115,36
+Visible=False
 
 [DM.FDQCadCli]
-Coordinates=27,268,87,33
+Coordinates=27,268,103,36
 Visible=False
 
 [DM.FDQConsFormaPag]
-Coordinates=636,375,131,141
+Coordinates=636,375,154,36
+Visible=False
 
 [DM.FDQCadFormaPag]
-Coordinates=291,1,124,33
+Coordinates=291,1,148,36
 Visible=False
 
 [DM.FDQCadPedido]
-Coordinates=465,330,108,33
+Coordinates=465,330,128,36
 Visible=False
 
 [DM.FDQConsAtendente]
-Coordinates=152,647,131,33
+Coordinates=152,647,153,36
 Visible=False
 
 [DM.FDQFiltroCadCLi]
-Coordinates=1218,870,116,33
-Visible=True
+Coordinates=1072,860,136,36
+Visible=False
 
 [DM.FDQAuxiliar]
-Coordinates=636,305,92,51
+Coordinates=636,305,107,36
+Visible=False
 
 [DM.FDQuery1]
-Coordinates=63,699,82,33
+Coordinates=63,699,97,36
 Visible=False
 
 [DM.FDQConsItemPedido]
-Coordinates=291,161,136,33
+Coordinates=291,161,160,36
 Visible=False
 
 [DM.FDQConsContasReceber]
-Coordinates=260,10,156,33
+Coordinates=260,10,184,36
 Visible=False
 
 [DM.FDQConsultaProd]
-Coordinates=38,986,122,33
+Coordinates=38,986,143,36
 Visible=False
 
 [DM.FDQMaxIdItemPedido]
-Coordinates=636,623,139,69
+Coordinates=636,623,165,36
+Visible=False
 
 [DM.FDQProdItemPedido]
-Coordinates=465,62,133,33
+Coordinates=465,62,157,36
 Visible=False
 
 [DM.FDQMaxIdProd]
-Coordinates=465,956,107,33
+Coordinates=465,956,127,36
 Visible=False
 
 [BindSourceDB1]
-Coordinates=260,10,142,645
+Coordinates=260,10,170,784
+LayerNames="contas receber"
 
 [BindingsList1]
-Coordinates=170,260,82,33
+Coordinates=170,260,91,36
 
 [Label1]
-Coordinates=201,372,46,51
+Coordinates=170,370,53,36
+Visible=False
 
 [ComboBoxFiltroClienteContasReceber]
-Coordinates=10,820,204,123
+Coordinates=10,820,236,146
 Visible=True
+LayerNames="filtro cliente"
 
 [LytFiltroClienteContasReceber]
-Coordinates=851,100,165,33
+Coordinates=851,100,190,36
+Visible=False
 
 [BindSourceDB2]
-Coordinates=1072,860,104,411
+Coordinates=300,820,124,498
+LayerNames="filtro cliente"
 
 [Label2]
-Coordinates=204,315,46,51
+Coordinates=160,310,53,36
+Visible=False
 
 [Label4]
-Coordinates=204,1,46,51
+Coordinates=204,1,53,36
+Visible=False
 
 [DateEdtFiltroVencInicialContasReceber]
-Coordinates=477,1,208,51
+Coordinates=477,1,242,36
+Visible=False
 
 [LytFiltroDataVencContasReceber]
-Coordinates=757,722,178,33
+Coordinates=757,722,206,36
+Visible=False
 
 [Label3]
-Coordinates=0,0,46,51
+Coordinates=0,0,53,36
+Visible=False
 
 [DateEdtFiltroVencFinalContasReceber]
-Coordinates=828,1,203,51
+Coordinates=828,1,236,36
+Visible=False
 
 [BtnBaixaContasReceber]
-Coordinates=851,155,134,51
+Coordinates=851,155,155,36
+Visible=False
+
+[ToolBar1]
+Coordinates=610,1050,67,36
+Visible=False
+
+[SpdBVoltarBaixaContasReceberEdicao]
+Coordinates=1149,188,240,36
+Visible=False
+
+[ListBoxItem1]
+Coordinates=1149,265,89,36
+Visible=False
+
+[SpdBConfirmaBaixaContasREceberEdicao]
+Coordinates=851,386,260,36
+Visible=False
+
+[LblAcrescimoMoedaBaixaContasReceberEdicao]
+Coordinates=449,1,291,36
+Visible=False
+
+[LblTipoReceitaBaixaContasReceberEdicao]
+Coordinates=851,232,261,36
+Visible=False
+
+[EdtAcrescimo]
+Coordinates=247,832,94,36
+Visible=False
+
+[EditValorReceber]
+Coordinates=346,832,115,36
+Visible=False
+
+[ListBoxItem4]
+Coordinates=1149,463,89,36
+Visible=False
+
+[ListBoxItem5]
+Coordinates=1149,518,89,36
+Visible=False
+
+[LytBaixaContasReceberEdicao]
+Coordinates=1149,573,192,36
+Visible=False
+
+[LblValorTotalBaixaContasReceberEdicao]
+Coordinates=1102,309,251,36
+Visible=False
+
+[DM.FDQConsAvistaFormaPag]
+Coordinates=520,10,189,36
+Visible=False
+
+[ComboBoxTipoReceita]
+Coordinates=540,250,146,146
+Visible=True
+LayerNames="tipo de receita baixa"
+
+[EdtValorTotal]
+Coordinates=679,1050,93,36
+Visible=False
+
+[DM.FDQCadBaixaContasReceber]
+Coordinates=1102,1,209,36
+Visible=False
+
+[ListBoxItem3]
+Coordinates=1149,628,89,36
+Visible=False
+
+[ListBoxItem2]
+Coordinates=1149,683,89,36
+Visible=False
+
+[LblTituloBaixaContasReceberEdicao]
+Coordinates=778,562,224,36
+Visible=False
+
+[DM.FDQMaxIdBaixaContaReceber]
+Coordinates=778,639,214,36
+Visible=False
+
+[LblValorBaixaContasReceberEdicao]
+Coordinates=1149,386,222,36
+Visible=False
+
+[LblDescMoedaBaixaContasReceberEdicao]
+Coordinates=851,463,260,36
+Visible=False
+
+[ListBoxbaixaContasReceberEdicao]
+Coordinates=778,777,216,36
+Visible=False
+
+[EdtDesconto]
+Coordinates=778,1008,88,36
+Visible=False
+
+[BindSourceDB3]
+Coordinates=520,10,176,190
+LayerNames="tipo de receita baixa"
+
+[Module Settings]
+ModelLayerNames="tipo de receita baixa";"contas receber";"filtro cliente"
+ActiveLayerNames=
+EditingLayerName=tipo de receita baixa
 

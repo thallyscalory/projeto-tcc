@@ -413,8 +413,8 @@ object FVenda1: TFVenda1
               Size.Width = 208.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
+              KillFocusByReturn = True
               OnTyping = EdtNumParcelaPedidoTyping
-              OnKeyUp = EdtNumParcelaPedidoKeyUp
             end
           end
           object ListBoxItem5: TListBoxItem
