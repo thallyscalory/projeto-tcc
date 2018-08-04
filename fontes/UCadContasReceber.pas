@@ -138,6 +138,8 @@ begin
   EdtAcrescimo.Text := EmptyStr;
   EdtValorTotal.Text := FloatToStr(saldoTotal);
 
+  SpdBConfirmaBaixaContasREceberEdicao.Visible := False;
+
   MudarAbaModelo(TbItemedicao, Sender);
 end;
 
@@ -197,6 +199,8 @@ begin
   DM.FDQConsAvistaFormaPag.Close;
   DM.FDQConsAvistaFormaPag.Open();
   DM.FDQConsAvistaFormaPag.Active := True;
+
+  SpdBConfirmaBaixaContasREceberEdicao.Visible := True;
 end;
 
 procedure TFCadContasReceber.DateEdtFiltroVencFinalContasReceberClosePicker
@@ -426,23 +430,103 @@ end;
 procedure TFCadContasReceber.SpdBConfirmaBaixaContasREceberEdicaoClick
   (Sender: TObject);
 var
-  valorTotal, quitar: Double;
+  valorTotal, valorPago, valorSaldo: Double;
   I, maxIdBaixa: integer;
   Data: TDateTime;
 begin
   inherited;
-  Data := Date;
-  valorTotal := StrToFloat(EdtValorTotal.Text);
-
-  if cliDiferente = 'S' then
+  if (EdtValorTotal.Text.IsEmpty) or (EdtValorTotal.Text = '0') or
+    (EdtValorTotal.Text = '0,00') then
   begin
-    if saldoTotal > valorTotal then
+    ShowMessage('Processo cancelado! valor em branco.');
+  end
+  else
+  begin
+    Data := Date;
+    valorTotal := StrToFloat(EdtValorTotal.Text);
+    valorPago := 0;
+    valorSaldo := 0;
+
+    if cliDiferente = 'S' then
     begin
-      ShowMessage
-        ('Processo cancelado! Não é permitido baixa parcial com mais de 1 cliente filtrado.');
-      EditValorReceber.SetFocus;
+      if saldoTotal > valorTotal then
+      begin
+        ShowMessage
+          ('Processo cancelado! Não é permitido baixa parcial com mais de 1 cliente filtrado.');
+        EditValorReceber.SetFocus;
+      end
+      else
+      begin
+        for I := 0 to tamanhoArray - 1 do
+        begin
+          if not idContasReceber[I].IsEmpty then
+          begin
+            try
+              // conta_receber
+              DM.FDQConsContasReceberBaixa.Close;
+              DM.FDQConsContasReceberBaixa.ParamByName('PIdContaReceber').Value
+                := idContasReceber[I];
+              DM.FDQConsContasReceberBaixa.Open();
+
+              valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
+                DM.FDQConsContasReceberBaixavalor_saldo.AsFloat;
+
+              valorTotal := valorTotal - StrToFloat(saldoContasReceber[I]);
+
+              DM.FDQAuxiliar.sql.Clear;
+
+              DM.FDQAuxiliar.sql.Add('update conta_receber');
+              DM.FDQAuxiliar.sql.Add(' set valor_pago = :valorPago,');
+              DM.FDQAuxiliar.sql.Add(' valor_saldo = :valorSaldo,');
+              DM.FDQAuxiliar.sql.Add(' data_quitacao = :dataQuitacao,');
+              DM.FDQAuxiliar.sql.Add(' quitado = :quitado');
+              DM.FDQAuxiliar.sql.Add(' where id = :Id');
+
+              DM.FDQAuxiliar.Params.ParamByName('valorPago').AsFloat :=
+                valorPago;
+              DM.FDQAuxiliar.Params.ParamByName('valorSaldo').AsFloat := 0;
+              DM.FDQAuxiliar.Params.ParamByName('dataQuitacao')
+                .AsDateTime := Data;
+              DM.FDQAuxiliar.Params.ParamByName('quitado').AsString := 'S';
+              DM.FDQAuxiliar.Params.ParamByName('id').AsInteger :=
+                StrToInt(idContasReceber[I]);
+
+              DM.FDQAuxiliar.ExecSQL;
+
+              // baixa_conta_receber
+              DM.FDQMaxIdBaixaContaReceber.Close;
+              DM.FDQMaxIdBaixaContaReceber.Open();
+              maxIdBaixa := DM.FDQMaxIdBaixaContaRecebermaxId.AsInteger + 1;
+
+              DM.FDQCadBaixaContasReceber.Close;
+              DM.FDQCadBaixaContasReceber.Open();
+              DM.FDQCadBaixaContasReceber.Append;
+              DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
+              DM.FDQCadBaixaContasReceberid_conta_receber.AsInteger :=
+                StrToInt(idContasReceber[I]);
+              DM.FDQCadBaixaContasReceberdata.AsDateTime := Data;
+              DM.FDQCadBaixaContasRecebervalor.AsFloat :=
+                StrToFloat(saldoContasReceber[I]);
+              DM.FDQCadBaixaContasReceberid_forma_pag.AsInteger :=
+                DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
+              DM.FDQCadBaixaContasReceber.Post;
+            except
+              on E: Exception do
+                ShowMessage('Erro!  ' + E.Message);
+            end;
+
+          end;
+
+        end;
+        DM.FDConnection1.CommitRetaining;
+        if valorTotal > 0 then
+        begin
+          ShowMessage('Troco: ' + FloatToStr(valorTotal));
+        end;
+        SpdBVoltarBaixaContasReceberEdicaoClick(Sender);
+      end;
     end
-    else
+    else if cliDiferente = 'N' then
     begin
       for I := 0 to tamanhoArray - 1 do
       begin
@@ -455,47 +539,94 @@ begin
               idContasReceber[I];
             DM.FDQConsContasReceberBaixa.Open();
 
-            quitar := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
-              DM.FDQConsContasReceberBaixavalor_saldo.AsFloat;
+            if valorTotal >= StrToFloat(saldoContasReceber[I]) then
+            begin
+              valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
+                StrToFloat(saldoContasReceber[I]);
 
-            valorTotal := valorTotal - StrToFloat(saldoContasReceber[I]);
+              valorTotal := valorTotal - StrToFloat(saldoContasReceber[I]);
 
-            DM.FDQAuxiliar.sql.Clear;
+              DM.FDQAuxiliar.sql.Clear;
 
-            DM.FDQAuxiliar.sql.Add('update conta_receber');
-            DM.FDQAuxiliar.sql.Add(' set valor_pago = :valorPago,');
-            DM.FDQAuxiliar.sql.Add(' valor_saldo = :valorSaldo,');
-            DM.FDQAuxiliar.sql.Add(' data_quitacao = :dataQuitacao,');
-            DM.FDQAuxiliar.sql.Add(' quitado = :quitado');
-            DM.FDQAuxiliar.sql.Add(' where id = :Id');
+              DM.FDQAuxiliar.sql.Add('update conta_receber');
+              DM.FDQAuxiliar.sql.Add(' set valor_pago = :valorPago,');
+              DM.FDQAuxiliar.sql.Add(' valor_saldo = :valorSaldo,');
+              DM.FDQAuxiliar.sql.Add(' data_quitacao = :dataQuitacao,');
+              DM.FDQAuxiliar.sql.Add(' quitado = :quitado');
+              DM.FDQAuxiliar.sql.Add(' where id = :Id');
 
-            DM.FDQAuxiliar.Params.ParamByName('valorPago').AsFloat := quitar;
-            DM.FDQAuxiliar.Params.ParamByName('valorSaldo').AsFloat := 0;
-            DM.FDQAuxiliar.Params.ParamByName('dataQuitacao')
-              .AsDateTime := Data;
-            DM.FDQAuxiliar.Params.ParamByName('quitado').AsString := 'S';
-            DM.FDQAuxiliar.Params.ParamByName('id').AsInteger :=
-              StrToInt(idContasReceber[I]);
+              DM.FDQAuxiliar.Params.ParamByName('valorPago').AsFloat :=
+                valorPago;
+              DM.FDQAuxiliar.Params.ParamByName('valorSaldo').AsFloat := 0;
+              DM.FDQAuxiliar.Params.ParamByName('dataQuitacao')
+                .AsDateTime := Data;
+              DM.FDQAuxiliar.Params.ParamByName('quitado').AsString := 'S';
+              DM.FDQAuxiliar.Params.ParamByName('id').AsInteger :=
+                StrToInt(idContasReceber[I]);
 
-            DM.FDQAuxiliar.ExecSQL;
+              DM.FDQAuxiliar.ExecSQL;
 
-            // baixa_conta_receber
-            DM.FDQMaxIdBaixaContaReceber.Close;
-            DM.FDQMaxIdBaixaContaReceber.Open();
-            maxIdBaixa := DM.FDQMaxIdBaixaContaRecebermaxId.AsInteger + 1;
+              // baixa_conta_receber
+              DM.FDQMaxIdBaixaContaReceber.Close;
+              DM.FDQMaxIdBaixaContaReceber.Open();
+              maxIdBaixa := DM.FDQMaxIdBaixaContaRecebermaxId.AsInteger + 1;
 
-            DM.FDQCadBaixaContasReceber.Close;
-            DM.FDQCadBaixaContasReceber.Open();
-            DM.FDQCadBaixaContasReceber.Append;
-            DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
-            DM.FDQCadBaixaContasReceberid_conta_receber.AsInteger :=
-              StrToInt(idContasReceber[I]);
-            DM.FDQCadBaixaContasReceberdata.AsDateTime := Data;
-            DM.FDQCadBaixaContasRecebervalor.AsFloat :=
-              StrToFloat(saldoContasReceber[I]);
-            DM.FDQCadBaixaContasReceberid_forma_pag.AsInteger :=
-              DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
-            DM.FDQCadBaixaContasReceber.Post;
+              DM.FDQCadBaixaContasReceber.Close;
+              DM.FDQCadBaixaContasReceber.Open();
+              DM.FDQCadBaixaContasReceber.Append;
+              DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
+              DM.FDQCadBaixaContasReceberid_conta_receber.AsInteger :=
+                StrToInt(idContasReceber[I]);
+              DM.FDQCadBaixaContasReceberdata.AsDateTime := Data;
+              DM.FDQCadBaixaContasRecebervalor.AsFloat :=
+                StrToFloat(saldoContasReceber[I]);
+              DM.FDQCadBaixaContasReceberid_forma_pag.AsInteger :=
+                DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
+              DM.FDQCadBaixaContasReceber.Post;
+            end
+            else
+            begin
+              valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
+                valorTotal;
+
+              valorSaldo := DM.FDQConsContasReceberBaixavalor_saldo.AsFloat -
+                valorTotal;
+
+              DM.FDQAuxiliar.sql.Clear;
+
+              DM.FDQAuxiliar.sql.Add('update conta_receber');
+              DM.FDQAuxiliar.sql.Add(' set valor_pago = :valorPago,');
+              DM.FDQAuxiliar.sql.Add(' valor_saldo = :valorSaldo');
+              DM.FDQAuxiliar.sql.Add(' where id = :Id');
+
+              DM.FDQAuxiliar.Params.ParamByName('valorPago').AsFloat :=
+                valorPago;
+              DM.FDQAuxiliar.Params.ParamByName('valorSaldo').AsFloat :=
+                valorSaldo;
+              DM.FDQAuxiliar.Params.ParamByName('id').AsInteger :=
+                StrToInt(idContasReceber[I]);
+
+              DM.FDQAuxiliar.ExecSQL;
+
+              // baixa_conta_receber
+              DM.FDQMaxIdBaixaContaReceber.Close;
+              DM.FDQMaxIdBaixaContaReceber.Open();
+              maxIdBaixa := DM.FDQMaxIdBaixaContaRecebermaxId.AsInteger + 1;
+
+              DM.FDQCadBaixaContasReceber.Close;
+              DM.FDQCadBaixaContasReceber.Open();
+              DM.FDQCadBaixaContasReceber.Append;
+              DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
+              DM.FDQCadBaixaContasReceberid_conta_receber.AsInteger :=
+                StrToInt(idContasReceber[I]);
+              DM.FDQCadBaixaContasReceberdata.AsDateTime := Data;
+              DM.FDQCadBaixaContasRecebervalor.AsFloat := valorTotal;
+              DM.FDQCadBaixaContasReceberid_forma_pag.AsInteger :=
+                DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
+              DM.FDQCadBaixaContasReceber.Post;
+
+              valorTotal := 0;
+            end;
           except
             on E: Exception do
               ShowMessage('Erro!  ' + E.Message);
@@ -511,6 +642,7 @@ begin
       end;
       SpdBVoltarBaixaContasReceberEdicaoClick(Sender);
     end;
+
   end;
 end;
 
@@ -535,6 +667,8 @@ begin
   BtnBaixaContasReceber.Visible := False;
 
   DM.FDQConsAvistaFormaPag.Active := False;
+
+  SpdBConfirmaBaixaContasREceberEdicao.Visible := False;
 
   MudarAbaModelo(TbItemListagem, Sender);
 end;
