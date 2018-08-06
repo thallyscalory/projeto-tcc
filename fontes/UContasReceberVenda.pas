@@ -122,15 +122,32 @@ begin
     end
     else
     begin
-      datavenc := IncMonth(dataHoje, I);
+      if vendaEntrada = 'S' then
+      begin
+        ListViewCadContasReceber.BeginUpdate;
+        listaContasReceber := ListViewCadContasReceber.Items.Add;
+        listaContasReceber.Text := DateTimeToStr(dataHoje);
+        listaContasReceber.Data[TMultiDetailAppearanceNames.Detail1] :=
+          vlParcela;
+        listaContasReceber.Data[TMultiDetailAppearanceNames.Detail2] :=
+          'dinheiro';
+        ListViewCadContasReceber.EndUpdate;
 
-      ListViewCadContasReceber.BeginUpdate;
-      listaContasReceber := ListViewCadContasReceber.Items.Add;
-      listaContasReceber.Text := DateTimeToStr(datavenc);
-      listaContasReceber.Data[TMultiDetailAppearanceNames.Detail1] := vlParcela;
-      listaContasReceber.Data[TMultiDetailAppearanceNames.Detail2] :=
-        tipoReceita;
-      ListViewCadContasReceber.EndUpdate;
+        vendaEntrada := 'N'
+      end
+      else
+      begin
+        datavenc := IncMonth(dataHoje, I);
+
+        ListViewCadContasReceber.BeginUpdate;
+        listaContasReceber := ListViewCadContasReceber.Items.Add;
+        listaContasReceber.Text := DateTimeToStr(datavenc);
+        listaContasReceber.Data[TMultiDetailAppearanceNames.Detail1] :=
+          vlParcela;
+        listaContasReceber.Data[TMultiDetailAppearanceNames.Detail2] :=
+          tipoReceita;
+        ListViewCadContasReceber.EndUpdate;
+      end;
     end;
   end;
 

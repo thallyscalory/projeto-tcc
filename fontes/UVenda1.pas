@@ -170,7 +170,8 @@ type
 
 var
   FVenda1: TFVenda1;
-  CliPedido, itemPedido, venda, finalizaVenda, vlParcela, tipoReceita: string;
+  CliPedido, itemPedido, venda, finalizaVenda, vlParcela, tipoReceita,
+    vendaEntrada: string;
   contItem, listCountItem, numParcela: integer;
   vlTotalAtual, vlTotalItemAtual, qtdTotalAtual: Double;
 
@@ -1367,19 +1368,56 @@ begin
                   (LblCodCliPedido.Text <> '') and
                   (StrToInt(EdtNumParcelaPedido.Text) > 0) then
                 begin
-                  LblSupApoioVenda.Text := 'Receber';
-                  SpdBVoltarCadCOntasReceber.Visible := True;
-                  CliPedido := EmptyStr;
-                  itemPedido := EmptyStr;
-                  finalizaVenda := 'S';
-                  numParcela := StrToInt(EdtNumParcelaPedido.Text);
-                  vlParcela := ListBoxItemParcelasVenda.ItemData.Detail;
-                  tipoReceita := ComboBoxFormaPagVenda.Selected.Text;
+                  if StrToInt(EdtNumParcelaPedido.Text) > 1 then
+                  begin
+                    MessageDlg('Pedido com entrada?',
+                      System.UITypes.TMsgDlgType.mtInformation,
+                      [System.UITypes.TMsgDlgBtn.mbYes,
+                      System.UITypes.TMsgDlgBtn.mbNo], 0,
+                      procedure(const AResult: System.UITypes.TModalResult)
+                      begin
+                        case AResult of
+                          mrYES:
+                            begin
+                              vendaEntrada := 'S';
+                              LblSupApoioVenda.Text := 'Receber';
+                              SpdBVoltarCadCOntasReceber.Visible := True;
+                              CliPedido := EmptyStr;
+                              itemPedido := EmptyStr;
+                              finalizaVenda := 'S';
+                              numParcela := StrToInt(EdtNumParcelaPedido.Text);
+                              vlParcela :=
+                                ListBoxItemParcelasVenda.ItemData.Detail;
+                              tipoReceita :=
+                                ComboBoxFormaPagVenda.Selected.Text;
 
-                  ToolBar3.Visible := True;
-                  LytConsultaClienteVendaApoio.Visible := False;
-                  AbrirFormVenda(TFContasReceberVenda);
-                  MudarAbaVenda(TbItemApoioVenda, Sender);
+                              ToolBar3.Visible := True;
+                              LytConsultaClienteVendaApoio.Visible := False;
+                              AbrirFormVenda(TFContasReceberVenda);
+                              MudarAbaVenda(TbItemApoioVenda, Sender);
+                            end;
+                          mrNo:
+                            begin
+                              vendaEntrada := 'N';
+                              LblSupApoioVenda.Text := 'Receber';
+                              SpdBVoltarCadCOntasReceber.Visible := True;
+                              CliPedido := EmptyStr;
+                              itemPedido := EmptyStr;
+                              finalizaVenda := 'S';
+                              numParcela := StrToInt(EdtNumParcelaPedido.Text);
+                              vlParcela :=
+                                ListBoxItemParcelasVenda.ItemData.Detail;
+                              tipoReceita :=
+                                ComboBoxFormaPagVenda.Selected.Text;
+
+                              ToolBar3.Visible := True;
+                              LytConsultaClienteVendaApoio.Visible := False;
+                              AbrirFormVenda(TFContasReceberVenda);
+                              MudarAbaVenda(TbItemApoioVenda, Sender);
+                            end;
+                        end;
+                      end);
+                  end;
                 end
                 else
                 begin

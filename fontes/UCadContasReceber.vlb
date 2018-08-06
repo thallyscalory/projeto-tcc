@@ -211,10 +211,6 @@ Visible=False
 Coordinates=247,832,94,36
 Visible=False
 
-[EditValorReceber]
-Coordinates=346,832,115,36
-Visible=False
-
 [ListBoxItem4]
 Coordinates=1149,463,89,36
 Visible=False
@@ -239,10 +235,6 @@ Visible=False
 Coordinates=540,250,146,146
 Visible=True
 LayerNames="tipo de receita baixa"
-
-[EdtValorTotal]
-Coordinates=679,1050,93,36
-Visible=False
 
 [DM.FDQCadBaixaContasReceber]
 Coordinates=1102,1,209,36
@@ -291,5 +283,13 @@ EditingLayerName=
 
 [DM.FDQConsContasReceberBaixa]
 Coordinates=149,250,216,36
+Visible=False
+
+[EditValorSaldo]
+Coordinates=346,832,100,36
+Visible=False
+
+[EdtValorReceber]
+Coordinates=679,1050,112,36
 Visible=False
 
