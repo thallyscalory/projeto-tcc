@@ -115,7 +115,7 @@ begin
   begin
     for J := 1 to tamanhoArray - 1 do
     begin
-      if not(idCliContasReceber[I].IsEmpty) or (idCliContasReceber[J].IsEmpty)
+      if not idCliContasReceber[I].IsEmpty and not idCliContasReceber[J].IsEmpty
       then
       begin
         if idCliContasReceber[I] <> idCliContasReceber[J] then
@@ -270,14 +270,14 @@ end;
 
 procedure TFCadContasReceber.EdtAcrescimoTyping(Sender: TObject);
 var
-  result: integer;
+  result: Double;
 begin
   inherited;
   result := 0;
   if not EdtAcrescimo.Text.IsEmpty then
   begin
-    result := StrToInt(EditValorSaldo.Text) + StrToInt(EdtAcrescimo.Text);
-    EdtValorReceber.Text := IntToStr(result);
+    result := StrToFloat(EditValorSaldo.Text) + StrToFloat(EdtAcrescimo.Text);
+    EdtValorReceber.Text := FloatToStr(result);
   end
   else
   begin
@@ -289,14 +289,14 @@ end;
 
 procedure TFCadContasReceber.EdtDescontoTyping(Sender: TObject);
 var
-  result: integer;
+  result: Double;
 begin
   inherited;
   result := 0;
   if not EdtDesconto.Text.IsEmpty then
   begin
-    result := StrToInt(EditValorSaldo.Text) - StrToInt(EdtDesconto.Text);
-    EdtValorReceber.Text := IntToStr(result);
+    result := StrToFloat(EditValorSaldo.Text) - StrToFloat(EdtDesconto.Text);
+    EdtValorReceber.Text := FloatToStr(result);
   end
   else
   begin
@@ -421,12 +421,14 @@ var
   valorTotal, valorPago, valorSaldo, valorDesc, ValorAcresc: Double;
   I, maxIdBaixa, primeiro: integer;
   Data: TDateTime;
-  quitado: string;
+  quitado, valida: string;
 begin
   inherited;
+  valida := 'S';
   primeiro := 0;
   for I := 0 to tamanhoArray - 1 do
   begin
+    if not saldoContasReceber[I].IsEmpty then
     begin
       Break
     end;
@@ -438,13 +440,19 @@ begin
   begin
     ShowMessage('Processo cancelado! Valor em branco.');
     EdtValorReceber.SetFocus;
+    valida := 'N';
   end
-  else if EdtDesconto.Text >= saldoContasReceber[primeiro] then
+  else if not EdtDesconto.Text.IsEmpty then
   begin
-    ShowMessage('Processo cancelado! Desconto maior que o saldo da conta.');
-    EdtDesconto.SetFocus;
-  end
-  else
+    if StrToFloat(EdtDesconto.Text) >= StrToFloat(saldoContasReceber[primeiro])
+    then
+    begin
+      ShowMessage('Processo cancelado! Desconto maior que o saldo da conta.');
+      EdtDesconto.SetFocus;
+      valida := 'N';
+    end;
+  end;
+  if valida = 'S' then
   begin
     Data := Date;
     valorTotal := StrToFloat(EdtValorReceber.Text);
@@ -551,15 +559,18 @@ begin
               begin
                 valorDesc := StrToFloat(EdtDesconto.Text);
 
-                if StrToFloat(EdtValorReceber.Text) >=
-                  StrToFloat(saldoContasReceber[I]) then
+                if (valorTotal + valorDesc) >= StrToFloat(saldoContasReceber[I])
+                then
                 begin
                   valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
-                    StrToFloat(saldoContasReceber[I]);
+                    (StrToFloat(saldoContasReceber[I]) - valorDesc);
 
                   valorSaldo := 0;
 
                   quitado := 'S';
+
+                  valorTotal := valorTotal -
+                    (StrToFloat(saldoContasReceber[I]) - valorDesc);
                 end
                 else
                 begin
@@ -570,6 +581,8 @@ begin
                     - valorDesc) - valorTotal;
 
                   quitado := 'N';
+
+                  valorTotal := 0;
                 end;
                 valorDesc := StrToFloat(EdtDesconto.Text) +
                   DM.FDQConsContasReceberBaixavalor_desconto.AsFloat;
@@ -579,6 +592,8 @@ begin
                 DM.FDQAuxiliar.sql.Add('update conta_receber');
                 DM.FDQAuxiliar.sql.Add(' set valor_pago = :valorPago,');
                 DM.FDQAuxiliar.sql.Add(' valor_desconto = :valorDesc,');
+                if quitado = 'S' then
+                  DM.FDQAuxiliar.sql.Add(' data_quitacao = :dataQuitacao,');
                 DM.FDQAuxiliar.sql.Add(' valor_saldo = :valorSaldo,');
                 DM.FDQAuxiliar.sql.Add(' quitado = :quitado');
                 DM.FDQAuxiliar.sql.Add(' where id = :Id');
@@ -587,6 +602,9 @@ begin
                   valorPago;
                 DM.FDQAuxiliar.Params.ParamByName('valorDesc').AsFloat :=
                   valorDesc;
+                if quitado = 'S' then
+                  DM.FDQAuxiliar.Params.ParamByName('dataQuitacao')
+                    .AsDateTime := Data;
                 DM.FDQAuxiliar.Params.ParamByName('valorSaldo').AsFloat :=
                   valorSaldo;
                 DM.FDQAuxiliar.Params.ParamByName('quitado').AsString
@@ -612,22 +630,23 @@ begin
                 DM.FDQCadBaixaContasReceberid_forma_pag.AsInteger :=
                   DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
                 DM.FDQCadBaixaContasReceber.Post;
-
-                valorTotal := 0;
               end
               else if not EdtAcrescimo.Text.IsEmpty then
               begin
                 ValorAcresc := StrToFloat(EdtAcrescimo.Text);
 
-                if StrToFloat(EdtValorReceber.Text) >=
+                if valorTotal >=
                   StrToFloat(saldoContasReceber[I]) then
                 begin
                   valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
-                    StrToFloat(saldoContasReceber[I]);
+                    (StrToFloat(saldoContasReceber[I]) + ValorAcresc);
 
                   valorSaldo := 0;
 
                   quitado := 'S';
+
+                  valorTotal := valorTotal -
+                    (StrToFloat(saldoContasReceber[I]) + ValorAcresc);
                 end
                 else
                 begin
@@ -638,6 +657,8 @@ begin
                     + ValorAcresc) - valorTotal;
 
                   quitado := 'N';
+
+                  valorTotal := 0;
                 end;
                 ValorAcresc := StrToFloat(EdtAcrescimo.Text) +
                   DM.FDQConsContasReceberBaixavalor_juro.AsFloat;
@@ -647,6 +668,8 @@ begin
                 DM.FDQAuxiliar.sql.Add('update conta_receber');
                 DM.FDQAuxiliar.sql.Add(' set valor_pago = :valorPago,');
                 DM.FDQAuxiliar.sql.Add(' valor_juro = :valorAcresc,');
+                if quitado = 'S' then
+                  DM.FDQAuxiliar.sql.Add(' data_quitacao = :dataQuitacao,');
                 DM.FDQAuxiliar.sql.Add(' valor_saldo = :valorSaldo,');
                 DM.FDQAuxiliar.sql.Add(' quitado = :quitado');
                 DM.FDQAuxiliar.sql.Add(' where id = :Id');
@@ -655,6 +678,9 @@ begin
                   valorPago;
                 DM.FDQAuxiliar.Params.ParamByName('valorAcresc').AsFloat :=
                   ValorAcresc;
+                if quitado = 'S' then
+                  DM.FDQAuxiliar.Params.ParamByName('dataQuitacao')
+                    .AsDateTime := Data;
                 DM.FDQAuxiliar.Params.ParamByName('valorSaldo').AsFloat :=
                   valorSaldo;
                 DM.FDQAuxiliar.Params.ParamByName('quitado').AsString
@@ -680,12 +706,10 @@ begin
                 DM.FDQCadBaixaContasReceberid_forma_pag.AsInteger :=
                   DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
                 DM.FDQCadBaixaContasReceber.Post;
-
-                valorTotal := 0;
               end
               else
               begin
-                if StrToFloat(EdtValorReceber.Text) >=
+                if valorTotal >=
                   StrToFloat(saldoContasReceber[I]) then
                 begin
                   valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
@@ -694,6 +718,8 @@ begin
                   valorSaldo := 0;
 
                   quitado := 'S';
+
+                  valorTotal := valorTotal - StrToFloat(saldoContasReceber[I]);
                 end
                 else
                 begin
@@ -704,6 +730,8 @@ begin
                     - valorTotal;
 
                   quitado := 'N';
+
+                  valorTotal := 0;
                 end;
 
                 DM.FDQAuxiliar.sql.Clear;
@@ -711,6 +739,8 @@ begin
                 DM.FDQAuxiliar.sql.Add('update conta_receber');
                 DM.FDQAuxiliar.sql.Add(' set valor_pago = :valorPago,');
                 DM.FDQAuxiliar.sql.Add(' valor_saldo = :valorSaldo,');
+                if quitado = 'S' then
+                  DM.FDQAuxiliar.sql.Add(' data_quitacao = :dataQuitacao,');
                 DM.FDQAuxiliar.sql.Add(' quitado = :quitado');
                 DM.FDQAuxiliar.sql.Add(' where id = :Id');
 
@@ -718,6 +748,9 @@ begin
                   valorPago;
                 DM.FDQAuxiliar.Params.ParamByName('valorSaldo').AsFloat :=
                   valorSaldo;
+                if quitado = 'S' then
+                  DM.FDQAuxiliar.Params.ParamByName('dataQuitacao')
+                    .AsDateTime := Data;
                 DM.FDQAuxiliar.Params.ParamByName('quitado').AsString
                   := quitado;
                 DM.FDQAuxiliar.Params.ParamByName('id').AsInteger :=
@@ -741,19 +774,21 @@ begin
                 DM.FDQCadBaixaContasReceberid_forma_pag.AsInteger :=
                   DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
                 DM.FDQCadBaixaContasReceber.Post;
-
-                valorTotal := 0;
               end;
             end
             else
             begin
-              if StrToFloat(EdtValorReceber.Text) >=
+              if valorTotal >=
                 StrToFloat(saldoContasReceber[I]) then
               begin
                 valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
                   StrToFloat(saldoContasReceber[I]);
 
                 valorSaldo := 0;
+
+                quitado := 'S';
+
+                valorTotal := valorTotal - StrToFloat(saldoContasReceber[I]);
               end
               else
               begin
@@ -762,17 +797,28 @@ begin
 
                 valorSaldo := DM.FDQConsContasReceberBaixavalor_saldo.AsFloat -
                   valorTotal;
+
+                quitado := 'N';
+
+                valorTotal := 0;
               end;
 
               DM.FDQAuxiliar.sql.Clear;
 
               DM.FDQAuxiliar.sql.Add('update conta_receber');
               DM.FDQAuxiliar.sql.Add(' set valor_pago = :valorPago,');
+              if quitado = 'S' then
+                DM.FDQAuxiliar.sql.Add(' data_quitacao = :dataQuitacao,');
+              DM.FDQAuxiliar.sql.Add(' quitado = :quitado,');
               DM.FDQAuxiliar.sql.Add(' valor_saldo = :valorSaldo');
               DM.FDQAuxiliar.sql.Add(' where id = :Id');
 
               DM.FDQAuxiliar.Params.ParamByName('valorPago').AsFloat :=
                 valorPago;
+              if quitado = 'S' then
+                DM.FDQAuxiliar.Params.ParamByName('dataQuitacao')
+                  .AsDateTime := Data;
+              DM.FDQAuxiliar.Params.ParamByName('quitado').AsString := quitado;
               DM.FDQAuxiliar.Params.ParamByName('valorSaldo').AsFloat :=
                 valorSaldo;
               DM.FDQAuxiliar.Params.ParamByName('id').AsInteger :=
@@ -796,8 +842,6 @@ begin
               DM.FDQCadBaixaContasReceberid_forma_pag.AsInteger :=
                 DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
               DM.FDQCadBaixaContasReceber.Post;
-
-              valorTotal := 0;
             end;
             // end;
           except
