@@ -23,10 +23,12 @@ object FVenda1: TFVenda1
       Size.Height = 480.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 1
+      TabIndex = 3
       TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
+        330s
+        431s
         330s
         431s
         330s
@@ -40,7 +42,7 @@ object FVenda1: TFVenda1
           item
           end>
         IsSelected = False
-        Size.Width = 82.000000000000000000
+        Size.Width = 66.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -148,8 +150,8 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = True
-        Size.Width = 82.000000000000000000
+        IsSelected = False
+        Size.Width = 66.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -513,7 +515,7 @@ object FVenda1: TFVenda1
           item
           end>
         IsSelected = False
-        Size.Width = 82.000000000000000000
+        Size.Width = 66.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
@@ -736,8 +738,8 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = False
-        Size.Width = 84.000000000000000000
+        IsSelected = True
+        Size.Width = 66.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'tabitemstyle'
@@ -801,126 +803,138 @@ object FVenda1: TFVenda1
               OnClick = SpdBVoltarCadCOntasReceberClick
             end
           end
-          object LytConsultaClienteVendaApoio: TLayout
-            Align = Client
+        end
+      end
+      object TbItemClienteVenda: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 66.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Cliente'
+        object Layout3: TLayout
+          Align = Client
+          Size.Width = 330.000000000000000000
+          Size.Height = 431.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object Layout4: TLayout
+            Align = Top
+            Position.Y = 48.000000000000000000
             Size.Width = 330.000000000000000000
-            Size.Height = 383.000000000000000000
+            Size.Height = 124.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
-            object Layout2: TLayout
+            object EditFiltroNomeCadCliVenda: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Top
-              Position.Y = 48.000000000000000000
-              Size.Width = 330.000000000000000000
-              Size.Height = 124.000000000000000000
-              Size.PlatformDefault = False
-              TabOrder = 1
-              object EditFiltroNomeCadCliVenda: TEdit
-                Touch.InteractiveGestures = [LongTap, DoubleTap]
-                Align = Top
-                StyleLookup = 'searchedit'
-                TabOrder = 0
-                ReturnKeyType = Done
-                Position.X = 4.000000000000000000
-                Margins.Left = 4.000000000000000000
-                Margins.Right = 4.000000000000000000
-                Scale.Y = 1.200000047683716000
-                Size.Width = 322.000000000000000000
-                Size.Height = 32.000000000000000000
-                Size.PlatformDefault = False
-                TextPrompt = 'Filtrar pelo nome'
-                KillFocusByReturn = True
-                OnTyping = EditFiltroNomeCadCliVendaTyping
-                OnClick = EditFiltroNomeCadCliVendaClick
-              end
-              object EditFiltroCodCadCliVenda: TEdit
-                Touch.InteractiveGestures = [LongTap, DoubleTap]
-                Align = Top
-                StyleLookup = 'searchedit'
-                TabOrder = 1
-                KeyboardType = NumberPad
-                ReturnKeyType = Done
-                Position.X = 4.000000000000000000
-                Position.Y = 38.400001525878910000
-                ClipParent = True
-                Margins.Left = 4.000000000000000000
-                Margins.Right = 4.000000000000000000
-                Scale.Y = 1.200000047683716000
-                Size.Width = 322.000000000000000000
-                Size.Height = 32.000000000000000000
-                Size.PlatformDefault = False
-                TextPrompt = 'Filtrar pelo c'#243'digo'
-                KillFocusByReturn = True
-                OnTyping = EditFiltroCodCadCliVendaTyping
-                OnClick = EditFiltroCodCadCliVendaClick
-              end
-              object BtnFiltrarCliVenda: TButton
-                Align = Top
-                StyledSettings = [Family, Size, Style]
-                Margins.Left = 20.000000000000000000
-                Margins.Right = 20.000000000000000000
-                Position.X = 20.000000000000000000
-                Position.Y = 76.800003051757810000
-                Size.Width = 290.000000000000000000
-                Size.Height = 44.000000000000000000
-                Size.PlatformDefault = False
-                TabOrder = 2
-                Text = 'Filtrar Todos'
-                TextSettings.FontColor = claWhite
-                TintColor = claNavy
-                OnClick = BtnFiltrarCliVendaClick
-              end
-            end
-            object ListViewCadCliVenda: TListView
-              Touch.InteractiveGestures = [DoubleTap]
-              ItemAppearanceClassName = 'TMultiDetailItemAppearance'
-              ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
-              HeaderAppearanceClassName = 'TListHeaderObjects'
-              FooterAppearanceClassName = 'TListHeaderObjects'
-              Align = Client
+              StyleLookup = 'searchedit'
+              TabOrder = 0
+              ReturnKeyType = Done
+              Position.X = 4.000000000000000000
               Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
               Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
+              Scale.Y = 1.200000047683716000
               Size.Width = 322.000000000000000000
-              Size.Height = 203.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextPrompt = 'Filtrar pelo nome'
+              KillFocusByReturn = True
+              OnTyping = edttttttTyping
+              OnClick = edttttttClick
+            end
+            object EditFiltroCodCadCliVenda: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Top
+              StyleLookup = 'searchedit'
+              TabOrder = 1
+              KeyboardType = NumberPad
+              ReturnKeyType = Done
+              Position.X = 4.000000000000000000
+              Position.Y = 38.400001525878910000
+              ClipParent = True
+              Margins.Left = 4.000000000000000000
+              Margins.Right = 4.000000000000000000
+              Scale.Y = 1.200000047683716000
+              Size.Width = 322.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextPrompt = 'Filtrar pelo c'#243'digo'
+              KillFocusByReturn = True
+              OnTyping = eddsssTyping
+              OnClick = eddsssClick
+            end
+            object BtnFiltrarCliVenda: TButton
+              Align = Top
+              StyledSettings = [Family, Size, Style]
+              Margins.Left = 20.000000000000000000
+              Margins.Right = 20.000000000000000000
+              Position.X = 20.000000000000000000
+              Position.Y = 76.800003051757810000
+              Size.Width = 290.000000000000000000
+              Size.Height = 44.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 2
-              ItemAppearanceObjects.ItemObjects.Image.Visible = True
-              ItemAppearanceObjects.ItemObjects.Accessory.Visible = False
-              ItemAppearanceObjects.ItemEditObjects.Image.Visible = True
-              ItemAppearanceObjects.ItemEditObjects.Accessory.Visible = False
-              OnItemClick = ListViewCadCliVendaItemClick
+              Text = 'Filtrar Todos'
+              TextSettings.FontColor = claWhite
+              TintColor = claNavy
+              OnClick = dsadaClick
             end
-            object ToolBar1: TToolBar
+          end
+          object ListViewCadCliVenda: TListView
+            Touch.InteractiveGestures = [DoubleTap]
+            ItemAppearanceClassName = 'TMultiDetailItemAppearance'
+            ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
+            HeaderAppearanceClassName = 'TListHeaderObjects'
+            FooterAppearanceClassName = 'TListHeaderObjects'
+            Align = Client
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Size.Width = 322.000000000000000000
+            Size.Height = 251.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            ItemAppearanceObjects.ItemObjects.Image.Visible = True
+            ItemAppearanceObjects.ItemObjects.Accessory.Visible = False
+            ItemAppearanceObjects.ItemEditObjects.Image.Visible = True
+            ItemAppearanceObjects.ItemEditObjects.Accessory.Visible = False
+            OnItemClick = listviewItemClick
+          end
+          object ToolBar4: TToolBar
+            Size.Width = 330.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 3
+            TintColor = claSilver
+            object Label4: TLabel
+              Align = Contents
+              StyledSettings = [Size]
               Size.Width = 330.000000000000000000
               Size.Height = 48.000000000000000000
               Size.PlatformDefault = False
-              TabOrder = 3
-              TintColor = claSilver
-              object Label3: TLabel
-                Align = Contents
-                StyledSettings = [Size]
-                Size.Width = 330.000000000000000000
-                Size.Height = 48.000000000000000000
-                Size.PlatformDefault = False
-                TextSettings.Font.Family = 'Arial'
-                TextSettings.Font.Size = 18.000000000000000000
-                TextSettings.Font.StyleExt = {04070000000000000004000000}
-                TextSettings.FontColor = claNavy
-                TextSettings.HorzAlign = Center
-                Text = 'Clientes'
-              end
-              object SpdBVoltarConsCliVendaApoio: TSpeedButton
-                Align = Left
-                IconTintColor = claNavy
-                Margins.Left = 8.000000000000000000
-                Position.X = 8.000000000000000000
-                Size.Width = 48.000000000000000000
-                Size.Height = 48.000000000000000000
-                Size.PlatformDefault = False
-                StyleLookup = 'backtoolbutton'
-                OnClick = SpdBVoltarConsCliVendaApoioClick
-              end
+              TextSettings.Font.Family = 'Arial'
+              TextSettings.Font.Size = 18.000000000000000000
+              TextSettings.Font.StyleExt = {04070000000000000004000000}
+              TextSettings.FontColor = claNavy
+              TextSettings.HorzAlign = Center
+              Text = 'Clientes'
+            end
+            object SpeedButton1: TSpeedButton
+              Align = Left
+              IconTintColor = claNavy
+              Margins.Left = 8.000000000000000000
+              Position.X = 8.000000000000000000
+              Size.Width = 48.000000000000000000
+              Size.Height = 48.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'backtoolbutton'
+              OnClick = SpdBVoltarConsCliVendaApoioClick
             end
           end
         end

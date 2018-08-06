@@ -98,17 +98,18 @@ type
     LytBotaoConfirmaItem: TLayout;
     BtnConfirmaCadContasReceber: TButton;
     LytGeralEdicaoItens: TLayout;
-    LytConsultaClienteVendaApoio: TLayout;
-    Layout2: TLayout;
+    BindSourceDB6: TBindSourceDB;
+    TbItemClienteVenda: TTabItem;
+    Layout3: TLayout;
+    Layout4: TLayout;
     EditFiltroNomeCadCliVenda: TEdit;
     EditFiltroCodCadCliVenda: TEdit;
     BtnFiltrarCliVenda: TButton;
     ListViewCadCliVenda: TListView;
-    BindSourceDB6: TBindSourceDB;
+    ToolBar4: TToolBar;
+    Label4: TLabel;
+    SpeedButton1: TSpeedButton;
     LinkListControlToField3: TLinkListControlToField;
-    ToolBar1: TToolBar;
-    SpdBVoltarConsCliVendaApoio: TSpeedButton;
-    Label3: TLabel;
     procedure SpBVoltarClick(Sender: TObject);
     procedure SpdBNovoVendaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -138,12 +139,12 @@ type
     procedure SpdBVoltarCadCOntasReceberClick(Sender: TObject);
     procedure BtnConfirmaCadContasReceberClick(Sender: TObject);
     procedure ComboBoxFormaPagVendaClosePopup(Sender: TObject);
-    procedure EditFiltroNomeCadCliVendaClick(Sender: TObject);
-    procedure EditFiltroCodCadCliVendaClick(Sender: TObject);
-    procedure EditFiltroNomeCadCliVendaTyping(Sender: TObject);
-    procedure EditFiltroCodCadCliVendaTyping(Sender: TObject);
-    procedure BtnFiltrarCliVendaClick(Sender: TObject);
-    procedure ListViewCadCliVendaItemClick(const Sender: TObject;
+    procedure edttttttClick(Sender: TObject);
+    procedure eddsssClick(Sender: TObject);
+    procedure edttttttTyping(Sender: TObject);
+    procedure eddsssTyping(Sender: TObject);
+    procedure dsadaClick(Sender: TObject);
+    procedure listviewItemClick(const Sender: TObject;
       const AItem: TListViewItem);
     procedure SpdBVoltarConsCliVendaApoioClick(Sender: TObject);
     procedure EdtDescontoMoedaPedidoKeyUp(Sender: TObject; var Key: Word;
@@ -205,7 +206,7 @@ end;
 procedure TFVenda1.BtnConfirmaApoioVendaClick(Sender: TObject);
 var
   paramSql, DataHora: string;
-  I, maxIdPedido, maxIdItemPedido, maxIdContasReceber: integer;
+  I, maxIdPedido, maxIdItemPedido, maxIdContasReceber, maxIdBaixa: integer;
   listaItemPedido: TListViewItem;
   qtdItemTotal, vlItemTotal, vlTotalPedido: Double;
   dataAgora: TDateTime;
@@ -516,6 +517,23 @@ begin
           StrToDateTime(datavenci[I]);
         DM.FDQCadContasReceberquitado.AsString := 'S';
         DM.FDQCadContasReceber.Post;
+
+        DM.FDQMaxIdBaixaContaReceber.Close;
+        DM.FDQMaxIdBaixaContaReceber.Open();
+        maxIdBaixa := DM.FDQMaxIdBaixaContaRecebermaxId.AsInteger + 1;
+
+        DM.FDQCadBaixaContasReceber.Close;
+        DM.FDQCadBaixaContasReceber.Open();
+        DM.FDQCadBaixaContasReceber.Append;
+        DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
+        DM.FDQCadBaixaContasReceberid_conta_receber.AsInteger :=
+          maxIdContasReceber;
+        DM.FDQCadBaixaContasReceberdata.AsDateTime :=
+          StrToDateTime(datavenci[I]);
+        DM.FDQCadBaixaContasRecebervalor.AsFloat := StrToFloat(vlparc[I]);
+        DM.FDQCadBaixaContasReceberid_forma_pag.AsInteger :=
+          DM.FDQConsFormaPagid_forma_pag.AsInteger;
+        DM.FDQCadBaixaContasReceber.Post;
       end
       else
       begin
@@ -601,7 +619,7 @@ begin
   end;
 end;
 
-procedure TFVenda1.BtnFiltrarCliVendaClick(Sender: TObject);
+procedure TFVenda1.dsadaClick(Sender: TObject);
 begin
   EditFiltroNomeCadCliVenda.Text := EmptyStr;
   EditFiltroCodCadCliVenda.Text := EmptyStr;
@@ -766,12 +784,12 @@ begin
 
 end;
 
-procedure TFVenda1.EditFiltroCodCadCliVendaClick(Sender: TObject);
+procedure TFVenda1.eddsssClick(Sender: TObject);
 begin
   MostrarTeclado(EditFiltroCodCadCliVenda);
 end;
 
-procedure TFVenda1.EditFiltroCodCadCliVendaTyping(Sender: TObject);
+procedure TFVenda1.eddsssTyping(Sender: TObject);
 begin
   EditFiltroNomeCadCliVenda.Text := EmptyStr;
   DM.FDQFiltroCadCLi.Active := False;
@@ -791,12 +809,12 @@ begin
   DM.FDQFiltroCadCLi.Active := True;
 end;
 
-procedure TFVenda1.EditFiltroNomeCadCliVendaClick(Sender: TObject);
+procedure TFVenda1.edttttttClick(Sender: TObject);
 begin
   MostrarTeclado(EditFiltroNomeCadCliVenda);
 end;
 
-procedure TFVenda1.EditFiltroNomeCadCliVendaTyping(Sender: TObject);
+procedure TFVenda1.edttttttTyping(Sender: TObject);
 begin
   EditFiltroCodCadCliVenda.Text := EmptyStr;
   DM.FDQFiltroCadCLi.Active := False;
@@ -954,7 +972,7 @@ begin
   ComboBoxAtendentePedido.Items.Clear;
 end;
 
-procedure TFVenda1.ListViewCadCliVendaItemClick(const Sender: TObject;
+procedure TFVenda1.listviewItemClick(const Sender: TObject;
   const AItem: TListViewItem);
 begin
   MessageDlg('Você deseja adicionar este cliente ao pedido?',
@@ -968,6 +986,9 @@ begin
             // caso sim
             EdtCliVenda.Text := DM.FDQFiltroCadCLinome_cli.AsString;
             LblCodCliPedido.Text := DM.FDQFiltroCadCLiid_cli.AsString;
+
+            EditFiltroNomeCadCliVenda.Text := EmptyStr;
+            EditFiltroCodCadCliVenda.Text := EmptyStr;
             MudarAbaVenda(TbItemedicaoVenda, Sender);
             DM.FDQFiltroCadCLi.Active := False;
           end;
@@ -1191,9 +1212,6 @@ var
   I: integer;
   vlItem, qtdItem: string;
 begin
-  ToolBar3.Visible := True;
-  LytConsultaClienteVendaApoio.Visible := False;
-
   SpdBVoltarCadCOntasReceber.Visible := False;
   contItem := 0;
   itemPedido := 'S';
@@ -1321,9 +1339,7 @@ begin
     itemPedido := EmptyStr;
     CliPedido := 'S';
     AbrirFormVenda(TFCadCli); }
-
-  ToolBar3.Visible := False;
-  MudarAbaVenda(TbItemApoioVenda, Sender);
+  MudarAbaVenda(TbItemClienteVenda, Sender);
 
   { if not Assigned(FCadCli) then
     FCadCli := TFCadCli.Create(nil);
@@ -1391,8 +1407,6 @@ begin
                               tipoReceita :=
                                 ComboBoxFormaPagVenda.Selected.Text;
 
-                              ToolBar3.Visible := True;
-                              LytConsultaClienteVendaApoio.Visible := False;
                               AbrirFormVenda(TFContasReceberVenda);
                               MudarAbaVenda(TbItemApoioVenda, Sender);
                             end;
@@ -1410,8 +1424,6 @@ begin
                               tipoReceita :=
                                 ComboBoxFormaPagVenda.Selected.Text;
 
-                              ToolBar3.Visible := True;
-                              LytConsultaClienteVendaApoio.Visible := False;
                               AbrirFormVenda(TFContasReceberVenda);
                               MudarAbaVenda(TbItemApoioVenda, Sender);
                             end;
