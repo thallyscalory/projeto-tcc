@@ -293,3 +293,15 @@ Visible=False
 Coordinates=679,1050,97,33
 Visible=False
 
+[LblSaldoTotalBarraInferior]
+Coordinates=851,309,144,51
+
+[ToolBar2]
+Coordinates=778,1127,58,33
+
+[LblValorDocBarraInferior]
+Coordinates=851,1085,137,51
+
+[LblValorMarcadoBarraInferior]
+Coordinates=1149,738,160,51
+

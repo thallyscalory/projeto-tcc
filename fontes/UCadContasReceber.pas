@@ -54,6 +54,10 @@ type
     ComboBoxTipoReceita: TComboBox;
     BindSourceDB3: TBindSourceDB;
     LinkListControlToField3: TLinkListControlToField;
+    ToolBar2: TToolBar;
+    LblSaldoTotalBarraInferior: TLabel;
+    LblValorDocBarraInferior: TLabel;
+    LblValorMarcadoBarraInferior: TLabel;
     procedure SpBVoltarClick(Sender: TObject);
     procedure ComboBoxFiltroClienteContasReceberEnter(Sender: TObject);
     procedure ComboBoxFiltroClienteContasReceberClosePopup(Sender: TObject);
@@ -72,7 +76,7 @@ type
   private
     saldoContasReceber, idContasReceber, idCliContasReceber: array of string;
     tamanhoArray, contadorArray, controleCheckmark: integer;
-    saldoTotal: Double;
+    saldoTotal, vlDoc, VlSaldo, vlMarc: Double;
     filtro, limpaArray, cliDiferente: string;
     { Private declarations }
   public
@@ -158,6 +162,15 @@ begin
   inherited;
   filtro := 'CLI';
 
+  vlDoc := 0;
+  VlSaldo := 0;
+  vlMarc := 0;
+
+  SetLength(saldoContasReceber, 0);
+  SetLength(idContasReceber, 0);
+  SetLength(idCliContasReceber, 0);
+  limpaArray := 'S';
+
   if ComboBoxFiltroClienteContasReceber.Selected.Text = '*Todos*' then
   begin
     DM.FDQConsContasReceber.Active := False;
@@ -184,6 +197,28 @@ begin
 
   DateEdtFiltroVencInicialContasReceber.Date := Date;
   DateEdtFiltroVencFinalContasReceber.Date := Date;
+
+  if not DM.FDQConsContasReceber.IsEmpty then
+  begin
+    DM.FDQConsContasReceber.First;
+    while not DM.FDQConsContasReceber.Eof do
+    begin
+      vlDoc := vlDoc + DM.FDQConsContasRecebervalor_documento.AsFloat;
+      VlSaldo := VlSaldo + DM.FDQConsContasRecebervalor_saldo.AsFloat;
+
+      DM.FDQConsContasReceber.Next;
+    end;
+    LblValorDocBarraInferior.Text := 'Vl Doc: ' + FloatToStr(vlDoc);
+    LblSaldoTotalBarraInferior.Text := 'Saldo: ' + FloatToStr(VlSaldo);
+    LblValorMarcadoBarraInferior.Text := 'Vl Marc: 0,00';
+  end
+  else
+  begin
+    LblValorDocBarraInferior.Text := 'Vl Doc: 0,00';
+    LblSaldoTotalBarraInferior.Text := 'Saldo: 0,00';
+    LblValorMarcadoBarraInferior.Text := 'Vl Marc: 0,00';
+  end;
+
 end;
 
 procedure TFCadContasReceber.ComboBoxFiltroClienteContasReceberEnter
@@ -219,6 +254,15 @@ var
 begin
   inherited;
   filtro := 'VENC';
+
+  vlDoc := 0;
+  VlSaldo := 0;
+  vlMarc := 0;
+
+  SetLength(saldoContasReceber, 0);
+  SetLength(idContasReceber, 0);
+  SetLength(idCliContasReceber, 0);
+  limpaArray := 'S';
 
   dataVencInicio := StrToDateTime(DateEdtFiltroVencInicialContasReceber.Text);
   dataVencFinal := StrToDateTime(DateEdtFiltroVencFinalContasReceber.Text);
@@ -266,6 +310,26 @@ begin
     on E: Exception do
       ShowMessage('Erro!' + E.Message);
   end;
+  if not DM.FDQConsContasReceber.IsEmpty then
+  begin
+    DM.FDQConsContasReceber.First;
+    while not DM.FDQConsContasReceber.Eof do
+    begin
+      vlDoc := vlDoc + DM.FDQConsContasRecebervalor_documento.AsFloat;
+      VlSaldo := VlSaldo + DM.FDQConsContasRecebervalor_saldo.AsFloat;
+
+      DM.FDQConsContasReceber.Next;
+    end;
+    LblValorDocBarraInferior.Text := 'Vl Doc: ' + FloatToStr(vlDoc);
+    LblSaldoTotalBarraInferior.Text := 'Saldo: ' + FloatToStr(VlSaldo);
+    LblValorMarcadoBarraInferior.Text := 'Vl Marc: 0,00';
+  end
+  else
+  begin
+    LblValorDocBarraInferior.Text := 'Vl Doc: 0,00';
+    LblSaldoTotalBarraInferior.Text := 'Saldo: 0,00';
+    LblValorMarcadoBarraInferior.Text := 'Vl Marc: 0,00';
+  end;
 end;
 
 procedure TFCadContasReceber.EdtAcrescimoTyping(Sender: TObject);
@@ -309,6 +373,10 @@ end;
 procedure TFCadContasReceber.FormCreate(Sender: TObject);
 begin
   inherited;
+  vlDoc := 0;
+  VlSaldo := 0;
+  vlMarc := 0;
+
   ComboBoxFiltroClienteContasReceberEnter(Sender);
   ComboBoxFiltroClienteContasReceber.ItemIndex :=
     ComboBoxFiltroClienteContasReceber.Count - 1;
@@ -357,6 +425,8 @@ begin
       DM.FDQConsContasReceberid_cliente.AsString;
     AItem.Detail := IntToStr(contadorArray);
 
+    vlMarc := vlMarc + StrToFloat(saldoContasReceber[contadorArray]);
+
     contadorArray := contadorArray + 1;
 
     BtnBaixaContasReceber.Visible := True;
@@ -366,6 +436,8 @@ begin
   else
   begin
     controleCheckmark := controleCheckmark - 1;
+
+    vlMarc := vlMarc - StrToFloat(saldoContasReceber[StrToInt(AItem.Detail)]);
 
     saldoContasReceber[StrToInt(AItem.Detail)] := EmptyStr;
     idContasReceber[StrToInt(AItem.Detail)] := EmptyStr;
@@ -377,7 +449,12 @@ begin
     if controleCheckmark = 0 then
     begin
       BtnBaixaContasReceber.Visible := False;
+      LblValorMarcadoBarraInferior.Text := 'Vl Marc: 0,00';
     end;
+  end;
+  if controleCheckmark > 0 then
+  begin
+    LblValorMarcadoBarraInferior.Text := 'Vl Marc: ' + FloatToStr(vlMarc);
   end;
 end;
 
@@ -404,7 +481,6 @@ begin
       AItem.Objects.TextObject.TextColor := claRed;
     end;
   end;
-
 end;
 
 procedure TFCadContasReceber.SpBVoltarClick(Sender: TObject);
@@ -635,8 +711,7 @@ begin
               begin
                 ValorAcresc := StrToFloat(EdtAcrescimo.Text);
 
-                if valorTotal >=
-                  StrToFloat(saldoContasReceber[I]) then
+                if valorTotal >= StrToFloat(saldoContasReceber[I]) then
                 begin
                   valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
                     (StrToFloat(saldoContasReceber[I]) + ValorAcresc);
@@ -709,8 +784,7 @@ begin
               end
               else
               begin
-                if valorTotal >=
-                  StrToFloat(saldoContasReceber[I]) then
+                if valorTotal >= StrToFloat(saldoContasReceber[I]) then
                 begin
                   valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
                     StrToFloat(saldoContasReceber[I]);
@@ -778,8 +852,7 @@ begin
             end
             else
             begin
-              if valorTotal >=
-                StrToFloat(saldoContasReceber[I]) then
+              if valorTotal >= StrToFloat(saldoContasReceber[I]) then
               begin
                 valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
                   StrToFloat(saldoContasReceber[I]);
