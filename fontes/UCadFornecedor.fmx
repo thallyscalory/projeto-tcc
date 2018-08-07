@@ -1,11 +1,5 @@
-inherited FCadCli: TFCadCli
-  Top = -117
+inherited FCadFornecedor: TFCadFornecedor
   Caption = 'FCadModelo1'
-  Position = Designed
-  OnKeyDown = FormKeyDown
-  OnVirtualKeyboardShown = FormVirtualKeyboardShown
-  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
-  Top = 65419
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
@@ -22,109 +16,7 @@ inherited FCadCli: TFCadCli
         inherited ToolBarsuperior: TToolBar
           inherited LblTitulo: TLabel
             TextSettings.Font.StyleExt = {04070000000000000004000000}
-            Text = 'Clientes'
           end
-          inherited SpBVoltar: TSpeedButton
-            OnClick = SpBVoltarClick
-          end
-          object SpdBNovoCadCli: TSpeedButton
-            Align = Right
-            IconTintColor = claNavy
-            Margins.Left = 4.000000000000000000
-            Margins.Right = 8.000000000000000000
-            Position.X = 274.000000000000000000
-            Size.Width = 48.000000000000000000
-            Size.Height = 48.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'addtoolbutton'
-            OnClick = SpdBNovoCadCliClick
-          end
-        end
-        object Layout1: TLayout
-          Align = Top
-          Position.Y = 48.000000000000000000
-          Size.Width = 330.000000000000000000
-          Size.Height = 124.000000000000000000
-          Size.PlatformDefault = False
-          TabOrder = 1
-          object EditFiltroNomeCadCli: TEdit
-            Touch.InteractiveGestures = [LongTap, DoubleTap]
-            Align = Top
-            StyleLookup = 'searchedit'
-            TabOrder = 0
-            ReturnKeyType = Done
-            Position.X = 4.000000000000000000
-            Margins.Left = 4.000000000000000000
-            Margins.Right = 4.000000000000000000
-            Scale.Y = 1.200000047683716000
-            Size.Width = 322.000000000000000000
-            Size.Height = 32.000000000000000000
-            Size.PlatformDefault = False
-            TextPrompt = 'Filtrar pelo nome'
-            KillFocusByReturn = True
-            OnTyping = EditFiltroNomeCadCliTyping
-            OnClick = EditFiltroNomeCadCliClick
-          end
-          object EditFiltroCodCadCli: TEdit
-            Touch.InteractiveGestures = [LongTap, DoubleTap]
-            Align = Top
-            StyleLookup = 'searchedit'
-            TabOrder = 1
-            KeyboardType = NumberPad
-            ReturnKeyType = Done
-            Position.X = 4.000000000000000000
-            Position.Y = 38.400001525878910000
-            ClipParent = True
-            Margins.Left = 4.000000000000000000
-            Margins.Right = 4.000000000000000000
-            Scale.Y = 1.200000047683716000
-            Size.Width = 322.000000000000000000
-            Size.Height = 32.000000000000000000
-            Size.PlatformDefault = False
-            TextPrompt = 'Filtrar pelo c'#243'digo'
-            KillFocusByReturn = True
-            OnTyping = EditFiltroCodCadCliTyping
-            OnClick = EditFiltroCodCadCliClick
-          end
-          object BtnFiltrarCli: TButton
-            Align = Top
-            StyledSettings = [Family, Size, Style]
-            Margins.Left = 20.000000000000000000
-            Margins.Right = 20.000000000000000000
-            Position.X = 20.000000000000000000
-            Position.Y = 76.800003051757810000
-            Size.Width = 290.000000000000000000
-            Size.Height = 44.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 2
-            Text = 'Filtrar Todos'
-            TextSettings.FontColor = claWhite
-            TintColor = claNavy
-            OnClick = BtnFiltrarCliClick
-          end
-        end
-        object ListViewCadCli: TListView
-          Touch.GestureManager = GestureManager1
-          Touch.InteractiveGestures = [DoubleTap]
-          OnGesture = ListViewCadCliGesture
-          ItemAppearanceClassName = 'TMultiDetailItemAppearance'
-          ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
-          HeaderAppearanceClassName = 'TListHeaderObjects'
-          FooterAppearanceClassName = 'TListHeaderObjects'
-          Align = Client
-          Margins.Left = 4.000000000000000000
-          Margins.Top = 4.000000000000000000
-          Margins.Right = 4.000000000000000000
-          Margins.Bottom = 4.000000000000000000
-          Size.Width = 322.000000000000000000
-          Size.Height = 251.000000000000000000
-          Size.PlatformDefault = False
-          TabOrder = 2
-          ItemAppearanceObjects.ItemObjects.Image.Visible = True
-          ItemAppearanceObjects.ItemEditObjects.Image.Visible = True
-          OnDblClick = ListViewCadCliDblClick
-          OnItemClickEx = ListViewCadCliItemClickEx
-          OnButtonClick = ListViewCadCliButtonClick
         end
       end
       inherited TbItemedicao: TTabItem
@@ -137,20 +29,13 @@ inherited FCadCli: TFCadCli
           Size.PlatformDefault = False
           TabOrder = 0
           TintColor = claSilver
-          object lblTituloEdicao: TLabel
+          object LblTituloEdicaoCadFornecedor: TLabel
             Align = Contents
-            StyledSettings = []
             Size.Width = 330.000000000000000000
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
-            TextSettings.Font.Family = 'Arial'
-            TextSettings.Font.Size = 18.000000000000000000
-            TextSettings.Font.StyleExt = {04070000000000000004000000}
-            TextSettings.FontColor = claNavy
-            TextSettings.HorzAlign = Center
-            Text = 'Clientes'
           end
-          object SpBVoltarEdicao: TSpeedButton
+          object SpdBVoltarEdicaoCadFornecedor: TSpeedButton
             Align = Left
             IconTintColor = claNavy
             Margins.Left = 8.000000000000000000
@@ -159,40 +44,26 @@ inherited FCadCli: TFCadCli
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'backtoolbutton'
-            OnClick = SpBVoltarEdicaoClick
           end
-          object SpdBEditar: TSpeedButton
-            Align = MostRight
+          object SpdBConfirmaEdicaoCadFornecedor: TSpeedButton
+            Align = Right
             IconTintColor = claNavy
-            Position.X = 282.000000000000000000
-            Size.Width = 48.000000000000000000
-            Size.Height = 48.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'composetoolbutton'
-            OnClick = SpdBEditarClick
-          end
-          object SpdBConfirmar: TSpeedButton
-            Align = MostRight
-            IconTintColor = claNavy
-            Position.X = 234.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Position.X = 218.000000000000000000
             Size.Width = 48.000000000000000000
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'donetoolbutton'
-            OnClick = SpdBConfirmarClick
           end
-          object SpdBFotoCli: TSpeedButton
-            Action = TakePhotoFromCameraAction1
+          object SpdBEditarEdicaoCadFornecedor: TSpeedButton
             Align = Right
-            Enabled = True
             IconTintColor = claNavy
-            ImageIndex = -1
-            Position.X = 186.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Position.X = 274.000000000000000000
             Size.Width = 48.000000000000000000
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
-            StyleLookup = 'cameratoolbutton'
-            Visible = True
+            StyleLookup = 'composetoolbutton'
           end
         end
         object ListBoxEdicaoCadCli: TListBox
@@ -231,7 +102,6 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Nome / Razao Social'
-              OnKeyUp = EdtNomeCliKeyUp
               object EdtBNomeCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -240,10 +110,9 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 StyleLookup = 'spinrightbutton'
                 TabOrder = 0
-                OnClick = EdtBNomeCliClick
               end
             end
-            object LblNomeCli: TLabel
+            object LblNomeForn: TLabel
               Align = Left
               StyledSettings = [Style, FontColor]
               Margins.Left = 4.000000000000000000
@@ -278,7 +147,7 @@ inherited FCadCli: TFCadCli
               Size.PlatformDefault = False
               TabOrder = 1
             end
-            object LblTipoPessoaCli: TLabel
+            object LblTipoPessoaForn: TLabel
               Align = Left
               StyledSettings = [Style, FontColor]
               Margins.Left = 4.000000000000000000
@@ -314,7 +183,6 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Cpf / Cnpj'
-              OnKeyUp = EdtCpfCliKeyUp
               object EdtBCpfCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -323,7 +191,6 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 StyleLookup = 'spinrightbutton'
                 TabOrder = 0
-                OnClick = EdtBCpfCliClick
               end
             end
             object LblCpfCli: TLabel
@@ -361,7 +228,6 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Rg / I.E'
-              OnKeyUp = EdtRgCliKeyUp
               object EdtBRgCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -370,7 +236,6 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 StyleLookup = 'spinrightbutton'
                 TabOrder = 0
-                OnClick = EdtBRgCliClick
               end
             end
             object LblRgCli: TLabel
@@ -408,7 +273,6 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Apelido / Nome Fantasia'
-              OnKeyUp = EdtApelidoCliKeyUp
               object EdtBApelidoCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -417,7 +281,6 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 StyleLookup = 'spinrightbutton'
                 TabOrder = 0
-                OnClick = EdtBApelidoCliClick
               end
             end
             object LblApelidoCli: TLabel
@@ -456,7 +319,6 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Telefone / Celular'
-              OnKeyUp = EdtFoneCliKeyUp
               object EdtBFoneCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -465,7 +327,6 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 StyleLookup = 'spinrightbutton'
                 TabOrder = 0
-                OnClick = EdtBFoneCliClick
               end
             end
             object LblFoneCli: TLabel
@@ -503,7 +364,6 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Endereco'
-              OnKeyUp = EdtEnderecoCliKeyUp
               object EdtBEndCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -512,7 +372,6 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 StyleLookup = 'spinrightbutton'
                 TabOrder = 0
-                OnClick = EdtBEndCliClick
               end
             end
             object LblEndCli: TLabel
@@ -550,7 +409,6 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Numero'
-              OnKeyUp = EdtNumCliKeyUp
               object EdtBNumCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -559,7 +417,6 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 StyleLookup = 'spinrightbutton'
                 TabOrder = 0
-                OnClick = EdtBNumCliClick
               end
             end
             object LblNumCli: TLabel
@@ -597,7 +454,6 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Complemento'
-              OnKeyUp = EdtCompCliKeyUp
               object EdtBCompCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -606,7 +462,6 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 StyleLookup = 'spinrightbutton'
                 TabOrder = 0
-                OnClick = EdtBCompCliClick
               end
             end
             object LblCompCli: TLabel
@@ -644,7 +499,6 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Bairro'
-              OnKeyUp = EdtBairroCliKeyUp
               object EdtBBairroCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -653,7 +507,6 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 StyleLookup = 'spinrightbutton'
                 TabOrder = 0
-                OnClick = EdtBBairroCliClick
               end
             end
             object LblBairroCli: TLabel
@@ -692,7 +545,6 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Cep'
-              OnKeyUp = EdtCepCliKeyUp
               object EdtBCepCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -701,7 +553,6 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 StyleLookup = 'spinrightbutton'
                 TabOrder = 0
-                OnClick = EdtBCepCliClick
               end
             end
             object LblCepCli: TLabel
@@ -739,7 +590,6 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Cidade'
-              OnKeyUp = EdtCidadeCliKeyUp
               object EdtBCidadeCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -748,7 +598,6 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 StyleLookup = 'spinrightbutton'
                 TabOrder = 0
-                OnClick = EdtBCidadeCliClick
               end
             end
             object Cidade: TLabel
@@ -786,7 +635,6 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Uf'
-              OnKeyUp = EdtUfCliKeyUp
               object EdtBUfCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -795,7 +643,6 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 StyleLookup = 'spinrightbutton'
                 TabOrder = 0
-                OnClick = EdtBUfCliClick
               end
             end
             object LblUfCli: TLabel
@@ -834,7 +681,6 @@ inherited FCadCli: TFCadCli
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Email'
-              OnKeyUp = EdtEmailCliKeyUp
               object EdtBEmailCli: TEditButton
                 CanFocus = False
                 Cursor = crArrow
@@ -843,7 +689,6 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 StyleLookup = 'spinrightbutton'
                 TabOrder = 0
-                OnClick = EdtBEmailCliClick
               end
             end
             object LblEmailCli: TLabel
@@ -957,221 +802,13 @@ inherited FCadCli: TFCadCli
               Margins.Top = 4.000000000000000000
               Margins.Right = 4.000000000000000000
               Margins.Bottom = 4.000000000000000000
-              Size.Width = 230.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-            end
-            object LblDataCadCli: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 67.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              Text = 'Data Cad: '
-            end
-          end
-          object ListBoxItem18: TListBoxItem
-            Position.Y = 710.000000000000000000
-            Size.Width = 309.000000000000000000
-            Size.Height = 130.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 17
-            object LytFotoCli: TLayout
-              Align = Client
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
               Size.Width = 301.000000000000000000
-              Size.Height = 122.000000000000000000
+              Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
-              TabOrder = 0
-              object ImgFotoCli: TImage
-                MultiResBitmap = <
-                  item
-                  end>
-                Align = Center
-                Size.Width = 100.000000000000000000
-                Size.Height = 100.000000000000000000
-                Size.PlatformDefault = False
-              end
             end
           end
         end
       end
     end
-  end
-  inherited ActionList1: TActionList
-    Left = 24
-    Top = 424
-    object TakePhotoFromCameraAction1: TTakePhotoFromCameraAction
-      Category = 'Media Library'
-      OnDidFinishTaking = TakePhotoFromCameraAction1DidFinishTaking
-    end
-  end
-  inherited ImageList1: TImageList
-    Left = 24
-    Top = 192
-  end
-  object BindSourceDB1: TBindSourceDB
-    ScopeMappings = <>
-    Left = 24
-    Top = 376
-  end
-  object BindingsList1: TBindingsList
-    Methods = <>
-    OutputConverters = <>
-    Left = 28
-    Top = 325
-    object LinkFillControlToField1: TLinkFillControlToField
-      Category = 'Quick Bindings'
-      Track = True
-      FillDataSource = BindSourceDB2
-      FillDisplayFieldName = 'cidade_cli'
-      AutoFill = True
-      FillExpressions = <>
-      FillHeaderExpressions = <>
-      FillBreakGroups = <>
-    end
-    object LinkListControlToField1: TLinkListControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'nome_cli'
-      Control = ListViewCadCli
-      FillExpressions = <
-        item
-          SourceMemberName = 'cpf_cnpj_cli'
-          ControlMemberName = 'Detail1'
-        end
-        item
-          SourceMemberName = 'fone_cli'
-          ControlMemberName = 'Detail2'
-        end>
-      FillHeaderExpressions = <>
-      FillHeaderFieldName = 'id_cli'
-      FillBreakGroups = <>
-    end
-    object LinkControlToField1: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'nome_cli'
-      Control = EdtNomeCli
-      Track = False
-    end
-    object LinkControlToField2: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'cpf_cnpj_cli'
-      Control = EdtCpfCli
-      Track = False
-    end
-    object LinkControlToField3: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'rg_ie_cli'
-      Control = EdtRgCli
-      Track = False
-    end
-    object LinkControlToField4: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'apelido_cli'
-      Control = EdtApelidoCli
-      Track = False
-    end
-    object LinkControlToField5: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'fone_cli'
-      Control = EdtFoneCli
-      Track = False
-    end
-    object LinkControlToField6: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'endereco_cli'
-      Control = EdtEnderecoCli
-      Track = False
-    end
-    object LinkControlToField7: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'num_cli'
-      Control = EdtNumCli
-      Track = False
-    end
-    object LinkControlToField8: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'complemento_cli'
-      Control = EdtCompCli
-      Track = False
-    end
-    object LinkControlToField9: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'bairro_cli'
-      Control = EdtBairroCli
-      Track = False
-    end
-    object LinkControlToField10: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'cep_cli'
-      Control = EdtCepCli
-      Track = False
-    end
-    object LinkControlToField11: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'cidade_cli'
-      Control = EdtCidadeCli
-      Track = False
-    end
-    object LinkControlToField12: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'uf_cli'
-      Control = EdtUfCli
-      Track = False
-    end
-    object LinkControlToField13: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'email_cli'
-      Control = EdtEmailCli
-      Track = False
-    end
-    object LinkControlToField14: TLinkControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'obs_cli'
-      Control = MemoObsCadCli
-      Track = False
-    end
-    object LinkPropertyToFieldBitmap: TLinkPropertyToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB2
-      FieldName = 'foto_cli'
-      Component = ImgFotoCli
-      ComponentProperty = 'Bitmap'
-    end
-  end
-  object BindSourceDB2: TBindSourceDB
-    DataSet = DM.FDQFiltroCadCLi
-    ScopeMappings = <>
-    Left = 24
-    Top = 256
-  end
-  object GestureManager1: TGestureManager
-    Sensitivity = 80.000000000000000000
-    Left = 164
-    Top = 318
   end
 end

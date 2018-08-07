@@ -23,7 +23,7 @@ object FVenda1: TFVenda1
       Size.Height = 480.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 3
+      TabIndex = 0
       TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
@@ -41,7 +41,7 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 66.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -738,7 +738,7 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 66.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -816,6 +816,8 @@ object FVenda1: TFVenda1
         StyleLookup = ''
         TabOrder = 0
         Text = 'Cliente'
+        ExplicitSize.cx = 66.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
         object Layout3: TLayout
           Align = Client
           Size.Width = 330.000000000000000000

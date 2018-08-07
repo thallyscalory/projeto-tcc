@@ -117,6 +117,7 @@ type
     GestureManager1: TGestureManager;
     BtnFiltrarCli: TButton;
     SpdBNovoCadCli: TSpeedButton;
+    LblDataCadCli: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure SpBVoltarEdicaoClick(Sender: TObject);
     procedure SpBVoltarClick(Sender: TObject);
@@ -696,31 +697,8 @@ begin
     EdtNomeCli.SetFocus;
     DesabilitaCampos;
     MudarAbaModelo(TbItemedicao, Sender);
-  end
-  else
-  begin
-    if venda = 'S' then
-    begin
-      MessageDlg('Você deseja adicionar este cliente ao pedido?',
-        System.UITypes.TMsgDlgType.mtInformation,
-        [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
-        procedure(const AResult: System.UITypes.TModalResult)
-        begin
-          case AResult of
-            mrYES:
-              begin
-                // caso sim
-                nomeCliente := DM.FDQFiltroCadCLinome_cli.AsString;
-                codCliente := DM.FDQFiltroCadCLiid_cli.AsString;
-              end;
-            mrNo:
-              begin
-                // caso não
-              end;
-          end;
-        end);
-    end;
   end;
+
 end;
 
 procedure TFCadCli.SpBVoltarClick(Sender: TObject);

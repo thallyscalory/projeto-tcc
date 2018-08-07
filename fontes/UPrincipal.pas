@@ -52,16 +52,20 @@ type
     LblTituloConsAdm: TLabel;
     LblTituloContProd: TLabel;
     ksLoadingIndicator1: TksLoadingIndicator;
+    ListBoxItem6: TListBoxItem;
+    RoundRectCadFornecedor: TRoundRect;
+    ImgCadFornecedor: TImage;
+    Layout1: TLayout;
+    LblTituloCadFornecedor: TLabel;
     procedure FormCreate(Sender: TObject);
-    procedure ImgCadCliClick(Sender: TObject);
     procedure RoundRectVendasClick(Sender: TObject);
-    procedure RoundRectCadCliClick(Sender: TObject);
     procedure ImgVendaClick(Sender: TObject);
     procedure RoundRectConsProdClick(Sender: TObject);
     procedure ImgConsProdClick(Sender: TObject);
     procedure SpdBInfoClick(Sender: TObject);
     procedure RoundRectConsAdmClick(Sender: TObject);
     procedure ImgConsAdmClick(Sender: TObject);
+    procedure RoundRectCadCliClick(Sender: TObject);
   private
     { Private declarations }
     FActiveForm: TForm;
@@ -114,13 +118,6 @@ begin
   TbControlPrincipal.TabPosition := TTabPosition.None;
 end;
 
-procedure TFPrincipal.ImgCadCliClick(Sender: TObject);
-begin
-  AbrirForm(TFCadCli);
-  MudarAba(TbItemApoio, Sender);
-  venda := EmptyStr;
-end;
-
 procedure TFPrincipal.ImgConsAdmClick(Sender: TObject);
 begin
   AbrirForm(TFCadContasReceber);
@@ -149,7 +146,7 @@ procedure TFPrincipal.RoundRectCadCliClick(Sender: TObject);
 begin
   AbrirForm(TFCadCli);
   MudarAba(TbItemApoio, Sender);
-  venda := EmptyStr;
+  venda := 'N';
 end;
 
 procedure TFPrincipal.RoundRectConsAdmClick(Sender: TObject);

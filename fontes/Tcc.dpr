@@ -13,7 +13,8 @@ uses
   UContasReceberVenda in 'UContasReceberVenda.pas' {FContasReceberVenda},
   UAuxiliar in 'UAuxiliar.pas' {FAuxiliar},
   UCadContasReceber in 'UCadContasReceber.pas' {FCadContasReceber},
-  UVenda1 in 'UVenda1.pas' {FVenda1};
+  UVenda1 in 'UVenda1.pas' {FVenda1},
+  UCadFornecedor in 'UCadFornecedor.pas' {FCadFornecedor};
 
 {$R *.res}
 
@@ -22,5 +23,6 @@ begin
   Application.CreateForm(TFSplash, FSplash);
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TFPrincipal, FPrincipal);
+  Application.CreateForm(TFCadFornecedor, FCadFornecedor);
   Application.Run;
 end.
