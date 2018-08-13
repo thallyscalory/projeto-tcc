@@ -108,6 +108,21 @@ begin
   DM.FDQConsFormaPag.Open();
 
   ListViewCadContasReceber.Items.Clear;
+
+  if vendaEntrada = 'S' then
+  begin
+    ListViewCadContasReceber.BeginUpdate;
+    listaContasReceber := ListViewCadContasReceber.Items.Add;
+    listaContasReceber.Text := DateTimeToStr(dataHoje);
+    listaContasReceber.Data[TMultiDetailAppearanceNames.Detail1] := vlParcela;
+    listaContasReceber.Data[TMultiDetailAppearanceNames.Detail2] := 'dinheiro';
+    ListViewCadContasReceber.EndUpdate;
+
+    vendaEntrada := 'N';
+
+    numParcela := numParcela - 1;
+  end;
+
   for I := 1 to numParcela do
   begin
     if DM.FDQConsFormaPagavista_forma_pag.AsString = 'S' then
@@ -122,32 +137,16 @@ begin
     end
     else
     begin
-      if vendaEntrada = 'S' then
-      begin
-        ListViewCadContasReceber.BeginUpdate;
-        listaContasReceber := ListViewCadContasReceber.Items.Add;
-        listaContasReceber.Text := DateTimeToStr(dataHoje);
-        listaContasReceber.Data[TMultiDetailAppearanceNames.Detail1] :=
-          vlParcela;
-        listaContasReceber.Data[TMultiDetailAppearanceNames.Detail2] :=
-          'dinheiro';
-        ListViewCadContasReceber.EndUpdate;
+      datavenc := IncMonth(dataHoje, I);
 
-        vendaEntrada := 'N'
-      end
-      else
-      begin
-        datavenc := IncMonth(dataHoje, I);
+      ListViewCadContasReceber.BeginUpdate;
+      listaContasReceber := ListViewCadContasReceber.Items.Add;
+      listaContasReceber.Text := DateTimeToStr(datavenc);
+      listaContasReceber.Data[TMultiDetailAppearanceNames.Detail1] := vlParcela;
+      listaContasReceber.Data[TMultiDetailAppearanceNames.Detail2] :=
+        tipoReceita;
+      ListViewCadContasReceber.EndUpdate;
 
-        ListViewCadContasReceber.BeginUpdate;
-        listaContasReceber := ListViewCadContasReceber.Items.Add;
-        listaContasReceber.Text := DateTimeToStr(datavenc);
-        listaContasReceber.Data[TMultiDetailAppearanceNames.Detail1] :=
-          vlParcela;
-        listaContasReceber.Data[TMultiDetailAppearanceNames.Detail2] :=
-          tipoReceita;
-        ListViewCadContasReceber.EndUpdate;
-      end;
     end;
   end;
 

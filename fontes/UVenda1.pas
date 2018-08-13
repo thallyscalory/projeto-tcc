@@ -174,7 +174,7 @@ var
   CliPedido, itemPedido, venda, finalizaVenda, vlParcela, tipoReceita,
     vendaEntrada: string;
   contItem, listCountItem, numParcela: integer;
-  vlTotalAtual, vlTotalItemAtual, qtdTotalAtual: Double;
+  vlTotalAtual, vlTotalItemAtual, qtdTotalAtual, vlTotalPedido: Double;
 
 implementation
 
@@ -1406,6 +1406,9 @@ begin
                                 ListBoxItemParcelasVenda.ItemData.Detail;
                               tipoReceita :=
                                 ComboBoxFormaPagVenda.Selected.Text;
+                              vlTotalPedido :=
+                                StrToFloat(ListBoxItemValorTotalVenda.
+                                ItemData.Detail);
 
                               AbrirFormVenda(TFContasReceberVenda);
                               MudarAbaVenda(TbItemApoioVenda, Sender);
@@ -1423,12 +1426,32 @@ begin
                                 ListBoxItemParcelasVenda.ItemData.Detail;
                               tipoReceita :=
                                 ComboBoxFormaPagVenda.Selected.Text;
+                              vlTotalPedido :=
+                                StrToFloat(ListBoxItemValorTotalVenda.
+                                ItemData.Detail);
 
                               AbrirFormVenda(TFContasReceberVenda);
                               MudarAbaVenda(TbItemApoioVenda, Sender);
                             end;
                         end;
                       end);
+                  end
+                  else
+                  begin
+                    vendaEntrada := 'N';
+                    LblSupApoioVenda.Text := 'Receber';
+                    SpdBVoltarCadCOntasReceber.Visible := True;
+                    CliPedido := EmptyStr;
+                    itemPedido := EmptyStr;
+                    finalizaVenda := 'S';
+                    numParcela := StrToInt(EdtNumParcelaPedido.Text);
+                    vlParcela := ListBoxItemParcelasVenda.ItemData.Detail;
+                    tipoReceita := ComboBoxFormaPagVenda.Selected.Text;
+                    vlTotalPedido :=
+                      StrToFloat(ListBoxItemValorTotalVenda.ItemData.Detail);
+
+                    AbrirFormVenda(TFContasReceberVenda);
+                    MudarAbaVenda(TbItemApoioVenda, Sender);
                   end;
                 end
                 else
