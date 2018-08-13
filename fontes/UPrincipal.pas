@@ -57,6 +57,10 @@ type
     ImgCadFornecedor: TImage;
     Layout1: TLayout;
     LblTituloCadFornecedor: TLabel;
+    ListBoxItem7: TListBoxItem;
+    Rectangle1: TRectangle;
+    ListBoxItem8: TListBoxItem;
+    Rectangle2: TRectangle;
     procedure FormCreate(Sender: TObject);
     procedure RoundRectVendasClick(Sender: TObject);
     procedure ImgVendaClick(Sender: TObject);
