@@ -2,7 +2,7 @@ object DM: TDM
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   Height = 442
-  Width = 1074
+  Width = 1204
   object FDConnection1: TFDConnection
     Params.Strings = (
       'Database=C:\projeto tcc\bd\calorytcc.s3db'
@@ -1659,6 +1659,221 @@ object DM: TDM
       Required = True
       FixedChar = True
       Size = 1
+    end
+  end
+  object FDQConsFornecedor: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      
+        'select * from fornecedor where id like :PIdForn or nome like :PN' +
+        'omeForn order by nome;')
+    Left = 1120
+    Top = 16
+    ParamData = <
+      item
+        Name = 'PIDFORN'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 30
+      end
+      item
+        Name = 'PNOMEFORN'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 60
+      end>
+    object FDQConsFornecedorid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQConsFornecedortipo_pessoa: TStringField
+      FieldName = 'tipo_pessoa'
+      Origin = 'tipo_pessoa'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsFornecedornome: TStringField
+      FieldName = 'nome'
+      Origin = 'nome'
+      Required = True
+      Size = 60
+    end
+    object FDQConsFornecedornome_fantasia: TStringField
+      FieldName = 'nome_fantasia'
+      Origin = 'nome_fantasia'
+      Size = 40
+    end
+    object FDQConsFornecedorcpf_cnpj: TStringField
+      FieldName = 'cpf_cnpj'
+      Origin = 'cpf_cnpj'
+      Size = 15
+    end
+    object FDQConsFornecedorrg_ie: TStringField
+      FieldName = 'rg_ie'
+      Origin = 'rg_ie'
+    end
+    object FDQConsFornecedorfone: TStringField
+      FieldName = 'fone'
+      Origin = 'fone'
+      Size = 10
+    end
+    object FDQConsFornecedorendereco: TStringField
+      FieldName = 'endereco'
+      Origin = 'endereco'
+      Size = 50
+    end
+    object FDQConsFornecedornumero: TStringField
+      FieldName = 'numero'
+      Origin = 'numero'
+      Size = 10
+    end
+    object FDQConsFornecedorcomplemento: TStringField
+      FieldName = 'complemento'
+      Origin = 'complemento'
+      Size = 30
+    end
+    object FDQConsFornecedorbairro: TStringField
+      FieldName = 'bairro'
+      Origin = 'bairro'
+      Size = 30
+    end
+    object FDQConsFornecedorcep: TStringField
+      FieldName = 'cep'
+      Origin = 'cep'
+      Size = 15
+    end
+    object FDQConsFornecedorcidade: TStringField
+      FieldName = 'cidade'
+      Origin = 'cidade'
+      Size = 30
+    end
+    object FDQConsFornecedoruf: TStringField
+      FieldName = 'uf'
+      Origin = 'uf'
+      FixedChar = True
+      Size = 2
+    end
+    object FDQConsFornecedoremail: TStringField
+      FieldName = 'email'
+      Origin = 'email'
+      Size = 60
+    end
+    object FDQConsFornecedorobs: TWideMemoField
+      FieldName = 'obs'
+      Origin = 'obs'
+      BlobType = ftWideMemo
+    end
+    object FDQConsFornecedorstatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsFornecedordata_cad: TDateField
+      FieldName = 'data_cad'
+      Origin = 'data_cad'
+    end
+  end
+  object FDQCadFornecedor: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from fornecedor')
+    Left = 1120
+    Top = 152
+    object FDQCadFornecedorid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQCadFornecedortipo_pessoa: TStringField
+      FieldName = 'tipo_pessoa'
+      Origin = 'tipo_pessoa'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQCadFornecedornome: TStringField
+      FieldName = 'nome'
+      Origin = 'nome'
+      Required = True
+      Size = 60
+    end
+    object FDQCadFornecedornome_fantasia: TStringField
+      FieldName = 'nome_fantasia'
+      Origin = 'nome_fantasia'
+      Size = 40
+    end
+    object FDQCadFornecedorcpf_cnpj: TStringField
+      FieldName = 'cpf_cnpj'
+      Origin = 'cpf_cnpj'
+      Size = 15
+    end
+    object FDQCadFornecedorrg_ie: TStringField
+      FieldName = 'rg_ie'
+      Origin = 'rg_ie'
+    end
+    object FDQCadFornecedorfone: TStringField
+      FieldName = 'fone'
+      Origin = 'fone'
+      Size = 10
+    end
+    object FDQCadFornecedorendereco: TStringField
+      FieldName = 'endereco'
+      Origin = 'endereco'
+      Size = 50
+    end
+    object FDQCadFornecedornumero: TStringField
+      FieldName = 'numero'
+      Origin = 'numero'
+      Size = 10
+    end
+    object FDQCadFornecedorcomplemento: TStringField
+      FieldName = 'complemento'
+      Origin = 'complemento'
+      Size = 30
+    end
+    object FDQCadFornecedorbairro: TStringField
+      FieldName = 'bairro'
+      Origin = 'bairro'
+      Size = 30
+    end
+    object FDQCadFornecedorcep: TStringField
+      FieldName = 'cep'
+      Origin = 'cep'
+      Size = 15
+    end
+    object FDQCadFornecedorcidade: TStringField
+      FieldName = 'cidade'
+      Origin = 'cidade'
+      Size = 30
+    end
+    object FDQCadFornecedoruf: TStringField
+      FieldName = 'uf'
+      Origin = 'uf'
+      FixedChar = True
+      Size = 2
+    end
+    object FDQCadFornecedoremail: TStringField
+      FieldName = 'email'
+      Origin = 'email'
+      Size = 60
+    end
+    object FDQCadFornecedorobs: TWideMemoField
+      FieldName = 'obs'
+      Origin = 'obs'
+      BlobType = ftWideMemo
+    end
+    object FDQCadFornecedorstatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQCadFornecedordata_cad: TDateField
+      FieldName = 'data_cad'
+      Origin = 'data_cad'
     end
   end
 end

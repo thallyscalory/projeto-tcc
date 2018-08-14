@@ -70,6 +70,8 @@ type
     procedure RoundRectConsAdmClick(Sender: TObject);
     procedure ImgConsAdmClick(Sender: TObject);
     procedure RoundRectCadCliClick(Sender: TObject);
+    procedure RoundRectCadFornecedorClick(Sender: TObject);
+    procedure ImgCadFornecedorClick(Sender: TObject);
   private
     { Private declarations }
     FActiveForm: TForm;
@@ -88,7 +90,7 @@ implementation
 {$R *.fmx}
 
 uses UDM, UVenda, UCadCli, UConsultaProduto, UInfo, UVenda1, UCadContasReceber,
-  UAuxiliar;
+  UAuxiliar, UCadFornecedor;
 
 procedure TFPrincipal.AbrirForm(AFormClass: TComponentClass);
 var
@@ -122,6 +124,12 @@ begin
   TbControlPrincipal.TabPosition := TTabPosition.None;
 end;
 
+procedure TFPrincipal.ImgCadFornecedorClick(Sender: TObject);
+begin
+  AbrirForm(TFCadFornecedor);
+  MudarAba(TbItemApoio, Sender);
+end;
+
 procedure TFPrincipal.ImgConsAdmClick(Sender: TObject);
 begin
   AbrirForm(TFCadContasReceber);
@@ -151,6 +159,12 @@ begin
   AbrirForm(TFCadCli);
   MudarAba(TbItemApoio, Sender);
   venda := 'N';
+end;
+
+procedure TFPrincipal.RoundRectCadFornecedorClick(Sender: TObject);
+begin
+  AbrirForm(TFCadFornecedor);
+  MudarAba(TbItemApoio, Sender);
 end;
 
 procedure TFPrincipal.RoundRectConsAdmClick(Sender: TObject);

@@ -3,24 +3,106 @@ inherited FCadFornecedor: TFCadFornecedor
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
-      TabIndex = 1
       Sizes = (
         330s
         431s
         330s
         431s)
       inherited TbItemListagem: TTabItem
-        IsSelected = False
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         inherited ToolBarsuperior: TToolBar
           inherited LblTitulo: TLabel
             TextSettings.Font.StyleExt = {04070000000000000004000000}
+            Text = 'Fornecedor'
           end
+          inherited SpBVoltar: TSpeedButton
+            OnClick = SpBVoltarClick
+          end
+        end
+        object Layout1: TLayout
+          Align = Top
+          Position.Y = 48.000000000000000000
+          Size.Width = 330.000000000000000000
+          Size.Height = 124.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object EditFiltroNomeFornecedor: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            StyleLookup = 'searchedit'
+            TabOrder = 0
+            ReturnKeyType = Done
+            Position.X = 4.000000000000000000
+            Margins.Left = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Scale.Y = 1.200000047683716000
+            Size.Width = 322.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Filtrar pelo nome'
+            KillFocusByReturn = True
+            OnTyping = EditFiltroNomeFornecedorTyping
+            OnClick = EditFiltroNomeFornecedorClick
+          end
+          object EditFiltroCodFornecedor: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            StyleLookup = 'searchedit'
+            TabOrder = 1
+            KeyboardType = NumberPad
+            ReturnKeyType = Done
+            Position.X = 4.000000000000000000
+            Position.Y = 38.400001525878910000
+            ClipParent = True
+            Margins.Left = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Scale.Y = 1.200000047683716000
+            Size.Width = 322.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Filtrar pelo c'#243'digo'
+            KillFocusByReturn = True
+            OnTyping = EditFiltroCodFornecedorTyping
+            OnClick = EditFiltroCodFornecedorClick
+          end
+          object BtnFiltrarFornecedor: TButton
+            Align = Top
+            StyledSettings = [Family, Size, Style]
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 76.800003051757810000
+            Size.Width = 290.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            Text = 'Filtrar Todos'
+            TextSettings.FontColor = claWhite
+            TintColor = claNavy
+            OnClick = BtnFiltrarFornecedorClick
+          end
+        end
+        object ListViewFornecedor: TListView
+          Touch.InteractiveGestures = [DoubleTap]
+          ItemAppearanceClassName = 'TMultiDetailItemAppearance'
+          ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
+          HeaderAppearanceClassName = 'TListHeaderObjects'
+          FooterAppearanceClassName = 'TListHeaderObjects'
+          Align = Client
+          Margins.Left = 4.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 4.000000000000000000
+          Margins.Bottom = 4.000000000000000000
+          Size.Width = 322.000000000000000000
+          Size.Height = 251.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          ItemAppearanceObjects.ItemObjects.Image.Visible = True
+          ItemAppearanceObjects.ItemEditObjects.Image.Visible = True
         end
       end
       inherited TbItemedicao: TTabItem
-        IsSelected = True
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object ToolBar1: TToolBar
@@ -88,7 +170,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 0
-            object EdtNomeCli: TEdit
+            object EdtNomeForn: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
@@ -133,7 +215,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
-            object ComboBoxTipoPessoaCli: TComboBox
+            object ComboBoxTipoPessoaForn: TComboBox
               Align = Client
               Items.Strings = (
                 'Fisica'
@@ -168,7 +250,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 2
-            object EdtCpfCli: TEdit
+            object EdtCpfForn: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
@@ -193,7 +275,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 TabOrder = 0
               end
             end
-            object LblCpfCli: TLabel
+            object LblCpfForn: TLabel
               Align = Left
               StyledSettings = [Style, FontColor]
               Margins.Left = 4.000000000000000000
@@ -214,7 +296,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 3
-            object EdtRgCli: TEdit
+            object EdtRgForn: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
@@ -238,7 +320,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 TabOrder = 0
               end
             end
-            object LblRgCli: TLabel
+            object LblRgForn: TLabel
               Align = Left
               StyledSettings = [Style, FontColor]
               Margins.Left = 4.000000000000000000
@@ -259,7 +341,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 4
-            object EdtApelidoCli: TEdit
+            object EdtApelidoForn: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
@@ -283,7 +365,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 TabOrder = 0
               end
             end
-            object LblApelidoCli: TLabel
+            object LblApelidoForn: TLabel
               Align = Left
               StyledSettings = [Style, FontColor]
               Margins.Left = 4.000000000000000000
@@ -304,7 +386,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 5
-            object EdtFoneCli: TEdit
+            object EdtFoneForn: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
@@ -329,7 +411,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 TabOrder = 0
               end
             end
-            object LblFoneCli: TLabel
+            object LblFoneForn: TLabel
               Align = Left
               StyledSettings = [Style, FontColor]
               Margins.Left = 4.000000000000000000
@@ -350,7 +432,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 6
-            object EdtEnderecoCli: TEdit
+            object EdtEnderecoForn: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
@@ -374,7 +456,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 TabOrder = 0
               end
             end
-            object LblEndCli: TLabel
+            object LblEndForn: TLabel
               Align = Left
               StyledSettings = [Style, FontColor]
               Margins.Left = 4.000000000000000000
@@ -395,7 +477,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 7
-            object EdtNumCli: TEdit
+            object EdtNumForn: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
@@ -419,7 +501,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 TabOrder = 0
               end
             end
-            object LblNumCli: TLabel
+            object LblNumForn: TLabel
               Align = Left
               StyledSettings = [Style, FontColor]
               Margins.Left = 4.000000000000000000
@@ -440,7 +522,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 8
-            object EdtCompCli: TEdit
+            object EdtCompForn: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
@@ -464,7 +546,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 TabOrder = 0
               end
             end
-            object LblCompCli: TLabel
+            object LblCompForn: TLabel
               Align = Left
               StyledSettings = [Style, FontColor]
               Margins.Left = 4.000000000000000000
@@ -485,7 +567,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 9
-            object EdtBairroCli: TEdit
+            object EdtBairroForn: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
@@ -509,7 +591,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 TabOrder = 0
               end
             end
-            object LblBairroCli: TLabel
+            object LblBairroForn: TLabel
               Align = Left
               StyledSettings = [Style, FontColor]
               Margins.Left = 4.000000000000000000
@@ -530,7 +612,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 10
-            object EdtCepCli: TEdit
+            object EdtCepForn: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 1
@@ -555,7 +637,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 TabOrder = 0
               end
             end
-            object LblCepCli: TLabel
+            object LblCepForn: TLabel
               Align = Left
               StyledSettings = [Style, FontColor]
               Margins.Left = 4.000000000000000000
@@ -576,7 +658,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 11
-            object EdtCidadeCli: TEdit
+            object EdtCidadeForn: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 1
@@ -600,7 +682,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 TabOrder = 0
               end
             end
-            object Cidade: TLabel
+            object LblCidadeForn: TLabel
               Align = Left
               StyledSettings = [Style, FontColor]
               Margins.Left = 4.000000000000000000
@@ -621,7 +703,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 12
-            object EdtUfCli: TEdit
+            object EdtUfForn: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 1
@@ -645,7 +727,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 TabOrder = 0
               end
             end
-            object LblUfCli: TLabel
+            object LblUfForn: TLabel
               Align = Left
               StyledSettings = [Style, FontColor]
               Margins.Left = 4.000000000000000000
@@ -666,7 +748,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 13
-            object EdtEmailCli: TEdit
+            object EdtEmailForn: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 1
@@ -691,7 +773,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 TabOrder = 0
               end
             end
-            object LblEmailCli: TLabel
+            object LblEmailForn: TLabel
               Align = Left
               StyledSettings = [Style, FontColor]
               Margins.Left = 4.000000000000000000
@@ -712,7 +794,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 14
-            object LblLiberaAprazoCli: TLabel
+            object LblStatusForn: TLabel
               Align = Left
               StyledSettings = [Style, FontColor]
               Margins.Left = 4.000000000000000000
@@ -720,34 +802,25 @@ inherited FCadFornecedor: TFCadFornecedor
               Margins.Bottom = 4.000000000000000000
               Position.X = 4.000000000000000000
               Position.Y = 4.000000000000000000
-              Size.Width = 101.000000000000000000
+              Size.Width = 69.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Family = 'Arial'
-              Text = 'Libera aprazo?'
+              Text = 'Status:'
             end
-            object RadioBLiberaAprazoS: TRadioButton
-              Align = Left
-              StyledSettings = [FontColor]
-              Position.X = 105.000000000000000000
-              Size.Width = 74.000000000000000000
-              Size.Height = 40.000000000000000000
+            object ComboBoxStatusForn: TComboBox
+              Align = Client
+              Items.Strings = (
+                'Ativo'
+                'Inativo')
+              ItemIndex = 0
+              Margins.Top = 4.000000000000000000
+              Margins.Right = 4.000000000000000000
+              Margins.Bottom = 4.000000000000000000
+              Size.Width = 232.000000000000000000
+              Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
-              StyleLookup = 'radiobuttonstyle'
-              TabOrder = 3
-              Text = 'Sim'
-              TextSettings.Font.Family = 'Arial'
-              TextSettings.Font.Size = 18.000000000000000000
-            end
-            object RadioBLiberaAprazoN: TRadioButton
-              Align = Left
-              Position.X = 179.000000000000000000
-              Size.Width = 72.000000000000000000
-              Size.Height = 40.000000000000000000
-              Size.PlatformDefault = False
-              StyleLookup = 'radiobuttonstyle'
-              TabOrder = 4
-              Text = 'N'#227'o'
+              TabOrder = 1
             end
           end
           object ListBoxItem16: TListBoxItem
@@ -756,7 +829,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 70.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 15
-            object LblObsCli: TLabel
+            object LblObsForn: TLabel
               Align = Left
               StyledSettings = [Style, FontColor]
               Margins.Left = 4.000000000000000000
@@ -771,7 +844,7 @@ inherited FCadFornecedor: TFCadFornecedor
               TextSettings.Font.Size = 11.000000000000000000
               Text = 'Obs:'
             end
-            object MemoObsCadCli: TMemo
+            object MemoObsForn: TMemo
               Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
               DataDetectorTypes = []
               Align = Client
@@ -793,7 +866,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 16
-            object EdtDataCadCli: TEdit
+            object EdtDataForn: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 0
@@ -802,13 +875,69 @@ inherited FCadFornecedor: TFCadFornecedor
               Margins.Top = 4.000000000000000000
               Margins.Right = 4.000000000000000000
               Margins.Bottom = 4.000000000000000000
-              Size.Width = 301.000000000000000000
+              Size.Width = 228.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
+            end
+            object LblDataCadForn: TLabel
+              Align = Left
+              StyledSettings = [Style, FontColor]
+              Margins.Left = 4.000000000000000000
+              Margins.Top = 4.000000000000000000
+              Margins.Bottom = 4.000000000000000000
+              Position.X = 4.000000000000000000
+              Position.Y = 4.000000000000000000
+              Size.Width = 69.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Arial'
+              Text = 'Data Cad:'
             end
           end
         end
       end
+    end
+  end
+  inherited ActionList1: TActionList
+    Left = 16
+    Top = 432
+  end
+  inherited ImageList1: TImageList
+    Left = 16
+    Top = 320
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = DM.FDQConsFornecedor
+    ScopeMappings = <>
+    Left = 32
+    Top = 376
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 28
+    Top = 261
+    object LinkListControlToField1: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'nome'
+      Control = ListViewFornecedor
+      FillExpressions = <
+        item
+          SourceMemberName = 'nome_fantasia'
+          ControlMemberName = 'Detail1'
+        end
+        item
+          SourceMemberName = 'fone'
+          ControlMemberName = 'Detail2'
+        end
+        item
+          SourceMemberName = 'cidade'
+          ControlMemberName = 'Detail3'
+        end>
+      FillHeaderExpressions = <>
+      FillHeaderFieldName = 'id'
+      FillBreakGroups = <>
     end
   end
 end
