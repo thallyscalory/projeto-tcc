@@ -118,6 +118,7 @@ type
     BtnFiltrarCli: TButton;
     SpdBNovoCadCli: TSpeedButton;
     LblDataCadCli: TLabel;
+    LinkControlToField15: TLinkControlToField;
     procedure FormCreate(Sender: TObject);
     procedure SpBVoltarEdicaoClick(Sender: TObject);
     procedure SpBVoltarClick(Sender: TObject);
@@ -679,11 +680,8 @@ begin
   if ItemObject is TListItemAccessory then
   begin
     lblTituloEdicao.Text := 'Detalhes';
-    SpdBEditar.Enabled := True;
     SpdBEditar.Visible := True;
-    SpdBConfirmar.Enabled := False;
     SpdBConfirmar.Visible := False;
-    EdtDataCadCli.Text := DM.FDQFiltroCadCLidata_cad_cli.AsString;
     if DM.FDQFiltroCadCLitipo_cli.AsString = 'F' then
       ComboBoxTipoPessoaCli.ItemIndex := 0
     else
@@ -807,8 +805,9 @@ begin
       DM.FDQAuxiliar.sql.Add(' uf_cli = :Uf,');
       DM.FDQAuxiliar.sql.Add(' email_cli = :Email,');
       DM.FDQAuxiliar.sql.Add(' liberaaprazo_cli = :LiberaAprazo,');
-      DM.FDQAuxiliar.sql.Add(' obs_cli = :Obs,');
-      DM.FDQAuxiliar.sql.Add(' foto_cli = :Foto');
+      if not FotoCli.IsEmpty then
+        DM.FDQAuxiliar.sql.Add(' foto_cli = :Foto,');
+      DM.FDQAuxiliar.sql.Add(' obs_cli = :Obs');
       DM.FDQAuxiliar.sql.Add(' where id_cli = :IdCli');
 
       DM.FDQAuxiliar.Params.ParamByName('TipoCli').AsString := TipoPessoa;
@@ -830,10 +829,10 @@ begin
       DM.FDQAuxiliar.Params.ParamByName('Email').AsString := EdtEmailCli.Text;
       DM.FDQAuxiliar.Params.ParamByName('LiberaAprazo').AsString :=
         LiberaAprazo;
-      DM.FDQAuxiliar.Params.ParamByName('Obs').AsString :=
-        MemoObsCadCli.Lines.Text;
       if not FotoCli.IsEmpty then
         DM.FDQAuxiliar.Params.ParamByName('Foto').Assign(FotoCli);
+      DM.FDQAuxiliar.Params.ParamByName('Obs').AsString :=
+        MemoObsCadCli.Lines.Text;
       DM.FDQAuxiliar.Params.ParamByName('IdCli').AsInteger :=
         DM.FDQFiltroCadCLiid_cli.AsInteger;
       DM.FDQAuxiliar.ExecSQL;
@@ -868,9 +867,7 @@ procedure TFCadCli.SpdBNovoCadCliClick(Sender: TObject);
 begin
   inherited;
   crud := 'iserir';
-  SpdBEditar.Enabled := False;
   SpdBEditar.Visible := False;
-  SpdBConfirmar.Enabled := True;
   SpdBConfirmar.Visible := True;
   lblTituloEdicao.Text := 'Novo Cadastro';
   HabilitaCampos;

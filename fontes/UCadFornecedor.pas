@@ -93,6 +93,21 @@ type
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     LinkListControlToField1: TLinkListControlToField;
+    LinkControlToField1: TLinkControlToField;
+    LinkControlToField2: TLinkControlToField;
+    LinkControlToField3: TLinkControlToField;
+    LinkControlToField4: TLinkControlToField;
+    LinkControlToField5: TLinkControlToField;
+    LinkControlToField6: TLinkControlToField;
+    LinkControlToField7: TLinkControlToField;
+    LinkControlToField8: TLinkControlToField;
+    LinkControlToField9: TLinkControlToField;
+    LinkControlToField10: TLinkControlToField;
+    LinkControlToField11: TLinkControlToField;
+    LinkControlToField12: TLinkControlToField;
+    LinkControlToField13: TLinkControlToField;
+    LinkControlToField14: TLinkControlToField;
+    LinkControlToField15: TLinkControlToField;
     procedure EditFiltroNomeFornecedorClick(Sender: TObject);
     procedure EditFiltroCodFornecedorClick(Sender: TObject);
     procedure EditFiltroNomeFornecedorTyping(Sender: TObject);
@@ -100,6 +115,11 @@ type
     procedure BtnFiltrarFornecedorClick(Sender: TObject);
     procedure SpBVoltarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure ListViewFornecedorItemClickEx(const Sender: TObject;
+      ItemIndex: Integer; const LocalClickPos: TPointF;
+      const ItemObject: TListItemDrawable);
+    procedure SpdBVoltarEdicaoCadFornecedorClick(Sender: TObject);
+    procedure SpdBEditarEdicaoCadFornecedorClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -190,6 +210,21 @@ begin
   TbControlCadModelo.TabPosition := TTabPosition.None;
 end;
 
+procedure TFCadFornecedor.ListViewFornecedorItemClickEx(const Sender: TObject;
+  ItemIndex: Integer; const LocalClickPos: TPointF;
+  const ItemObject: TListItemDrawable);
+begin
+  inherited;
+  if ItemObject is TListItemAccessory then
+  begin
+    LblTituloEdicaoCadFornecedor.Text := 'Detalhes';
+    SpdBEditarEdicaoCadFornecedor.Visible := True;
+    SpdBConfirmaEdicaoCadFornecedor.Visible := False;
+    MudarAbaModelo(TbItemedicao, Sender);
+  end;
+
+end;
+
 procedure TFCadFornecedor.SpBVoltarClick(Sender: TObject);
 begin
   inherited;
@@ -197,6 +232,19 @@ begin
   EditFiltroNomeFornecedor.Text := EmptyStr;
   EditFiltroCodFornecedor.Text := EmptyStr;
   FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
+end;
+
+procedure TFCadFornecedor.SpdBEditarEdicaoCadFornecedorClick(Sender: TObject);
+begin
+  inherited;
+  SpdBEditarEdicaoCadFornecedor.Visible := False;
+  SpdBConfirmaEdicaoCadFornecedor.Visible := True;
+end;
+
+procedure TFCadFornecedor.SpdBVoltarEdicaoCadFornecedorClick(Sender: TObject);
+begin
+  inherited;
+  MudarAbaModelo(TbItemListagem, Sender);
 end;
 
 end.

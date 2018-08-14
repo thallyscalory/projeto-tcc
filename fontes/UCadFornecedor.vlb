@@ -1,440 +1,443 @@
 ﻿[BtnFiltrarFornecedor]
-Coordinates=2155,1026,133,36
+Coordinates=2155,1026,117,33
 Visible=False
 
 [ListBoxItem8]
-Coordinates=943,1230,89,36
+Coordinates=943,1230,79,33
 Visible=False
 
 [DM.FDQCadFornecedor]
-Coordinates=463,10,154,36
+Coordinates=463,10,131,33
 Visible=False
 
 [ListBoxItem6]
-Coordinates=844,1230,89,36
+Coordinates=844,1230,79,33
 Visible=False
 
 [LblCompForn]
-Coordinates=1239,1116,92,36
+Coordinates=1239,1116,81,33
 Visible=False
 
 [EdtBFoneCli]
-Coordinates=747,1230,87,36
+Coordinates=747,1230,76,33
 Visible=False
 
 [EdtBCidadeCli]
-Coordinates=639,1230,98,36
+Coordinates=639,1230,85,33
 Visible=False
 
 [LblDataCadForn]
-Coordinates=1941,1026,109,36
+Coordinates=1941,1026,94,33
 Visible=False
 
 [DM.FDQPedido]
-Coordinates=797,10,105,36
+Coordinates=797,10,89,33
 Visible=False
 
 [DM.FDQConsContasReceber]
-Coordinates=10,10,184,36
+Coordinates=10,10,156,33
 Visible=False
 
 [EdtBApelidoCli]
-Coordinates=528,1230,101,36
+Coordinates=528,1230,89,33
 Visible=False
 
 [ListBoxItem12]
-Coordinates=422,1230,96,36
+Coordinates=422,1230,84,33
 Visible=False
 
 [SpdBConfirmaEdicaoCadFornecedor]
-Coordinates=654,1026,226,36
+Coordinates=654,1026,196,33
 Visible=False
 
 [LblCepForn]
-Coordinates=1629,1116,82,36
+Coordinates=1629,1116,72,33
 Visible=False
 
 [DM.FDQCadContasReceber]
-Coordinates=1337,10,177,36
+Coordinates=1337,10,149,33
 Visible=False
 
 [ListBoxItem15]
-Coordinates=316,1230,96,36
+Coordinates=316,1230,84,33
 Visible=False
 
 [DM.FDQConsFornecedor]
-Coordinates=150,20,160,36
+Coordinates=150,20,137,33
 Visible=False
 
 [ListBoxItem16]
-Coordinates=210,1230,96,36
+Coordinates=210,1230,84,33
 Visible=False
 
 [EdtApelidoForn]
-Coordinates=-44,540,103,58
+Coordinates=430,20,91,51
 
 [EdtCompForn]
-Coordinates=578,134,94,58
+Coordinates=430,250,83,51
 
 [DM.FDQConsAtendente]
-Coordinates=644,782,153,36
+Coordinates=644,782,131,33
 Visible=False
 
 [DM.FDQCadBaixaContasReceber]
-Coordinates=807,782,209,36
+Coordinates=807,782,177,33
 Visible=False
 
 [DM.FDQFiltroCadCLi]
-Coordinates=204,10,136,36
+Coordinates=204,10,116,33
 Visible=False
 
 [EdtBCompCli]
-Coordinates=109,1230,91,36
+Coordinates=109,1230,80,33
 Visible=False
 
 [ListBoxEdicaoCadCli]
-Coordinates=173,782,135,36
+Coordinates=173,782,118,33
 Visible=False
 
 [LblNumForn]
-Coordinates=2060,1026,85,36
+Coordinates=2060,1026,75,33
 Visible=False
 
 [EdtEnderecoForn]
-Coordinates=69,540,115,58
+Coordinates=430,170,100,51
 
 [DM.FDQProdItemPedido]
-Coordinates=1524,10,157,36
+Coordinates=1524,10,133,33
 Visible=False
 
 [ListBoxItem5]
-Coordinates=10,1230,89,36
+Coordinates=10,1230,79,33
 Visible=False
 
 [ListBoxItem1]
-Coordinates=2476,1184,89,36
+Coordinates=2476,1184,79,33
 Visible=False
 
 [DM.FDQMaxIdPedido]
-Coordinates=1557,782,140,36
+Coordinates=1557,782,118,33
 Visible=False
 
 [EdtBairroForn]
-Coordinates=333,490,95,58
+Coordinates=300,320,84,51
 
 [DM.FDQCadProd]
-Coordinates=1880,10,115,36
+Coordinates=1880,10,97,33
 Visible=False
 
 [EdtEmailForn]
-Coordinates=601,400,92,58
+Coordinates=300,470,81,51
 
 [EdtBNumCli]
-Coordinates=2382,1184,84,36
+Coordinates=2382,1184,74,33
 Visible=False
 
 [EdtDataForn]
-Coordinates=592,540,87,58
+Coordinates=130,490,76,51
 
 [DM.FDQAuxiliar]
-Coordinates=535,1116,107,36
+Coordinates=535,1116,92,33
 Visible=False
 
 [DM.FDQDetalheProdCodBar]
-Coordinates=1691,10,179,36
+Coordinates=1691,10,152,33
 Visible=False
 
 [ToolBar1]
-Coordinates=2305,1184,67,36
+Coordinates=2305,1184,58,33
 Visible=False
 
 [ListBoxItem10]
-Coordinates=2199,1184,96,36
+Coordinates=2199,1184,84,33
 Visible=False
 
 [ListViewFornecedor]
-Coordinates=-70,20,128,278
+Coordinates=-70,20,112,231
 Visible=True
 
 [DM.FDQuery1]
-Coordinates=2005,10,97,36
+Coordinates=2005,10,82,33
 Visible=False
 
 [LblRgForn]
-Coordinates=213,1116,74,36
+Coordinates=213,1116,66,33
 Visible=False
 
 [DM.FDQConsAvistaFormaPag]
-Coordinates=1026,782,189,36
+Coordinates=1026,782,161,33
 Visible=False
 
 [LblUfForn]
-Coordinates=1548,1116,71,36
+Coordinates=1548,1116,63,33
 Visible=False
 
 [LblBairroForn]
-Coordinates=10,1116,93,36
+Coordinates=10,1116,83,33
 Visible=False
 
 [EditFiltroNomeFornecedor]
-Coordinates=2010,1116,165,36
+Coordinates=2010,1116,144,33
 Visible=False
 
 [DM.FDQConsContasReceberBaixa]
-Coordinates=941,10,216,36
+Coordinates=941,10,183,33
 Visible=False
 
 [ActMudarAba]
-Coordinates=1351,1486,92,36
+Coordinates=1351,1486,81,33
 
 [EdtUfForn]
-Coordinates=410,170,73,58
+Coordinates=430,390,64,51
 
 [ListBoxItem17]
-Coordinates=2093,1184,96,36
+Coordinates=2093,1184,84,33
 Visible=False
 
 [LblFoneForn]
-Coordinates=1504,1026,87,36
+Coordinates=1504,1026,77,33
 Visible=False
 
 [EdtBBairroCli]
-Coordinates=1991,1184,92,36
+Coordinates=1991,1184,81,33
 Visible=False
 
 [ListBoxItem3]
-Coordinates=1892,1184,89,36
+Coordinates=1892,1184,79,33
 Visible=False
 
 [ComboBoxStatusForn]
-Coordinates=1407,782,140,36
+Coordinates=1407,782,123,33
 Visible=False
 
 [ListBoxItem9]
-Coordinates=1793,1184,89,36
+Coordinates=1793,1184,79,33
 Visible=False
 
 [ListBoxItem2]
-Coordinates=1694,1184,89,36
+Coordinates=1694,1184,79,33
 Visible=False
 
 [DM.FDQCadItemPedido]
-Coordinates=10,782,153,36
+Coordinates=10,782,129,33
 Visible=False
 
 [ListBoxItem4]
-Coordinates=1595,1184,89,36
+Coordinates=1595,1184,79,33
 Visible=False
 
 [DM.FDQConsFormaPag]
-Coordinates=322,782,154,36
+Coordinates=322,782,131,33
 Visible=False
 
 [EdtCepForn]
-Coordinates=402,400,84,58
+Coordinates=430,320,73,51
 
 [LblTipoPessoaForn]
-Coordinates=300,1026,126,36
+Coordinates=300,1026,110,33
 Visible=False
 
 [ImageList1]
-Coordinates=1351,1871,77,36
+Coordinates=1351,1871,68,33
 
 [DM.FDQMaxIdItemPedido]
-Coordinates=1844,782,165,36
+Coordinates=1844,782,139,33
 Visible=False
 
 [LblEndForn]
-Coordinates=135,1026,81,36
+Coordinates=135,1026,72,33
 Visible=False
 
 [EdtBCepCli]
-Coordinates=1504,1184,81,36
+Coordinates=1504,1184,70,33
 Visible=False
 
 [ActionList1]
-Coordinates=1351,1981,78,36
+Coordinates=1351,1981,70,33
 
 [TbItemedicao]
-Coordinates=1402,1184,92,36
+Coordinates=1402,1184,80,33
 Visible=False
 
 [SpdBEditarEdicaoCadFornecedor]
-Coordinates=2185,1116,208,36
+Coordinates=2185,1116,180,33
 Visible=False
 
 [EdtRgForn]
-Coordinates=584,44,76,58
+Coordinates=430,90,67,51
 
 [DM.FDQCadCli]
-Coordinates=350,10,103,36
+Coordinates=350,10,87,33
 Visible=False
 
 [EditFiltroCodFornecedor]
-Coordinates=490,240,155,58
+Coordinates=580,240,136,33
+Visible=False
 
 [LblTitulo]
-Coordinates=226,1026,64,36
+Coordinates=226,1026,57,33
 Visible=False
 
 [EdtBEmailCli]
-Coordinates=1302,1184,90,36
+Coordinates=1302,1184,79,33
 Visible=False
 
 [EdtFoneForn]
-Coordinates=435,330,89,58
+Coordinates=300,170,78,51
 
 [MemoObsForn]
-Coordinates=637,490,100,58
+Coordinates=440,470,87,51
 
 [EdtBRgCli]
-Coordinates=1218,1184,74,36
+Coordinates=1218,1184,65,33
 Visible=False
 
 [SpdBVoltarEdicaoCadFornecedor]
-Coordinates=436,1026,208,36
+Coordinates=436,1026,180,33
 Visible=False
 
 [Layout1]
-Coordinates=1148,1184,60,36
+Coordinates=1148,1184,53,33
 Visible=False
 
 [ListBoxItem11]
-Coordinates=1042,1184,96,36
+Coordinates=1042,1184,84,33
 Visible=False
 
 [TbControlCadModelo]
-Coordinates=896,1184,136,36
+Coordinates=896,1184,119,33
 Visible=False
 
 [DM.FDQMaxIdBaixaContaReceber]
-Coordinates=2218,782,214,36
+Coordinates=2218,782,181,33
 Visible=False
 
 [LblNomeForn]
-Coordinates=1908,1116,92,36
+Coordinates=1908,1116,81,33
 Visible=False
 
 [EdtCpfForn]
-Coordinates=502,540,80,58
+Coordinates=300,90,70,51
 
 [EdtBEndCli]
-Coordinates=806,1184,80,36
+Coordinates=806,1184,70,33
 Visible=False
 
 [ListBoxItem13]
-Coordinates=700,1184,96,36
+Coordinates=700,1184,84,33
 Visible=False
 
 [SpBVoltar]
-Coordinates=420,540,72,58
+Coordinates=420,540,64,33
+Visible=False
 
 [DM.FDQMaxIdProd]
-Coordinates=1707,782,127,36
+Coordinates=1707,782,107,33
 Visible=False
 
 [LblTituloEdicaoCadFornecedor]
-Coordinates=1001,1026,192,36
+Coordinates=1001,1026,167,33
 Visible=False
 
 [ListBoxItem14]
-Coordinates=594,1184,96,36
+Coordinates=594,1184,84,33
 Visible=False
 
 [EdtBUfCli]
-Coordinates=514,1184,70,36
+Coordinates=514,1184,62,33
 Visible=False
 
 [EdtCidadeForn]
-Coordinates=473,44,101,58
+Coordinates=300,390,88,51
 
 [ListBoxItem7]
-Coordinates=415,1184,89,36
+Coordinates=415,1184,79,33
 Visible=False
 
 [LblEmailForn]
-Coordinates=113,1116,90,36
+Coordinates=113,1116,80,33
 Visible=False
 
 [LblObsForn]
-Coordinates=1684,1026,82,36
+Coordinates=1684,1026,72,33
 Visible=False
 
 [LblStatusForn]
-Coordinates=1297,1026,95,36
+Coordinates=1297,1026,84,33
 Visible=False
 
 [ToolBarsuperior]
-Coordinates=299,1184,106,36
+Coordinates=299,1184,94,33
 Visible=False
 
 [DM.FDQMaxIdCli]
-Coordinates=10,1026,115,36
+Coordinates=10,1026,97,33
 Visible=False
 
 [ComboBoxTipoPessoaForn]
-Coordinates=1225,782,172,36
+Coordinates=1225,782,149,33
 Visible=False
 
 [LytBase]
-Coordinates=228,1184,61,36
+Coordinates=228,1184,54,33
 Visible=False
 
 [DM.FDQConsItemPedido]
-Coordinates=1167,10,160,36
+Coordinates=1167,10,136,33
 Visible=False
 
 [EdtNumForn]
-Coordinates=540,490,87,58
+Coordinates=300,250,76,51
 
 [DM.FDQConsultaProd]
-Coordinates=2112,10,143,36
+Coordinates=2112,10,122,33
 Visible=False
 
 [DM.FDQCadFormaPag]
-Coordinates=486,782,148,36
+Coordinates=486,782,124,33
 Visible=False
 
 [DM.FDQCadPedido]
-Coordinates=2265,10,128,36
+Coordinates=2265,10,108,33
 Visible=False
 
 [TbItemListagem]
-Coordinates=111,1184,107,36
+Coordinates=111,1184,93,33
 Visible=False
 
 [LblCpfForn]
-Coordinates=1820,1116,78,36
+Coordinates=1820,1116,69,33
 Visible=False
 
 [LblApelidoForn]
-Coordinates=890,1026,101,36
+Coordinates=890,1026,90,33
 Visible=False
 
 [LblCidadeForn]
-Coordinates=311,540,99,58
+Coordinates=311,540,87,33
+Visible=False
 
 [EdtNomeForn]
-Coordinates=689,540,94,58
+Coordinates=300,20,82,51
 
 [EdtBNomeCli]
-Coordinates=10,1184,91,36
+Coordinates=10,1184,80,33
 Visible=False
 
 [EdtBCpfCli]
-Coordinates=2507,1116,78,36
+Coordinates=2507,1116,68,33
 Visible=False
 
 [DM.FDQMaxIdContasReceber]
-Coordinates=2019,782,189,36
+Coordinates=2019,782,159,33
 Visible=False
 
 []
 Coordinates=183,2233,91,36
 
 [BindSourceDB1]
-Coordinates=120,10,147,476
+Coordinates=120,10,123,465
 
 [BindingsList1]
-Coordinates=57,317,91,36
+Coordinates=57,317,82,33
 

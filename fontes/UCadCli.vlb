@@ -231,7 +231,7 @@ LayerNames="filtro cliente"
 Coordinates=880,1049,100,51
 
 [EdtDataCadCli]
-Coordinates=151,1040,85,51
+Coordinates=-180,280,85,51
 
 [ListBoxItem14]
 Coordinates=1057,1126,84,33
@@ -412,4 +412,37 @@ Coordinates=267,452,138,159
 
 [FVenda1.BindSourceDB5]
 Coordinates=225,1,138,303
+
+[SpdBNovoCadCli]
+Coordinates=436,1,99,51
+
+[DM.FDQConsFornecedor]
+Coordinates=175,89,137,375
+
+[LblDataCadCli]
+Coordinates=175,483,84,51
+
+[DM.FDQCadBaixaContasReceber]
+Coordinates=609,782,177,141
+
+[DM.FDQConsContasReceber]
+Coordinates=0,0,156,627
+
+[DM.FDQMaxIdContasReceber]
+Coordinates=175,1,159,69
+
+[DM.FDQCadFornecedor]
+Coordinates=336,1005,131,375
+
+[DM.FDQMaxIdBaixaContaReceber]
+Coordinates=938,1,181,69
+
+[DM.FDQCadContasReceber]
+Coordinates=177,1005,149,285
+
+[DM.FDQConsContasReceberBaixa]
+Coordinates=470,1005,183,285
+
+[DM.FDQConsAvistaFormaPag]
+Coordinates=440,857,161,141
 
