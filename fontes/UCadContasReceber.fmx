@@ -80,6 +80,7 @@ inherited FCadContasReceber: TFCadContasReceber
           end
           object ComboBoxFiltroClienteContasReceber: TComboBox
             Align = Client
+            ItemIndex = 0
             Margins.Top = 10.000000000000000000
             Margins.Right = 4.000000000000000000
             Size.Width = 205.000000000000000000

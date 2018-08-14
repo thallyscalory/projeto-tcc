@@ -225,8 +225,6 @@ procedure TFCadContasReceber.ComboBoxFiltroClienteContasReceberEnter
   (Sender: TObject);
 begin
   inherited;
-  // ComboBoxFiltroClienteContasReceber.Items.Clear;
-
   DM.FDQFiltroCadCLi.Close;
   DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := '%';
   DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
@@ -236,7 +234,7 @@ begin
   ComboBoxFiltroClienteContasReceber.Items.Add('*Todos*');
   ComboBoxFiltroClienteContasReceber.Items.Move
     (ComboBoxFiltroClienteContasReceber.Items.Count - 1, 0);
-  ComboBoxFiltroClienteContasReceber.ItemIndex := 0;
+  //ComboBoxFiltroClienteContasReceber.ItemIndex := 0;
 end;
 
 procedure TFCadContasReceber.ComboBoxTipoReceitaEnter(Sender: TObject);
@@ -381,7 +379,7 @@ begin
   vlMarc := 0;
 
   ComboBoxFiltroClienteContasReceberEnter(Sender);
-  // ComboBoxFiltroClienteContasReceber.ItemIndex := 0;
+  ComboBoxFiltroClienteContasReceber.ItemIndex := 0;
   DateEdtFiltroVencInicialContasReceber.Date := Date;
   DateEdtFiltroVencFinalContasReceber.Date := Date;
 
