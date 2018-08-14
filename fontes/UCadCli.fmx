@@ -118,8 +118,6 @@ inherited FCadCli: TFCadCli
           Size.Height = 251.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
-          ItemAppearanceObjects.ItemObjects.Image.Visible = True
-          ItemAppearanceObjects.ItemEditObjects.Image.Visible = True
           OnDblClick = ListViewCadCliDblClick
           OnItemClickEx = ListViewCadCliItemClickEx
           OnButtonClick = ListViewCadCliButtonClick

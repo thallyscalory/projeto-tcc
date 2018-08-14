@@ -98,8 +98,6 @@ inherited FCadFornecedor: TFCadFornecedor
           Size.Height = 251.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
-          ItemAppearanceObjects.ItemObjects.Image.Visible = True
-          ItemAppearanceObjects.ItemEditObjects.Image.Visible = True
         end
       end
       inherited TbItemedicao: TTabItem
