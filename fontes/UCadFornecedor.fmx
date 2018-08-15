@@ -1,14 +1,18 @@
 inherited FCadFornecedor: TFCadFornecedor
   Caption = 'FCadModelo1'
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
+      TabIndex = 1
       Sizes = (
         330s
         431s
         330s
         431s)
       inherited TbItemListagem: TTabItem
+        IsSelected = False
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         inherited ToolBarsuperior: TToolBar
@@ -113,6 +117,7 @@ inherited FCadFornecedor: TFCadFornecedor
         end
       end
       inherited TbItemedicao: TTabItem
+        IsSelected = True
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object ToolBar1: TToolBar
@@ -167,7 +172,7 @@ inherited FCadFornecedor: TFCadFornecedor
             OnClick = SpdBEditarEdicaoCadFornecedorClick
           end
         end
-        object ListBoxEdicaoCadCli: TListBox
+        object ListBoxEdicaoForn: TListBox
           Align = Client
           Margins.Left = 8.000000000000000000
           Margins.Top = 8.000000000000000000

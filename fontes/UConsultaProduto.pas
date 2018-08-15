@@ -432,7 +432,7 @@ procedure TFConsProduto.FormVirtualKeyboardShown(Sender: TObject;
 begin
   inherited;
   ListBoxEdicaoConsProd.Align := TAlignLayout.Top;
-  ListBoxEdicaoConsProd.Height := ((Self.Height) - (Self.Height * 0.43));
+  ListBoxEdicaoConsProd.Height := ((Self.Height) - (Self.Height * 0.50));
 end;
 
 procedure TFConsProduto.HabilitaCampos;

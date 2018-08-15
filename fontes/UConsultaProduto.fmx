@@ -16,8 +16,6 @@ inherited FConsProduto: TFConsProduto
         inherited ToolBarsuperior: TToolBar
           inherited LblTitulo: TLabel
             StyledSettings = []
-            TextSettings.Font.Family = 'Arial'
-            TextSettings.Font.Size = 18.000000000000000000
             TextSettings.Font.StyleExt = {04070000000000000004000000}
             Text = 'Produtos'
           end

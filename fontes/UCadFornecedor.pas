@@ -16,7 +16,7 @@ uses
 type
   TFCadFornecedor = class(TFCadModelo)
     ToolBar1: TToolBar;
-    ListBoxEdicaoCadCli: TListBox;
+    ListBoxEdicaoForn: TListBox;
     ListBoxItem1: TListBoxItem;
     EdtNomeForn: TEdit;
     EdtBNomeCli: TEditButton;
@@ -123,6 +123,10 @@ type
     procedure SpdBEditarEdicaoCadFornecedorClick(Sender: TObject);
     procedure SpdBNovoFornClick(Sender: TObject);
     procedure SpdBConfirmaEdicaoCadFornecedorClick(Sender: TObject);
+    procedure FormVirtualKeyboardShown(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
+    procedure FormVirtualKeyboardHidden(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
   private
     crud: string;
 
@@ -239,6 +243,21 @@ begin
   TbControlCadModelo.TabPosition := TTabPosition.None;
 end;
 
+procedure TFCadFornecedor.FormVirtualKeyboardHidden(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
+begin
+  inherited;
+  ListBoxEdicaoForn.Align := TAlignLayout.Client;
+end;
+
+procedure TFCadFornecedor.FormVirtualKeyboardShown(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
+begin
+  inherited;
+  ListBoxEdicaoForn.Align := TAlignLayout.Top;
+  ListBoxEdicaoForn.Height := ((Self.Height) - (Self.Height * 0.50));
+end;
+
 procedure TFCadFornecedor.HabilitaCampos;
 begin
   EdtNomeForn.Enabled := True;
@@ -291,6 +310,22 @@ begin
     LblTituloEdicaoCadFornecedor.Text := 'Detalhes';
     SpdBEditarEdicaoCadFornecedor.Visible := True;
     SpdBConfirmaEdicaoCadFornecedor.Visible := False;
+    if DM.FDQConsFornecedortipo_pessoa.AsString = 'J' then
+    begin
+      ComboBoxTipoPessoaForn.ItemIndex := 1;
+    end
+    else if DM.FDQConsFornecedortipo_pessoa.AsString = 'F' then
+    begin
+      ComboBoxTipoPessoaForn.ItemIndex := 0;
+    end;
+    if DM.FDQConsFornecedorstatus.AsString = 'A' then
+    begin
+      ComboBoxStatusForn.ItemIndex := 0;
+    end
+    else if DM.FDQConsFornecedorstatus.AsString = 'I' then
+    begin
+      ComboBoxStatusForn.ItemIndex := 1;
+    end;
     DesabilitaCampos;
     MudarAbaModelo(TbItemedicao, Sender);
   end;
@@ -378,8 +413,11 @@ end;
 procedure TFCadFornecedor.SpdBEditarEdicaoCadFornecedorClick(Sender: TObject);
 begin
   inherited;
+  crud := 'editar';
   SpdBEditarEdicaoCadFornecedor.Visible := False;
   SpdBConfirmaEdicaoCadFornecedor.Visible := True;
+  HabilitaCampos;
+  EdtNomeForn.SetFocus;
 end;
 
 procedure TFCadFornecedor.SpdBNovoFornClick(Sender: TObject);

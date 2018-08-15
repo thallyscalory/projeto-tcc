@@ -92,10 +92,6 @@ Visible=False
 Coordinates=109,1230,80,33
 Visible=False
 
-[ListBoxEdicaoCadCli]
-Coordinates=173,782,118,33
-Visible=False
-
 [LblNumForn]
 Coordinates=2060,1026,75,33
 Visible=False
@@ -440,4 +436,8 @@ Coordinates=120,10,123,465
 
 [BindingsList1]
 Coordinates=57,317,82,33
+
+[ListBoxEdicaoForn]
+Coordinates=173,782,118,33
+Visible=False
 

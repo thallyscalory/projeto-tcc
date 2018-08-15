@@ -536,7 +536,7 @@ procedure TFCadCli.FormVirtualKeyboardShown(Sender: TObject;
 begin
   inherited;
   ListBoxEdicaoCadCli.Align := TAlignLayout.Top;
-  ListBoxEdicaoCadCli.Height := ((Self.Height) - (Self.Height * 0.43));
+  ListBoxEdicaoCadCli.Height := ((Self.Height) - (Self.Height * 0.50));
 end;
 
 procedure TFCadCli.HabilitaCampos;
