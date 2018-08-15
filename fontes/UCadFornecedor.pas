@@ -10,8 +10,8 @@ uses
   FMX.TabControl, FMX.Controls.Presentation, FMX.Layouts, FMX.ScrollBox,
   FMX.Memo, FMX.ListBox, FMX.Edit, FMX.ListView.Types, FMX.ListView.Appearances,
   FMX.ListView.Adapters.Base, MultiDetailAppearanceU, FMX.ListView, System.Rtti,
-  System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.EngExt,
-  Fmx.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope;
+  System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.EngExt,
+  FMX.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope;
 
 type
   TFCadFornecedor = class(TFCadModelo)
@@ -108,6 +108,7 @@ type
     LinkControlToField13: TLinkControlToField;
     LinkControlToField14: TLinkControlToField;
     LinkControlToField15: TLinkControlToField;
+    SpdBNovoForn: TSpeedButton;
     procedure EditFiltroNomeFornecedorClick(Sender: TObject);
     procedure EditFiltroCodFornecedorClick(Sender: TObject);
     procedure EditFiltroNomeFornecedorTyping(Sender: TObject);
@@ -120,7 +121,14 @@ type
       const ItemObject: TListItemDrawable);
     procedure SpdBVoltarEdicaoCadFornecedorClick(Sender: TObject);
     procedure SpdBEditarEdicaoCadFornecedorClick(Sender: TObject);
+    procedure SpdBNovoFornClick(Sender: TObject);
+    procedure SpdBConfirmaEdicaoCadFornecedorClick(Sender: TObject);
   private
+    crud: string;
+
+    procedure HabilitaCampos;
+    procedure DesabilitaCampos;
+    procedure LimpaCampos;
     { Private declarations }
   public
     { Public declarations }
@@ -146,6 +154,27 @@ begin
   DM.FDQConsFornecedor.ParamByName('PIdForn').Value := Null;
   DM.FDQConsFornecedor.Open();
   DM.FDQConsFornecedor.Active := True;
+end;
+
+procedure TFCadFornecedor.DesabilitaCampos;
+begin
+  EdtNomeForn.Enabled := False;
+  ComboBoxTipoPessoaForn.Enabled := False;
+  EdtCpfForn.Enabled := False;
+  EdtRgForn.Enabled := False;
+  EdtApelidoForn.Enabled := False;
+  EdtFoneForn.Enabled := False;
+  EdtEnderecoForn.Enabled := False;
+  EdtNumForn.Enabled := False;
+  EdtCompForn.Enabled := False;
+  EdtBairroForn.Enabled := False;
+  EdtCepForn.Enabled := False;
+  EdtCidadeForn.Enabled := False;
+  EdtUfForn.Enabled := False;
+  EdtEmailForn.Enabled := False;
+  ComboBoxStatusForn.Enabled := False;
+  MemoObsForn.ReadOnly := True;
+  EdtDataForn.Enabled := False;
 end;
 
 procedure TFCadFornecedor.EditFiltroCodFornecedorClick(Sender: TObject);
@@ -210,6 +239,48 @@ begin
   TbControlCadModelo.TabPosition := TTabPosition.None;
 end;
 
+procedure TFCadFornecedor.HabilitaCampos;
+begin
+  EdtNomeForn.Enabled := True;
+  ComboBoxTipoPessoaForn.Enabled := True;
+  EdtCpfForn.Enabled := True;
+  EdtRgForn.Enabled := True;
+  EdtApelidoForn.Enabled := True;
+  EdtFoneForn.Enabled := True;
+  EdtEnderecoForn.Enabled := True;
+  EdtNumForn.Enabled := True;
+  EdtCompForn.Enabled := True;
+  EdtBairroForn.Enabled := True;
+  EdtCepForn.Enabled := True;
+  EdtCidadeForn.Enabled := True;
+  EdtUfForn.Enabled := True;
+  EdtEmailForn.Enabled := True;
+  ComboBoxStatusForn.Enabled := True;
+  MemoObsForn.ReadOnly := False;
+  EdtDataForn.Enabled := False;
+end;
+
+procedure TFCadFornecedor.LimpaCampos;
+begin
+  EdtNomeForn.Text := EmptyStr;
+  ComboBoxTipoPessoaForn.ItemIndex := 1;
+  EdtCpfForn.Text := EmptyStr;
+  EdtRgForn.Text := EmptyStr;
+  EdtApelidoForn.Text := EmptyStr;
+  EdtFoneForn.Text := EmptyStr;
+  EdtEnderecoForn.Text := EmptyStr;
+  EdtNumForn.Text := EmptyStr;
+  EdtCompForn.Text := EmptyStr;
+  EdtBairroForn.Text := EmptyStr;
+  EdtCepForn.Text := EmptyStr;
+  EdtCidadeForn.Text := EmptyStr;
+  EdtUfForn.Text := EmptyStr;
+  EdtEmailForn.Text := EmptyStr;
+  ComboBoxStatusForn.ItemIndex := 0;
+  MemoObsForn.Lines.Clear;
+  EdtDataForn.Text := EmptyStr;
+end;
+
 procedure TFCadFornecedor.ListViewFornecedorItemClickEx(const Sender: TObject;
   ItemIndex: Integer; const LocalClickPos: TPointF;
   const ItemObject: TListItemDrawable);
@@ -220,6 +291,7 @@ begin
     LblTituloEdicaoCadFornecedor.Text := 'Detalhes';
     SpdBEditarEdicaoCadFornecedor.Visible := True;
     SpdBConfirmaEdicaoCadFornecedor.Visible := False;
+    DesabilitaCampos;
     MudarAbaModelo(TbItemedicao, Sender);
   end;
 
@@ -234,11 +306,94 @@ begin
   FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
 end;
 
+procedure TFCadFornecedor.SpdBConfirmaEdicaoCadFornecedorClick(Sender: TObject);
+var
+  tipoPessoa, Status: string;
+  dataCad: TDate;
+begin
+  inherited;
+  if EdtNomeForn.Text.IsEmpty then
+  begin
+    ShowMessage('Processo Cancelado! Nome não pode estar em branco');
+    EdtNomeForn.SetFocus;
+  end
+  else
+  begin
+    try
+      if ComboBoxTipoPessoaForn.ItemIndex = 1 then
+      begin
+        tipoPessoa := 'J';
+      end
+      else if ComboBoxTipoPessoaForn.ItemIndex = 0 then
+      begin
+        tipoPessoa := 'F';
+      end;
+      if ComboBoxStatusForn.ItemIndex = 0 then
+      begin
+        Status := 'A';
+      end
+      else if ComboBoxStatusForn.ItemIndex = 1 then
+      begin
+        Status := 'I';
+      end;
+
+      if crud = 'inserir' then
+      begin
+        dataCad := Date;
+
+        DM.FDQCadFornecedor.Close;
+        DM.FDQCadFornecedor.Open();
+        DM.FDQCadFornecedor.Append;
+        DM.FDQCadFornecedortipo_pessoa.AsString := tipoPessoa;
+        DM.FDQCadFornecedornome.AsString := EdtNomeForn.Text;
+        DM.FDQCadFornecedornome_fantasia.AsString := EdtApelidoForn.Text;
+        DM.FDQCadFornecedorcpf_cnpj.AsString := EdtCpfForn.Text;
+        DM.FDQCadFornecedorrg_ie.AsString := EdtRgForn.Text;
+        DM.FDQCadFornecedorfone.AsString := EdtFoneForn.Text;
+        DM.FDQCadFornecedorendereco.AsString := EdtEnderecoForn.Text;
+        DM.FDQCadFornecedornumero.AsString := EdtNumForn.Text;
+        DM.FDQCadFornecedorcomplemento.AsString := EdtCompForn.Text;
+        DM.FDQCadFornecedorbairro.AsString := EdtBairroForn.Text;
+        DM.FDQCadFornecedorcep.AsString := EdtCepForn.Text;
+        DM.FDQCadFornecedorcidade.AsString := EdtCidadeForn.Text;
+        DM.FDQCadFornecedoruf.AsString := EdtUfForn.Text;
+        DM.FDQCadFornecedoremail.AsString := EdtEmailForn.Text;
+        DM.FDQCadFornecedorobs.AsString := MemoObsForn.Text;
+        DM.FDQCadFornecedorstatus.AsString := Status;
+        DM.FDQCadFornecedordata_cad.AsDateTime := dataCad;
+        DM.FDQCadFornecedor.Post;
+
+        DM.FDConnection1.CommitRetaining;
+        LimpaCampos;
+        MudarAbaModelo(TbItemListagem, Sender);
+      end;
+
+    except
+      on E: Exception do
+        ShowMessage('Erro! ' + E.Message);
+    end;
+  end;
+end;
+
 procedure TFCadFornecedor.SpdBEditarEdicaoCadFornecedorClick(Sender: TObject);
 begin
   inherited;
   SpdBEditarEdicaoCadFornecedor.Visible := False;
   SpdBConfirmaEdicaoCadFornecedor.Visible := True;
+end;
+
+procedure TFCadFornecedor.SpdBNovoFornClick(Sender: TObject);
+begin
+  inherited;
+  crud := 'inserir';
+  DM.FDQConsFornecedor.Active := False;
+  LblTituloEdicaoCadFornecedor.Text := 'Novo Cadastro';
+  SpdBEditarEdicaoCadFornecedor.Visible := False;
+  SpdBConfirmaEdicaoCadFornecedor.Visible := True;
+  LimpaCampos;
+  HabilitaCampos;
+  MudarAbaModelo(TbItemedicao, Sender);
+  EdtNomeForn.SetFocus;
 end;
 
 procedure TFCadFornecedor.SpdBVoltarEdicaoCadFornecedorClick(Sender: TObject);

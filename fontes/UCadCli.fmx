@@ -9,14 +9,12 @@ inherited FCadCli: TFCadCli
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
-      TabIndex = 1
       Sizes = (
         330s
         431s
         330s
         431s)
       inherited TbItemListagem: TTabItem
-        IsSelected = False
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         inherited ToolBarsuperior: TToolBar
@@ -126,7 +124,6 @@ inherited FCadCli: TFCadCli
         end
       end
       inherited TbItemedicao: TTabItem
-        IsSelected = True
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object ToolBar1: TToolBar
@@ -185,7 +182,8 @@ inherited FCadCli: TFCadCli
             Enabled = True
             IconTintColor = claNavy
             ImageIndex = -1
-            Position.X = 186.000000000000000000
+            Margins.Right = 15.000000000000000000
+            Position.X = 171.000000000000000000
             Size.Width = 48.000000000000000000
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False

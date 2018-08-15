@@ -243,7 +243,7 @@ begin
   RadioBLiberaAprazoN.Enabled := False;
   LblObsCli.Enabled := False;
   MemoObsCadCli.ReadOnly := True;
-  SpdBFotoCli.Enabled := False;
+  SpdBFotoCli.Visible := False;
   EdtDataCadCli.Enabled := False;
 end;
 
@@ -558,7 +558,7 @@ begin
   RadioBLiberaAprazoS.Enabled := True;
   RadioBLiberaAprazoN.Enabled := True;
   MemoObsCadCli.ReadOnly := False;
-  SpdBFotoCli.Enabled := True;
+  SpdBFotoCli.Visible := True;
   EdtDataCadCli.Enabled := False;
 end;
 
@@ -779,6 +779,10 @@ begin
       DM.FDQCadClifoto_cli.Assign(FotoCli);
       DM.FDQCadCli.Post;
 
+      DM.FDConnection1.CommitRetaining;
+      DM.FDQFiltroCadCLi.Active := False;
+      MudarAbaModelo(TbItemListagem, Sender);
+      FPrincipal.ksLoadingIndicator1.HideLoading;
     except
       on E: Exception do
         ShowMessage('Erro!  ' + E.Message);
@@ -837,16 +841,15 @@ begin
         DM.FDQFiltroCadCLiid_cli.AsInteger;
       DM.FDQAuxiliar.ExecSQL;
 
+      DM.FDConnection1.CommitRetaining;
+      DM.FDQFiltroCadCLi.Active := False;
+      MudarAbaModelo(TbItemListagem, Sender);
+      FPrincipal.ksLoadingIndicator1.HideLoading;
     except
       on E: Exception do
         ShowMessage('Erro!  ' + E.Message);
     end;
   end;
-  DM.FDConnection1.CommitRetaining;
-  DM.FDQFiltroCadCLi.Active := False;
-  MudarAbaModelo(TbItemListagem, Sender);
-  LimpaCampos;
-  FPrincipal.ksLoadingIndicator1.HideLoading;
 end;
 
 procedure TFCadCli.SpdBEditarClick(Sender: TObject);
@@ -855,10 +858,8 @@ begin
   FotoCli := ImgFotoCli.Bitmap;
   crud := 'editar';
   lblTituloEdicao.Text := 'Editando Cadastro';
-  SpdBEditar.Enabled := False;
   SpdBEditar.Visible := False;
   SpdBConfirmar.Visible := True;
-  SpdBConfirmar.Enabled := True;
   HabilitaCampos;
   EdtNomeCli.SetFocus;
 end;
@@ -866,12 +867,13 @@ end;
 procedure TFCadCli.SpdBNovoCadCliClick(Sender: TObject);
 begin
   inherited;
+  DM.FDQFiltroCadCLi.Active := False;
   crud := 'iserir';
   SpdBEditar.Visible := False;
   SpdBConfirmar.Visible := True;
   lblTituloEdicao.Text := 'Novo Cadastro';
-  HabilitaCampos;
   LimpaCampos;
+  HabilitaCampos;
   // EdtDataCadCli.Text := DateTimeToStr(Now); => para pegar a data atual
   MudarAbaModelo(TbItemedicao, Sender);
   EdtNomeCli.SetFocus;

@@ -3,14 +3,12 @@ inherited FCadFornecedor: TFCadFornecedor
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
-      TabIndex = 1
       Sizes = (
         330s
         431s
         330s
         431s)
       inherited TbItemListagem: TTabItem
-        IsSelected = False
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         inherited ToolBarsuperior: TToolBar
@@ -20,6 +18,17 @@ inherited FCadFornecedor: TFCadFornecedor
           end
           inherited SpBVoltar: TSpeedButton
             OnClick = SpBVoltarClick
+          end
+          object SpdBNovoForn: TSpeedButton
+            Align = Right
+            IconTintColor = claNavy
+            Margins.Right = 8.000000000000000000
+            Position.X = 274.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'addtoolbutton'
+            OnClick = SpdBNovoFornClick
           end
         end
         object Layout1: TLayout
@@ -104,7 +113,6 @@ inherited FCadFornecedor: TFCadFornecedor
         end
       end
       inherited TbItemedicao: TTabItem
-        IsSelected = True
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object ToolBar1: TToolBar
@@ -145,6 +153,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'donetoolbutton'
+            OnClick = SpdBConfirmaEdicaoCadFornecedorClick
           end
           object SpdBEditarEdicaoCadFornecedor: TSpeedButton
             Align = Right
@@ -230,7 +239,7 @@ inherited FCadFornecedor: TFCadFornecedor
               Items.Strings = (
                 'Fisica'
                 'Juridica')
-              ItemIndex = 0
+              ItemIndex = 1
               Margins.Top = 4.000000000000000000
               Margins.Right = 4.000000000000000000
               Margins.Bottom = 4.000000000000000000
