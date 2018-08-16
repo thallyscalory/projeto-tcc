@@ -24,6 +24,12 @@ type
     TbItemedicao: TTabItem;
     ImageList1: TImageList;
     procedure FormCreate(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure FormVirtualKeyboardShown(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
+    procedure FormVirtualKeyboardHidden(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
   private
     { Private declarations }
   public
@@ -70,7 +76,7 @@ uses UDM, UPrincipal, UVenda;
 function TFCadModelo.DisplayFormatter(AValue: double;
   ADisplayFormar: String): String;
 begin
-Result := FormatFloat(ADisplayFormar, AValue);
+  Result := FormatFloat(ADisplayFormar, AValue);
 end;
 
 procedure TFCadModelo.EsconderTeclado;
@@ -87,6 +93,43 @@ procedure TFCadModelo.FormCreate(Sender: TObject);
 begin
   TbControlCadModelo.ActiveTab := TbItemListagem;
   TbControlCadModelo.TabPosition := TTabPosition.None;
+end;
+
+procedure TFCadModelo.FormKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+{ var
+  keyboard: IFMXVirtualKeyboardService; }
+begin
+  { if Key = vkHardwareBack then
+    begin
+    Key := 0;
+    if TecladoVirtualVisible then
+    begin
+    if TPlatformServices.Current.SupportsPlatformService
+    (IFMXVirtualKeyboardService, keyboard) then
+    begin
+    if TVirtualKeyBoardState.Visible in keyboard.GetVirtualKeyBoardState
+    then
+    begin
+    keyboard.HideVirtualKeyboard;
+    end;
+    end;
+    end
+    else
+    FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
+    end; }
+end;
+
+procedure TFCadModelo.FormVirtualKeyboardHidden(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
+begin
+  TecladoVirtualVisible := False;
+end;
+
+procedure TFCadModelo.FormVirtualKeyboardShown(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
+begin
+  TecladoVirtualVisible := True;
 end;
 
 procedure TFCadModelo.MostrarTeclado(const AControl: TFmxObject);

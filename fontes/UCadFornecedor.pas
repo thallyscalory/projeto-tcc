@@ -401,8 +401,63 @@ begin
         DM.FDConnection1.CommitRetaining;
         LimpaCampos;
         MudarAbaModelo(TbItemListagem, Sender);
-      end;
+      end
+      else if crud = 'editar' then
+      begin
+        DM.FDQAuxiliar.sql.Clear;
 
+        DM.FDQAuxiliar.sql.Add('update fornecedor');
+        DM.FDQAuxiliar.sql.Add(' set tipo_pessoa = :TipoPessoa,');
+        DM.FDQAuxiliar.sql.Add(' nome = :Nome,');
+        DM.FDQAuxiliar.sql.Add(' nome_fantasia = :NomeFantasia,');
+        DM.FDQAuxiliar.sql.Add(' cpf_cnpj = :CpfCnpj,');
+        DM.FDQAuxiliar.sql.Add(' rg_ie = :RgIe,');
+        DM.FDQAuxiliar.sql.Add(' fone = :Fone,');
+        DM.FDQAuxiliar.sql.Add(' endereco = :Endereco,');
+        DM.FDQAuxiliar.sql.Add(' numero = :Numero,');
+        DM.FDQAuxiliar.sql.Add(' complemento = :Complemento,');
+        DM.FDQAuxiliar.sql.Add(' bairro = :Bairro,');
+        DM.FDQAuxiliar.sql.Add(' cep = :Cep,');
+        DM.FDQAuxiliar.sql.Add(' cidade = :Cidade,');
+        DM.FDQAuxiliar.sql.Add(' uf = :Uf,');
+        DM.FDQAuxiliar.sql.Add(' email = :Email,');
+        DM.FDQAuxiliar.sql.Add(' obs = :Obs,');
+        DM.FDQAuxiliar.sql.Add(' status = :Status');
+        DM.FDQAuxiliar.sql.Add(' where id = :Id');
+
+        DM.FDQAuxiliar.Params.ParamByName('TipoPessoa').AsString := tipoPessoa;
+        DM.FDQAuxiliar.Params.ParamByName('Nome').AsString := EdtNomeForn.Text;
+        DM.FDQAuxiliar.Params.ParamByName('NomeFantasia').AsString :=
+          EdtApelidoForn.Text;
+        DM.FDQAuxiliar.Params.ParamByName('CpfCnpj').AsString :=
+          EdtCpfForn.Text;
+        DM.FDQAuxiliar.Params.ParamByName('RgIe').AsString := EdtRgForn.Text;
+        DM.FDQAuxiliar.Params.ParamByName('Fone').AsString := EdtFoneForn.Text;
+        DM.FDQAuxiliar.Params.ParamByName('Endereco').AsString :=
+          EdtEnderecoForn.Text;
+        DM.FDQAuxiliar.Params.ParamByName('Numero').AsString := EdtNumForn.Text;
+        DM.FDQAuxiliar.Params.ParamByName('Complemento').AsString :=
+          EdtCompForn.Text;
+        DM.FDQAuxiliar.Params.ParamByName('Bairro').AsString :=
+          EdtBairroForn.Text;
+        DM.FDQAuxiliar.Params.ParamByName('Cep').AsString := EdtCepForn.Text;
+        DM.FDQAuxiliar.Params.ParamByName('Cidade').AsString :=
+          EdtCidadeForn.Text;
+        DM.FDQAuxiliar.Params.ParamByName('Uf').AsString := EdtUfForn.Text;
+        DM.FDQAuxiliar.Params.ParamByName('Email').AsString :=
+          EdtEmailForn.Text;
+        DM.FDQAuxiliar.Params.ParamByName('Obs').AsString := MemoObsForn.Text;
+        DM.FDQAuxiliar.Params.ParamByName('Status').AsString := Status;
+        DM.FDQAuxiliar.Params.ParamByName('Id').AsInteger :=
+          DM.FDQConsFornecedorid.AsInteger;
+
+        DM.FDQAuxiliar.ExecSQL;
+
+        DM.FDConnection1.CommitRetaining;
+        LimpaCampos;
+        DM.FDQConsFornecedor.Active := False;
+        MudarAbaModelo(TbItemListagem, Sender);
+      end;
     except
       on E: Exception do
         ShowMessage('Erro! ' + E.Message);
@@ -414,6 +469,7 @@ procedure TFCadFornecedor.SpdBEditarEdicaoCadFornecedorClick(Sender: TObject);
 begin
   inherited;
   crud := 'editar';
+  LblTituloEdicaoCadFornecedor.Text := 'Editando';
   SpdBEditarEdicaoCadFornecedor.Visible := False;
   SpdBConfirmaEdicaoCadFornecedor.Visible := True;
   HabilitaCampos;

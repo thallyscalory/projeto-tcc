@@ -33,6 +33,10 @@ type
     procedure BtnConfirmaCadContasReceberClick(Sender: TObject);
     procedure ListViewCadContasReceberItemClick(const Sender: TObject;
       const AItem: TListViewItem);
+    procedure FormVirtualKeyboardHidden(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
+    procedure FormVirtualKeyboardShown(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
   private
     { Private declarations }
   public
@@ -49,7 +53,7 @@ implementation
 
 {$R *.fmx}
 
-uses UCadCli, UConsultaProduto, UDM, UVenda1;
+uses UCadCli, UConsultaProduto, UDM, UVenda1, UPrincipal;
 
 procedure TFContasReceberVenda.BtnConfirmaCadContasReceberClick
   (Sender: TObject);
@@ -165,6 +169,18 @@ begin
       [TMultiDetailAppearanceNames.Detail2].ToString;
   end;
 
+end;
+
+procedure TFContasReceberVenda.FormVirtualKeyboardHidden(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
+begin
+  TecladoVirtualVisible := False;
+end;
+
+procedure TFContasReceberVenda.FormVirtualKeyboardShown(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
+begin
+  TecladoVirtualVisible := True;
 end;
 
 procedure TFContasReceberVenda.ListViewCadContasReceberGesture(Sender: TObject;

@@ -8,6 +8,9 @@ object FCadModelo: TFCadModelo
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
+  OnKeyUp = FormKeyUp
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
   DesignerMasterStyle = 3
   object LytBase: TLayout
     Align = Client

@@ -8,6 +8,8 @@ object FContasReceberVenda: TFContasReceberVenda
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
   DesignerMasterStyle = 3
   object LytBase: TLayout
     Align = Client

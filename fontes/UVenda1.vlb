@@ -461,9 +461,6 @@ Coordinates=957,1225,58,33
 [Layout4]
 Coordinates=957,1280,53,33
 
-[SpeedButton1]
-Coordinates=162,1106,84,51
-
 [ListViewCadCliVenda]
 Coordinates=250,580,119,231
 Visible=True
@@ -476,4 +473,7 @@ Coordinates=330,1106,40,51
 
 [BtnFiltrarCliVenda]
 Coordinates=261,1106,53,51
+
+[SpdBVoltarClienteVenda]
+Coordinates=162,1106,84,51
 

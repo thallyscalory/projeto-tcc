@@ -184,6 +184,8 @@ type
     procedure EditFiltroCodCadCliTyping(Sender: TObject);
     procedure BtnFiltrarCliClick(Sender: TObject);
     procedure SpdBNovoCadCliClick(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
   private
     clickBotao: Boolean;
     DataHora: TDateTime;
@@ -499,27 +501,79 @@ end;
 procedure TFCadCli.FormKeyDown(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 // para controlar o botao voltar do celular.
-var
-  BotaoFisVoltar: IFMXVirtualKeyboardService;
+{ var
+  BotaoFisVoltar: IFMXVirtualKeyboardService; }
 begin
-  if (Key = vkHardwareBack) then
-  begin
+  { if (Key = vkHardwareBack) then
+    begin
     TPlatformServices.Current.SupportsPlatformService
-      (IFMXVirtualKeyboardService, IInterface(BotaoFisVoltar));
+    (IFMXVirtualKeyboardService, IInterface(BotaoFisVoltar));
     if (BotaoFisVoltar <> nil) then
     begin
-      // se o teclado estiver ativo não faça nada.
+    // se o teclado estiver ativo não faça nada.
     end
     else if TbControlCadModelo.ActiveTab = TbItemListagem then
     begin
-      DM.FDQFiltroCadCLi.Active := False;
-      EditFiltroNomeCadCli.Text := EmptyStr;
-      EditFiltroCodCadCli.Text := EmptyStr;
-      FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
+    DM.FDQFiltroCadCLi.Active := False;
+    EditFiltroNomeCadCli.Text := EmptyStr;
+    EditFiltroCodCadCli.Text := EmptyStr;
+    FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
     end
     else if TbControlCadModelo.ActiveTab = TbItemedicao then
     begin
-      MudarAbaModelo(TbItemListagem, Sender);
+    MudarAbaModelo(TbItemListagem, Sender);
+    end;
+    end; }
+end;
+
+procedure TFCadCli.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+  Shift: TShiftState);
+var
+  keyboard: IFMXVirtualKeyboardService;
+begin
+  inherited;
+  if Key = vkHardwareBack then
+  begin
+    Key := 0;
+    if TecladoVirtualVisible then
+    begin
+      if TPlatformServices.Current.SupportsPlatformService
+        (IFMXVirtualKeyboardService, keyboard) then
+      begin
+        if TVirtualKeyBoardState.Visible in keyboard.GetVirtualKeyBoardState
+        then
+        begin
+          keyboard.HideVirtualKeyboard;
+        end;
+      end;
+    end
+    else
+    begin
+      if TbControlCadModelo.ActiveTab = TbItemListagem then
+      begin
+        SpBVoltarClick(Sender);
+        { if FActiveForm.ClassType = TFCadCli then
+          begin
+          if FCadCli.TbControlCadModelo.ActiveTab = FCadCli.TbItemListagem then
+          begin
+          MudarAba(TbItemMenu, Sender);
+          end;
+          //else if FCadCli.TbControlCadModelo.ActiveTab = FCadCli.TbItemedicao then
+          //begin
+          //FCadCli.SpBVoltarEdicaoClick(Sender);
+          //end;
+
+          end
+          else if FActiveForm.ClassType = TFVenda1 then
+          begin
+          ShowMessage('venda');
+          end;
+        }
+      end
+      else
+      begin
+        SpBVoltarEdicaoClick(Sender);
+      end;
     end;
   end;
 end;
@@ -705,6 +759,7 @@ begin
   DM.FDQFiltroCadCLi.Active := False;
   EditFiltroNomeCadCli.Text := EmptyStr;
   EditFiltroCodCadCli.Text := EmptyStr;
+  close;
   { if CliPedido = 'S' then
     begin
     if not Assigned(FVenda1) then
@@ -717,7 +772,7 @@ begin
     end }
   // else
   // begin
-  FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
+  // FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
   // end;
 end;
 
@@ -835,10 +890,10 @@ begin
         LiberaAprazo;
       if not FotoCli.IsEmpty then
         DM.FDQAuxiliar.Params.ParamByName('Foto').Assign(FotoCli);
-      DM.FDQAuxiliar.Params.ParamByName('Obs').AsString :=
-        MemoObsCadCli.Lines.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Obs').AsString := MemoObsCadCli.Text;
       DM.FDQAuxiliar.Params.ParamByName('IdCli').AsInteger :=
         DM.FDQFiltroCadCLiid_cli.AsInteger;
+
       DM.FDQAuxiliar.ExecSQL;
 
       DM.FDConnection1.CommitRetaining;

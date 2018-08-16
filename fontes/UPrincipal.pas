@@ -8,7 +8,8 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.ListBox, FMX.StdCtrls, FMX.Layouts, FMX.Controls.Presentation,
   FMX.Effects,
-  FMX.TabControl, System.Actions, FMX.ActnList, ksTypes, ksLoadingIndicator;
+  FMX.TabControl, System.Actions, FMX.ActnList, ksTypes, ksLoadingIndicator,
+  FMX.VirtualKeyboard, System.Math, FMX.Platform;
 
 type
   TFPrincipal = class(TForm)
@@ -72,6 +73,13 @@ type
     procedure RoundRectCadCliClick(Sender: TObject);
     procedure RoundRectCadFornecedorClick(Sender: TObject);
     procedure ImgCadFornecedorClick(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure FormVirtualKeyboardHidden(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
+    procedure FormVirtualKeyboardShown(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
+    procedure ImgCadCliClick(Sender: TObject);
   private
     { Private declarations }
     FActiveForm: TForm;
@@ -84,6 +92,7 @@ type
 
 var
   FPrincipal: TFPrincipal;
+  TecladoVirtualVisible: Boolean;
 
 implementation
 
@@ -124,6 +133,59 @@ begin
   TbControlPrincipal.TabPosition := TTabPosition.None;
 end;
 
+procedure TFPrincipal.FormKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+var
+  keyboard: IFMXVirtualKeyboardService;
+begin
+  if Key = vkHardwareBack then
+  begin
+    Key := 0;
+    if TecladoVirtualVisible then
+    begin
+      if TPlatformServices.Current.SupportsPlatformService
+        (IFMXVirtualKeyboardService, keyboard) then
+      begin
+        if TVirtualKeyBoardState.Visible in keyboard.GetVirtualKeyBoardState
+        then
+        begin
+          keyboard.HideVirtualKeyboard;
+        end;
+      end;
+    end
+    else
+    begin
+      if TbControlPrincipal.ActiveTab = TbItemMenu then
+      begin
+        Close;
+      end;
+    end;
+  end;
+end;
+
+procedure TFPrincipal.FormVirtualKeyboardHidden(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
+begin
+  TecladoVirtualVisible := False;
+end;
+
+procedure TFPrincipal.FormVirtualKeyboardShown(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
+begin
+  TecladoVirtualVisible := True;
+end;
+
+procedure TFPrincipal.ImgCadCliClick(Sender: TObject);
+begin
+  if not Assigned(FCadCli) then
+    FCadCli := TFCadCli.Create(nil);
+  FCadCli.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
+end;
+
 procedure TFPrincipal.ImgCadFornecedorClick(Sender: TObject);
 begin
   AbrirForm(TFCadFornecedor);
@@ -144,8 +206,15 @@ end;
 
 procedure TFPrincipal.ImgVendaClick(Sender: TObject);
 begin
-  AbrirForm(TFVenda1);
-  MudarAba(TbItemApoio, Sender);
+  {AbrirForm(TFVenda1);
+    MudarAba(TbItemApoio, Sender);}
+  if not Assigned(FVenda1) then
+    FVenda1 := TFVenda1.Create(nil);
+  FVenda1.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
 end;
 
 procedure TFPrincipal.MudarAba(ATabItem: TTabItem; Sender: TObject);
@@ -156,9 +225,18 @@ end;
 
 procedure TFPrincipal.RoundRectCadCliClick(Sender: TObject);
 begin
-  AbrirForm(TFCadCli);
-  MudarAba(TbItemApoio, Sender);
-  venda := 'N';
+  { AbrirForm(TFCadCli);
+    MudarAba(TbItemApoio, Sender);
+    venda := 'N'; }
+
+  if not Assigned(FCadCli) then
+    FCadCli := TFCadCli.Create(nil);
+  FCadCli.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
+
 end;
 
 procedure TFPrincipal.RoundRectCadFornecedorClick(Sender: TObject);
@@ -181,8 +259,15 @@ end;
 
 procedure TFPrincipal.RoundRectVendasClick(Sender: TObject);
 begin
-  AbrirForm(TFVenda1);
-  MudarAba(TbItemApoio, Sender);
+  {AbrirForm(TFVenda1);
+    MudarAba(TbItemApoio, Sender);}
+  if not Assigned(FVenda1) then
+    FVenda1 := TFVenda1.Create(nil);
+  FVenda1.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
 end;
 
 procedure TFPrincipal.SpdBInfoClick(Sender: TObject);

@@ -3,8 +3,6 @@ inherited FCadCli: TFCadCli
   Caption = 'FCadModelo1'
   Position = Designed
   OnKeyDown = FormKeyDown
-  OnVirtualKeyboardShown = FormVirtualKeyboardShown
-  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
   Top = 65419
   DesignerMasterStyle = 3
   inherited LytBase: TLayout

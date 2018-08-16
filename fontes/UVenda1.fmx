@@ -8,6 +8,7 @@ object FVenda1: TFVenda1
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
+  OnKeyUp = FormKeyUp
   OnVirtualKeyboardShown = FormVirtualKeyboardShown
   OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
   DesignerMasterStyle = 3
@@ -927,7 +928,7 @@ object FVenda1: TFVenda1
               TextSettings.HorzAlign = Center
               Text = 'Clientes'
             end
-            object SpeedButton1: TSpeedButton
+            object SpdBVoltarClienteVenda: TSpeedButton
               Align = Left
               IconTintColor = claNavy
               Margins.Left = 8.000000000000000000

@@ -108,7 +108,7 @@ type
     ListViewCadCliVenda: TListView;
     ToolBar4: TToolBar;
     Label4: TLabel;
-    SpeedButton1: TSpeedButton;
+    SpdBVoltarClienteVenda: TSpeedButton;
     LinkListControlToField3: TLinkListControlToField;
     procedure SpBVoltarClick(Sender: TObject);
     procedure SpdBNovoVendaClick(Sender: TObject);
@@ -150,6 +150,8 @@ type
     procedure EdtDescontoMoedaPedidoKeyUp(Sender: TObject; var Key: Word;
       var KeyChar: Char; Shift: TShiftState);
     procedure EdtDescontoMoedaPedidoClick(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -931,15 +933,71 @@ begin
   TbControlVenda.TabPosition := TTabPosition.None;
 end;
 
+procedure TFVenda1.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+  Shift: TShiftState);
+var
+  keyboard: IFMXVirtualKeyboardService;
+begin
+  if Key = vkHardwareBack then
+  begin
+    Key := 0;
+    if TecladoVirtualVisible then
+    begin
+      if TPlatformServices.Current.SupportsPlatformService
+        (IFMXVirtualKeyboardService, keyboard) then
+      begin
+        if TVirtualKeyBoardState.Visible in keyboard.GetVirtualKeyBoardState
+        then
+        begin
+          keyboard.HideVirtualKeyboard;
+        end;
+      end;
+    end
+    else
+    begin
+      if TbControlVenda.ActiveTab = TbItemListagemVenda then
+      begin
+        SpBVoltarClick(Sender);
+      end
+      else if TbControlVenda.ActiveTab = TbItemedicaoVenda then
+      begin
+        SpdBVoltarVendaEdicaoClick(Sender);
+      end
+      else if TbControlVenda.ActiveTab = TbItemPedidoItemVenda then
+      begin
+        SpdBVoltarItemVendaClick(Sender);
+      end
+      else if TbControlVenda.ActiveTab = TbItemApoioVenda then
+      begin
+        if SpdBVoltarCadCOntasReceber.Visible then
+        begin
+         SpdBVoltarCadCOntasReceberClick(Sender);
+        end
+        else
+        begin
+          BtnConfirmaApoioVendaClick(Sender);
+        end;
+      end
+      else if TbControlVenda.ActiveTab = TbItemClienteVenda then
+      begin
+        SpdBVoltarConsCliVendaApoioClick(Sender);
+      end;
+
+    end;
+  end;
+end;
+
 procedure TFVenda1.FormVirtualKeyboardHidden(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
+  TecladoVirtualVisible := False;
   ListBoxPedido.Align := TAlignLayout.Client;
 end;
 
 procedure TFVenda1.FormVirtualKeyboardShown(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
+  TecladoVirtualVisible := True;
   ListBoxPedido.Align := TAlignLayout.Top;
   ListBoxPedido.Height := ((Self.Height) - (Self.Height * 0.43));
 end;
@@ -1204,7 +1262,8 @@ begin
   CliPedido := EmptyStr;
   itemPedido := EmptyStr;
   venda := EmptyStr;
-  FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
+  Close;
+  // FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
 end;
 
 procedure TFVenda1.SpdBAdicionaItemPedidoClick(Sender: TObject);
@@ -1987,4 +2046,3 @@ begin
 end;
 
 end.
-
