@@ -11,7 +11,9 @@ uses
   FMX.Memo, FMX.ListBox, FMX.Edit, FMX.ListView.Types, FMX.ListView.Appearances,
   FMX.ListView.Adapters.Base, MultiDetailAppearanceU, FMX.ListView, System.Rtti,
   System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.EngExt,
-  FMX.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope;
+  FMX.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope,
+  FMX.VirtualKeyboard, System.Math,
+  FMX.Platform;
 
 type
   TFCadFornecedor = class(TFCadModelo)
@@ -127,6 +129,8 @@ type
       KeyboardVisible: Boolean; const Bounds: TRect);
     procedure FormVirtualKeyboardHidden(Sender: TObject;
       KeyboardVisible: Boolean; const Bounds: TRect);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
   private
     crud: string;
 
@@ -243,6 +247,41 @@ begin
   TbControlCadModelo.TabPosition := TTabPosition.None;
 end;
 
+procedure TFCadFornecedor.FormKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+var
+  keyboard: IFMXVirtualKeyboardService;
+begin
+  inherited;
+  if Key = vkHardwareBack then
+  begin
+    Key := 0;
+    if TecladoVirtualVisible then
+    begin
+      if TPlatformServices.Current.SupportsPlatformService
+        (IFMXVirtualKeyboardService, keyboard) then
+      begin
+        if TVirtualKeyBoardState.Visible in keyboard.GetVirtualKeyBoardState
+        then
+        begin
+          keyboard.HideVirtualKeyboard;
+        end;
+      end;
+    end
+    else
+    begin
+      if TbControlCadModelo.ActiveTab = TbItemListagem then
+      begin
+        SpBVoltarClick(Sender);
+      end
+      else
+      begin
+        SpdBVoltarEdicaoCadFornecedorClick(Sender);
+      end;
+    end;
+  end;
+end;
+
 procedure TFCadFornecedor.FormVirtualKeyboardHidden(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
@@ -338,7 +377,7 @@ begin
   DM.FDQConsFornecedor.Active := False;
   EditFiltroNomeFornecedor.Text := EmptyStr;
   EditFiltroCodFornecedor.Text := EmptyStr;
-  FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
+  Close;
 end;
 
 procedure TFCadFornecedor.SpdBConfirmaEdicaoCadFornecedorClick(Sender: TObject);

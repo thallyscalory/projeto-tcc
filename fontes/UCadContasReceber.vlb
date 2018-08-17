@@ -305,3 +305,9 @@ Coordinates=851,1085,137,51
 [LblValorMarcadoBarraInferior]
 Coordinates=1149,738,160,51
 
+[DM.FDQConsFornecedor]
+Coordinates=489,1031,137,375
+
+[DM.FDQCadFornecedor]
+Coordinates=734,1085,131,375
+

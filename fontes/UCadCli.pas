@@ -552,23 +552,6 @@ begin
       if TbControlCadModelo.ActiveTab = TbItemListagem then
       begin
         SpBVoltarClick(Sender);
-        { if FActiveForm.ClassType = TFCadCli then
-          begin
-          if FCadCli.TbControlCadModelo.ActiveTab = FCadCli.TbItemListagem then
-          begin
-          MudarAba(TbItemMenu, Sender);
-          end;
-          //else if FCadCli.TbControlCadModelo.ActiveTab = FCadCli.TbItemedicao then
-          //begin
-          //FCadCli.SpBVoltarEdicaoClick(Sender);
-          //end;
-
-          end
-          else if FActiveForm.ClassType = TFVenda1 then
-          begin
-          ShowMessage('venda');
-          end;
-        }
       end
       else
       begin
@@ -760,20 +743,6 @@ begin
   EditFiltroNomeCadCli.Text := EmptyStr;
   EditFiltroCodCadCli.Text := EmptyStr;
   close;
-  { if CliPedido = 'S' then
-    begin
-    if not Assigned(FVenda1) then
-    FVenda1 := TFVenda1.Create(nil);
-    FVenda1.ShowModal(
-    procedure(modalResult: TModalResult)
-    begin
-
-    end);
-    end }
-  // else
-  // begin
-  // FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
-  // end;
 end;
 
 procedure TFCadCli.SpBVoltarEdicaoClick(Sender: TObject);

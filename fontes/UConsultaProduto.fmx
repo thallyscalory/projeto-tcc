@@ -1,7 +1,5 @@
 inherited FConsProduto: TFConsProduto
   Caption = 'FCadModelo1'
-  OnVirtualKeyboardShown = FormVirtualKeyboardShown
-  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl

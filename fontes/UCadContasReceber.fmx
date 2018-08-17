@@ -1,5 +1,6 @@
 inherited FCadContasReceber: TFCadContasReceber
   Caption = 'FCadModelo1'
+  OnShow = FormShow
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl

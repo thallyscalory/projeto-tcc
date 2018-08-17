@@ -18,10 +18,8 @@ type
     LytFundoMenuPrinc: TLayout;
     TbControlPrincipal: TTabControl;
     TbItemMenu: TTabItem;
-    TbItemApoio: TTabItem;
     ActionList1: TActionList;
     ActMudarAba: TChangeTabAction;
-    LytPrincipal: TLayout;
     ToolBar1: TToolBar;
     SpdBInfo: TSpeedButton;
     Label1: TLabel;
@@ -80,6 +78,7 @@ type
     procedure FormVirtualKeyboardShown(Sender: TObject;
       KeyboardVisible: Boolean; const Bounds: TRect);
     procedure ImgCadCliClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     FActiveForm: TForm;
@@ -102,23 +101,7 @@ uses UDM, UVenda, UCadCli, UConsultaProduto, UInfo, UVenda1, UCadContasReceber,
   UAuxiliar, UCadFornecedor;
 
 procedure TFPrincipal.AbrirForm(AFormClass: TComponentClass);
-var
-  LayoutBase, BotaoMenu: TComponent;
 begin
-  if Assigned(FActiveForm) then
-  begin
-    if FActiveForm.ClassType = AFormClass then
-      Exit
-    else
-    begin
-      FActiveForm.DisposeOf;
-      FActiveForm := nil;
-    end;
-  end;
-  Application.CreateForm(AFormClass, FActiveForm);
-  LayoutBase := FActiveForm.FindComponent('LytBase');
-  if Assigned(LayoutBase) then
-    LytPrincipal.AddObject(TLayout(LayoutBase));
 
 end;
 
@@ -126,6 +109,21 @@ end;
 // begin
 // ListBoxMenuPrinc.ItemWidth := (Self.ClientWidth - 20);
 // end;
+
+procedure TFPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  if Assigned(FVenda1) then
+    FVenda1.DisposeOf;
+  if Assigned(FCadContasReceber) then
+    FCadContasReceber.DisposeOf;
+  if Assigned(FCadCli) then
+    FCadCli.DisposeOf;
+  if Assigned(FCadFornecedor) then
+    FCadFornecedor.DisposeOf;
+  if Assigned(FConsProduto) then
+    FConsProduto.DisposeOf;
+
+end;
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
@@ -157,26 +155,43 @@ begin
     begin
       if TbControlPrincipal.ActiveTab = TbItemMenu then
       begin
-        Close;
+        MessageDlg('Deseja encerrar o aplicativo?',
+          System.UITypes.TMsgDlgType.mtInformation,
+          [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
+          procedure(const AResult: System.UITypes.TModalResult)
+          begin
+            case AResult of
+              mrYES:
+                begin
+                  // caso sim
+                  Close;
+                end;
+              mrNo:
+                begin
+                  // caso não
+                end;
+            end;
+          end);
       end;
     end;
   end;
 end;
 
 procedure TFPrincipal.FormVirtualKeyboardHidden(Sender: TObject;
-  KeyboardVisible: Boolean; const Bounds: TRect);
+KeyboardVisible: Boolean; const Bounds: TRect);
 begin
   TecladoVirtualVisible := False;
 end;
 
 procedure TFPrincipal.FormVirtualKeyboardShown(Sender: TObject;
-  KeyboardVisible: Boolean; const Bounds: TRect);
+KeyboardVisible: Boolean; const Bounds: TRect);
 begin
   TecladoVirtualVisible := True;
 end;
 
 procedure TFPrincipal.ImgCadCliClick(Sender: TObject);
 begin
+  Application.CreateForm(TFCadCli, FCadCli);
   if not Assigned(FCadCli) then
     FCadCli := TFCadCli.Create(nil);
   FCadCli.ShowModal(
@@ -188,26 +203,43 @@ end;
 
 procedure TFPrincipal.ImgCadFornecedorClick(Sender: TObject);
 begin
-  AbrirForm(TFCadFornecedor);
-  MudarAba(TbItemApoio, Sender);
+  Application.CreateForm(TFCadFornecedor, FCadFornecedor);
+  if not Assigned(FCadFornecedor) then
+    FCadFornecedor := TFCadFornecedor.Create(nil);
+  FCadFornecedor.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
 end;
 
 procedure TFPrincipal.ImgConsAdmClick(Sender: TObject);
 begin
-  AbrirForm(TFCadContasReceber);
-  MudarAba(TbItemApoio, Sender);
+  Application.CreateForm(TFCadContasReceber, FCadContasReceber);
+  if not Assigned(FCadContasReceber) then
+    FCadContasReceber := TFCadContasReceber.Create(nil);
+  FCadContasReceber.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
 end;
 
 procedure TFPrincipal.ImgConsProdClick(Sender: TObject);
 begin
-  AbrirForm(TFConsProduto);
-  MudarAba(TbItemApoio, Sender);
+  Application.CreateForm(TFConsProduto, FConsProduto);
+  if not Assigned(FConsProduto) then
+    FConsProduto := TFConsProduto.Create(nil);
+  FConsProduto.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
 end;
 
 procedure TFPrincipal.ImgVendaClick(Sender: TObject);
 begin
-  {AbrirForm(TFVenda1);
-    MudarAba(TbItemApoio, Sender);}
+  Application.CreateForm(TFVenda1, FVenda1);
   if not Assigned(FVenda1) then
     FVenda1 := TFVenda1.Create(nil);
   FVenda1.ShowModal(
@@ -225,10 +257,7 @@ end;
 
 procedure TFPrincipal.RoundRectCadCliClick(Sender: TObject);
 begin
-  { AbrirForm(TFCadCli);
-    MudarAba(TbItemApoio, Sender);
-    venda := 'N'; }
-
+  Application.CreateForm(TFCadCli, FCadCli);
   if not Assigned(FCadCli) then
     FCadCli := TFCadCli.Create(nil);
   FCadCli.ShowModal(
@@ -236,31 +265,47 @@ begin
     begin
 
     end);
-
 end;
 
 procedure TFPrincipal.RoundRectCadFornecedorClick(Sender: TObject);
 begin
-  AbrirForm(TFCadFornecedor);
-  MudarAba(TbItemApoio, Sender);
+  Application.CreateForm(TFCadFornecedor, FCadFornecedor);
+  if not Assigned(FCadFornecedor) then
+    FCadFornecedor := TFCadFornecedor.Create(nil);
+  FCadFornecedor.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
 end;
 
 procedure TFPrincipal.RoundRectConsAdmClick(Sender: TObject);
 begin
-  AbrirForm(TFCadContasReceber);
-  MudarAba(TbItemApoio, Sender);
+  Application.CreateForm(TFCadContasReceber, FCadContasReceber);
+  if not Assigned(FCadContasReceber) then
+    FCadContasReceber := TFCadContasReceber.Create(nil);
+  FCadContasReceber.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
 end;
 
 procedure TFPrincipal.RoundRectConsProdClick(Sender: TObject);
 begin
-  AbrirForm(TFConsProduto);
-  MudarAba(TbItemApoio, Sender);
+  Application.CreateForm(TFConsProduto, FConsProduto);
+  if not Assigned(FConsProduto) then
+    FConsProduto := TFConsProduto.Create(nil);
+  FConsProduto.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
 end;
 
 procedure TFPrincipal.RoundRectVendasClick(Sender: TObject);
 begin
-  {AbrirForm(TFVenda1);
-    MudarAba(TbItemApoio, Sender);}
+  Application.CreateForm(TFVenda1, FVenda1);
   if not Assigned(FVenda1) then
     FVenda1 := TFVenda1.Create(nil);
   FVenda1.ShowModal(
@@ -272,8 +317,13 @@ end;
 
 procedure TFPrincipal.SpdBInfoClick(Sender: TObject);
 begin
-  AbrirForm(TFInfo);
-  MudarAba(TbItemApoio, Sender);
+  if not Assigned(FInfo) then
+    FInfo := TFInfo.Create(nil);
+  FInfo.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
 end;
 
 end.

@@ -12,7 +12,9 @@ uses
   System.Bindings.Outputs, FMX.Bind.Editors, Data.Bind.EngExt,
   FMX.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope, FMX.Edit,
   FMX.StdActns, FMX.MediaLibrary.Actions, Winsoft.FireMonkey.Obr, FMX.ListBox,
-  System.ImageList, FMX.ImgList, MultiDetailAppearanceU;
+  System.ImageList, FMX.ImgList, MultiDetailAppearanceU, FMX.VirtualKeyboard,
+  System.Math,
+  FMX.Platform;
 
 type
   TFConsProduto = class(TFCadModelo)
@@ -138,6 +140,8 @@ type
     procedure EdtFiltroNomeProdTyping(Sender: TObject);
     procedure EdtFiltroCodProdTyping(Sender: TObject);
     procedure BtnFiltrarProdClick(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
   private
     crud: String;
 
@@ -418,6 +422,41 @@ begin
     ToolBarsuperior.Visible := False;
   end;
 
+end;
+
+procedure TFConsProduto.FormKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+var
+  keyboard: IFMXVirtualKeyboardService;
+begin
+  inherited;
+  if Key = vkHardwareBack then
+  begin
+    Key := 0;
+    if TecladoVirtualVisible then
+    begin
+      if TPlatformServices.Current.SupportsPlatformService
+        (IFMXVirtualKeyboardService, keyboard) then
+      begin
+        if TVirtualKeyBoardState.Visible in keyboard.GetVirtualKeyBoardState
+        then
+        begin
+          keyboard.HideVirtualKeyboard;
+        end;
+      end;
+    end
+    else
+    begin
+      if TbControlCadModelo.ActiveTab = TbItemListagem then
+      begin
+        SpBVoltarClick(Sender);
+      end
+      else
+      begin
+        SpBVoltarEdicaoClick(Sender);
+      end;
+    end;
+  end;
 end;
 
 procedure TFConsProduto.FormVirtualKeyboardHidden(Sender: TObject;
@@ -792,20 +831,8 @@ end;
 procedure TFConsProduto.SpBVoltarClick(Sender: TObject);
 begin
   DM.FDQConsultaProd.Active := False;
-  { if itemPedido = 'S' then
-    begin
-    if not Assigned(FVenda1) then
-    FVenda1 := TFVenda1.Create(nil);
-    FVenda1.ShowModal(
-    procedure(modalResult: TModalResult)
-    begin
+  Close;
 
-    end);
-    end }
-  // else
-  // begin
-  FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
-  // end;
 end;
 
 procedure TFConsProduto.SpBVoltarEdicaoClick(Sender: TObject);

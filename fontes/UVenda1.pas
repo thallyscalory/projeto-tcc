@@ -1259,11 +1259,11 @@ end;
 
 procedure TFVenda1.SpBVoltarClick(Sender: TObject);
 begin
+  DM.FDQPedido.Active := False;
   CliPedido := EmptyStr;
   itemPedido := EmptyStr;
   venda := EmptyStr;
   Close;
-  // FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
 end;
 
 procedure TFVenda1.SpdBAdicionaItemPedidoClick(Sender: TObject);

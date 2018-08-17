@@ -22,3 +22,6 @@ Visible=False
 [DM.FDQFiltroCadCLi]
 Visible=False
 
+[DM.FDQConsAvistaFormaPag]
+Visible=False
+

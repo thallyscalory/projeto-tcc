@@ -1,9 +1,7 @@
 inherited FCadCli: TFCadCli
-  Top = -117
   Caption = 'FCadModelo1'
   Position = Designed
   OnKeyDown = FormKeyDown
-  Top = 65419
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl

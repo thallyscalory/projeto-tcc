@@ -11,7 +11,9 @@ uses
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, MultiDetailAppearanceU,
   FMX.ListView, System.Rtti, System.Bindings.Outputs, FMX.Bind.Editors,
   Data.Bind.EngExt, FMX.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope,
-  FMX.ListBox, FMX.DateTimeCtrls, System.UIConsts, FMX.Edit;
+  FMX.ListBox, FMX.DateTimeCtrls, System.UIConsts, FMX.Edit,
+  FMX.VirtualKeyboard, System.Math,
+  FMX.Platform;
 
 type
   TFCadContasReceber = class(TFCadModelo)
@@ -73,6 +75,9 @@ type
     procedure EdtAcrescimoTyping(Sender: TObject);
     procedure EdtDescontoTyping(Sender: TObject);
     procedure SpdBConfirmaBaixaContasREceberEdicaoClick(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
+    procedure FormShow(Sender: TObject);
   private
     saldoContasReceber, idContasReceber, idCliContasReceber: array of string;
     tamanhoArray, contadorArray, controleCheckmark: integer;
@@ -225,6 +230,7 @@ procedure TFCadContasReceber.ComboBoxFiltroClienteContasReceberEnter
   (Sender: TObject);
 begin
   inherited;
+  DM.FDQFiltroCadCLi.Active := False;
   DM.FDQFiltroCadCLi.Close;
   DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := '%';
   DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
@@ -234,7 +240,7 @@ begin
   ComboBoxFiltroClienteContasReceber.Items.Add('*Todos*');
   ComboBoxFiltroClienteContasReceber.Items.Move
     (ComboBoxFiltroClienteContasReceber.Items.Count - 1, 0);
-  //ComboBoxFiltroClienteContasReceber.ItemIndex := 0;
+  // ComboBoxFiltroClienteContasReceber.ItemIndex := 0;
 end;
 
 procedure TFCadContasReceber.ComboBoxTipoReceitaEnter(Sender: TObject);
@@ -396,6 +402,66 @@ begin
   DM.FDQConsAvistaFormaPag.Active := False;
 end;
 
+procedure TFCadContasReceber.FormKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+var
+  keyboard: IFMXVirtualKeyboardService;
+begin
+  inherited;
+  if Key = vkHardwareBack then
+  begin
+    Key := 0;
+    if TecladoVirtualVisible then
+    begin
+      if TPlatformServices.Current.SupportsPlatformService
+        (IFMXVirtualKeyboardService, keyboard) then
+      begin
+        if TVirtualKeyBoardState.Visible in keyboard.GetVirtualKeyBoardState
+        then
+        begin
+          keyboard.HideVirtualKeyboard;
+        end;
+      end;
+    end
+    else
+    begin
+      if TbControlCadModelo.ActiveTab = TbItemListagem then
+      begin
+        SpBVoltarClick(Sender);
+      end
+      else
+      begin
+        SpdBVoltarBaixaContasReceberEdicaoClick(Sender);
+      end;
+    end;
+  end;
+end;
+
+procedure TFCadContasReceber.FormShow(Sender: TObject);
+begin
+  inherited;
+  { vlDoc := 0;
+    VlSaldo := 0;
+    vlMarc := 0;
+
+    ComboBoxFiltroClienteContasReceberEnter(Sender);
+    ComboBoxFiltroClienteContasReceber.ItemIndex := 0;
+    DateEdtFiltroVencInicialContasReceber.Date := Date;
+    DateEdtFiltroVencFinalContasReceber.Date := Date;
+
+    tamanhoArray := 0;
+    contadorArray := 0;
+    controleCheckmark := 0;
+    limpaArray := 'N';
+    ListViewCadContasReceber.ItemAppearanceObjects.ItemObjects.Accessory.
+    Visible := False;
+    ListViewCadContasReceber.ItemAppearanceObjects.ItemEditObjects.Accessory.
+    Visible := False;
+    BtnBaixaContasReceber.Visible := False;
+
+    DM.FDQConsAvistaFormaPag.Active := False; }
+end;
+
 procedure TFCadContasReceber.ListViewCadContasReceberItemClick
   (const Sender: TObject; const AItem: TListViewItem);
 begin
@@ -487,8 +553,7 @@ procedure TFCadContasReceber.SpBVoltarClick(Sender: TObject);
 begin
   DM.FDQConsContasReceber.Active := False;
   DM.FDQFiltroCadCLi.Active := False;
-  FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
-  FPrincipal.AbrirForm(TFAuxiliar);
+  Close;
 end;
 
 procedure TFCadContasReceber.SpdBConfirmaBaixaContasREceberEdicaoClick
