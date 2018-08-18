@@ -26,7 +26,7 @@ Coordinates=319,56,92,36
 Coordinates=590,1470,136,36
 
 []
-Coordinates=630,773,107,33
+Coordinates=652,881,107,36
 Visible=True
 
 [DM.FDQFiltroCadCLi]
@@ -130,9 +130,6 @@ Coordinates=580,1010,153,212
 
 [ToolBar1]
 Coordinates=510,810,67,36
-
-[LytFundoEdicao]
-Coordinates=652,881,107,36
 
 [ListBoxItem10]
 Coordinates=972,1397,96,36

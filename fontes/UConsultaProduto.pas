@@ -28,7 +28,6 @@ type
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     LinkListControlToField1: TLinkListControlToField;
-    LytFundoEdicao: TLayout;
     ToolBar1: TToolBar;
     LblTituloEdicao: TLabel;
     SpBVoltarEdicao: TSpeedButton;
@@ -87,6 +86,7 @@ type
     LblVlPromocaoProd: TLabel;
     SpdBNovoCadProd: TSpeedButton;
     BtnFiltrarProd: TButton;
+    VertScrollBox1: TVertScrollBox;
     procedure TakePhotoFromCameraAction1DidFinishTaking(Image: TBitmap);
     procedure EdtFiltroNomeProdClick(Sender: TObject);
     procedure EdtFiltroCodProdClick(Sender: TObject);
@@ -105,10 +105,6 @@ type
       const AItem: TListItem; const AObject: TListItemSimpleControl);
     procedure SpBEditarProdClick(Sender: TObject);
     procedure SpBConfirmarProdClick(Sender: TObject);
-    procedure FormVirtualKeyboardHidden(Sender: TObject;
-      KeyboardVisible: Boolean; const Bounds: TRect);
-    procedure FormVirtualKeyboardShown(Sender: TObject;
-      KeyboardVisible: Boolean; const Bounds: TRect);
     procedure TakePhotoFromCameraAction2DidFinishTaking(Image: TBitmap);
     procedure SpdBNovoCadProdClick(Sender: TObject);
     procedure SpBVoltarClick(Sender: TObject);
@@ -457,21 +453,6 @@ begin
       end;
     end;
   end;
-end;
-
-procedure TFConsProduto.FormVirtualKeyboardHidden(Sender: TObject;
-  KeyboardVisible: Boolean; const Bounds: TRect);
-begin
-  inherited;
-  ListBoxEdicaoConsProd.Align := TAlignLayout.Client;
-end;
-
-procedure TFConsProduto.FormVirtualKeyboardShown(Sender: TObject;
-  KeyboardVisible: Boolean; const Bounds: TRect);
-begin
-  inherited;
-  ListBoxEdicaoConsProd.Align := TAlignLayout.Top;
-  ListBoxEdicaoConsProd.Height := ((Self.Height) - (Self.Height * 0.50));
 end;
 
 procedure TFConsProduto.HabilitaCampos;

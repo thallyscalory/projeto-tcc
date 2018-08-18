@@ -33,7 +33,6 @@ type
     Label4: TLabel;
     DateEdtFiltroVencFinalContasReceber: TDateEdit;
     BtnBaixaContasReceber: TButton;
-    LytBaixaContasReceberEdicao: TLayout;
     ListBoxbaixaContasReceberEdicao: TListBox;
     ListBoxItem1: TListBoxItem;
     ListBoxItem2: TListBoxItem;
@@ -60,6 +59,7 @@ type
     LblSaldoTotalBarraInferior: TLabel;
     LblValorDocBarraInferior: TLabel;
     LblValorMarcadoBarraInferior: TLabel;
+    VertScrollBox1: TVertScrollBox;
     procedure SpBVoltarClick(Sender: TObject);
     procedure ComboBoxFiltroClienteContasReceberEnter(Sender: TObject);
     procedure ComboBoxFiltroClienteContasReceberClosePopup(Sender: TObject);

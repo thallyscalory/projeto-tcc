@@ -14,7 +14,7 @@ uses
   FMX.VirtualKeyboard,
   FMX.Platform, FMX.ListBox, FMX.ScrollBox, FMX.Memo, FMX.StdActns,
   FMX.MediaLibrary.Actions, FMX.Objects, System.Math, System.ImageList,
-  FMX.ImgList, FMX.Gestures, MultiDetailAppearanceU;
+  FMX.ImgList, FMX.Gestures, MultiDetailAppearanceU, FMX.Ani;
 
 type
   TFCadCli = class(TFCadModelo)
@@ -119,13 +119,12 @@ type
     SpdBNovoCadCli: TSpeedButton;
     LblDataCadCli: TLabel;
     LinkControlToField15: TLinkControlToField;
+    VertScrollBox1: TVertScrollBox;
     procedure FormCreate(Sender: TObject);
     procedure SpBVoltarEdicaoClick(Sender: TObject);
     procedure SpBVoltarClick(Sender: TObject);
     procedure EditFiltroNomeCadCliClick(Sender: TObject);
     procedure EditFiltroCodCadCliClick(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word; var KeyChar: Char;
-      Shift: TShiftState);
     procedure SpdBEditarClick(Sender: TObject);
     procedure TakePhotoFromCameraAction1DidFinishTaking(Image: TBitmap);
     procedure SpdBConfirmarClick(Sender: TObject);
@@ -144,13 +143,8 @@ type
     procedure EdtBEmailCliClick(Sender: TObject);
     procedure ListViewCadCliButtonClick(const Sender: TObject;
       const AItem: TListItem; const AObject: TListItemSimpleControl);
-    procedure FormVirtualKeyboardHidden(Sender: TObject;
-      KeyboardVisible: Boolean; const Bounds: TRect);
-    procedure FormVirtualKeyboardShown(Sender: TObject;
-      KeyboardVisible: Boolean; const Bounds: TRect);
     procedure ListViewCadCliGesture(Sender: TObject;
       const EventInfo: TGestureEventInfo; var Handled: Boolean);
-    procedure ListViewCadCliDblClick(Sender: TObject);
     procedure ListViewCadCliItemClickEx(const Sender: TObject;
       ItemIndex: Integer; const LocalClickPos: TPointF;
       const ItemObject: TListItemDrawable);
@@ -498,34 +492,6 @@ begin
   end;
 end;
 
-procedure TFCadCli.FormKeyDown(Sender: TObject; var Key: Word;
-  var KeyChar: Char; Shift: TShiftState);
-// para controlar o botao voltar do celular.
-{ var
-  BotaoFisVoltar: IFMXVirtualKeyboardService; }
-begin
-  { if (Key = vkHardwareBack) then
-    begin
-    TPlatformServices.Current.SupportsPlatformService
-    (IFMXVirtualKeyboardService, IInterface(BotaoFisVoltar));
-    if (BotaoFisVoltar <> nil) then
-    begin
-    // se o teclado estiver ativo não faça nada.
-    end
-    else if TbControlCadModelo.ActiveTab = TbItemListagem then
-    begin
-    DM.FDQFiltroCadCLi.Active := False;
-    EditFiltroNomeCadCli.Text := EmptyStr;
-    EditFiltroCodCadCli.Text := EmptyStr;
-    FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
-    end
-    else if TbControlCadModelo.ActiveTab = TbItemedicao then
-    begin
-    MudarAbaModelo(TbItemListagem, Sender);
-    end;
-    end; }
-end;
-
 procedure TFCadCli.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
   Shift: TShiftState);
 var
@@ -559,21 +525,6 @@ begin
       end;
     end;
   end;
-end;
-
-procedure TFCadCli.FormVirtualKeyboardHidden(Sender: TObject;
-  KeyboardVisible: Boolean; const Bounds: TRect);
-begin
-  inherited;
-  ListBoxEdicaoCadCli.Align := TAlignLayout.Client;
-end;
-
-procedure TFCadCli.FormVirtualKeyboardShown(Sender: TObject;
-  KeyboardVisible: Boolean; const Bounds: TRect);
-begin
-  inherited;
-  ListBoxEdicaoCadCli.Align := TAlignLayout.Top;
-  ListBoxEdicaoCadCli.Height := ((Self.Height) - (Self.Height * 0.50));
 end;
 
 procedure TFCadCli.HabilitaCampos;
@@ -650,32 +601,6 @@ begin
   // MudarAbaModelo(TbItemedicao, Sender);
 end;
 
-procedure TFCadCli.ListViewCadCliDblClick(Sender: TObject);
-begin
-  inherited;
-  // if venda = 'S' then
-  // begin
-  // MessageDlg('Você deseja adicionar este cliente ao pedido?',
-  // System.UITypes.TMsgDlgType.mtInformation,
-  // [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
-  // procedure(const AResult: System.UITypes.TModalResult)
-  // begin
-  // case AResult of
-  // mrYES:
-  // begin
-  // caso sim
-  // nomeCliente := DM.FDQFiltroCadCLinome_cli.AsString;
-  // codCliente := DM.FDQFiltroCadCLiid_cli.AsString;
-  // end;
-  // mrNo:
-  // begin
-  // caso não
-  // end;
-  // end;
-  // end);
-  // end;
-end;
-
 procedure TFCadCli.ListViewCadCliGesture(Sender: TObject;
   const EventInfo: TGestureEventInfo; var Handled: Boolean);
 begin
@@ -742,7 +667,7 @@ begin
   DM.FDQFiltroCadCLi.Active := False;
   EditFiltroNomeCadCli.Text := EmptyStr;
   EditFiltroCodCadCli.Text := EmptyStr;
-  close;
+  Close;
 end;
 
 procedure TFCadCli.SpBVoltarEdicaoClick(Sender: TObject);

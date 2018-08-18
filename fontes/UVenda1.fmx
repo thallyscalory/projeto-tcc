@@ -24,7 +24,7 @@ object FVenda1: TFVenda1
       Size.Height = 480.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
@@ -42,7 +42,7 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 66.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -151,7 +151,7 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 66.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -214,300 +214,309 @@ object FVenda1: TFVenda1
             OnClick = SpdBEditarVendaClick
           end
         end
-        object ListBoxPedido: TListBox
+        object VertScrollBox1: TVertScrollBox
           Align = Client
           Size.Width = 330.000000000000000000
           Size.Height = 383.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
-          DisableFocusEffect = True
-          DefaultItemStyles.ItemStyle = ''
-          DefaultItemStyles.GroupHeaderStyle = ''
-          DefaultItemStyles.GroupFooterStyle = ''
-          Viewport.Width = 325.000000000000000000
+          Viewport.Width = 330.000000000000000000
           Viewport.Height = 383.000000000000000000
-          object ListBoxItemNumPedidoVenda: TListBoxItem
-            TextSettings.Font.Family = 'Arial'
-            TextSettings.Font.Size = 14.000000000000000000
-            StyledSettings = [Style, FontColor, Other]
-            Margins.Left = 4.000000000000000000
-            Margins.Right = 10.000000000000000000
-            Position.X = 4.000000000000000000
-            StyleLookup = 'listboxitemrightdetail'
+          object ListBoxPedido: TListBox
+            Align = Client
+            Size.Width = 330.000000000000000000
+            Size.Height = 383.000000000000000000
+            Size.PlatformDefault = False
             TabOrder = 0
-            Text = 'Num. Pedido:'
-          end
-          object ListBoxItem2: TListBoxItem
-            Position.Y = 44.000000000000000000
-            TabOrder = 1
-            object LblCliVenda: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 61.000000000000000000
-              Size.Height = 36.000000000000000000
-              Size.PlatformDefault = False
+            DisableFocusEffect = True
+            DefaultItemStyles.ItemStyle = ''
+            DefaultItemStyles.GroupHeaderStyle = ''
+            DefaultItemStyles.GroupFooterStyle = ''
+            Viewport.Width = 325.000000000000000000
+            Viewport.Height = 383.000000000000000000
+            object ListBoxItemNumPedidoVenda: TListBoxItem
               TextSettings.Font.Family = 'Arial'
               TextSettings.Font.Size = 14.000000000000000000
-              Text = 'Cliente:'
+              StyledSettings = [Style, FontColor, Other]
+              Margins.Left = 4.000000000000000000
+              Margins.Right = 10.000000000000000000
+              Position.X = 4.000000000000000000
+              StyleLookup = 'listboxitemrightdetail'
+              TabOrder = 0
+              Text = 'Num. Pedido:'
             end
-            object SpdBPesqCliVenda: TSpeedButton
-              Align = Right
-              IconTintColor = claNavy
-              Margins.Right = 8.000000000000000000
-              Position.X = 269.000000000000000000
-              Size.Width = 48.000000000000000000
-              Size.Height = 48.000000000000000000
-              Size.PlatformDefault = False
-              StyleLookup = 'searchtoolbutton'
-              OnClick = SpdBPesqCliVendaClick
+            object ListBoxItem2: TListBoxItem
+              Position.Y = 44.000000000000000000
+              TabOrder = 1
+              object LblCliVenda: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 61.000000000000000000
+                Size.Height = 36.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Cliente:'
+              end
+              object SpdBPesqCliVenda: TSpeedButton
+                Align = Right
+                IconTintColor = claNavy
+                Margins.Right = 8.000000000000000000
+                Position.X = 269.000000000000000000
+                Size.Width = 48.000000000000000000
+                Size.Height = 48.000000000000000000
+                Size.PlatformDefault = False
+                StyleLookup = 'searchtoolbutton'
+                OnClick = SpdBPesqCliVendaClick
+              end
+              object EdtCliVenda: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 3
+                Enabled = False
+                Margins.Top = 8.000000000000000000
+                Margins.Bottom = 8.000000000000000000
+                Size.Width = 146.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+              end
+              object LblCodCliPedido: TLabel
+                Align = Left
+                Margins.Right = 2.000000000000000000
+                Position.X = 65.000000000000000000
+                Size.Width = 56.000000000000000000
+                Size.Height = 44.000000000000000000
+                Size.PlatformDefault = False
+              end
             end
-            object EdtCliVenda: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
+            object ListBoxItemprodutoVenda: TListBoxItem
+              TextSettings.Font.Family = 'Arial'
+              TextSettings.Font.Size = 14.000000000000000000
+              StyledSettings = [Style, FontColor, Other]
+              Position.Y = 88.000000000000000000
+              TabOrder = 6
+              object SpdBPesqItemPedido: TSpeedButton
+                Align = Right
+                IconTintColor = claNavy
+                Margins.Left = 15.000000000000000000
+                Position.X = 206.000000000000000000
+                Size.Width = 48.000000000000000000
+                Size.Height = 48.000000000000000000
+                Size.PlatformDefault = False
+                StyleLookup = 'searchtoolbutton'
+                OnClick = SpdBPesqItemPedidoClick
+              end
+              object SpdBAdicionaItemPedido: TSpeedButton
+                Align = Right
+                IconTintColor = claNavy
+                Margins.Left = 15.000000000000000000
+                Margins.Right = 8.000000000000000000
+                Position.X = 269.000000000000000000
+                Size.Width = 48.000000000000000000
+                Size.Height = 48.000000000000000000
+                Size.PlatformDefault = False
+                StyleLookup = 'addtoolbutton'
+                OnClick = SpdBAdicionaItemPedidoClick
+              end
+              object LblProdutoPedido: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 61.000000000000000000
+                Size.Height = 36.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Produto:'
+              end
+              object LblQtdItemPedido: TLabel
+                Align = Left
+                StyledSettings = [Style]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 69.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 132.000000000000000000
+                Size.Height = 36.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.FontColor = claSilver
+              end
+            end
+            object ListBoxItem3: TListBoxItem
+              Position.Y = 132.000000000000000000
+              TabOrder = 2
+              object LblFormaPagVenda: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 101.000000000000000000
+                Size.Height = 36.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Tipo de receita'
+              end
+              object ComboBoxFormaPagVenda: TComboBox
+                Align = Client
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 8.000000000000000000
+                Size.Width = 160.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+                OnClosePopup = ComboBoxFormaPagVendaClosePopup
+                OnEnter = ComboBoxFormaPagVendaEnter
+              end
+              object SpdBNovoFormaPag: TSpeedButton
+                Align = Right
+                IconTintColor = claNavy
+                Margins.Right = 8.000000000000000000
+                Position.X = 269.000000000000000000
+                Size.Width = 48.000000000000000000
+                Size.Height = 48.000000000000000000
+                Size.PlatformDefault = False
+                StyleLookup = 'addtoolbutton'
+              end
+            end
+            object ListBoxItem4: TListBoxItem
+              Position.Y = 176.000000000000000000
               TabOrder = 3
-              Enabled = False
-              Margins.Top = 8.000000000000000000
-              Margins.Bottom = 8.000000000000000000
-              Size.Width = 146.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
+              object LblNumParcelasVenda: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 109.000000000000000000
+                Size.Height = 36.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Num. Parcela:'
+              end
+              object EdtNumParcelaPedido: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                KeyboardType = NumberPad
+                ReturnKeyType = Done
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 8.000000000000000000
+                Size.Width = 208.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                KillFocusByReturn = True
+                OnTyping = EdtNumParcelaPedidoTyping
+              end
             end
-            object LblCodCliPedido: TLabel
-              Align = Left
-              Margins.Right = 2.000000000000000000
-              Position.X = 65.000000000000000000
-              Size.Width = 56.000000000000000000
-              Size.Height = 44.000000000000000000
-              Size.PlatformDefault = False
+            object ListBoxItem5: TListBoxItem
+              Position.Y = 220.000000000000000000
+              TabOrder = 5
+              object LblDescMoedaPedido: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 109.000000000000000000
+                Size.Height = 36.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Desconto (R$):'
+              end
+              object EdtDescontoMoedaPedido: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 0
+                KeyboardType = NumbersAndPunctuation
+                ReturnKeyType = Done
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 8.000000000000000000
+                Size.Width = 208.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                OnKeyUp = EdtDescontoMoedaPedidoKeyUp
+                OnClick = EdtDescontoMoedaPedidoClick
+              end
             end
-          end
-          object ListBoxItemprodutoVenda: TListBoxItem
-            TextSettings.Font.Family = 'Arial'
-            TextSettings.Font.Size = 14.000000000000000000
-            StyledSettings = [Style, FontColor, Other]
-            Position.Y = 88.000000000000000000
-            TabOrder = 6
-            object SpdBPesqItemPedido: TSpeedButton
-              Align = Right
-              IconTintColor = claNavy
-              Margins.Left = 15.000000000000000000
-              Position.X = 206.000000000000000000
-              Size.Width = 48.000000000000000000
-              Size.Height = 48.000000000000000000
-              Size.PlatformDefault = False
-              StyleLookup = 'searchtoolbutton'
-              OnClick = SpdBPesqItemPedidoClick
-            end
-            object SpdBAdicionaItemPedido: TSpeedButton
-              Align = Right
-              IconTintColor = claNavy
-              Margins.Left = 15.000000000000000000
-              Margins.Right = 8.000000000000000000
-              Position.X = 269.000000000000000000
-              Size.Width = 48.000000000000000000
-              Size.Height = 48.000000000000000000
-              Size.PlatformDefault = False
-              StyleLookup = 'addtoolbutton'
-              OnClick = SpdBAdicionaItemPedidoClick
-            end
-            object LblProdutoPedido: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 61.000000000000000000
-              Size.Height = 36.000000000000000000
-              Size.PlatformDefault = False
+            object ListBoxItemValorTotalVenda: TListBoxItem
               TextSettings.Font.Family = 'Arial'
               TextSettings.Font.Size = 14.000000000000000000
-              Text = 'Produto:'
-            end
-            object LblQtdItemPedido: TLabel
-              Align = Left
-              StyledSettings = [Style]
+              StyledSettings = [Style, FontColor, Other]
               Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 69.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 132.000000000000000000
-              Size.Height = 36.000000000000000000
-              Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              TextSettings.FontColor = claSilver
-            end
-          end
-          object ListBoxItem3: TListBoxItem
-            Position.Y = 132.000000000000000000
-            TabOrder = 2
-            object LblFormaPagVenda: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
+              Margins.Right = 10.000000000000000000
               Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 101.000000000000000000
-              Size.Height = 36.000000000000000000
-              Size.PlatformDefault = False
+              Position.Y = 264.000000000000000000
+              StyleLookup = 'listboxitemrightdetail'
+              TabOrder = 4
+              Text = 'Valor Total:'
+            end
+            object ListBoxItemParcelasVenda: TListBoxItem
               TextSettings.Font.Family = 'Arial'
               TextSettings.Font.Size = 14.000000000000000000
-              Text = 'Tipo de receita'
+              StyledSettings = [Style, FontColor, Other]
+              Position.Y = 308.000000000000000000
+              StyleLookup = 'listboxitemrightdetail'
+              TabOrder = 7
             end
-            object ComboBoxFormaPagVenda: TComboBox
-              Align = Client
-              Margins.Top = 8.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 8.000000000000000000
-              Size.Width = 160.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TabOrder = 1
-              OnClosePopup = ComboBoxFormaPagVendaClosePopup
-              OnEnter = ComboBoxFormaPagVendaEnter
+            object ListBoxItem1: TListBoxItem
+              Position.Y = 352.000000000000000000
+              TabOrder = 8
+              object LblAtendentePedido: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 85.000000000000000000
+                Size.Height = 36.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Atendente:'
+              end
+              object ComboBoxAtendentePedido: TComboBox
+                Align = Client
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 8.000000000000000000
+                Size.Width = 232.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 0
+                OnClosePopup = ComboBoxAtendentePedidoClosePopup
+                OnEnter = ComboBoxAtendentePedidoEnter
+              end
             end
-            object SpdBNovoFormaPag: TSpeedButton
-              Align = Right
-              IconTintColor = claNavy
-              Margins.Right = 8.000000000000000000
-              Position.X = 269.000000000000000000
-              Size.Width = 48.000000000000000000
-              Size.Height = 48.000000000000000000
-              Size.PlatformDefault = False
-              StyleLookup = 'addtoolbutton'
+            object ListBoxItem6: TListBoxItem
+              Position.Y = 396.000000000000000000
+              TabOrder = 9
             end
-          end
-          object ListBoxItem4: TListBoxItem
-            Position.Y = 176.000000000000000000
-            TabOrder = 3
-            object LblNumParcelasVenda: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 109.000000000000000000
-              Size.Height = 36.000000000000000000
-              Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              TextSettings.Font.Size = 14.000000000000000000
-              Text = 'Num. Parcela:'
-            end
-            object EdtNumParcelaPedido: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
-              TabOrder = 1
-              KeyboardType = NumberPad
-              ReturnKeyType = Done
-              Margins.Top = 8.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 8.000000000000000000
-              Size.Width = 208.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              KillFocusByReturn = True
-              OnTyping = EdtNumParcelaPedidoTyping
-            end
-          end
-          object ListBoxItem5: TListBoxItem
-            Position.Y = 220.000000000000000000
-            TabOrder = 5
-            object LblDescMoedaPedido: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 109.000000000000000000
-              Size.Height = 36.000000000000000000
-              Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              TextSettings.Font.Size = 14.000000000000000000
-              Text = 'Desconto (R$):'
-            end
-            object EdtDescontoMoedaPedido: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
-              TabOrder = 0
-              KeyboardType = NumbersAndPunctuation
-              ReturnKeyType = Done
-              Margins.Top = 8.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 8.000000000000000000
-              Size.Width = 208.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              OnKeyUp = EdtDescontoMoedaPedidoKeyUp
-              OnClick = EdtDescontoMoedaPedidoClick
-            end
-          end
-          object ListBoxItemValorTotalVenda: TListBoxItem
-            TextSettings.Font.Family = 'Arial'
-            TextSettings.Font.Size = 14.000000000000000000
-            StyledSettings = [Style, FontColor, Other]
-            Margins.Left = 4.000000000000000000
-            Margins.Right = 10.000000000000000000
-            Position.X = 4.000000000000000000
-            Position.Y = 264.000000000000000000
-            StyleLookup = 'listboxitemrightdetail'
-            TabOrder = 4
-            Text = 'Valor Total:'
-          end
-          object ListBoxItemParcelasVenda: TListBoxItem
-            TextSettings.Font.Family = 'Arial'
-            TextSettings.Font.Size = 14.000000000000000000
-            StyledSettings = [Style, FontColor, Other]
-            Position.Y = 308.000000000000000000
-            StyleLookup = 'listboxitemrightdetail'
-            TabOrder = 7
-          end
-          object ListBoxItem1: TListBoxItem
-            Position.Y = 352.000000000000000000
-            TabOrder = 8
-            object LblAtendentePedido: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 85.000000000000000000
-              Size.Height = 36.000000000000000000
-              Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              TextSettings.Font.Size = 14.000000000000000000
-              Text = 'Atendente:'
-            end
-            object ComboBoxAtendentePedido: TComboBox
-              Align = Client
-              Margins.Top = 8.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 8.000000000000000000
-              Size.Width = 232.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TabOrder = 0
-              OnClosePopup = ComboBoxAtendentePedidoClosePopup
-              OnEnter = ComboBoxAtendentePedidoEnter
-            end
-          end
-          object ListBoxItem6: TListBoxItem
-            Position.Y = 396.000000000000000000
-            TabOrder = 9
           end
         end
       end
@@ -574,7 +583,7 @@ object FVenda1: TFVenda1
           PullToRefresh = True
         end
         object LytGeralEdicaoItens: TLayout
-          Align = Bottom
+          Align = Top
           Position.Y = 152.000000000000000000
           Size.Width = 330.000000000000000000
           Size.Height = 279.000000000000000000

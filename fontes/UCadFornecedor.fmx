@@ -3,12 +3,14 @@ inherited FCadFornecedor: TFCadFornecedor
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
+      TabIndex = 1
       Sizes = (
         330s
         431s
         330s
         431s)
       inherited TbItemListagem: TTabItem
+        IsSelected = False
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         inherited ToolBarsuperior: TToolBar
@@ -113,6 +115,7 @@ inherited FCadFornecedor: TFCadFornecedor
         end
       end
       inherited TbItemedicao: TTabItem
+        IsSelected = True
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object ToolBar1: TToolBar
@@ -167,750 +170,759 @@ inherited FCadFornecedor: TFCadFornecedor
             OnClick = SpdBEditarEdicaoCadFornecedorClick
           end
         end
-        object ListBoxEdicaoForn: TListBox
+        object VertScrollBox1: TVertScrollBox
           Align = Client
-          Margins.Left = 8.000000000000000000
-          Margins.Top = 8.000000000000000000
-          Margins.Right = 8.000000000000000000
-          Margins.Bottom = 8.000000000000000000
-          Size.Width = 314.000000000000000000
-          Size.Height = 367.000000000000000000
+          Size.Width = 330.000000000000000000
+          Size.Height = 383.000000000000000000
           Size.PlatformDefault = False
-          StyleLookup = 'listboxstyle'
           TabOrder = 1
-          DisableFocusEffect = True
-          DefaultItemStyles.ItemStyle = ''
-          DefaultItemStyles.GroupHeaderStyle = ''
-          DefaultItemStyles.GroupFooterStyle = ''
-          Viewport.Width = 309.000000000000000000
-          Viewport.Height = 367.000000000000000000
-          object ListBoxItem1: TListBoxItem
-            Size.Width = 309.000000000000000000
-            Size.Height = 40.000000000000000000
+          Viewport.Width = 330.000000000000000000
+          Viewport.Height = 383.000000000000000000
+          object ListBoxEdicaoForn: TListBox
+            Align = Client
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Size.Width = 314.000000000000000000
+            Size.Height = 367.000000000000000000
             Size.PlatformDefault = False
+            StyleLookup = 'listboxstyle'
             TabOrder = 0
-            object EdtNomeForn: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
-              TabOrder = 0
-              ReturnKeyType = Next
-              MaxLength = 60
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Size.Width = 244.000000000000000000
-              Size.Height = 32.000000000000000000
+            DisableFocusEffect = True
+            DefaultItemStyles.ItemStyle = ''
+            DefaultItemStyles.GroupHeaderStyle = ''
+            DefaultItemStyles.GroupFooterStyle = ''
+            Viewport.Width = 309.000000000000000000
+            Viewport.Height = 367.000000000000000000
+            object ListBoxItem1: TListBoxItem
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
-              TextPrompt = 'Nome / Razao Social'
-              object EdtBNomeCli: TEditButton
-                CanFocus = False
-                Cursor = crArrow
-                Size.Width = 28.000000000000000000
-                Size.Height = 28.000000000000000000
-                Size.PlatformDefault = False
-                StyleLookup = 'spinrightbutton'
+              TabOrder = 0
+              object EdtNomeForn: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
                 TabOrder = 0
+                ReturnKeyType = Next
+                MaxLength = 60
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 244.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Nome / Razao Social'
+                object EdtBNomeCli: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                end
+              end
+              object LblNomeForn: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 53.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                Text = 'Nome:'
               end
             end
-            object LblNomeForn: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 53.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              Text = 'Nome:'
-            end
-          end
-          object ListBoxItem2: TListBoxItem
-            Position.Y = 40.000000000000000000
-            Size.Width = 309.000000000000000000
-            Size.Height = 40.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 1
-            object ComboBoxTipoPessoaForn: TComboBox
-              Align = Client
-              Items.Strings = (
-                'Fisica'
-                'Juridica')
-              ItemIndex = 1
-              Margins.Top = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Size.Width = 224.000000000000000000
-              Size.Height = 32.000000000000000000
+            object ListBoxItem2: TListBoxItem
+              Position.Y = 40.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 1
-            end
-            object LblTipoPessoaForn: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 77.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              Text = 'Tipo Pessoa:'
-            end
-          end
-          object ListBoxItem3: TListBoxItem
-            Position.Y = 80.000000000000000000
-            Size.Width = 309.000000000000000000
-            Size.Height = 40.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 2
-            object EdtCpfForn: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
-              TabOrder = 0
-              KeyboardType = NumberPad
-              ReturnKeyType = Next
-              MaxLength = 20
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Size.Width = 228.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TextPrompt = 'Cpf / Cnpj'
-              object EdtBCpfCli: TEditButton
-                CanFocus = False
-                Cursor = crArrow
-                Size.Width = 28.000000000000000000
-                Size.Height = 28.000000000000000000
+              object ComboBoxTipoPessoaForn: TComboBox
+                Align = Client
+                Items.Strings = (
+                  'Fisica'
+                  'Juridica')
+                ItemIndex = 1
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 224.000000000000000000
+                Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
-                StyleLookup = 'spinrightbutton'
-                TabOrder = 0
+                TabOrder = 1
+              end
+              object LblTipoPessoaForn: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 77.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                Text = 'Tipo Pessoa:'
               end
             end
-            object LblCpfForn: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 69.000000000000000000
-              Size.Height = 32.000000000000000000
+            object ListBoxItem3: TListBoxItem
+              Position.Y = 80.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              Text = 'Cpf / Cnpj:'
-            end
-          end
-          object ListBoxItem4: TListBoxItem
-            Position.Y = 120.000000000000000000
-            Size.Width = 309.000000000000000000
-            Size.Height = 40.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 3
-            object EdtRgForn: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
-              TabOrder = 0
-              ReturnKeyType = Next
-              MaxLength = 20
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Size.Width = 228.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TextPrompt = 'Rg / I.E'
-              object EdtBRgCli: TEditButton
-                CanFocus = False
-                Cursor = crArrow
-                Size.Width = 28.000000000000000000
-                Size.Height = 28.000000000000000000
-                Size.PlatformDefault = False
-                StyleLookup = 'spinrightbutton'
+              TabOrder = 2
+              object EdtCpfForn: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
                 TabOrder = 0
+                KeyboardType = NumberPad
+                ReturnKeyType = Next
+                MaxLength = 20
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Cpf / Cnpj'
+                object EdtBCpfCli: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                end
+              end
+              object LblCpfForn: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                Text = 'Cpf / Cnpj:'
               end
             end
-            object LblRgForn: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 69.000000000000000000
-              Size.Height = 32.000000000000000000
+            object ListBoxItem4: TListBoxItem
+              Position.Y = 120.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              Text = 'Rg / I.E:'
-            end
-          end
-          object ListBoxItem5: TListBoxItem
-            Position.Y = 160.000000000000000000
-            Size.Width = 309.000000000000000000
-            Size.Height = 40.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 4
-            object EdtApelidoForn: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
-              TabOrder = 0
-              ReturnKeyType = Next
-              MaxLength = 30
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Size.Width = 228.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TextPrompt = 'Apelido / Nome Fantasia'
-              object EdtBApelidoCli: TEditButton
-                CanFocus = False
-                Cursor = crArrow
-                Size.Width = 28.000000000000000000
-                Size.Height = 28.000000000000000000
-                Size.PlatformDefault = False
-                StyleLookup = 'spinrightbutton'
+              TabOrder = 3
+              object EdtRgForn: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
                 TabOrder = 0
+                ReturnKeyType = Next
+                MaxLength = 20
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Rg / I.E'
+                object EdtBRgCli: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                end
+              end
+              object LblRgForn: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                Text = 'Rg / I.E:'
               end
             end
-            object LblApelidoForn: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 69.000000000000000000
-              Size.Height = 32.000000000000000000
+            object ListBoxItem5: TListBoxItem
+              Position.Y = 160.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              Text = 'Apelido:'
-            end
-          end
-          object ListBoxItem6: TListBoxItem
-            Position.Y = 200.000000000000000000
-            Size.Width = 309.000000000000000000
-            Size.Height = 40.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 5
-            object EdtFoneForn: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
-              TabOrder = 0
-              KeyboardType = NumberPad
-              ReturnKeyType = Next
-              MaxLength = 15
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Size.Width = 228.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TextPrompt = 'Telefone / Celular'
-              object EdtBFoneCli: TEditButton
-                CanFocus = False
-                Cursor = crArrow
-                Size.Width = 28.000000000000000000
-                Size.Height = 28.000000000000000000
-                Size.PlatformDefault = False
-                StyleLookup = 'spinrightbutton'
+              TabOrder = 4
+              object EdtApelidoForn: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
                 TabOrder = 0
+                ReturnKeyType = Next
+                MaxLength = 30
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Apelido / Nome Fantasia'
+                object EdtBApelidoCli: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                end
+              end
+              object LblApelidoForn: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                Text = 'Apelido:'
               end
             end
-            object LblFoneForn: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 69.000000000000000000
-              Size.Height = 32.000000000000000000
+            object ListBoxItem6: TListBoxItem
+              Position.Y = 200.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              Text = 'Telefone:'
-            end
-          end
-          object ListBoxItem7: TListBoxItem
-            Position.Y = 240.000000000000000000
-            Size.Width = 309.000000000000000000
-            Size.Height = 40.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 6
-            object EdtEnderecoForn: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
-              TabOrder = 0
-              ReturnKeyType = Next
-              MaxLength = 50
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Size.Width = 228.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TextPrompt = 'Endereco'
-              object EdtBEndCli: TEditButton
-                CanFocus = False
-                Cursor = crArrow
-                Size.Width = 28.000000000000000000
-                Size.Height = 28.000000000000000000
-                Size.PlatformDefault = False
-                StyleLookup = 'spinrightbutton'
+              TabOrder = 5
+              object EdtFoneForn: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
                 TabOrder = 0
+                KeyboardType = NumberPad
+                ReturnKeyType = Next
+                MaxLength = 15
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Telefone / Celular'
+                object EdtBFoneCli: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                end
+              end
+              object LblFoneForn: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                Text = 'Telefone:'
               end
             end
-            object LblEndForn: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 69.000000000000000000
-              Size.Height = 32.000000000000000000
+            object ListBoxItem7: TListBoxItem
+              Position.Y = 240.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              Text = 'Endereco:'
-            end
-          end
-          object ListBoxItem8: TListBoxItem
-            Position.Y = 280.000000000000000000
-            Size.Width = 309.000000000000000000
-            Size.Height = 40.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 7
-            object EdtNumForn: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
-              TabOrder = 0
-              ReturnKeyType = Next
-              MaxLength = 10
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Size.Width = 228.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TextPrompt = 'Numero'
-              object EdtBNumCli: TEditButton
-                CanFocus = False
-                Cursor = crArrow
-                Size.Width = 28.000000000000000000
-                Size.Height = 28.000000000000000000
-                Size.PlatformDefault = False
-                StyleLookup = 'spinrightbutton'
+              TabOrder = 6
+              object EdtEnderecoForn: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
                 TabOrder = 0
+                ReturnKeyType = Next
+                MaxLength = 50
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Endereco'
+                object EdtBEndCli: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                end
+              end
+              object LblEndForn: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                Text = 'Endereco:'
               end
             end
-            object LblNumForn: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 69.000000000000000000
-              Size.Height = 32.000000000000000000
+            object ListBoxItem8: TListBoxItem
+              Position.Y = 280.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              Text = 'Numero:'
-            end
-          end
-          object ListBoxItem9: TListBoxItem
-            Position.Y = 320.000000000000000000
-            Size.Width = 309.000000000000000000
-            Size.Height = 40.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 8
-            object EdtCompForn: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
-              TabOrder = 0
-              ReturnKeyType = Next
-              MaxLength = 30
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Size.Width = 204.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TextPrompt = 'Complemento'
-              object EdtBCompCli: TEditButton
-                CanFocus = False
-                Cursor = crArrow
-                Size.Width = 28.000000000000000000
-                Size.Height = 28.000000000000000000
-                Size.PlatformDefault = False
-                StyleLookup = 'spinrightbutton'
+              TabOrder = 7
+              object EdtNumForn: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
                 TabOrder = 0
+                ReturnKeyType = Next
+                MaxLength = 10
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Numero'
+                object EdtBNumCli: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                end
+              end
+              object LblNumForn: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                Text = 'Numero:'
               end
             end
-            object LblCompForn: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 93.000000000000000000
-              Size.Height = 32.000000000000000000
+            object ListBoxItem9: TListBoxItem
+              Position.Y = 320.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              Text = 'Complemento:'
-            end
-          end
-          object ListBoxItem10: TListBoxItem
-            Position.Y = 360.000000000000000000
-            Size.Width = 309.000000000000000000
-            Size.Height = 40.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 9
-            object EdtBairroForn: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
-              TabOrder = 0
-              ReturnKeyType = Next
-              MaxLength = 50
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Size.Width = 228.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TextPrompt = 'Bairro'
-              object EdtBBairroCli: TEditButton
-                CanFocus = False
-                Cursor = crArrow
-                Size.Width = 28.000000000000000000
-                Size.Height = 28.000000000000000000
-                Size.PlatformDefault = False
-                StyleLookup = 'spinrightbutton'
+              TabOrder = 8
+              object EdtCompForn: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
                 TabOrder = 0
+                ReturnKeyType = Next
+                MaxLength = 30
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 204.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Complemento'
+                object EdtBCompCli: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                end
+              end
+              object LblCompForn: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 93.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                Text = 'Complemento:'
               end
             end
-            object LblBairroForn: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 69.000000000000000000
-              Size.Height = 32.000000000000000000
+            object ListBoxItem10: TListBoxItem
+              Position.Y = 360.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              Text = 'Bairro'
-            end
-          end
-          object ListBoxItem11: TListBoxItem
-            Position.Y = 400.000000000000000000
-            Size.Width = 309.000000000000000000
-            Size.Height = 40.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 10
-            object EdtCepForn: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
-              TabOrder = 1
-              KeyboardType = NumberPad
-              ReturnKeyType = Next
-              MaxLength = 15
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Size.Width = 228.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TextPrompt = 'Cep'
-              object EdtBCepCli: TEditButton
-                CanFocus = False
-                Cursor = crArrow
-                Size.Width = 28.000000000000000000
-                Size.Height = 28.000000000000000000
-                Size.PlatformDefault = False
-                StyleLookup = 'spinrightbutton'
+              TabOrder = 9
+              object EdtBairroForn: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
                 TabOrder = 0
+                ReturnKeyType = Next
+                MaxLength = 50
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Bairro'
+                object EdtBBairroCli: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                end
+              end
+              object LblBairroForn: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                Text = 'Bairro'
               end
             end
-            object LblCepForn: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 69.000000000000000000
-              Size.Height = 32.000000000000000000
+            object ListBoxItem11: TListBoxItem
+              Position.Y = 400.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              Text = 'Cep:'
-            end
-          end
-          object ListBoxItem12: TListBoxItem
-            Position.Y = 440.000000000000000000
-            Size.Width = 309.000000000000000000
-            Size.Height = 40.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 11
-            object EdtCidadeForn: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
-              TabOrder = 1
-              ReturnKeyType = Next
-              MaxLength = 30
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Size.Width = 228.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TextPrompt = 'Cidade'
-              object EdtBCidadeCli: TEditButton
-                CanFocus = False
-                Cursor = crArrow
-                Size.Width = 28.000000000000000000
-                Size.Height = 28.000000000000000000
+              TabOrder = 10
+              object EdtCepForn: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                KeyboardType = NumberPad
+                ReturnKeyType = Next
+                MaxLength = 15
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
-                StyleLookup = 'spinrightbutton'
-                TabOrder = 0
+                TextPrompt = 'Cep'
+                object EdtBCepCli: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                end
+              end
+              object LblCepForn: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                Text = 'Cep:'
               end
             end
-            object LblCidadeForn: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 69.000000000000000000
-              Size.Height = 32.000000000000000000
+            object ListBoxItem12: TListBoxItem
+              Position.Y = 440.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              Text = 'Cidade:'
-            end
-          end
-          object ListBoxItem13: TListBoxItem
-            Position.Y = 480.000000000000000000
-            Size.Width = 309.000000000000000000
-            Size.Height = 40.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 12
-            object EdtUfForn: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
-              TabOrder = 1
-              ReturnKeyType = Next
-              MaxLength = 2
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Size.Width = 228.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TextPrompt = 'Uf'
-              object EdtBUfCli: TEditButton
-                CanFocus = False
-                Cursor = crArrow
-                Size.Width = 28.000000000000000000
-                Size.Height = 28.000000000000000000
+              TabOrder = 11
+              object EdtCidadeForn: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                ReturnKeyType = Next
+                MaxLength = 30
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
-                StyleLookup = 'spinrightbutton'
-                TabOrder = 0
+                TextPrompt = 'Cidade'
+                object EdtBCidadeCli: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                end
+              end
+              object LblCidadeForn: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                Text = 'Cidade:'
               end
             end
-            object LblUfForn: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 69.000000000000000000
-              Size.Height = 32.000000000000000000
+            object ListBoxItem13: TListBoxItem
+              Position.Y = 480.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              Text = 'Uf:'
-            end
-          end
-          object ListBoxItem14: TListBoxItem
-            Position.Y = 520.000000000000000000
-            Size.Width = 309.000000000000000000
-            Size.Height = 40.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 13
-            object EdtEmailForn: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
-              TabOrder = 1
-              KeyboardType = EmailAddress
-              ReturnKeyType = Next
-              MaxLength = 60
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Size.Width = 228.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TextPrompt = 'Email'
-              object EdtBEmailCli: TEditButton
-                CanFocus = False
-                Cursor = crArrow
-                Size.Width = 28.000000000000000000
-                Size.Height = 28.000000000000000000
+              TabOrder = 12
+              object EdtUfForn: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                ReturnKeyType = Next
+                MaxLength = 2
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
-                StyleLookup = 'spinrightbutton'
-                TabOrder = 0
+                TextPrompt = 'Uf'
+                object EdtBUfCli: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                end
+              end
+              object LblUfForn: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                Text = 'Uf:'
               end
             end
-            object LblEmailForn: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 69.000000000000000000
-              Size.Height = 32.000000000000000000
+            object ListBoxItem14: TListBoxItem
+              Position.Y = 520.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              Text = 'Email:'
+              TabOrder = 13
+              object EdtEmailForn: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                KeyboardType = EmailAddress
+                ReturnKeyType = Next
+                MaxLength = 60
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = 'Email'
+                object EdtBEmailCli: TEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 28.000000000000000000
+                  Size.PlatformDefault = False
+                  StyleLookup = 'spinrightbutton'
+                  TabOrder = 0
+                end
+              end
+              object LblEmailForn: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                Text = 'Email:'
+              end
             end
-          end
-          object ListBoxItem15: TListBoxItem
-            Position.Y = 560.000000000000000000
-            Size.Width = 309.000000000000000000
-            Size.Height = 40.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 14
-            object LblStatusForn: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 69.000000000000000000
-              Size.Height = 32.000000000000000000
+            object ListBoxItem15: TListBoxItem
+              Position.Y = 560.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              Text = 'Status:'
+              TabOrder = 14
+              object LblStatusForn: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                Text = 'Status:'
+              end
+              object ComboBoxStatusForn: TComboBox
+                Align = Client
+                Items.Strings = (
+                  'Ativo'
+                  'Inativo')
+                ItemIndex = 0
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 232.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+              end
             end
-            object ComboBoxStatusForn: TComboBox
-              Align = Client
-              Items.Strings = (
-                'Ativo'
-                'Inativo')
-              ItemIndex = 0
-              Margins.Top = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Size.Width = 232.000000000000000000
-              Size.Height = 32.000000000000000000
+            object ListBoxItem16: TListBoxItem
+              Position.Y = 600.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 70.000000000000000000
               Size.PlatformDefault = False
-              TabOrder = 1
+              TabOrder = 15
+              object LblObsForn: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 41.000000000000000000
+                Size.Height = 62.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 11.000000000000000000
+                Text = 'Obs:'
+              end
+              object MemoObsForn: TMemo
+                Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+                DataDetectorTypes = []
+                Align = Client
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 256.000000000000000000
+                Size.Height = 58.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 0
+                Viewport.Width = 248.000000000000000000
+                Viewport.Height = 50.000000000000000000
+              end
             end
-          end
-          object ListBoxItem16: TListBoxItem
-            Position.Y = 600.000000000000000000
-            Size.Width = 309.000000000000000000
-            Size.Height = 70.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 15
-            object LblObsForn: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 41.000000000000000000
-              Size.Height = 62.000000000000000000
+            object ListBoxItem17: TListBoxItem
+              Position.Y = 670.000000000000000000
+              Size.Width = 309.000000000000000000
+              Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              TextSettings.Font.Size = 11.000000000000000000
-              Text = 'Obs:'
-            end
-            object MemoObsForn: TMemo
-              Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
-              DataDetectorTypes = []
-              Align = Client
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 8.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Size.Width = 256.000000000000000000
-              Size.Height = 58.000000000000000000
-              Size.PlatformDefault = False
-              TabOrder = 0
-              Viewport.Width = 248.000000000000000000
-              Viewport.Height = 50.000000000000000000
-            end
-          end
-          object ListBoxItem17: TListBoxItem
-            Position.Y = 670.000000000000000000
-            Size.Width = 309.000000000000000000
-            Size.Height = 40.000000000000000000
-            Size.PlatformDefault = False
-            TabOrder = 16
-            object EdtDataForn: TEdit
-              Touch.InteractiveGestures = [LongTap, DoubleTap]
-              Align = Client
-              TabOrder = 0
-              Enabled = False
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Right = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Size.Width = 228.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-            end
-            object LblDataCadForn: TLabel
-              Align = Left
-              StyledSettings = [Style, FontColor]
-              Margins.Left = 4.000000000000000000
-              Margins.Top = 4.000000000000000000
-              Margins.Bottom = 4.000000000000000000
-              Position.X = 4.000000000000000000
-              Position.Y = 4.000000000000000000
-              Size.Width = 69.000000000000000000
-              Size.Height = 32.000000000000000000
-              Size.PlatformDefault = False
-              TextSettings.Font.Family = 'Arial'
-              Text = 'Data Cad:'
+              TabOrder = 16
+              object EdtDataForn: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 0
+                Enabled = False
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 228.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+              end
+              object LblDataCadForn: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                Text = 'Data Cad:'
+              end
             end
           end
         end

@@ -14,6 +14,7 @@ Visible=False
 Visible=False
 
 [DM.FDQConsultaProd]
+Visible=False
 
 [DM.FDQFiltroCadCLi]
 Visible=False

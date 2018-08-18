@@ -36,7 +36,7 @@ object FContasReceberVenda: TFContasReceberVenda
       OnItemClick = ListViewCadContasReceberItemClick
     end
     object LytGeralEdicaoContasReceber: TLayout
-      Align = Bottom
+      Align = Top
       Position.Y = 256.000000000000000000
       Size.Width = 330.000000000000000000
       Size.Height = 224.000000000000000000

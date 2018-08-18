@@ -111,6 +111,7 @@ type
     LinkControlToField14: TLinkControlToField;
     LinkControlToField15: TLinkControlToField;
     SpdBNovoForn: TSpeedButton;
+    VertScrollBox1: TVertScrollBox;
     procedure EditFiltroNomeFornecedorClick(Sender: TObject);
     procedure EditFiltroCodFornecedorClick(Sender: TObject);
     procedure EditFiltroNomeFornecedorTyping(Sender: TObject);
@@ -125,10 +126,6 @@ type
     procedure SpdBEditarEdicaoCadFornecedorClick(Sender: TObject);
     procedure SpdBNovoFornClick(Sender: TObject);
     procedure SpdBConfirmaEdicaoCadFornecedorClick(Sender: TObject);
-    procedure FormVirtualKeyboardShown(Sender: TObject;
-      KeyboardVisible: Boolean; const Bounds: TRect);
-    procedure FormVirtualKeyboardHidden(Sender: TObject;
-      KeyboardVisible: Boolean; const Bounds: TRect);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
   private
@@ -264,7 +261,7 @@ begin
         if TVirtualKeyBoardState.Visible in keyboard.GetVirtualKeyBoardState
         then
         begin
-          keyboard.HideVirtualKeyboard;
+         keyboard.HideVirtualKeyboard;
         end;
       end;
     end
@@ -280,21 +277,6 @@ begin
       end;
     end;
   end;
-end;
-
-procedure TFCadFornecedor.FormVirtualKeyboardHidden(Sender: TObject;
-  KeyboardVisible: Boolean; const Bounds: TRect);
-begin
-  inherited;
-  ListBoxEdicaoForn.Align := TAlignLayout.Client;
-end;
-
-procedure TFCadFornecedor.FormVirtualKeyboardShown(Sender: TObject;
-  KeyboardVisible: Boolean; const Bounds: TRect);
-begin
-  inherited;
-  ListBoxEdicaoForn.Align := TAlignLayout.Top;
-  ListBoxEdicaoForn.Height := ((Self.Height) - (Self.Height * 0.50));
 end;
 
 procedure TFCadFornecedor.HabilitaCampos;

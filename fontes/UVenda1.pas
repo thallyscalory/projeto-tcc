@@ -13,7 +13,7 @@ uses
   Data.Bind.Components, Data.Bind.DBScope, System.Rtti, System.Bindings.Outputs,
   FMX.Bind.Editors, FMX.ListBox, System.ImageList, FMX.ImgList, FMX.Edit,
   ksTypes, ksLoadingIndicator, FMX.VirtualKeyboard, System.Math,
-  FMX.Platform;
+  FMX.Platform, FMX.Ani;
 
 type
   TFVenda1 = class(TForm)
@@ -110,6 +110,7 @@ type
     Label4: TLabel;
     SpdBVoltarClienteVenda: TSpeedButton;
     LinkListControlToField3: TLinkListControlToField;
+    VertScrollBox1: TVertScrollBox;
     procedure SpBVoltarClick(Sender: TObject);
     procedure SpdBNovoVendaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -159,6 +160,12 @@ type
     crud: string;
     FActiveForm: TForm;
     itemIndexList: integer;
+
+  const
+    DoneBarHeight = 66;
+
+    function FocusedControl: TControl;
+    function GetFocusedControlOffset(KeyboardRect: TRect): Single;
 
     procedure EsconderTeclado;
     procedure MostrarTeclado(const AControl: TFmxObject);
@@ -927,6 +934,13 @@ begin
     keyboard.HideVirtualKeyboard;
 end;
 
+function TFVenda1.FocusedControl: TControl;
+begin
+  Result := nil;
+  if Assigned(Focused) and (Focused.GetObject is TControl) then
+    Result := TControl(Focused.GetObject);
+end;
+
 procedure TFVenda1.FormCreate(Sender: TObject);
 begin
   TbControlVenda.ActiveTab := TbItemListagemVenda;
@@ -971,7 +985,7 @@ begin
       begin
         if SpdBVoltarCadCOntasReceber.Visible then
         begin
-         SpdBVoltarCadCOntasReceberClick(Sender);
+          SpdBVoltarCadCOntasReceberClick(Sender);
         end
         else
         begin
@@ -991,15 +1005,58 @@ procedure TFVenda1.FormVirtualKeyboardHidden(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
   TecladoVirtualVisible := False;
-  ListBoxPedido.Align := TAlignLayout.Client;
+  // tbPrincipal.AnimateFloat('Position.Y', FSavedY, 0.1);
+  // tbPrincipal.Align := TAlignLayout.alClient;
+
+  if not KeyboardVisible then
+    AnimateFloat('Padding.Top', 0, 0.1);
 end;
 
 procedure TFVenda1.FormVirtualKeyboardShown(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
+var
+  O: TFmxObject;
 begin
+  inherited;
+  { ListBoxEdicaoCadCli.Align := TAlignLayout.Top;
+    ListBoxEdicaoCadCli.Height := ((Self.Height) - (Self.Height * 0.50)); }
   TecladoVirtualVisible := True;
-  ListBoxPedido.Align := TAlignLayout.Top;
-  ListBoxPedido.Height := ((Self.Height) - (Self.Height * 0.43));
+  // tbPrincipal.Align := TAlignLayout.alNone;
+  // FSavedY := tbPrincipal.Position.Y;
+  // tbPrincipal.AnimateFloat('Position.Y', FSavedY + GetFocusedControlOffset(Bounds), 0.1);
+  if Assigned(Focused) and (Focused.GetObject is TControl) then
+    if TControl(Focused).AbsoluteRect.Bottom - Padding.Top >=
+      (Bounds.Top - DoneBarHeight) then
+    begin
+      for O in Children do
+        if (O is TFloatAnimation) and
+          (TFloatAnimation(O).PropertyName = 'Padding.Top') then
+          TFloatAnimation(O).StopAtCurrent;
+      AnimateFloat('Padding.Top', Bounds.Top - DoneBarHeight - TControl(Focused)
+        .AbsoluteRect.Bottom + Padding.Top, 0.2)
+    end
+    else
+  else
+    AnimateFloat('Padding.Top', 0, 0.1);
+end;
+
+function TFVenda1.GetFocusedControlOffset(KeyboardRect: TRect): Single;
+var
+  Control: TControl;
+  ControlPos: TPointF;
+  KeyboardTop: Single;
+begin
+  Result := 0;
+  KeyboardTop := Height - (KeyboardRect.Bottom - KeyboardRect.Top) - 66;
+  // At least, should be. 66 is the height of the keyboard "done" bar
+  Control := FocusedControl;
+  if Assigned(Control) then
+  begin
+    ControlPos := Control.LocalToAbsolute(PointF(0, 0));
+    Result := KeyboardTop - ControlPos.Y + Control.Height + 2;
+    if Result >= 0 then
+      Result := 0;
+  end;
 end;
 
 procedure TFVenda1.HabilitaCampos;

@@ -9,7 +9,7 @@ uses
   FMX.Layouts, FMX.StdCtrls, FMX.Controls.Presentation, FMX.ListView.Types,
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
   System.Actions, FMX.ActnList, FMX.VirtualKeyboard, System.Math,
-  FMX.Platform, System.ImageList, FMX.ImgList;
+  FMX.Platform, System.ImageList, FMX.ImgList, FMX.Ani;
 
 type
   TFCadModelo = class(TForm)
@@ -37,7 +37,12 @@ type
   protected
     FActiveForm: TForm;
 
+    const DoneBarHeight = 66;
+
     function DisplayFormatter(AValue: double; ADisplayFormar: String): String;
+    function FocusedControl: TControl;
+    function GetFocusedControlOffset(KeyboardRect: TRect): Single;
+
     procedure MudarAbaModelo(ATabItem: TTabItem; Sender: TObject);
     // procedure AbrirFormModelo(AFormClass: TComponentClass);
     procedure EsconderTeclado;
@@ -89,6 +94,13 @@ begin
     keyboard.HideVirtualKeyboard;
 end;
 
+function TFCadModelo.FocusedControl: TControl;
+begin
+  Result := nil;
+  if Assigned(Focused) and (Focused.GetObject is TControl) then
+    Result := TControl(Focused.GetObject);
+end;
+
 procedure TFCadModelo.FormCreate(Sender: TObject);
 begin
   TbControlCadModelo.ActiveTab := TbItemListagem;
@@ -124,12 +136,58 @@ procedure TFCadModelo.FormVirtualKeyboardHidden(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 begin
   TecladoVirtualVisible := False;
+  // tbPrincipal.AnimateFloat('Position.Y', FSavedY, 0.1);
+  // tbPrincipal.Align := TAlignLayout.alClient;
+
+  if not KeyboardVisible then
+    AnimateFloat('Padding.Top', 0, 0.1);
 end;
 
 procedure TFCadModelo.FormVirtualKeyboardShown(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
+var
+  O: TFMXObject;
 begin
+  inherited;
+  { ListBoxEdicaoCadCli.Align := TAlignLayout.Top;
+    ListBoxEdicaoCadCli.Height := ((Self.Height) - (Self.Height * 0.50)); }
   TecladoVirtualVisible := True;
+  // tbPrincipal.Align := TAlignLayout.alNone;
+  // FSavedY := tbPrincipal.Position.Y;
+  // tbPrincipal.AnimateFloat('Position.Y', FSavedY + GetFocusedControlOffset(Bounds), 0.1);
+  if Assigned(Focused) and (Focused.GetObject is TControl) then
+    if TControl(Focused).AbsoluteRect.Bottom - Padding.Top >=
+      (Bounds.Top - DoneBarHeight) then
+    begin
+      for O in Children do
+        if (O is TFloatAnimation) and
+          (TFloatAnimation(O).PropertyName = 'Padding.Top') then
+          TFloatAnimation(O).StopAtCurrent;
+      AnimateFloat('Padding.Top', Bounds.Top - DoneBarHeight - TControl(Focused)
+        .AbsoluteRect.Bottom + Padding.Top, 0.1)
+    end
+    else
+  else
+    AnimateFloat('Padding.Top', 0, 0.1);
+end;
+
+function TFCadModelo.GetFocusedControlOffset(KeyboardRect: TRect): Single;
+var
+  Control: TControl;
+  ControlPos: TPointF;
+  KeyboardTop: Single;
+begin
+  Result := 0;
+  KeyboardTop := Height - (KeyboardRect.Bottom - KeyboardRect.Top) - 66;
+  // At least, should be. 66 is the height of the keyboard "done" bar
+  Control := FocusedControl;
+  if Assigned(Control) then
+  begin
+    ControlPos := Control.LocalToAbsolute(PointF(0, 0));
+    Result := KeyboardTop - ControlPos.Y + Control.Height + 2;
+    if Result >= 0 then
+      Result := 0;
+  end;
 end;
 
 procedure TFCadModelo.MostrarTeclado(const AControl: TFmxObject);

@@ -41,7 +41,8 @@ Visible=True
 LayerNames="contas receber"
 
 []
-Coordinates=75,185,91,36
+Coordinates=1149,573,166,33
+Visible=False
 
 [DM.FDQCadContasReceber]
 Coordinates=636,1,149,33
@@ -217,10 +218,6 @@ Visible=False
 
 [ListBoxItem5]
 Coordinates=1149,518,79,33
-Visible=False
-
-[LytBaixaContasReceberEdicao]
-Coordinates=1149,573,166,33
 Visible=False
 
 [LblValorTotalBaixaContasReceberEdicao]

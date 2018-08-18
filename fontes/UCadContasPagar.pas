@@ -10,6 +10,8 @@ uses
 
 type
   TFCadContasPagar = class(TFCadModelo)
+    VertScrollBox1: TVertScrollBox;
+    ToolBar1: TToolBar;
   private
     { Private declarations }
   public
