@@ -33,12 +33,12 @@ type
     RoundRectVendas: TRoundRect;
     RoundRectCadCli: TRoundRect;
     RoundRectConsProd: TRoundRect;
-    RoundRectConsAdm: TRoundRect;
+    RoundRectCadContasReceber: TRoundRect;
     RoundRectContagemProd: TRoundRect;
     ImgVenda: TImage;
     ImgCadCli: TImage;
     ImgConsProd: TImage;
-    ImgConsAdm: TImage;
+    ImgCadContasReceber: TImage;
     ImgContagemProd: TImage;
     LytVendas: TLayout;
     LytCadCli: TLayout;
@@ -60,14 +60,19 @@ type
     Rectangle1: TRectangle;
     ListBoxItem8: TListBoxItem;
     Rectangle2: TRectangle;
+    ListBoxItem9: TListBoxItem;
+    RoundRectCadContasPagar: TRoundRect;
+    ImgCadContasPagar: TImage;
+    Layout2: TLayout;
+    LblCadContasPagar: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure RoundRectVendasClick(Sender: TObject);
     procedure ImgVendaClick(Sender: TObject);
     procedure RoundRectConsProdClick(Sender: TObject);
     procedure ImgConsProdClick(Sender: TObject);
     procedure SpdBInfoClick(Sender: TObject);
-    procedure RoundRectConsAdmClick(Sender: TObject);
-    procedure ImgConsAdmClick(Sender: TObject);
+    procedure RoundRectCadContasReceberClick(Sender: TObject);
+    procedure ImgCadContasReceberClick(Sender: TObject);
     procedure RoundRectCadCliClick(Sender: TObject);
     procedure RoundRectCadFornecedorClick(Sender: TObject);
     procedure ImgCadFornecedorClick(Sender: TObject);
@@ -213,7 +218,7 @@ begin
     end);
 end;
 
-procedure TFPrincipal.ImgConsAdmClick(Sender: TObject);
+procedure TFPrincipal.ImgCadContasReceberClick(Sender: TObject);
 begin
   Application.CreateForm(TFCadContasReceber, FCadContasReceber);
   if not Assigned(FCadContasReceber) then
@@ -279,7 +284,7 @@ begin
     end);
 end;
 
-procedure TFPrincipal.RoundRectConsAdmClick(Sender: TObject);
+procedure TFPrincipal.RoundRectCadContasReceberClick(Sender: TObject);
 begin
   Application.CreateForm(TFCadContasReceber, FCadContasReceber);
   if not Assigned(FCadContasReceber) then

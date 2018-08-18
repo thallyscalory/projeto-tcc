@@ -14,7 +14,8 @@ uses
   UAuxiliar in 'UAuxiliar.pas' {FAuxiliar},
   UCadContasReceber in 'UCadContasReceber.pas' {FCadContasReceber},
   UVenda1 in 'UVenda1.pas' {FVenda1},
-  UCadFornecedor in 'UCadFornecedor.pas' {FCadFornecedor};
+  UCadFornecedor in 'UCadFornecedor.pas' {FCadFornecedor},
+  UCadContasPagar in 'UCadContasPagar.pas' {FCadContasPagar};
 
 {$R *.res}
 
@@ -24,5 +25,6 @@ begin
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TFPrincipal, FPrincipal);
   Application.CreateForm(TFCadFornecedor, FCadFornecedor);
+  Application.CreateForm(TFCadContasPagar, FCadContasPagar);
   Application.Run;
 end.
