@@ -187,6 +187,17 @@ inherited FCadCli: TFCadCli
             StyleLookup = 'cameratoolbutton'
             Visible = True
           end
+          object SpdBRelatorioCli: TSpeedButton
+            Align = Right
+            IconTintColor = claRed
+            Margins.Right = 15.000000000000000000
+            Position.X = 108.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'actiontoolbutton'
+            OnClick = SpdBRelatorioCliClick
+          end
         end
         object VertScrollBox1: TVertScrollBox
           Align = Client
@@ -256,7 +267,7 @@ inherited FCadCli: TFCadCli
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextSettings.Font.Family = 'Arial'
-                Text = 'Nome:'
+                Text = 'Nome :'
               end
             end
             object ListBoxItem2: TListBoxItem
@@ -291,7 +302,7 @@ inherited FCadCli: TFCadCli
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextSettings.Font.Family = 'Arial'
-                Text = 'Tipo Pessoa:'
+                Text = 'Tipo Pessoa :'
               end
             end
             object ListBoxItem3: TListBoxItem
@@ -339,7 +350,7 @@ inherited FCadCli: TFCadCli
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextSettings.Font.Family = 'Arial'
-                Text = 'Cpf / Cnpj:'
+                Text = 'Cpf / Cnpj :'
               end
             end
             object ListBoxItem4: TListBoxItem
@@ -386,7 +397,7 @@ inherited FCadCli: TFCadCli
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextSettings.Font.Family = 'Arial'
-                Text = 'Rg / I.E:'
+                Text = 'Rg / I.E :'
               end
             end
             object ListBoxItem5: TListBoxItem
@@ -433,7 +444,7 @@ inherited FCadCli: TFCadCli
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextSettings.Font.Family = 'Arial'
-                Text = 'Apelido:'
+                Text = 'Apelido :'
               end
             end
             object ListBoxItem6: TListBoxItem
@@ -481,7 +492,7 @@ inherited FCadCli: TFCadCli
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextSettings.Font.Family = 'Arial'
-                Text = 'Telefone:'
+                Text = 'Telefone :'
               end
             end
             object ListBoxItem7: TListBoxItem
@@ -528,7 +539,7 @@ inherited FCadCli: TFCadCli
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextSettings.Font.Family = 'Arial'
-                Text = 'Endereco:'
+                Text = 'Endereco :'
               end
             end
             object ListBoxItem8: TListBoxItem
@@ -575,7 +586,7 @@ inherited FCadCli: TFCadCli
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextSettings.Font.Family = 'Arial'
-                Text = 'Numero:'
+                Text = 'Numero :'
               end
             end
             object ListBoxItem9: TListBoxItem
@@ -622,7 +633,7 @@ inherited FCadCli: TFCadCli
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextSettings.Font.Family = 'Arial'
-                Text = 'Complemento:'
+                Text = 'Complemento :'
               end
             end
             object ListBoxItem10: TListBoxItem
@@ -669,7 +680,7 @@ inherited FCadCli: TFCadCli
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextSettings.Font.Family = 'Arial'
-                Text = 'Bairro'
+                Text = 'Bairro :'
               end
             end
             object ListBoxItem11: TListBoxItem
@@ -717,7 +728,7 @@ inherited FCadCli: TFCadCli
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextSettings.Font.Family = 'Arial'
-                Text = 'Cep:'
+                Text = 'Cep :'
               end
             end
             object ListBoxItem12: TListBoxItem
@@ -752,7 +763,7 @@ inherited FCadCli: TFCadCli
                   OnClick = EdtBCidadeCliClick
                 end
               end
-              object Cidade: TLabel
+              object LblCidade: TLabel
                 Align = Left
                 StyledSettings = [Style, FontColor]
                 Margins.Left = 4.000000000000000000
@@ -764,7 +775,7 @@ inherited FCadCli: TFCadCli
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextSettings.Font.Family = 'Arial'
-                Text = 'Cidade:'
+                Text = 'Cidade :'
               end
             end
             object ListBoxItem13: TListBoxItem
@@ -811,7 +822,7 @@ inherited FCadCli: TFCadCli
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextSettings.Font.Family = 'Arial'
-                Text = 'Uf:'
+                Text = 'Uf :'
               end
             end
             object ListBoxItem14: TListBoxItem
@@ -859,7 +870,7 @@ inherited FCadCli: TFCadCli
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextSettings.Font.Family = 'Arial'
-                Text = 'Email:'
+                Text = 'Email :'
               end
             end
             object ListBoxItem15: TListBoxItem
@@ -974,7 +985,7 @@ inherited FCadCli: TFCadCli
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextSettings.Font.Family = 'Arial'
-                Text = 'Data Cad: '
+                Text = 'Data Cad : '
               end
             end
             object ListBoxItem18: TListBoxItem

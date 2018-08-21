@@ -33,7 +33,7 @@ uses UPrincipal;
 
 procedure TFInfo.SpBVoltarClick(Sender: TObject);
 begin
-FPrincipal.MudarAba(FPrincipal.TbItemMenu, Sender);
+Close;
 end;
 
 end.

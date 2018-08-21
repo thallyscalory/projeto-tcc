@@ -111,7 +111,7 @@ type
     LblCompCli: TLabel;
     LblBairroCli: TLabel;
     LblCepCli: TLabel;
-    Cidade: TLabel;
+    LblCidade: TLabel;
     LblUfCli: TLabel;
     LblEmailCli: TLabel;
     GestureManager1: TGestureManager;
@@ -120,6 +120,7 @@ type
     LblDataCadCli: TLabel;
     LinkControlToField15: TLinkControlToField;
     VertScrollBox1: TVertScrollBox;
+    SpdBRelatorioCli: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure SpBVoltarEdicaoClick(Sender: TObject);
     procedure SpBVoltarClick(Sender: TObject);
@@ -180,6 +181,7 @@ type
     procedure SpdBNovoCadCliClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
+    procedure SpdBRelatorioCliClick(Sender: TObject);
   private
     clickBotao: Boolean;
     DataHora: TDateTime;
@@ -202,7 +204,9 @@ implementation
 
 {$R *.fmx}
 
-uses UDM, UPrincipal, UVenda1;
+uses UDM, UPrincipal, UVenda1, Androidapi.JNI.GraphicsContentViewText,
+  Androidapi.JNI.JavaTypes,
+  Androidapi.JNI.Net, Androidapi.Helpers, System.IOUtils;
 
 procedure TFCadCli.BtnFiltrarCliClick(Sender: TObject);
 begin
@@ -826,6 +830,177 @@ begin
   // EdtDataCadCli.Text := DateTimeToStr(Now); => para pegar a data atual
   MudarAbaModelo(TbItemedicao, Sender);
   EdtNomeCli.SetFocus;
+end;
+
+function FileNameToUri(const FileName: string): Jnet_Uri;
+var
+  JavaFile: JFile;
+begin
+  JavaFile := TJFile.JavaClass.init(StringToJString(FileName));
+  Result := TJnet_Uri.JavaClass.fromFile(JavaFile);
+end;
+
+procedure TFCadCli.SpdBRelatorioCliClick(Sender: TObject);
+var
+  Document: JPdfDocument;
+  PageInfo: JPdfDocument_PageInfo;
+  Page: JPdfDocument_Page;
+  Canvas: JCanvas;
+  Paint: JPaint;
+  Rect: JRectF;
+  FileName: string;
+  OutputStream: JFileOutputStream;
+  Intent: JIntent;
+begin
+  inherited;
+  // create Pdf document
+  Document := TJPdfDocument.JavaClass.init;
+  try
+    // create page  1
+    PageInfo := TJPageInfo_Builder.JavaClass.init(100, 100, 1).create;
+    Page := Document.startPage(PageInfo);
+
+    Canvas := Page.getCanvas;
+    Paint := TJPaint.JavaClass.init;
+    Paint.setLinearText(True);
+
+    Paint.setARGB($FF, 0, 0, $FF);
+    Canvas.drawText(StringToJString('Calory Sistemas'), 5,
+      10, Paint);
+
+    Paint.setStrokeWidth(1);
+    Canvas.drawLine(0, 14, 100, 14, Paint);
+
+    Paint.setARGB($FF, 28, 28, 28);
+    Paint.setStrokeWidth(0);
+    Paint.setTextSize(2);
+
+    // cor da letra -> Paint.setARGB($FF, 0, 0, $FF);
+    Canvas.drawText(StringToJString(LblNomeCli.Text + ' ' + EdtNomeCli.Text), 1,
+     17 , Paint);
+
+    Canvas.drawLine(0, 18, 100, 18, Paint);
+
+    Canvas.drawText(StringToJString(LblTipoPessoaCli.Text + ' ' +
+      ComboBoxTipoPessoaCli.Selected.Text), 1, 20, Paint);
+
+    Canvas.drawLine(0, 21, 100, 21, Paint);
+
+    Canvas.drawText(StringToJString(LblCpfCli.Text + ' ' + EdtCpfCli.Text), 1,
+      23, Paint);
+
+    Canvas.drawLine(0, 24, 100, 24, Paint);
+
+    Canvas.drawText(StringToJString(LblRgCli.Text + ' ' + EdtRgCli.Text), 1,
+      26, Paint);
+
+    Canvas.drawLine(0, 27, 100, 27, Paint);
+
+    Canvas.drawText(StringToJString(LblApelidoCli.Text + ' ' +
+      EdtApelidoCli.Text), 1, 29, Paint);
+
+    Canvas.drawLine(0, 30, 100, 30, Paint);
+
+    Canvas.drawText(StringToJString(LblFoneCli.Text + ' ' + EdtFoneCli.Text), 1,
+      32, Paint);
+
+    Canvas.drawLine(0, 33, 100, 33, Paint);
+
+    Canvas.drawText(StringToJString(LblEndCli.Text + ' ' + EdtEnderecoCli.Text),
+      1, 35, Paint);
+
+    Canvas.drawLine(0, 36, 100, 36, Paint);
+
+    Canvas.drawText(StringToJString(LblNumCli.Text + ' ' + EdtNumCli.Text), 1,
+      38, Paint);
+
+    Canvas.drawLine(0, 39, 100, 39, Paint);
+
+    Canvas.drawText(StringToJString(LblCompCli.Text + ' ' + EdtCompCli.Text), 1,
+      41, Paint);
+
+    Canvas.drawLine(0, 42, 100, 42, Paint);
+
+    Canvas.drawText(StringToJString(LblBairroCli.Text + ' ' +
+      EdtBairroCli.Text), 1, 44, Paint);
+
+    Canvas.drawLine(0, 45, 100, 45, Paint);
+
+    Canvas.drawText(StringToJString(LblCepCli.Text + ' ' + EdtCepCli.Text), 1,
+      47, Paint);
+
+    Canvas.drawLine(0, 48, 100, 48, Paint);
+
+    Canvas.drawText(StringToJString(LblCidade.Text + ' ' + EdtCidadeCli.Text),
+      1, 50, Paint);
+
+    Canvas.drawLine(0, 51, 100, 51, Paint);
+
+    Canvas.drawText(StringToJString(LblUfCli.Text + ' ' + EdtUfCli.Text), 1,
+      53, Paint);
+
+    Canvas.drawLine(0, 54, 100, 54, Paint);
+
+    Canvas.drawText(StringToJString(LblEmailCli.Text + ' ' + EdtEmailCli.Text),
+      1, 56, Paint);
+
+    Canvas.drawLine(0, 57, 100, 57, Paint);
+
+    Canvas.drawText(StringToJString(LblDataCadCli.Text + ' ' +
+      EdtDataCadCli.Text), 1, 59, Paint);
+
+    Document.finishPage(Page);
+
+    // create page 2
+
+    { PageInfo := TJPageInfo_Builder.JavaClass.init(100, 100, 2).create;
+      Page := Document.startPage(PageInfo);
+
+      Canvas := Page.getCanvas;
+      Paint := TJPaint.JavaClass.init;
+
+      Paint.setARGB($FF, $FF, 0, 0);
+      Canvas.drawLine(10, 10, 90, 10, Paint);
+
+      Paint.setStrokeWidth(1);
+      Paint.setARGB($FF, 0, $FF, 0);
+      Canvas.drawLine(10, 20, 90, 20, Paint);
+
+      Paint.setStrokeWidth(2);
+      Paint.setARGB($FF, 0, 0, $FF);
+      Canvas.drawLine(10, 30, 90, 30, Paint);
+
+      Paint.setARGB($FF, $FF, $FF, 0);
+      Canvas.drawRect(10, 40, 90, 60, Paint);
+
+      Rect := TJRectF.JavaClass.init;
+      Rect.&set(10, 70, 90, 90);
+      Paint.setARGB($FF, $FF, 0, $FF);
+      Canvas.drawRoundRect(Rect, 5, 5, Paint);
+
+      Document.finishPage(Page); }
+
+    // write PDF document to file
+    FileName := TPath.GetSharedDocumentsPath + PathDelim + 'relatorio.pdf';
+    OutputStream := TJFileOutputStream.JavaClass.init
+      (StringToJString(FileName));
+    try
+      Document.writeTo(OutputStream);
+    finally
+      OutputStream.Close;
+    end;
+  finally
+    Document.Close;
+  end;
+
+  // start PDF viewer
+  Intent := TJIntent.JavaClass.init;
+  Intent.setAction(TJIntent.JavaClass.ACTION_VIEW);
+  Intent.setDataAndType(FileNameToUri(FileName),
+    StringToJString('application/pdf'));
+  Intent.setFlags(TJIntent.JavaClass.FLAG_ACTIVITY_NO_HISTORY or
+    TJIntent.JavaClass.FLAG_ACTIVITY_CLEAR_TOP);
+  SharedActivity.StartActivity(Intent);
 end;
 
 procedure TFCadCli.TakePhotoFromCameraAction1DidFinishTaking(Image: TBitmap);

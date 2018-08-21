@@ -371,9 +371,6 @@ Coordinates=116,1,80,51
 [LblCepCli]
 Coordinates=127,357,62,51
 
-[Cidade]
-Coordinates=523,644,48,51
-
 [DM.FDQProdItemPedido]
 Visible=False
 Coordinates=780,497,133,33
@@ -445,4 +442,7 @@ Coordinates=470,1005,183,285
 
 [DM.FDQConsAvistaFormaPag]
 Coordinates=440,857,161,141
+
+[LblCidade]
+Coordinates=523,644,48,51
 

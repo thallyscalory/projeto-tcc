@@ -56,7 +56,11 @@ implementation
 
 {$R *.fmx}
 
-uses UDM, UPrincipal, UVenda;
+uses UDM, UPrincipal, UVenda, Androidapi.JNI.GraphicsContentViewText,
+  Androidapi.JNI.JavaTypes,
+  Androidapi.JNI.Net, Androidapi.Helpers, System.IOUtils;
+
+
 
 { procedure TFCadModelo.AbrirFormModelo(AFormClass: TComponentClass);
   var
