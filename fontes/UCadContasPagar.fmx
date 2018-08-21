@@ -3,14 +3,15 @@ inherited FCadContasPagar: TFCadContasPagar
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
-      TabIndex = 1
       Sizes = (
+        330s
+        431s
         330s
         431s
         330s
         431s)
       inherited TbItemListagem: TTabItem
-        IsSelected = False
+        Size.Width = 110.000000000000000000
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         inherited ToolBarsuperior: TToolBar
@@ -18,9 +19,142 @@ inherited FCadContasPagar: TFCadContasPagar
             TextSettings.Font.StyleExt = {04070000000000000004000000}
           end
         end
+        object LytFiltroDataVencContasReceber: TLayout
+          Align = Top
+          Margins.Left = 2.000000000000000000
+          Margins.Top = 2.000000000000000000
+          Margins.Right = 2.000000000000000000
+          Margins.Bottom = 2.000000000000000000
+          Position.X = 2.000000000000000000
+          Position.Y = 104.000000000000000000
+          Size.Width = 326.000000000000000000
+          Size.Height = 65.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          object Label2: TLabel
+            Align = Top
+            StyledSettings = []
+            Margins.Left = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 2.000000000000000000
+            Position.X = 8.000000000000000000
+            Size.Width = 310.000000000000000000
+            Size.Height = 33.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claNavy
+            Text = 'Filtrar Data Vencimento:'
+          end
+          object Label3: TLabel
+            Align = Left
+            StyledSettings = []
+            Margins.Left = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Position.Y = 35.000000000000000000
+            Size.Width = 33.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claNavy
+            Text = 'De:'
+          end
+          object DateEdtFiltroVencInicialContasPagar: TDateEdit
+            Date = 43312.000000000000000000
+            Align = Left
+            Margins.Right = 8.000000000000000000
+            Position.X = 41.000000000000000000
+            Position.Y = 35.000000000000000000
+            Size.Width = 108.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+          end
+          object Label4: TLabel
+            Align = Left
+            StyledSettings = []
+            Position.X = 157.000000000000000000
+            Position.Y = 35.000000000000000000
+            Size.Width = 24.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claNavy
+            Text = 'A:'
+          end
+          object DateEdtFiltroVencFinalContasPagar: TDateEdit
+            Date = 43312.000000000000000000
+            Align = Left
+            Margins.Right = 8.000000000000000000
+            Position.X = 181.000000000000000000
+            Position.Y = 35.000000000000000000
+            Size.Width = 108.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 4
+          end
+        end
+        object LytFiltroClienteContasReceber: TLayout
+          Align = Top
+          Margins.Left = 2.000000000000000000
+          Margins.Top = 2.000000000000000000
+          Margins.Right = 2.000000000000000000
+          Margins.Bottom = 2.000000000000000000
+          Position.X = 2.000000000000000000
+          Position.Y = 50.000000000000000000
+          Size.Width = 326.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          object Label1: TLabel
+            Align = Left
+            StyledSettings = []
+            Margins.Left = 8.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Position.X = 8.000000000000000000
+            Size.Width = 105.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            TextSettings.FontColor = claNavy
+            Text = 'Filtrar Cliente:'
+          end
+          object ComboBoxFiltroFornContasPagar: TComboBox
+            Align = Client
+            ItemIndex = 0
+            Margins.Top = 10.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Size.Width = 205.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+          end
+        end
+        object ListViewCadContasPagar: TListView
+          ItemAppearanceClassName = 'TListItemAppearance'
+          ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+          HeaderAppearanceClassName = 'TListHeaderObjects'
+          FooterAppearanceClassName = 'TListHeaderObjects'
+          Align = Client
+          Margins.Left = 4.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 4.000000000000000000
+          Margins.Bottom = 4.000000000000000000
+          Size.Width = 322.000000000000000000
+          Size.Height = 252.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 5
+        end
       end
       inherited TbItemedicao: TTabItem
-        IsSelected = True
+        Size.Width = 110.000000000000000000
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object VertScrollBox1: TVertScrollBox
@@ -39,6 +173,18 @@ inherited FCadContasPagar: TFCadContasPagar
           TabOrder = 1
           TintColor = claSilver
         end
+      end
+      object TabItemBaixa: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 110.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Baixa'
       end
     end
   end

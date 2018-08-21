@@ -306,6 +306,28 @@ type
     FDQCadFornecedorobs: TWideMemoField;
     FDQCadFornecedorstatus: TStringField;
     FDQCadFornecedordata_cad: TDateField;
+    FDQConsContaPagar: TFDQuery;
+    FDQCadContaPagar: TFDQuery;
+    FDQConsContaPagarid: TFDAutoIncField;
+    FDQConsContaPagarid_fornecedor: TIntegerField;
+    FDQConsContaPagarid_tipo_despesa: TIntegerField;
+    FDQConsContaPagarn_doc: TStringField;
+    FDQConsContaPagarvalor_doc: TBCDField;
+    FDQConsContaPagarvalor_pago: TBCDField;
+    FDQConsContaPagarvalor_saldo: TBCDField;
+    FDQConsContaPagardata_venc: TDateField;
+    FDQConsContaPagardata_quitacao: TDateTimeField;
+    FDQConsContaPagarquitado: TStringField;
+    FDQCadContaPagarid: TFDAutoIncField;
+    FDQCadContaPagarid_fornecedor: TIntegerField;
+    FDQCadContaPagarid_tipo_despesa: TIntegerField;
+    FDQCadContaPagarn_doc: TStringField;
+    FDQCadContaPagarvalor_doc: TBCDField;
+    FDQCadContaPagarvalor_pago: TBCDField;
+    FDQCadContaPagarvalor_saldo: TBCDField;
+    FDQCadContaPagardata_venc: TDateField;
+    FDQCadContaPagardata_quitacao: TDateTimeField;
+    FDQCadContaPagarquitado: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

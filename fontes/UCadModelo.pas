@@ -56,9 +56,7 @@ implementation
 
 {$R *.fmx}
 
-uses UDM, UPrincipal, UVenda, Androidapi.JNI.GraphicsContentViewText,
-  Androidapi.JNI.JavaTypes,
-  Androidapi.JNI.Net, Androidapi.Helpers, System.IOUtils;
+uses UDM, UPrincipal, UVenda, System.IOUtils;
 
 
 

@@ -2,13 +2,14 @@ object DM: TDM
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   Height = 442
-  Width = 1204
+  Width = 1505
   object FDConnection1: TFDConnection
     Params.Strings = (
       'Database=C:\projeto tcc\bd\calorytcc.s3db'
       'OpenMode=ReadWrite'
       'LockingMode=Normal'
       'DriverID=SQLite')
+    Connected = True
     LoginPrompt = False
     Left = 40
     Top = 8
@@ -1575,8 +1576,8 @@ object DM: TDM
     Connection = FDConnection1
     SQL.Strings = (
       'select * from conta_receber where id = :PIdContaReceber;')
-    Left = 816
-    Top = 216
+    Left = 960
+    Top = 8
     ParamData = <
       item
         Name = 'PIDCONTARECEBER'
@@ -1860,6 +1861,126 @@ object DM: TDM
     object FDQCadFornecedordata_cad: TDateField
       FieldName = 'data_cad'
       Origin = 'data_cad'
+    end
+  end
+  object FDQConsContaPagar: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from conta_pagar')
+    Left = 1264
+    Top = 16
+    object FDQConsContaPagarid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object FDQConsContaPagarid_fornecedor: TIntegerField
+      FieldName = 'id_fornecedor'
+      Origin = 'id_fornecedor'
+    end
+    object FDQConsContaPagarid_tipo_despesa: TIntegerField
+      FieldName = 'id_tipo_despesa'
+      Origin = 'id_tipo_despesa'
+    end
+    object FDQConsContaPagarn_doc: TStringField
+      FieldName = 'n_doc'
+      Origin = 'n_doc'
+      Size = 30
+    end
+    object FDQConsContaPagarvalor_doc: TBCDField
+      FieldName = 'valor_doc'
+      Origin = 'valor_doc'
+      Required = True
+      Precision = 9
+      Size = 2
+    end
+    object FDQConsContaPagarvalor_pago: TBCDField
+      FieldName = 'valor_pago'
+      Origin = 'valor_pago'
+      Precision = 9
+      Size = 2
+    end
+    object FDQConsContaPagarvalor_saldo: TBCDField
+      FieldName = 'valor_saldo'
+      Origin = 'valor_saldo'
+      Required = True
+      Precision = 9
+      Size = 2
+    end
+    object FDQConsContaPagardata_venc: TDateField
+      FieldName = 'data_venc'
+      Origin = 'data_venc'
+      Required = True
+    end
+    object FDQConsContaPagardata_quitacao: TDateTimeField
+      FieldName = 'data_quitacao'
+      Origin = 'data_quitacao'
+    end
+    object FDQConsContaPagarquitado: TStringField
+      FieldName = 'quitado'
+      Origin = 'quitado'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object FDQCadContaPagar: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from conta_pagar')
+    Left = 1256
+    Top = 152
+    object FDQCadContaPagarid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object FDQCadContaPagarid_fornecedor: TIntegerField
+      FieldName = 'id_fornecedor'
+      Origin = 'id_fornecedor'
+    end
+    object FDQCadContaPagarid_tipo_despesa: TIntegerField
+      FieldName = 'id_tipo_despesa'
+      Origin = 'id_tipo_despesa'
+    end
+    object FDQCadContaPagarn_doc: TStringField
+      FieldName = 'n_doc'
+      Origin = 'n_doc'
+      Size = 30
+    end
+    object FDQCadContaPagarvalor_doc: TBCDField
+      FieldName = 'valor_doc'
+      Origin = 'valor_doc'
+      Required = True
+      Precision = 9
+      Size = 2
+    end
+    object FDQCadContaPagarvalor_pago: TBCDField
+      FieldName = 'valor_pago'
+      Origin = 'valor_pago'
+      Precision = 9
+      Size = 2
+    end
+    object FDQCadContaPagarvalor_saldo: TBCDField
+      FieldName = 'valor_saldo'
+      Origin = 'valor_saldo'
+      Required = True
+      Precision = 9
+      Size = 2
+    end
+    object FDQCadContaPagardata_venc: TDateField
+      FieldName = 'data_venc'
+      Origin = 'data_venc'
+      Required = True
+    end
+    object FDQCadContaPagardata_quitacao: TDateTimeField
+      FieldName = 'data_quitacao'
+      Origin = 'data_quitacao'
+    end
+    object FDQCadContaPagarquitado: TStringField
+      FieldName = 'quitado'
+      Origin = 'quitado'
+      FixedChar = True
+      Size = 1
     end
   end
 end
