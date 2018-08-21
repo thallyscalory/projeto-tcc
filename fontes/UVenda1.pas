@@ -304,7 +304,9 @@ begin
       DM.FDQMaxIdPedido.Close;
       DM.FDQMaxIdPedido.Open();
       maxIdPedido := DM.FDQMaxIdPedidomaxIdPedido.AsInteger + 1;
+
       DataHora := DateTimeToStr(Now);
+
       DM.FDQConsFormaPag.Close;
       DM.FDQConsFormaPag.ParamByName('PDescricaoFormaPag').Value :=
         ComboBoxFormaPagVenda.Selected.Text;

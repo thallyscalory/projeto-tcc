@@ -275,26 +275,12 @@ object DM: TDM
       Origin = 'foto_cli'
     end
   end
-  object FDQMaxIdCli: TFDQuery
-    Connection = FDConnection1
-    SQL.Strings = (
-      'select max(id_cli) as max from cliente;')
-    Left = 280
-    Top = 64
-    object FDQMaxIdClimax: TLargeintField
-      AutoGenerateValue = arDefault
-      FieldName = 'max'
-      Origin = 'max'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-  end
   object FDQCadCli: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
       'select * from cliente')
-    Left = 280
-    Top = 128
+    Left = 288
+    Top = 144
     object FDQCadCliid_cli: TIntegerField
       FieldName = 'id_cli'
       Origin = 'id_cli'

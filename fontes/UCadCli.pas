@@ -120,7 +120,7 @@ type
     LblDataCadCli: TLabel;
     LinkControlToField15: TLinkControlToField;
     VertScrollBox1: TVertScrollBox;
-    SpdBRelatorioCli: TSpeedButton;
+    ImgRelatorioCli: TImage;
     procedure FormCreate(Sender: TObject);
     procedure SpBVoltarEdicaoClick(Sender: TObject);
     procedure SpBVoltarClick(Sender: TObject);
@@ -181,7 +181,7 @@ type
     procedure SpdBNovoCadCliClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
-    procedure SpdBRelatorioCliClick(Sender: TObject);
+    procedure ImgRelatorioCliClick(Sender: TObject);
   private
     clickBotao: Boolean;
     DataHora: TDateTime;
@@ -244,6 +244,7 @@ begin
   LblObsCli.Enabled := False;
   MemoObsCadCli.ReadOnly := True;
   SpdBFotoCli.Visible := False;
+  ImgRelatorioCli.Visible := True;
   EdtDataCadCli.Enabled := False;
 end;
 
@@ -551,285 +552,8 @@ begin
   RadioBLiberaAprazoN.Enabled := True;
   MemoObsCadCli.ReadOnly := False;
   SpdBFotoCli.Visible := True;
+  ImgRelatorioCli.Visible := False;
   EdtDataCadCli.Enabled := False;
-end;
-
-procedure TFCadCli.LimpaCampos;
-begin
-  EdtNomeCli.Text := EmptyStr;
-  ComboBoxTipoPessoaCli.ItemIndex := 0;
-  EdtCpfCli.Text := EmptyStr;
-  EdtRgCli.Text := EmptyStr;
-  EdtApelidoCli.Text := EmptyStr;
-  EdtFoneCli.Text := EmptyStr;
-  EdtEnderecoCli.Text := EmptyStr;
-  EdtNumCli.Text := EmptyStr;
-  EdtCompCli.Text := EmptyStr;
-  EdtBairroCli.Text := EmptyStr;
-  EdtCepCli.Text := EmptyStr;
-  EdtCidadeCli.Text := EmptyStr;
-  EdtUfCli.Text := EmptyStr;
-  EdtEmailCli.Text := EmptyStr;
-  RadioBLiberaAprazoS.IsChecked := False;
-  RadioBLiberaAprazoN.IsChecked := True;
-  ImgFotoCli.Bitmap := nil;
-  MemoObsCadCli.Lines.Clear;
-  EdtDataCadCli.Text := EmptyStr;
-end;
-
-procedure TFCadCli.ListViewCadCliButtonClick(const Sender: TObject;
-  const AItem: TListItem; const AObject: TListItemSimpleControl);
-// var
-// bmp: TBitmap;
-begin
-  inherited;
-  // clickBotao := False;
-  // lblTituloEdicao.Text := 'Detalhes';
-  // SpdBEditar.Enabled := True;
-  // SpdBEditar.Visible := True;
-  // SpdBConfirmar.Enabled := False;
-  // SpdBConfirmar.Visible := False;
-  // EdtDataCadCli.Text := DM.FDQFiltroCadCLidata_cad_cli.AsString;
-  // if DM.FDQFiltroCadCLitipo_cli.AsString = 'F' then
-  // ComboBoxTipoPessoaCli.ItemIndex := 0
-  // else
-  // ComboBoxTipoPessoaCli.ItemIndex := 1;
-  // if DM.FDQFiltroCadCLiliberaaprazo_cli.AsString = 'S' then
-  // RadioBLiberaAprazoS.IsChecked := True
-  // else
-  // RadioBLiberaAprazoN.IsChecked := True;
-  // EditFiltroNomeCadCli.Text := EmptyStr;
-  // EditFiltroCodCadCli.Text := EmptyStr;
-  // EdtNomeCli.SetFocus;
-  // DesabilitaCampos;
-  // MudarAbaModelo(TbItemedicao, Sender);
-end;
-
-procedure TFCadCli.ListViewCadCliGesture(Sender: TObject;
-  const EventInfo: TGestureEventInfo; var Handled: Boolean);
-begin
-  inherited;
-  // if EventInfo.GestureID = igiDoubleTap then
-  // begin
-  // if venda = 'S' then
-  // begin
-  // MessageDlg('Você deseja adicionar este cliente ao pedido?',
-  // System.UITypes.TMsgDlgType.mtInformation,
-  // [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
-  // procedure(const AResult: System.UITypes.TModalResult)
-  // begin
-  // case AResult of
-  // mrYES:
-  // begin
-  // caso sim
-  // nomeCliente := DM.FDQFiltroCadCLinome_cli.AsString;
-  // codCliente := DM.FDQFiltroCadCLiid_cli.AsString;
-  // end;
-  // mrNo:
-  // begin
-  // caso não
-  // end;
-  // end;
-  // end);
-  // end;
-  // end;
-
-end;
-
-procedure TFCadCli.ListViewCadCliItemClickEx(const Sender: TObject;
-  ItemIndex: Integer; const LocalClickPos: TPointF;
-  const ItemObject: TListItemDrawable);
-var
-  bmp: TBitmap;
-begin
-  inherited;
-  if ItemObject is TListItemAccessory then
-  begin
-    lblTituloEdicao.Text := 'Detalhes';
-    SpdBEditar.Visible := True;
-    SpdBConfirmar.Visible := False;
-    if DM.FDQFiltroCadCLitipo_cli.AsString = 'F' then
-      ComboBoxTipoPessoaCli.ItemIndex := 0
-    else
-      ComboBoxTipoPessoaCli.ItemIndex := 1;
-    if DM.FDQFiltroCadCLiliberaaprazo_cli.AsString = 'S' then
-      RadioBLiberaAprazoS.IsChecked := True
-    else
-      RadioBLiberaAprazoN.IsChecked := True;
-    // EditFiltroNomeCadCli.Text := EmptyStr;
-    // EditFiltroCodCadCli.Text := EmptyStr;
-    EdtNomeCli.SetFocus;
-    DesabilitaCampos;
-    MudarAbaModelo(TbItemedicao, Sender);
-  end;
-
-end;
-
-procedure TFCadCli.SpBVoltarClick(Sender: TObject);
-begin
-  inherited;
-  DM.FDQFiltroCadCLi.Active := False;
-  EditFiltroNomeCadCli.Text := EmptyStr;
-  EditFiltroCodCadCli.Text := EmptyStr;
-  Close;
-end;
-
-procedure TFCadCli.SpBVoltarEdicaoClick(Sender: TObject);
-begin
-  inherited;
-  LimpaCampos;
-  MudarAbaModelo(TbItemListagem, Sender);
-
-end;
-
-procedure TFCadCli.SpdBConfirmarClick(Sender: TObject);
-var
-  sql, LiberaAprazo, TipoPessoa, DataHora: string;
-  MaxId: Integer;
-  Data: TDateTime;
-  data1: string;
-begin
-  inherited;
-  EsconderTeclado;
-  FPrincipal.ksLoadingIndicator1.ShowLoading;
-  DataHora := DateTimeToStr(Now);
-  if RadioBLiberaAprazoS.IsChecked then
-    LiberaAprazo := 'S'
-  else
-    LiberaAprazo := 'N';
-  if ComboBoxTipoPessoaCli.ItemIndex = 1 then
-    TipoPessoa := 'J'
-  else
-    TipoPessoa := 'F';
-  if crud = 'iserir' then
-  begin
-    try
-      DM.FDQMaxIdCli.Close;
-      DM.FDQMaxIdCli.Open();
-      MaxId := DM.FDQMaxIdClimax.AsInteger + 1;
-
-      DM.FDQCadCli.Close;
-      DM.FDQCadCli.Open();
-      DM.FDQCadCli.Append;
-      DM.FDQCadCliid_cli.AsInteger := MaxId;
-      DM.FDQCadClitipo_cli.AsString := TipoPessoa;
-      DM.FDQCadClinome_cli.AsString := EdtNomeCli.Text;
-      DM.FDQCadClicpf_cnpj_cli.AsString := EdtCpfCli.Text;
-      DM.FDQCadClirg_ie_cli.AsString := EdtRgCli.Text;
-      DM.FDQCadCliapelido_cli.AsString := EdtApelidoCli.Text;
-      DM.FDQCadClifone_cli.AsString := EdtFoneCli.Text;
-      DM.FDQCadCliendereco_cli.AsString := EdtEnderecoCli.Text;
-      DM.FDQCadClinum_cli.AsString := EdtNumCli.Text;
-      DM.FDQCadClicomplemento_cli.AsString := EdtCompCli.Text;
-      DM.FDQCadClibairro_cli.AsString := EdtBairroCli.Text;
-      DM.FDQCadClicep_cli.AsString := EdtCepCli.Text;
-      DM.FDQCadClicidade_cli.AsString := EdtCidadeCli.Text;
-      DM.FDQCadCliuf_cli.AsString := EdtUfCli.Text;
-      DM.FDQCadCliemail_cli.AsString := EdtEmailCli.Text;
-      DM.FDQCadCliliberaaprazo_cli.AsString := LiberaAprazo;
-      DM.FDQCadCliobs_cli.AsString := MemoObsCadCli.Text;
-      DM.FDQCadClidata_cad_cli.AsDateTime := StrToDateTime(DataHora);
-      DM.FDQCadClifoto_cli.Assign(FotoCli);
-      DM.FDQCadCli.Post;
-
-      DM.FDConnection1.CommitRetaining;
-      DM.FDQFiltroCadCLi.Active := False;
-      MudarAbaModelo(TbItemListagem, Sender);
-      FPrincipal.ksLoadingIndicator1.HideLoading;
-    except
-      on E: Exception do
-        ShowMessage('Erro!  ' + E.Message);
-    end;
-  end
-  else if crud = 'editar' then
-  begin
-    try
-      DM.FDQAuxiliar.sql.Clear;
-
-      DM.FDQAuxiliar.sql.Add('update cliente');
-      DM.FDQAuxiliar.sql.Add(' set tipo_cli = :TipoCli,');
-      DM.FDQAuxiliar.sql.Add(' nome_cli = :Nome,');
-      DM.FDQAuxiliar.sql.Add(' cpf_cnpj_cli = :Cpf,');
-      DM.FDQAuxiliar.sql.Add(' rg_ie_cli = :Rg,');
-      DM.FDQAuxiliar.sql.Add(' apelido_cli = :Apelido,');
-      DM.FDQAuxiliar.sql.Add(' fone_cli = :Fone,');
-      DM.FDQAuxiliar.sql.Add(' endereco_cli = :Endereco,');
-      DM.FDQAuxiliar.sql.Add(' num_cli = :Num,');
-      DM.FDQAuxiliar.sql.Add(' complemento_cli = :Complemento,');
-      DM.FDQAuxiliar.sql.Add(' bairro_cli = :Bairro,');
-      DM.FDQAuxiliar.sql.Add(' cep_cli = :Cep,');
-      DM.FDQAuxiliar.sql.Add(' cidade_cli = :Cidade,');
-      DM.FDQAuxiliar.sql.Add(' uf_cli = :Uf,');
-      DM.FDQAuxiliar.sql.Add(' email_cli = :Email,');
-      DM.FDQAuxiliar.sql.Add(' liberaaprazo_cli = :LiberaAprazo,');
-      if not FotoCli.IsEmpty then
-        DM.FDQAuxiliar.sql.Add(' foto_cli = :Foto,');
-      DM.FDQAuxiliar.sql.Add(' obs_cli = :Obs');
-      DM.FDQAuxiliar.sql.Add(' where id_cli = :IdCli');
-
-      DM.FDQAuxiliar.Params.ParamByName('TipoCli').AsString := TipoPessoa;
-      DM.FDQAuxiliar.Params.ParamByName('Nome').AsString := EdtNomeCli.Text;
-      DM.FDQAuxiliar.Params.ParamByName('Cpf').AsString := EdtCpfCli.Text;
-      DM.FDQAuxiliar.Params.ParamByName('Rg').AsString := EdtRgCli.Text;
-      DM.FDQAuxiliar.Params.ParamByName('Apelido').AsString :=
-        EdtApelidoCli.Text;
-      DM.FDQAuxiliar.Params.ParamByName('Fone').AsString := EdtFoneCli.Text;
-      DM.FDQAuxiliar.Params.ParamByName('Endereco').AsString :=
-        EdtEnderecoCli.Text;
-      DM.FDQAuxiliar.Params.ParamByName('Num').AsString := EdtNumCli.Text;
-      DM.FDQAuxiliar.Params.ParamByName('Complemento').AsString :=
-        EdtCompCli.Text;
-      DM.FDQAuxiliar.Params.ParamByName('Bairro').AsString := EdtBairroCli.Text;
-      DM.FDQAuxiliar.Params.ParamByName('Cep').AsString := EdtCepCli.Text;
-      DM.FDQAuxiliar.Params.ParamByName('Cidade').AsString := EdtCidadeCli.Text;
-      DM.FDQAuxiliar.Params.ParamByName('Uf').AsString := EdtUfCli.Text;
-      DM.FDQAuxiliar.Params.ParamByName('Email').AsString := EdtEmailCli.Text;
-      DM.FDQAuxiliar.Params.ParamByName('LiberaAprazo').AsString :=
-        LiberaAprazo;
-      if not FotoCli.IsEmpty then
-        DM.FDQAuxiliar.Params.ParamByName('Foto').Assign(FotoCli);
-      DM.FDQAuxiliar.Params.ParamByName('Obs').AsString := MemoObsCadCli.Text;
-      DM.FDQAuxiliar.Params.ParamByName('IdCli').AsInteger :=
-        DM.FDQFiltroCadCLiid_cli.AsInteger;
-
-      DM.FDQAuxiliar.ExecSQL;
-
-      DM.FDConnection1.CommitRetaining;
-      DM.FDQFiltroCadCLi.Active := False;
-      MudarAbaModelo(TbItemListagem, Sender);
-      FPrincipal.ksLoadingIndicator1.HideLoading;
-    except
-      on E: Exception do
-        ShowMessage('Erro!  ' + E.Message);
-    end;
-  end;
-end;
-
-procedure TFCadCli.SpdBEditarClick(Sender: TObject);
-begin
-  inherited;
-  FotoCli := ImgFotoCli.Bitmap;
-  crud := 'editar';
-  lblTituloEdicao.Text := 'Editando Cadastro';
-  SpdBEditar.Visible := False;
-  SpdBConfirmar.Visible := True;
-  HabilitaCampos;
-  EdtNomeCli.SetFocus;
-end;
-
-procedure TFCadCli.SpdBNovoCadCliClick(Sender: TObject);
-begin
-  inherited;
-  DM.FDQFiltroCadCLi.Active := False;
-  crud := 'iserir';
-  SpdBEditar.Visible := False;
-  SpdBConfirmar.Visible := True;
-  lblTituloEdicao.Text := 'Novo Cadastro';
-  LimpaCampos;
-  HabilitaCampos;
-  // EdtDataCadCli.Text := DateTimeToStr(Now); => para pegar a data atual
-  MudarAbaModelo(TbItemedicao, Sender);
-  EdtNomeCli.SetFocus;
 end;
 
 function FileNameToUri(const FileName: string): Jnet_Uri;
@@ -840,7 +564,7 @@ begin
   Result := TJnet_Uri.JavaClass.fromFile(JavaFile);
 end;
 
-procedure TFCadCli.SpdBRelatorioCliClick(Sender: TObject);
+procedure TFCadCli.ImgRelatorioCliClick(Sender: TObject);
 var
   Document: JPdfDocument;
   PageInfo: JPdfDocument_PageInfo;
@@ -1001,6 +725,279 @@ begin
   Intent.setFlags(TJIntent.JavaClass.FLAG_ACTIVITY_NO_HISTORY or
     TJIntent.JavaClass.FLAG_ACTIVITY_CLEAR_TOP);
   SharedActivity.StartActivity(Intent);
+end;
+
+procedure TFCadCli.LimpaCampos;
+begin
+  EdtNomeCli.Text := EmptyStr;
+  ComboBoxTipoPessoaCli.ItemIndex := 0;
+  EdtCpfCli.Text := EmptyStr;
+  EdtRgCli.Text := EmptyStr;
+  EdtApelidoCli.Text := EmptyStr;
+  EdtFoneCli.Text := EmptyStr;
+  EdtEnderecoCli.Text := EmptyStr;
+  EdtNumCli.Text := EmptyStr;
+  EdtCompCli.Text := EmptyStr;
+  EdtBairroCli.Text := EmptyStr;
+  EdtCepCli.Text := EmptyStr;
+  EdtCidadeCli.Text := EmptyStr;
+  EdtUfCli.Text := EmptyStr;
+  EdtEmailCli.Text := EmptyStr;
+  RadioBLiberaAprazoS.IsChecked := False;
+  RadioBLiberaAprazoN.IsChecked := True;
+  ImgFotoCli.Bitmap := nil;
+  MemoObsCadCli.Lines.Clear;
+  EdtDataCadCli.Text := EmptyStr;
+end;
+
+procedure TFCadCli.ListViewCadCliButtonClick(const Sender: TObject;
+  const AItem: TListItem; const AObject: TListItemSimpleControl);
+// var
+// bmp: TBitmap;
+begin
+  inherited;
+  // clickBotao := False;
+  // lblTituloEdicao.Text := 'Detalhes';
+  // SpdBEditar.Enabled := True;
+  // SpdBEditar.Visible := True;
+  // SpdBConfirmar.Enabled := False;
+  // SpdBConfirmar.Visible := False;
+  // EdtDataCadCli.Text := DM.FDQFiltroCadCLidata_cad_cli.AsString;
+  // if DM.FDQFiltroCadCLitipo_cli.AsString = 'F' then
+  // ComboBoxTipoPessoaCli.ItemIndex := 0
+  // else
+  // ComboBoxTipoPessoaCli.ItemIndex := 1;
+  // if DM.FDQFiltroCadCLiliberaaprazo_cli.AsString = 'S' then
+  // RadioBLiberaAprazoS.IsChecked := True
+  // else
+  // RadioBLiberaAprazoN.IsChecked := True;
+  // EditFiltroNomeCadCli.Text := EmptyStr;
+  // EditFiltroCodCadCli.Text := EmptyStr;
+  // EdtNomeCli.SetFocus;
+  // DesabilitaCampos;
+  // MudarAbaModelo(TbItemedicao, Sender);
+end;
+
+procedure TFCadCli.ListViewCadCliGesture(Sender: TObject;
+  const EventInfo: TGestureEventInfo; var Handled: Boolean);
+begin
+  inherited;
+  // if EventInfo.GestureID = igiDoubleTap then
+  // begin
+  // if venda = 'S' then
+  // begin
+  // MessageDlg('Você deseja adicionar este cliente ao pedido?',
+  // System.UITypes.TMsgDlgType.mtInformation,
+  // [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
+  // procedure(const AResult: System.UITypes.TModalResult)
+  // begin
+  // case AResult of
+  // mrYES:
+  // begin
+  // caso sim
+  // nomeCliente := DM.FDQFiltroCadCLinome_cli.AsString;
+  // codCliente := DM.FDQFiltroCadCLiid_cli.AsString;
+  // end;
+  // mrNo:
+  // begin
+  // caso não
+  // end;
+  // end;
+  // end);
+  // end;
+  // end;
+
+end;
+
+procedure TFCadCli.ListViewCadCliItemClickEx(const Sender: TObject;
+  ItemIndex: Integer; const LocalClickPos: TPointF;
+  const ItemObject: TListItemDrawable);
+var
+  bmp: TBitmap;
+begin
+  inherited;
+  if ItemObject is TListItemAccessory then
+  begin
+    lblTituloEdicao.Text := 'Detalhes';
+    SpdBEditar.Visible := True;
+    SpdBConfirmar.Visible := False;
+    if DM.FDQFiltroCadCLitipo_cli.AsString = 'F' then
+      ComboBoxTipoPessoaCli.ItemIndex := 0
+    else
+      ComboBoxTipoPessoaCli.ItemIndex := 1;
+    if DM.FDQFiltroCadCLiliberaaprazo_cli.AsString = 'S' then
+      RadioBLiberaAprazoS.IsChecked := True
+    else
+      RadioBLiberaAprazoN.IsChecked := True;
+    // EditFiltroNomeCadCli.Text := EmptyStr;
+    // EditFiltroCodCadCli.Text := EmptyStr;
+    EdtNomeCli.SetFocus;
+    DesabilitaCampos;
+    MudarAbaModelo(TbItemedicao, Sender);
+  end;
+
+end;
+
+procedure TFCadCli.SpBVoltarClick(Sender: TObject);
+begin
+  inherited;
+  DM.FDQFiltroCadCLi.Active := False;
+  EditFiltroNomeCadCli.Text := EmptyStr;
+  EditFiltroCodCadCli.Text := EmptyStr;
+  Close;
+end;
+
+procedure TFCadCli.SpBVoltarEdicaoClick(Sender: TObject);
+begin
+  inherited;
+  LimpaCampos;
+  MudarAbaModelo(TbItemListagem, Sender);
+
+end;
+
+procedure TFCadCli.SpdBConfirmarClick(Sender: TObject);
+var
+  sql, LiberaAprazo, TipoPessoa, DataHora: string;
+  MaxId: Integer;
+  Data: TDateTime;
+  data1: string;
+begin
+  inherited;
+  EsconderTeclado;
+  FPrincipal.ksLoadingIndicator1.ShowLoading;
+  DataHora := DateTimeToStr(Now);
+  if RadioBLiberaAprazoS.IsChecked then
+    LiberaAprazo := 'S'
+  else
+    LiberaAprazo := 'N';
+  if ComboBoxTipoPessoaCli.ItemIndex = 1 then
+    TipoPessoa := 'J'
+  else
+    TipoPessoa := 'F';
+  if crud = 'iserir' then
+  begin
+    try
+      DM.FDQCadCli.Close;
+      DM.FDQCadCli.Open();
+      DM.FDQCadCli.Append;
+      DM.FDQCadClitipo_cli.AsString := TipoPessoa;
+      DM.FDQCadClinome_cli.AsString := EdtNomeCli.Text;
+      DM.FDQCadClicpf_cnpj_cli.AsString := EdtCpfCli.Text;
+      DM.FDQCadClirg_ie_cli.AsString := EdtRgCli.Text;
+      DM.FDQCadCliapelido_cli.AsString := EdtApelidoCli.Text;
+      DM.FDQCadClifone_cli.AsString := EdtFoneCli.Text;
+      DM.FDQCadCliendereco_cli.AsString := EdtEnderecoCli.Text;
+      DM.FDQCadClinum_cli.AsString := EdtNumCli.Text;
+      DM.FDQCadClicomplemento_cli.AsString := EdtCompCli.Text;
+      DM.FDQCadClibairro_cli.AsString := EdtBairroCli.Text;
+      DM.FDQCadClicep_cli.AsString := EdtCepCli.Text;
+      DM.FDQCadClicidade_cli.AsString := EdtCidadeCli.Text;
+      DM.FDQCadCliuf_cli.AsString := EdtUfCli.Text;
+      DM.FDQCadCliemail_cli.AsString := EdtEmailCli.Text;
+      DM.FDQCadCliliberaaprazo_cli.AsString := LiberaAprazo;
+      DM.FDQCadCliobs_cli.AsString := MemoObsCadCli.Text;
+      DM.FDQCadClidata_cad_cli.AsDateTime := StrToDateTime(DataHora);
+      DM.FDQCadClifoto_cli.Assign(FotoCli);
+      DM.FDQCadCli.Post;
+
+      DM.FDConnection1.CommitRetaining;
+      DM.FDQFiltroCadCLi.Active := False;
+      MudarAbaModelo(TbItemListagem, Sender);
+      FPrincipal.ksLoadingIndicator1.HideLoading;
+    except
+      on E: Exception do
+        ShowMessage('Erro!  ' + E.Message);
+    end;
+  end
+  else if crud = 'editar' then
+  begin
+    try
+      DM.FDQAuxiliar.sql.Clear;
+
+      DM.FDQAuxiliar.sql.Add('update cliente');
+      DM.FDQAuxiliar.sql.Add(' set tipo_cli = :TipoCli,');
+      DM.FDQAuxiliar.sql.Add(' nome_cli = :Nome,');
+      DM.FDQAuxiliar.sql.Add(' cpf_cnpj_cli = :Cpf,');
+      DM.FDQAuxiliar.sql.Add(' rg_ie_cli = :Rg,');
+      DM.FDQAuxiliar.sql.Add(' apelido_cli = :Apelido,');
+      DM.FDQAuxiliar.sql.Add(' fone_cli = :Fone,');
+      DM.FDQAuxiliar.sql.Add(' endereco_cli = :Endereco,');
+      DM.FDQAuxiliar.sql.Add(' num_cli = :Num,');
+      DM.FDQAuxiliar.sql.Add(' complemento_cli = :Complemento,');
+      DM.FDQAuxiliar.sql.Add(' bairro_cli = :Bairro,');
+      DM.FDQAuxiliar.sql.Add(' cep_cli = :Cep,');
+      DM.FDQAuxiliar.sql.Add(' cidade_cli = :Cidade,');
+      DM.FDQAuxiliar.sql.Add(' uf_cli = :Uf,');
+      DM.FDQAuxiliar.sql.Add(' email_cli = :Email,');
+      DM.FDQAuxiliar.sql.Add(' liberaaprazo_cli = :LiberaAprazo,');
+      if not FotoCli.IsEmpty then
+        DM.FDQAuxiliar.sql.Add(' foto_cli = :Foto,');
+      DM.FDQAuxiliar.sql.Add(' obs_cli = :Obs');
+      DM.FDQAuxiliar.sql.Add(' where id_cli = :IdCli');
+
+      DM.FDQAuxiliar.Params.ParamByName('TipoCli').AsString := TipoPessoa;
+      DM.FDQAuxiliar.Params.ParamByName('Nome').AsString := EdtNomeCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Cpf').AsString := EdtCpfCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Rg').AsString := EdtRgCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Apelido').AsString :=
+        EdtApelidoCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Fone').AsString := EdtFoneCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Endereco').AsString :=
+        EdtEnderecoCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Num').AsString := EdtNumCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Complemento').AsString :=
+        EdtCompCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Bairro').AsString := EdtBairroCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Cep').AsString := EdtCepCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Cidade').AsString := EdtCidadeCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Uf').AsString := EdtUfCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Email').AsString := EdtEmailCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('LiberaAprazo').AsString :=
+        LiberaAprazo;
+      if not FotoCli.IsEmpty then
+        DM.FDQAuxiliar.Params.ParamByName('Foto').Assign(FotoCli);
+      DM.FDQAuxiliar.Params.ParamByName('Obs').AsString := MemoObsCadCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('IdCli').AsInteger :=
+        DM.FDQFiltroCadCLiid_cli.AsInteger;
+
+      DM.FDQAuxiliar.ExecSQL;
+
+      DM.FDConnection1.CommitRetaining;
+      DM.FDQFiltroCadCLi.Active := False;
+      MudarAbaModelo(TbItemListagem, Sender);
+      FPrincipal.ksLoadingIndicator1.HideLoading;
+    except
+      on E: Exception do
+        ShowMessage('Erro!  ' + E.Message);
+    end;
+  end;
+end;
+
+procedure TFCadCli.SpdBEditarClick(Sender: TObject);
+begin
+  inherited;
+  FotoCli := ImgFotoCli.Bitmap;
+  crud := 'editar';
+  lblTituloEdicao.Text := 'Editando Cadastro';
+  SpdBEditar.Visible := False;
+  SpdBConfirmar.Visible := True;
+  HabilitaCampos;
+  EdtNomeCli.SetFocus;
+end;
+
+procedure TFCadCli.SpdBNovoCadCliClick(Sender: TObject);
+begin
+  inherited;
+  DM.FDQFiltroCadCLi.Active := False;
+  crud := 'iserir';
+  SpdBEditar.Visible := False;
+  SpdBConfirmar.Visible := True;
+  lblTituloEdicao.Text := 'Novo Cadastro';
+  LimpaCampos;
+  HabilitaCampos;
+  // EdtDataCadCli.Text := DateTimeToStr(Now); => para pegar a data atual
+  MudarAbaModelo(TbItemedicao, Sender);
+  EdtNomeCli.SetFocus;
 end;
 
 procedure TFCadCli.TakePhotoFromCameraAction1DidFinishTaking(Image: TBitmap);

@@ -17,8 +17,6 @@ type
     FDQuery1: TFDQuery;
     FDQDetalheProdCodBar: TFDQuery;
     FDQFiltroCadCLi: TFDQuery;
-    FDQMaxIdCli: TFDQuery;
-    FDQMaxIdClimax: TLargeintField;
     FDQCadCli: TFDQuery;
     FDQConsultaProd: TFDQuery;
     FDQCadCliid_cli: TIntegerField;

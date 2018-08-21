@@ -14,7 +14,7 @@ Coordinates=213,313,142,33
 Coordinates=117,10,133,249
 
 []
-Coordinates=624,1,124,33
+Coordinates=130,547,78,69
 
 [FDQConsFormaPagcondicional_forma_pag]
 Coordinates=608,365,227,33
@@ -51,9 +51,6 @@ Coordinates=608,729,102,33
 
 [FDQuery1vrvenda]
 Coordinates=608,781,103,33
-
-[FDQMaxIdCli]
-Coordinates=130,547,78,69
 
 [FDQuery1CodigoBarra]
 Coordinates=628,833,125,33
@@ -222,9 +219,6 @@ Coordinates=1119,573,191,33
 
 [FDQPedidovalor_pedido]
 Coordinates=1119,677,134,33
-
-[FDQMaxIdClimax]
-Coordinates=889,1192,99,33
 
 [FDQCadClicpf_cnpj_cli]
 Coordinates=1119,781,128,33

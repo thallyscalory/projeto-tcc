@@ -187,16 +187,35 @@ inherited FCadCli: TFCadCli
             StyleLookup = 'cameratoolbutton'
             Visible = True
           end
-          object SpdBRelatorioCli: TSpeedButton
+          object ImgRelatorioCli: TImage
+            MultiResBitmap.Height = 16
+            MultiResBitmap.Width = 16
+            MultiResBitmap = <
+              item
+                Width = 16
+                Height = 16
+                PNG = {
+                  89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+                  61000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  006F49444154384F63604005C781DCFF0430480D4E00D24C08A0A86122A49A2E
+                  F2C4F81B57B81C67840618A92EB5846A384E711890EB02B88BB1190012233AAA
+                  7179013DD0701A0832E0041659902B90312E034EA03B176433BE7081C9E1F426
+                  C94979E05D801E0BA00025949D51021D00537B392526A7177A0000000049454E
+                  44AE426082}
+                FileName = 
+                  'C:\projeto tcc\imagens para cria'#231#227'o de software\16-16\printer-to' +
+                  'ol.png'
+              end>
             Align = Right
-            IconTintColor = claRed
+            Margins.Top = 10.000000000000000000
             Margins.Right = 15.000000000000000000
-            Position.X = 108.000000000000000000
-            Size.Width = 48.000000000000000000
-            Size.Height = 48.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Position.X = 106.000000000000000000
+            Position.Y = 10.000000000000000000
+            Size.Width = 50.000000000000000000
+            Size.Height = 28.000000000000000000
             Size.PlatformDefault = False
-            StyleLookup = 'actiontoolbutton'
-            OnClick = SpdBRelatorioCliClick
+            OnClick = ImgRelatorioCliClick
           end
         end
         object VertScrollBox1: TVertScrollBox
@@ -1041,7 +1060,7 @@ inherited FCadCli: TFCadCli
     Methods = <>
     OutputConverters = <>
     Left = 28
-    Top = 325
+    Top = 309
     object LinkFillControlToField1: TLinkFillControlToField
       Category = 'Quick Bindings'
       Track = True
