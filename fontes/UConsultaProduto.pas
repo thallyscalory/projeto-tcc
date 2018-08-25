@@ -743,7 +743,7 @@ begin
       DM.FDQCadProd.Post;
     except
       on E: Exception do
-        ShowMessage('Erro!  ' + E.Message);
+        ShowMessage('Erro!  ' + #13#10 + E.Message);
     end;
   end
   else if crud = 'editar' then
@@ -786,7 +786,7 @@ begin
       DM.FDQAuxiliar.ExecSQL;
     except
       on E: Exception do
-        ShowMessage('Erro!  ' + E.Message);
+        ShowMessage('Erro!  ' + #13#10 + E.Message);
     end;
   end;
   DM.FDConnection1.CommitRetaining;

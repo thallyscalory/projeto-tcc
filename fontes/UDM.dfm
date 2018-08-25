@@ -9,7 +9,6 @@ object DM: TDM
       'OpenMode=ReadWrite'
       'LockingMode=Normal'
       'DriverID=SQLite')
-    Connected = True
     LoginPrompt = False
     Left = 40
     Top = 8
@@ -53,9 +52,11 @@ object DM: TDM
       Origin = 'un'
       Size = 4
     end
-    object FDQuery1vrvenda: TFloatField
+    object FDQuery1vrvenda: TBCDField
       FieldName = 'vrvenda'
       Origin = 'vrvenda'
+      Precision = 9
+      Size = 2
     end
     object FDQuery1sigla: TStringField
       FieldName = 'sigla'
@@ -73,13 +74,17 @@ object DM: TDM
       Required = True
       Size = 13
     end
-    object FDQuery1vrpromocao: TFloatField
+    object FDQuery1vrpromocao: TBCDField
       FieldName = 'vrpromocao'
       Origin = 'vrpromocao'
+      Precision = 9
+      Size = 2
     end
-    object FDQuery1VRAVISTA: TFloatField
+    object FDQuery1VRAVISTA: TBCDField
       FieldName = 'VRAVISTA'
       Origin = 'VRAVISTA'
+      Precision = 9
+      Size = 2
     end
     object FDQuery1ativo: TStringField
       FieldName = 'ativo'
@@ -123,9 +128,11 @@ object DM: TDM
       Origin = 'un'
       Size = 4
     end
-    object FDQDetalheProdCodBarvrvenda: TFloatField
+    object FDQDetalheProdCodBarvrvenda: TBCDField
       FieldName = 'vrvenda'
       Origin = 'vrvenda'
+      Precision = 9
+      Size = 2
     end
     object FDQDetalheProdCodBarsigla: TStringField
       FieldName = 'sigla'
@@ -143,13 +150,17 @@ object DM: TDM
       Required = True
       Size = 13
     end
-    object FDQDetalheProdCodBarvrpromocao: TFloatField
+    object FDQDetalheProdCodBarvrpromocao: TBCDField
       FieldName = 'vrpromocao'
       Origin = 'vrpromocao'
+      Precision = 9
+      Size = 2
     end
-    object FDQDetalheProdCodBarVRAVISTA: TFloatField
+    object FDQDetalheProdCodBarVRAVISTA: TBCDField
       FieldName = 'VRAVISTA'
       Origin = 'VRAVISTA'
+      Precision = 9
+      Size = 2
     end
     object FDQDetalheProdCodBarativo: TStringField
       FieldName = 'ativo'
@@ -428,9 +439,11 @@ object DM: TDM
       Origin = 'un'
       Size = 4
     end
-    object FDQConsultaProdvrvenda: TFloatField
+    object FDQConsultaProdvrvenda: TBCDField
       FieldName = 'vrvenda'
       Origin = 'vrvenda'
+      Precision = 9
+      Size = 2
     end
     object FDQConsultaProdsigla: TStringField
       FieldName = 'sigla'
@@ -448,13 +461,17 @@ object DM: TDM
       Required = True
       Size = 13
     end
-    object FDQConsultaProdvrpromocao: TFloatField
+    object FDQConsultaProdvrpromocao: TBCDField
       FieldName = 'vrpromocao'
       Origin = 'vrpromocao'
+      Precision = 9
+      Size = 2
     end
-    object FDQConsultaProdVRAVISTA: TFloatField
+    object FDQConsultaProdVRAVISTA: TBCDField
       FieldName = 'VRAVISTA'
       Origin = 'VRAVISTA'
+      Precision = 9
+      Size = 2
     end
     object FDQConsultaProdativo: TStringField
       FieldName = 'ativo'
@@ -506,9 +523,11 @@ object DM: TDM
       Origin = 'un'
       Size = 4
     end
-    object FDQCadProdvrvenda: TFloatField
+    object FDQCadProdvrvenda: TBCDField
       FieldName = 'vrvenda'
       Origin = 'vrvenda'
+      Precision = 9
+      Size = 2
     end
     object FDQCadProdsigla: TStringField
       FieldName = 'sigla'
@@ -526,13 +545,17 @@ object DM: TDM
       Required = True
       Size = 13
     end
-    object FDQCadProdvrpromocao: TFloatField
+    object FDQCadProdvrpromocao: TBCDField
       FieldName = 'vrpromocao'
       Origin = 'vrpromocao'
+      Precision = 9
+      Size = 2
     end
-    object FDQCadProdVRAVISTA: TFloatField
+    object FDQCadProdVRAVISTA: TBCDField
       FieldName = 'VRAVISTA'
       Origin = 'VRAVISTA'
+      Precision = 9
+      Size = 2
     end
     object FDQCadProdativo: TStringField
       FieldName = 'ativo'
@@ -591,11 +614,11 @@ object DM: TDM
         ParamType = ptInput
         Size = 1
       end>
-    object FDQPedidoid_pedido: TIntegerField
+    object FDQPedidoid_pedido: TFDAutoIncField
       FieldName = 'id_pedido'
       Origin = 'id_pedido'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQPedidoid_cli_pedido: TIntegerField
       FieldName = 'id_cli_pedido'
@@ -610,12 +633,14 @@ object DM: TDM
       FieldName = 'valor_pedido'
       Origin = 'valor_pedido'
       Required = True
-      Precision = 8
+      Precision = 9
       Size = 2
     end
-    object FDQPedidodescmoeda_pedido: TFloatField
+    object FDQPedidodescmoeda_pedido: TBCDField
       FieldName = 'descmoeda_pedido'
       Origin = 'descmoeda_pedido'
+      Precision = 9
+      Size = 2
     end
     object FDQPedidodescpercent_pedido: TFloatField
       FieldName = 'descpercent_pedido'
@@ -828,9 +853,11 @@ object DM: TDM
       Origin = 'un'
       Size = 4
     end
-    object FDQProdItemPedidovrvenda: TFloatField
+    object FDQProdItemPedidovrvenda: TBCDField
       FieldName = 'vrvenda'
       Origin = 'vrvenda'
+      Precision = 9
+      Size = 2
     end
     object FDQProdItemPedidosigla: TStringField
       FieldName = 'sigla'
@@ -848,13 +875,17 @@ object DM: TDM
       Required = True
       Size = 13
     end
-    object FDQProdItemPedidovrpromocao: TFloatField
+    object FDQProdItemPedidovrpromocao: TBCDField
       FieldName = 'vrpromocao'
       Origin = 'vrpromocao'
+      Precision = 9
+      Size = 2
     end
-    object FDQProdItemPedidoVRAVISTA: TFloatField
+    object FDQProdItemPedidoVRAVISTA: TBCDField
       FieldName = 'VRAVISTA'
       Origin = 'VRAVISTA'
+      Precision = 9
+      Size = 2
     end
     object FDQProdItemPedidoativo: TStringField
       FieldName = 'ativo'
@@ -920,16 +951,15 @@ object DM: TDM
       'select * from pedido;')
     Left = 368
     Top = 144
-    object FDQCadPedidoid_pedido: TIntegerField
+    object FDQCadPedidoid_pedido: TFDAutoIncField
       FieldName = 'id_pedido'
       Origin = 'id_pedido'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQCadPedidoid_cli_pedido: TIntegerField
       FieldName = 'id_cli_pedido'
       Origin = 'id_cli_pedido'
-      Required = True
     end
     object FDQCadPedidodatahora_pedido: TDateTimeField
       FieldName = 'datahora_pedido'
@@ -940,12 +970,14 @@ object DM: TDM
       FieldName = 'valor_pedido'
       Origin = 'valor_pedido'
       Required = True
-      Precision = 8
+      Precision = 9
       Size = 2
     end
-    object FDQCadPedidodescmoeda_pedido: TFloatField
+    object FDQCadPedidodescmoeda_pedido: TBCDField
       FieldName = 'descmoeda_pedido'
       Origin = 'descmoeda_pedido'
+      Precision = 9
+      Size = 2
     end
     object FDQCadPedidodescpercent_pedido: TFloatField
       FieldName = 'descpercent_pedido'
@@ -1007,11 +1039,11 @@ object DM: TDM
         ParamType = ptInput
         Size = 20
       end>
-    object FDQConsItemPedidoid_item_pedido: TIntegerField
+    object FDQConsItemPedidoid_item_pedido: TFDAutoIncField
       FieldName = 'id_item_pedido'
       Origin = 'id_item_pedido'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQConsItemPedidoid_pedido_item: TIntegerField
       FieldName = 'id_pedido_item'
@@ -1032,16 +1064,20 @@ object DM: TDM
       FieldName = 'valor_item_pedido'
       Origin = 'valor_item_pedido'
       Required = True
-      Precision = 8
+      Precision = 9
       Size = 2
     end
-    object FDQConsItemPedidodescmoeda_item_pedido: TFloatField
+    object FDQConsItemPedidodescmoeda_item_pedido: TBCDField
       FieldName = 'descmoeda_item_pedido'
       Origin = 'descmoeda_item_pedido'
+      Precision = 9
+      Size = 2
     end
-    object FDQConsItemPedidodescpercent_item_pedido: TFloatField
+    object FDQConsItemPedidodescpercent_item_pedido: TBCDField
       FieldName = 'descpercent_item_pedido'
       Origin = 'descpercent_item_pedido'
+      Precision = 9
+      Size = 2
     end
     object FDQConsItemPedidoid_atendente_item: TIntegerField
       FieldName = 'id_atendente_item'
@@ -1092,11 +1128,11 @@ object DM: TDM
       'select * from item_pedido;')
     Left = 480
     Top = 144
-    object FDQCadItemPedidoid_item_pedido: TIntegerField
+    object FDQCadItemPedidoid_item_pedido: TFDAutoIncField
       FieldName = 'id_item_pedido'
       Origin = 'id_item_pedido'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQCadItemPedidoid_pedido_item: TIntegerField
       FieldName = 'id_pedido_item'
@@ -1117,16 +1153,20 @@ object DM: TDM
       FieldName = 'valor_item_pedido'
       Origin = 'valor_item_pedido'
       Required = True
-      Precision = 8
+      Precision = 9
       Size = 2
     end
-    object FDQCadItemPedidodescmoeda_item_pedido: TFloatField
+    object FDQCadItemPedidodescmoeda_item_pedido: TBCDField
       FieldName = 'descmoeda_item_pedido'
       Origin = 'descmoeda_item_pedido'
+      Precision = 9
+      Size = 2
     end
-    object FDQCadItemPedidodescpercent_item_pedido: TFloatField
+    object FDQCadItemPedidodescpercent_item_pedido: TBCDField
       FieldName = 'descpercent_item_pedido'
       Origin = 'descpercent_item_pedido'
+      Precision = 9
+      Size = 2
     end
     object FDQCadItemPedidoid_atendente_item: TIntegerField
       FieldName = 'id_atendente_item'
@@ -1190,11 +1230,11 @@ object DM: TDM
         ParamType = ptInput
         Size = 60
       end>
-    object FDQConsContasReceberid: TIntegerField
+    object FDQConsContasReceberid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQConsContasReceberid_pedido: TIntegerField
       FieldName = 'id_pedido'
@@ -1209,27 +1249,37 @@ object DM: TDM
       FieldName = 'id_forma_pag'
       Origin = 'id_forma_pag'
     end
-    object FDQConsContasRecebervalor_documento: TFloatField
+    object FDQConsContasRecebervalor_documento: TBCDField
       FieldName = 'valor_documento'
       Origin = 'valor_documento'
       Required = True
+      Precision = 9
+      Size = 2
     end
-    object FDQConsContasRecebervalor_juro: TFloatField
+    object FDQConsContasRecebervalor_juro: TBCDField
       FieldName = 'valor_juro'
       Origin = 'valor_juro'
+      Precision = 9
+      Size = 2
     end
-    object FDQConsContasRecebervalor_desconto: TFloatField
+    object FDQConsContasRecebervalor_desconto: TBCDField
       FieldName = 'valor_desconto'
       Origin = 'valor_desconto'
+      Precision = 9
+      Size = 2
     end
-    object FDQConsContasRecebervalor_pago: TFloatField
+    object FDQConsContasRecebervalor_pago: TBCDField
       FieldName = 'valor_pago'
       Origin = 'valor_pago'
+      Precision = 9
+      Size = 2
     end
-    object FDQConsContasRecebervalor_saldo: TFloatField
+    object FDQConsContasRecebervalor_saldo: TBCDField
       FieldName = 'valor_saldo'
       Origin = 'valor_saldo'
       Required = True
+      Precision = 9
+      Size = 2
     end
     object FDQConsContasReceberdata_venc: TDateField
       FieldName = 'data_venc'
@@ -1296,7 +1346,7 @@ object DM: TDM
       Origin = 'apelido_cli'
       ProviderFlags = []
       ReadOnly = True
-      Size = 15
+      Size = 30
     end
     object FDQConsContasReceberfone_cli: TStringField
       AutoGenerateValue = arDefault
@@ -1402,6 +1452,15 @@ object DM: TDM
       ProviderFlags = []
       ReadOnly = True
     end
+    object FDQConsContasReceberstatus: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'status'
+      Origin = 'status'
+      ProviderFlags = []
+      ReadOnly = True
+      FixedChar = True
+      Size = 1
+    end
   end
   object FDQMaxIdContasReceber: TFDQuery
     Connection = FDConnection1
@@ -1423,11 +1482,11 @@ object DM: TDM
       'select * from conta_receber')
     Left = 816
     Top = 152
-    object FDQCadContasReceberid: TIntegerField
+    object FDQCadContasReceberid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQCadContasReceberid_pedido: TIntegerField
       FieldName = 'id_pedido'
@@ -1442,27 +1501,37 @@ object DM: TDM
       FieldName = 'id_forma_pag'
       Origin = 'id_forma_pag'
     end
-    object FDQCadContasRecebervalor_documento: TFloatField
+    object FDQCadContasRecebervalor_documento: TBCDField
       FieldName = 'valor_documento'
       Origin = 'valor_documento'
       Required = True
+      Precision = 9
+      Size = 2
     end
-    object FDQCadContasRecebervalor_juro: TFloatField
+    object FDQCadContasRecebervalor_juro: TBCDField
       FieldName = 'valor_juro'
       Origin = 'valor_juro'
+      Precision = 9
+      Size = 2
     end
-    object FDQCadContasRecebervalor_desconto: TFloatField
+    object FDQCadContasRecebervalor_desconto: TBCDField
       FieldName = 'valor_desconto'
       Origin = 'valor_desconto'
+      Precision = 9
+      Size = 2
     end
-    object FDQCadContasRecebervalor_pago: TFloatField
+    object FDQCadContasRecebervalor_pago: TBCDField
       FieldName = 'valor_pago'
       Origin = 'valor_pago'
+      Precision = 9
+      Size = 2
     end
-    object FDQCadContasRecebervalor_saldo: TFloatField
+    object FDQCadContasRecebervalor_saldo: TBCDField
       FieldName = 'valor_saldo'
       Origin = 'valor_saldo'
       Required = True
+      Precision = 9
+      Size = 2
     end
     object FDQCadContasReceberdata_venc: TDateField
       FieldName = 'data_venc'
@@ -1492,26 +1561,28 @@ object DM: TDM
       'select * from baixa_conta_receber;')
     Left = 960
     Top = 152
-    object FDQCadBaixaContasReceberid: TIntegerField
+    object FDQCadBaixaContasReceberid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQCadBaixaContasReceberid_conta_receber: TIntegerField
       FieldName = 'id_conta_receber'
       Origin = 'id_conta_receber'
       Required = True
     end
-    object FDQCadBaixaContasReceberdata: TDateField
+    object FDQCadBaixaContasReceberdata: TDateTimeField
       FieldName = 'data'
       Origin = 'data'
       Required = True
     end
-    object FDQCadBaixaContasRecebervalor: TFloatField
+    object FDQCadBaixaContasRecebervalor: TBCDField
       FieldName = 'valor'
       Origin = 'valor'
       Required = True
+      Precision = 9
+      Size = 2
     end
     object FDQCadBaixaContasReceberid_forma_pag: TIntegerField
       FieldName = 'id_forma_pag'
@@ -1585,11 +1656,11 @@ object DM: TDM
         ParamType = ptInput
         Size = 30
       end>
-    object FDQConsContasReceberBaixaid: TIntegerField
+    object FDQConsContasReceberBaixaid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQConsContasReceberBaixaid_pedido: TIntegerField
       FieldName = 'id_pedido'
@@ -1604,27 +1675,37 @@ object DM: TDM
       FieldName = 'id_forma_pag'
       Origin = 'id_forma_pag'
     end
-    object FDQConsContasReceberBaixavalor_documento: TFloatField
+    object FDQConsContasReceberBaixavalor_documento: TBCDField
       FieldName = 'valor_documento'
       Origin = 'valor_documento'
       Required = True
+      Precision = 9
+      Size = 2
     end
-    object FDQConsContasReceberBaixavalor_juro: TFloatField
+    object FDQConsContasReceberBaixavalor_juro: TBCDField
       FieldName = 'valor_juro'
       Origin = 'valor_juro'
+      Precision = 9
+      Size = 2
     end
-    object FDQConsContasReceberBaixavalor_desconto: TFloatField
+    object FDQConsContasReceberBaixavalor_desconto: TBCDField
       FieldName = 'valor_desconto'
       Origin = 'valor_desconto'
+      Precision = 9
+      Size = 2
     end
-    object FDQConsContasReceberBaixavalor_pago: TFloatField
+    object FDQConsContasReceberBaixavalor_pago: TBCDField
       FieldName = 'valor_pago'
       Origin = 'valor_pago'
+      Precision = 9
+      Size = 2
     end
-    object FDQConsContasReceberBaixavalor_saldo: TFloatField
+    object FDQConsContasReceberBaixavalor_saldo: TBCDField
       FieldName = 'valor_saldo'
       Origin = 'valor_saldo'
       Required = True
+      Precision = 9
+      Size = 2
     end
     object FDQConsContasReceberBaixadata_venc: TDateField
       FieldName = 'data_venc'
@@ -1866,13 +1947,53 @@ object DM: TDM
   object FDQConsContaPagar: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
-      'select * from conta_pagar')
+      'select * from conta_pagar cp '
+      'inner join fornecedor f on cp.id = f.id '
+      
+        'where cp.quitado = '#39'N'#39' and (f.nome_fantasia like :PFornContaPaga' +
+        'r1 and cp.data_venc between :PDataVencInicio and :PDataVencFinal' +
+        ' '
+      'or f.nome_fantasia like :PFornContaPagar2) '
+      'order by f.nome_fantasia'
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      '')
     Left = 1264
     Top = 16
+    ParamData = <
+      item
+        Name = 'PFORNCONTAPAGAR1'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 40
+      end
+      item
+        Name = 'PDATAVENCINICIO'
+        DataType = ftDateTime
+        ParamType = ptInput
+        Size = 10
+      end
+      item
+        Name = 'PDATAVENCFINAL'
+        DataType = ftDateTime
+        ParamType = ptInput
+        Size = 10
+      end
+      item
+        Name = 'PFORNCONTAPAGAR2'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 40
+      end>
     object FDQConsContaPagarid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQConsContaPagarid_fornecedor: TIntegerField
       FieldName = 'id_fornecedor'
@@ -1891,6 +2012,18 @@ object DM: TDM
       FieldName = 'valor_doc'
       Origin = 'valor_doc'
       Required = True
+      Precision = 9
+      Size = 2
+    end
+    object FDQConsContaPagarvalor_descmoeda: TBCDField
+      FieldName = 'valor_descmoeda'
+      Origin = 'valor_descmoeda'
+      Precision = 9
+      Size = 2
+    end
+    object FDQConsContaPagarvalor_acresc: TBCDField
+      FieldName = 'valor_acresc'
+      Origin = 'valor_acresc'
       Precision = 9
       Size = 2
     end
@@ -1922,6 +2055,150 @@ object DM: TDM
       FixedChar = True
       Size = 1
     end
+    object FDQConsContaPagarid_1: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'id_1'
+      Origin = 'id'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object FDQConsContaPagartipo_pessoa: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'tipo_pessoa'
+      Origin = 'tipo_pessoa'
+      ProviderFlags = []
+      ReadOnly = True
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsContaPagarnome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'nome'
+      Origin = 'nome'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 60
+    end
+    object FDQConsContaPagarnome_fantasia: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'nome_fantasia'
+      Origin = 'nome_fantasia'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 40
+    end
+    object FDQConsContaPagarcpf_cnpj: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cpf_cnpj'
+      Origin = 'cpf_cnpj'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 15
+    end
+    object FDQConsContaPagarrg_ie: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'rg_ie'
+      Origin = 'rg_ie'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object FDQConsContaPagarfone: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'fone'
+      Origin = 'fone'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 10
+    end
+    object FDQConsContaPagarendereco: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'endereco'
+      Origin = 'endereco'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object FDQConsContaPagarnumero: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'numero'
+      Origin = 'numero'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 10
+    end
+    object FDQConsContaPagarcomplemento: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'complemento'
+      Origin = 'complemento'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 30
+    end
+    object FDQConsContaPagarbairro: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'bairro'
+      Origin = 'bairro'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 30
+    end
+    object FDQConsContaPagarcep: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cep'
+      Origin = 'cep'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 15
+    end
+    object FDQConsContaPagarcidade: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cidade'
+      Origin = 'cidade'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 30
+    end
+    object FDQConsContaPagaruf: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'uf'
+      Origin = 'uf'
+      ProviderFlags = []
+      ReadOnly = True
+      FixedChar = True
+      Size = 2
+    end
+    object FDQConsContaPagaremail: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'email'
+      Origin = 'email'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 60
+    end
+    object FDQConsContaPagarobs: TWideMemoField
+      AutoGenerateValue = arDefault
+      FieldName = 'obs'
+      Origin = 'obs'
+      ProviderFlags = []
+      ReadOnly = True
+      BlobType = ftWideMemo
+    end
+    object FDQConsContaPagarstatus: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'status'
+      Origin = 'status'
+      ProviderFlags = []
+      ReadOnly = True
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsContaPagardata_cad: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'data_cad'
+      Origin = 'data_cad'
+      ProviderFlags = []
+      ReadOnly = True
+    end
   end
   object FDQCadContaPagar: TFDQuery
     Connection = FDConnection1
@@ -1933,6 +2210,7 @@ object DM: TDM
       FieldName = 'id'
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQCadContaPagarid_fornecedor: TIntegerField
       FieldName = 'id_fornecedor'
@@ -1951,6 +2229,18 @@ object DM: TDM
       FieldName = 'valor_doc'
       Origin = 'valor_doc'
       Required = True
+      Precision = 9
+      Size = 2
+    end
+    object FDQCadContaPagarvalor_descmoeda: TBCDField
+      FieldName = 'valor_descmoeda'
+      Origin = 'valor_descmoeda'
+      Precision = 9
+      Size = 2
+    end
+    object FDQCadContaPagarvalor_acresc: TBCDField
+      FieldName = 'valor_acresc'
+      Origin = 'valor_acresc'
       Precision = 9
       Size = 2
     end

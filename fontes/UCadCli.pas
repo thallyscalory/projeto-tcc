@@ -203,10 +203,16 @@ var
 implementation
 
 {$R *.fmx}
+{$IFDEF MSWINDOWS}
+
+uses UDM, UPrincipal, UVenda1;
+{$ENDIF}
+{$IFDEF ANDROID}
 
 uses UDM, UPrincipal, UVenda1, Androidapi.JNI.GraphicsContentViewText,
   Androidapi.JNI.JavaTypes,
   Androidapi.JNI.Net, Androidapi.Helpers, System.IOUtils;
+{$ENDIF}
 
 procedure TFCadCli.BtnFiltrarCliClick(Sender: TObject);
 begin
@@ -556,6 +562,8 @@ begin
   EdtDataCadCli.Enabled := False;
 end;
 
+{$IFDEF ANDROID}
+
 function FileNameToUri(const FileName: string): Jnet_Uri;
 var
   JavaFile: JFile;
@@ -563,8 +571,10 @@ begin
   JavaFile := TJFile.JavaClass.init(StringToJString(FileName));
   Result := TJnet_Uri.JavaClass.fromFile(JavaFile);
 end;
+{$ENDIF}
 
 procedure TFCadCli.ImgRelatorioCliClick(Sender: TObject);
+{$IFDEF ANDROID}
 var
   Document: JPdfDocument;
   PageInfo: JPdfDocument_PageInfo;
@@ -575,8 +585,10 @@ var
   FileName: string;
   OutputStream: JFileOutputStream;
   Intent: JIntent;
+{$ENDIF}
 begin
   inherited;
+{$IFDEF ANDROID}
   // create Pdf document
   Document := TJPdfDocument.JavaClass.init;
   try
@@ -589,8 +601,7 @@ begin
     Paint.setLinearText(True);
 
     Paint.setARGB($FF, 0, 0, $FF);
-    Canvas.drawText(StringToJString('Calory Sistemas'), 5,
-      10, Paint);
+    Canvas.drawText(StringToJString('Calory Sistemas'), 5, 10, Paint);
 
     Paint.setStrokeWidth(1);
     Canvas.drawLine(0, 14, 100, 14, Paint);
@@ -601,7 +612,7 @@ begin
 
     // cor da letra -> Paint.setARGB($FF, 0, 0, $FF);
     Canvas.drawText(StringToJString(LblNomeCli.Text + ' ' + EdtNomeCli.Text), 1,
-     17 , Paint);
+      17, Paint);
 
     Canvas.drawLine(0, 18, 100, 18, Paint);
 
@@ -725,6 +736,7 @@ begin
   Intent.setFlags(TJIntent.JavaClass.FLAG_ACTIVITY_NO_HISTORY or
     TJIntent.JavaClass.FLAG_ACTIVITY_CLEAR_TOP);
   SharedActivity.StartActivity(Intent);
+{$ENDIF}
 end;
 
 procedure TFCadCli.LimpaCampos;
@@ -906,7 +918,7 @@ begin
       FPrincipal.ksLoadingIndicator1.HideLoading;
     except
       on E: Exception do
-        ShowMessage('Erro!  ' + E.Message);
+        ShowMessage('Erro!  ' + #13#10 + E.Message);
     end;
   end
   else if crud = 'editar' then
@@ -968,7 +980,7 @@ begin
       FPrincipal.ksLoadingIndicator1.HideLoading;
     except
       on E: Exception do
-        ShowMessage('Erro!  ' + E.Message);
+        ShowMessage('Erro!  ' + #13#10 + E.Message);
     end;
   end;
 end;

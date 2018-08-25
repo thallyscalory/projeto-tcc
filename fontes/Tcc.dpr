@@ -21,10 +21,8 @@ uses
 
 begin
   Application.Initialize;
-  Application.CreateForm(TFSplash, FSplash);
   Application.CreateForm(TDM, DM);
+  Application.CreateForm(TFSplash, FSplash);
   Application.CreateForm(TFPrincipal, FPrincipal);
-  Application.CreateForm(TFCadFornecedor, FCadFornecedor);
-  Application.CreateForm(TFCadContasPagar, FCadContasPagar);
   Application.Run;
 end.

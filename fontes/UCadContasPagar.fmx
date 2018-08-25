@@ -18,6 +18,9 @@ inherited FCadContasPagar: TFCadContasPagar
           inherited LblTitulo: TLabel
             TextSettings.Font.StyleExt = {04070000000000000004000000}
           end
+          inherited SpBVoltar: TSpeedButton
+            OnClick = SpBVoltarClick
+          end
         end
         object LytFiltroDataVencContasReceber: TLayout
           Align = Top
@@ -89,6 +92,7 @@ inherited FCadContasPagar: TFCadContasPagar
           end
           object DateEdtFiltroVencFinalContasPagar: TDateEdit
             Date = 43312.000000000000000000
+            OnClosePicker = DateEdtFiltroVencFinalContasPagarClosePicker
             Align = Left
             Margins.Right = 8.000000000000000000
             Position.X = 181.000000000000000000
@@ -135,11 +139,13 @@ inherited FCadContasPagar: TFCadContasPagar
             Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 1
+            OnClosePopup = ComboBoxFiltroFornContasPagarClosePopup
+            OnEnter = ComboBoxFiltroFornContasPagarEnter
           end
         end
         object ListViewCadContasPagar: TListView
-          ItemAppearanceClassName = 'TListItemAppearance'
-          ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+          ItemAppearanceClassName = 'TMultiDetailItemAppearance'
+          ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
           HeaderAppearanceClassName = 'TListHeaderObjects'
           FooterAppearanceClassName = 'TListHeaderObjects'
           Align = Client
@@ -174,7 +180,7 @@ inherited FCadContasPagar: TFCadContasPagar
           TintColor = claSilver
         end
       end
-      object TabItemBaixa: TTabItem
+      object TbItemBaixa: TTabItem
         CustomIcon = <
           item
           end>
@@ -185,7 +191,66 @@ inherited FCadContasPagar: TFCadContasPagar
         StyleLookup = ''
         TabOrder = 0
         Text = 'Baixa'
+        ExplicitSize.cx = 43.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
       end
     end
+  end
+  inherited ActionList1: TActionList
+    Left = 16
+    Top = 424
+  end
+  inherited ImageList1: TImageList
+    Left = 24
+    Top = 360
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = DM.FDQConsContaPagar
+    ScopeMappings = <>
+    Left = 24
+    Top = 296
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 100
+    Top = 421
+    object LinkListControlToField1: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'data_venc'
+      Control = ListViewCadContasPagar
+      FillExpressions = <
+        item
+          SourceMemberName = 'valor_doc'
+          ControlMemberName = 'Detail1'
+        end
+        item
+          SourceMemberName = 'valor_pago'
+          ControlMemberName = 'Detail2'
+        end
+        item
+          SourceMemberName = 'valor_saldo'
+          ControlMemberName = 'Detail3'
+        end>
+      FillHeaderExpressions = <>
+      FillHeaderFieldName = 'nome'
+      FillBreakGroups = <>
+    end
+    object LinkListControlToField2: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      FieldName = 'nome_fantasia'
+      Control = ComboBoxFiltroFornContasPagar
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+  end
+  object BindSourceDB2: TBindSourceDB
+    DataSet = DM.FDQConsFornecedor
+    ScopeMappings = <>
+    Left = 16
+    Top = 240
   end
 end

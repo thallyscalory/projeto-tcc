@@ -14,7 +14,7 @@ Coordinates=213,313,142,33
 Coordinates=117,10,133,249
 
 []
-Coordinates=130,547,78,69
+Coordinates=873,365,186,33
 
 [FDQConsFormaPagcondicional_forma_pag]
 Coordinates=608,365,227,33
@@ -28,50 +28,17 @@ Coordinates=873,1,146,33
 [FDQCadPedido]
 Coordinates=126,278,100,231
 
-[FDQuery1descricao]
-Coordinates=608,469,111,33
-
 [FDQCadClicomplemento_cli]
 Coordinates=873,53,152,33
-
-[FDQDetalheProdCodBargrupo]
-Coordinates=608,521,163,33
-
-[FDQCadPedidodescmoeda_pedido]
-Coordinates=608,573,186,33
 
 [FDQCadCliapelido_cli]
 Coordinates=628,625,121,33
 
-[FDQDetalheProdCodBarCodigoBarra]
-Coordinates=608,677,196,33
-
-[FDQuery1produto]
-Coordinates=608,729,102,33
-
-[FDQuery1vrvenda]
-Coordinates=608,781,103,33
-
-[FDQuery1CodigoBarra]
-Coordinates=628,833,125,33
-
 [FDQCadProd]
 Coordinates=120,654,79,249
 
-[FDQPedidodatahora_pedido]
-Coordinates=873,157,153,33
-
-[FDQDetalheProdCodBarativo]
-Coordinates=873,209,157,33
-
 [FDQCadClitipo_cli]
 Coordinates=608,885,104,33
-
-[FDQCadProdproduto]
-Coordinates=0,667,117,33
-
-[FDQDetalheProdCodBarvrpromocao]
-Coordinates=873,261,193,33
 
 [FDQCadClibairro_cli]
 Coordinates=608,937,115,33
@@ -79,41 +46,8 @@ Coordinates=608,937,115,33
 [FDQCadClinome_cli]
 Coordinates=489,942,113,33
 
-[FDQPedidoid_formapag_pedido]
-Coordinates=873,313,171,33
-
-[FDQCadItemPedidoid_item_pedido]
-Coordinates=873,365,186,33
-
-[FDQCadProdcodigo]
-Coordinates=0,909,112,33
-
 [FDQCadFormaPag]
 Coordinates=121,942,112,141
-
-[FDQPedidonome_cli]
-Coordinates=873,417,115,33
-
-[FDQProdItemPedidoativo]
-Coordinates=873,469,139,33
-
-[FDQConsultaProdvrpromocao]
-Coordinates=873,521,163,33
-
-[FDQCadProddescricao]
-Coordinates=873,573,127,33
-
-[FDQProdItemPedidovrpromocao]
-Coordinates=873,625,174,33
-
-[FDQDetalheProdCodBardescricao]
-Coordinates=873,677,182,33
-
-[FDQProdItemPedidogrupo]
-Coordinates=873,729,144,33
-
-[FDQCadPedidodatahora_pedido]
-Coordinates=873,781,172,33
 
 [FDQCadCli]
 Coordinates=288,1,83,393
@@ -121,35 +55,11 @@ Coordinates=288,1,83,393
 [FDQConsultaProd]
 Coordinates=325,413,103,249
 
-[FDQConsultaProdgrupo]
-Coordinates=873,833,132,33
-
-[FDQuery1grupo]
-Coordinates=628,989,92,33
-
-[FDQProdItemPedidodescricao]
-Coordinates=873,885,163,33
-
-[FDQPedidoid_forma_pag]
-Coordinates=873,937,137,33
-
 [FDQMaxIdPedido]
 Coordinates=21,547,99,69
 
 [FDQCadClicep_cli]
 Coordinates=873,989,103,33
-
-[FDQPedidoid_cli]
-Coordinates=628,1041,96,33
-
-[FDQProdItemPedidosigla]
-Coordinates=873,1041,138,33
-
-[FDQDetalheProdCodBarun]
-Coordinates=724,942,146,33
-
-[FDQPedidoid_cli_pedido]
-Coordinates=908,1093,136,33
 
 [FDQConsFormaPaggeraconta_forma_pag]
 Coordinates=1119,1,219,33
@@ -157,35 +67,11 @@ Coordinates=1119,1,219,33
 [FDQProdItemPedido]
 Coordinates=441,365,115,249
 
-[FDQConsultaProddescricao]
-Coordinates=1119,53,151,33
-
-[FDQConsultaProdVRAVISTA]
-Coordinates=1119,105,155,33
-
 [FDQConsFormaPag]
 Coordinates=359,847,112,141
 
-[FDQCadProdvrvenda]
-Coordinates=789,1121,118,33
-
 [FDQMaxIdProd]
 Coordinates=37,422,88,69
-
-[FDQuery1vrpromocao]
-Coordinates=660,1121,123,33
-
-[FDQCadPedidoobs_pedido]
-Coordinates=1119,157,147,33
-
-[FDQProdItemPedidoun]
-Coordinates=531,1121,127,33
-
-[FDQPedidoid_pedido]
-Coordinates=402,1121,119,33
-
-[FDQPedidofoto_cli]
-Coordinates=293,1121,107,33
 
 [FDQCadFormaPagcondicional_forma_pag]
 Coordinates=1119,261,221,33
@@ -193,53 +79,20 @@ Coordinates=1119,261,221,33
 [FDQCadCliobs_cli]
 Coordinates=184,1121,104,33
 
-[FDQPedidodescricao_forma_pag]
-Coordinates=1119,313,176,33
-
-[FDQPedidodescmoeda_pedido]
-Coordinates=1119,365,166,33
-
-[FDQuery1sigla]
-Coordinates=95,1121,87,33
-
-[FDQProdItemPedidocodigo]
-Coordinates=1119,417,148,33
-
-[FDQuery1codigo]
-Coordinates=908,1145,97,33
-
 [FDQCadFormaPagid_forma_pag]
 Coordinates=1119,469,173,33
 
 [FDQCadFormaPagavista_forma_pag]
 Coordinates=1119,521,193,33
 
-[FDQCadPedidoid_formapag_pedido]
-Coordinates=1119,573,191,33
-
-[FDQPedidovalor_pedido]
-Coordinates=1119,677,134,33
-
 [FDQCadClicpf_cnpj_cli]
 Coordinates=1119,781,128,33
-
-[FDQCadProdvrpromocao]
-Coordinates=1119,833,138,33
 
 [FDQMaxIdItemPedidomaxId]
 Coordinates=1119,937,150,33
 
-[FDQCadPedidonrparcela_pedido]
-Coordinates=1119,989,175,33
-
-[FDQCadProdCodigoBarra]
-Coordinates=1119,1041,141,33
-
 [FDQMaxIdItemPedido]
 Coordinates=337,700,120,69
-
-[FDQCadItemPedidoqte_item_pedido]
-Coordinates=1119,1093,192,33
 
 [FDQCadClirg_ie_cli]
 Coordinates=1119,1145,110,33
@@ -247,38 +100,14 @@ Coordinates=1119,1145,110,33
 [FDQConsFormaPagavista_forma_pag]
 Coordinates=1401,53,199,33
 
-[FDQConsultaProdsigla]
-Coordinates=1119,1197,127,33
-
 [FDQCadFormaPaggeraconta_forma_pag]
 Coordinates=1401,105,213,33
-
-[FDQDetalheProdCodBarsigla]
-Coordinates=1401,157,157,33
-
-[FDQCadProdativo]
-Coordinates=1010,1192,103,33
 
 [FDQCadClicidade_cli]
 Coordinates=770,1216,118,33
 
-[FDQCadPedidoid_pedido]
-Coordinates=631,1216,138,33
-
-[FDQPedidonrparcela_pedido]
-Coordinates=1401,209,156,33
-
 [FDQCadCliendereco_cli]
 Coordinates=492,1216,131,33
-
-[FDQCadPedidovalor_pedido]
-Coordinates=1401,261,153,33
-
-[FDQCadItemPedidoid_atendente_item]
-Coordinates=1401,313,201,33
-
-[FDQCadPedidoid_cli_pedido]
-Coordinates=1401,365,155,33
 
 [FDQConsItemPedido]
 Coordinates=466,633,124,195
@@ -289,44 +118,20 @@ Coordinates=343,1216,141,33
 [FDQCadClinum_cli]
 Coordinates=234,1192,107,33
 
-[FDQCadPedidostatus_pedido]
-Coordinates=1401,469,159,33
-
-[FDQCadPedidodescpercent_pedido]
-Coordinates=1401,521,190,33
-
-[FDQPedidodescpercent_pedido]
-Coordinates=1401,573,170,33
-
 [FDQConsFormaPagdescricao_forma_pag]
 Coordinates=1401,625,218,33
 
 [FDQMaxIdProdmaxIdProd]
 Coordinates=85,1216,141,33
 
-[FDQCadItemPedidodescmoeda_item_pedido]
-Coordinates=1401,677,234,33
-
 [FDQCadCliid_cli]
 Coordinates=0,1159,95,33
-
-[FDQDetalheProdCodBarVRAVISTA]
-Coordinates=1401,729,186,33
 
 [FDQConsAtendentenome_funcionario]
 Coordinates=1401,781,201,33
 
-[FDQProdItemPedidoproduto]
-Coordinates=1401,833,153,33
-
-[FDQCadItemPedidoid_pedido_item]
-Coordinates=1401,885,186,33
-
 [FDQConsAtendenteusuario]
 Coordinates=1401,937,149,33
-
-[FDQCadItemPedidovalor_item_pedido]
-Coordinates=1401,989,202,33
 
 [FDQCadCliuf_cli]
 Coordinates=1119,1249,95,33
@@ -334,23 +139,8 @@ Coordinates=1119,1249,95,33
 [FDQCadCliemail_cli]
 Coordinates=1401,1041,112,33
 
-[FDQDetalheProdCodBarvrvenda]
-Coordinates=1401,1093,173,33
-
-[FDQProdItemPedidovrvenda]
-Coordinates=1401,1145,154,33
-
 [FDQConsAtendente]
 Coordinates=240,942,112,141
-
-[FDQuery1VRAVISTA]
-Coordinates=1401,1197,115,33
-
-[FDQDetalheProdCodBarproduto]
-Coordinates=1679,1,172,33
-
-[FDQProdItemPedidoCodigoBarra]
-Coordinates=1679,105,177,33
 
 [FDQConsFormaPagid_forma_pag]
 Coordinates=1679,157,179,33
@@ -358,59 +148,11 @@ Coordinates=1679,157,179,33
 [FDQMaxIdPedidomaxIdPedido]
 Coordinates=1679,209,163,33
 
-[FDQPedidostatus_pedido]
-Coordinates=1401,1249,140,33
-
-[FDQConsultaProdativo]
-Coordinates=1401,1301,127,33
-
-[FDQuery1un]
-Coordinates=16,1121,76,33
-
-[FDQCadProdsigla]
-Coordinates=1292,1287,102,33
-
-[FDQConsultaProdproduto]
-Coordinates=1252,1216,142,33
-
 [FDQConsAtendenteid_funcionario]
 Coordinates=1679,261,183,33
 
-[FDQCadItemPedidoid_produto_item]
-Coordinates=1679,313,191,33
-
-[FDQPedidoobs_pedido]
-Coordinates=1163,1320,128,33
-
-[FDQCadProdVRAVISTA]
-Coordinates=1024,1320,131,33
-
-[FDQCadProdgrupo]
-Coordinates=915,1287,108,33
-
-[FDQConsultaProdvrvenda]
-Coordinates=1679,365,143,33
-
-[FDQConsultaProdcodigo]
-Coordinates=776,1320,137,33
-
-[FDQConsultaProdCodigoBarra]
-Coordinates=1679,417,165,33
-
-[FDQProdItemPedidoVRAVISTA]
-Coordinates=1679,469,167,33
-
 [FDQPedido]
 Coordinates=209,547,112,357
-
-[FDQConsultaProdun]
-Coordinates=657,1320,116,33
-
-[FDQPedidocpf_cnpj_cli]
-Coordinates=518,1320,129,33
-
-[FDQuery1ativo]
-Coordinates=429,1287,87,33
 
 [FDQCadClidata_cad_cli]
 Coordinates=290,1320,130,33
@@ -421,21 +163,9 @@ Coordinates=161,1320,127,33
 [FDQCadItemPedido]
 Coordinates=466,53,124,195
 
-[FDQPedidocondicional_forma_pag]
-Coordinates=1679,521,186,33
-
 [FDQCadClifone_cli]
 Coordinates=52,1287,107,33
 
 [FDQCadFormaPagdescricao_forma_pag]
 Coordinates=1679,573,212,33
-
-[FDQDetalheProdCodBarcodigo]
-Coordinates=1679,625,167,33
-
-[FDQCadProdun]
-Coordinates=1401,1353,91,33
-
-[FDQCadItemPedidodescpercent_item_pedido]
-Coordinates=1679,677,238,33
 

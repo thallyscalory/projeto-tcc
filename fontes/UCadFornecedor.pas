@@ -261,7 +261,7 @@ begin
         if TVirtualKeyBoardState.Visible in keyboard.GetVirtualKeyBoardState
         then
         begin
-         keyboard.HideVirtualKeyboard;
+          keyboard.HideVirtualKeyboard;
         end;
       end;
     end
@@ -370,7 +370,8 @@ begin
   inherited;
   if EdtNomeForn.Text.IsEmpty then
   begin
-    ShowMessage('Processo Cancelado! Nome não pode estar em branco');
+    ShowMessage('Processo Cancelado!' + #13#10 +
+      'Nome não pode estar em branco');
     EdtNomeForn.SetFocus;
   end
   else
@@ -481,7 +482,7 @@ begin
       end;
     except
       on E: Exception do
-        ShowMessage('Erro! ' + E.Message);
+        ShowMessage('Erro! ' + #13#10 + E.Message);
     end;
   end;
 end;

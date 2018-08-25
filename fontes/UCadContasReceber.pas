@@ -271,15 +271,14 @@ begin
   SetLength(idCliContasReceber, 0);
   limpaArray := 'S';
 
-  dataVencInicio := StrToDateTime(DateEdtFiltroVencInicialContasReceber.Text);
-  dataVencFinal := StrToDateTime(DateEdtFiltroVencFinalContasReceber.Text);
+  dataVencInicio := DateEdtFiltroVencInicialContasReceber.DateTime;
+  dataVencFinal := DateEdtFiltroVencFinalContasReceber.DateTime;
 
   try
-    if DateEdtFiltroVencInicialContasReceber.Date >
-      DateEdtFiltroVencFinalContasReceber.Date then
+    if dataVencInicio > dataVencFinal then
     begin
-      ShowMessage
-        ('Processo cancelado! A data inicial não pode ser maior que a data final.');
+      ShowMessage('Processo cancelado!' + #13#10 +
+        'A data inicial não pode ser maior que a data final.');
       DateEdtFiltroVencInicialContasReceber.Date := Date;
       DateEdtFiltroVencFinalContasReceber.Date := Date;
     end
@@ -315,7 +314,7 @@ begin
     end;
   except
     on E: Exception do
-      ShowMessage('Erro!' + E.Message);
+      ShowMessage('Erro!' + #13#10 + E.Message);
   end;
   if not DM.FDQConsContasReceber.IsEmpty then
   begin
@@ -579,7 +578,7 @@ begin
   if (EdtValorReceber.Text.IsEmpty) or (EdtValorReceber.Text = '0') or
     (EdtValorReceber.Text = '0,00') then
   begin
-    ShowMessage('Processo cancelado! Valor em branco.');
+    ShowMessage('Processo cancelado!' + #13#10 + 'Valor em branco.');
     EdtValorReceber.SetFocus;
     valida := 'N';
   end
@@ -588,7 +587,8 @@ begin
     if StrToFloat(EdtDesconto.Text) >= StrToFloat(saldoContasReceber[primeiro])
     then
     begin
-      ShowMessage('Processo cancelado! Desconto maior que o saldo da conta.');
+      ShowMessage('Processo cancelado!' + #13#10 +
+        'Desconto maior que o saldo da conta.');
       EdtDesconto.SetFocus;
       valida := 'N';
     end;
@@ -606,8 +606,8 @@ begin
     begin
       if saldoTotal > valorTotal then
       begin
-        ShowMessage
-          ('Processo cancelado! Não é permitido baixa parcial com mais de 1 cliente filtrado.');
+        ShowMessage('Processo cancelado!' + #13#10 +
+          'Não é permitido baixa parcial com mais de 1 cliente filtrado.');
         EdtValorReceber.SetFocus;
       end
       else
@@ -667,7 +667,7 @@ begin
               DM.FDQCadBaixaContasReceber.Post;
             except
               on E: Exception do
-                ShowMessage('Erro!  ' + E.Message);
+                ShowMessage('Erro!  ' + #13#10 + E.Message);
             end;
 
           end;
@@ -984,7 +984,7 @@ begin
             // end;
           except
             on E: Exception do
-              ShowMessage('Erro!  ' + E.Message);
+              ShowMessage('Erro!  ' + #13#10 + E.Message);
           end;
 
         end;

@@ -84,6 +84,8 @@ type
       KeyboardVisible: Boolean; const Bounds: TRect);
     procedure ImgCadCliClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure RoundRectCadContasPagarClick(Sender: TObject);
+    procedure ImgCadContasPagarClick(Sender: TObject);
   private
     { Private declarations }
     FActiveForm: TForm;
@@ -103,7 +105,7 @@ implementation
 {$R *.fmx}
 
 uses UDM, UVenda, UCadCli, UConsultaProduto, UInfo, UVenda1, UCadContasReceber,
-  UAuxiliar, UCadFornecedor;
+  UAuxiliar, UCadFornecedor, UCadContasPagar;
 
 procedure TFPrincipal.AbrirForm(AFormClass: TComponentClass);
 begin
@@ -121,6 +123,8 @@ begin
     FVenda1.DisposeOf;
   if Assigned(FCadContasReceber) then
     FCadContasReceber.DisposeOf;
+  if Assigned(FCadContasPagar) then
+    FCadContasPagar.DisposeOf;
   if Assigned(FCadCli) then
     FCadCli.DisposeOf;
   if Assigned(FCadFornecedor) then
@@ -218,6 +222,18 @@ begin
     end);
 end;
 
+procedure TFPrincipal.ImgCadContasPagarClick(Sender: TObject);
+begin
+  Application.CreateForm(TFCadContasPagar, FCadContasPagar);
+  if not Assigned(FCadContasPagar) then
+    FCadContasPagar := TFCadContasPagar.Create(nil);
+  FCadContasPagar.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
+end;
+
 procedure TFPrincipal.ImgCadContasReceberClick(Sender: TObject);
 begin
   Application.CreateForm(TFCadContasReceber, FCadContasReceber);
@@ -278,6 +294,18 @@ begin
   if not Assigned(FCadFornecedor) then
     FCadFornecedor := TFCadFornecedor.Create(nil);
   FCadFornecedor.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
+end;
+
+procedure TFPrincipal.RoundRectCadContasPagarClick(Sender: TObject);
+begin
+  Application.CreateForm(TFCadContasPagar, FCadContasPagar);
+  if not Assigned(FCadContasPagar) then
+    FCadContasPagar := TFCadContasPagar.Create(nil);
+  FCadContasPagar.ShowModal(
     procedure(modalResult: TModalResult)
     begin
 
