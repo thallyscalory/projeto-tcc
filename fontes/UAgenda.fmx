@@ -1,0 +1,398 @@
+object FAgenda: TFAgenda
+  Left = 0
+  Top = 0
+  Caption = 'FAgenda'
+  ClientHeight = 480
+  ClientWidth = 330
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  OnKeyUp = FormKeyUp
+  OnVirtualKeyboardShown = FormVirtualKeyboardShown
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
+  DesignerMasterStyle = 3
+  object TabControl1: TTabControl
+    Align = Client
+    Size.Width = 330.000000000000000000
+    Size.Height = 480.000000000000000000
+    Size.PlatformDefault = False
+    TabHeight = 49.000000000000000000
+    TabIndex = 1
+    TabOrder = 0
+    TabPosition = PlatformDefault
+    Sizes = (
+      330s
+      431s
+      330s
+      431s)
+    object TbItemPesquisa: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 165.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Pesquisa'
+      ExplicitSize.cx = 165.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+      object LytFiltroDataVencContasReceber: TLayout
+        Align = Top
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 2.000000000000000000
+        Margins.Right = 2.000000000000000000
+        Margins.Bottom = 2.000000000000000000
+        Position.X = 2.000000000000000000
+        Position.Y = 50.000000000000000000
+        Size.Width = 326.000000000000000000
+        Size.Height = 65.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        object Label2: TLabel
+          Align = Top
+          StyledSettings = []
+          Margins.Left = 8.000000000000000000
+          Margins.Right = 8.000000000000000000
+          Margins.Bottom = 2.000000000000000000
+          Position.X = 8.000000000000000000
+          Size.Width = 310.000000000000000000
+          Size.Height = 33.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claNavy
+          Text = 'Filtrar Data Agendamento:'
+        end
+        object Label3: TLabel
+          Align = Left
+          StyledSettings = []
+          Margins.Left = 8.000000000000000000
+          Position.X = 8.000000000000000000
+          Position.Y = 35.000000000000000000
+          Size.Width = 33.000000000000000000
+          Size.Height = 30.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claNavy
+          Text = 'De:'
+        end
+        object DateEdtFiltroVencInicialContasReceber: TDateEdit
+          Date = 43349.000000000000000000
+          TodayDefault = True
+          Align = Left
+          Margins.Right = 8.000000000000000000
+          Position.X = 41.000000000000000000
+          Position.Y = 35.000000000000000000
+          Size.Width = 108.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+        end
+        object Label4: TLabel
+          Align = Left
+          StyledSettings = []
+          Position.X = 157.000000000000000000
+          Position.Y = 35.000000000000000000
+          Size.Width = 24.000000000000000000
+          Size.Height = 30.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claNavy
+          Text = 'A:'
+        end
+        object DateEdtFiltroVencFinalContasReceber: TDateEdit
+          Date = 43349.000000000000000000
+          TodayDefault = True
+          OnClosePicker = DateEdtFiltroVencFinalContasReceberClosePicker
+          Align = Left
+          Margins.Right = 8.000000000000000000
+          Position.X = 181.000000000000000000
+          Position.Y = 35.000000000000000000
+          Size.Width = 108.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+        end
+      end
+      object ListView1: TListView
+        Touch.InteractiveGestures = [LongTap]
+        OnGesture = ListView1Gesture
+        ItemAppearanceClassName = 'TMultiDetailItemAppearance'
+        ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
+        HeaderAppearanceClassName = 'TListHeaderObjects'
+        FooterAppearanceClassName = 'TListHeaderObjects'
+        Align = Client
+        Margins.Top = 4.000000000000000000
+        Size.Width = 330.000000000000000000
+        Size.Height = 310.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        OnItemClickEx = ListView1ItemClickEx
+      end
+      object ToolBar1: TToolBar
+        Size.Width = 330.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        TintColor = claSilver
+        object Label1: TLabel
+          Align = Contents
+          StyledSettings = []
+          Size.Width = 330.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.Font.StyleExt = {04070000000000000004000000}
+          TextSettings.FontColor = claNavy
+          TextSettings.HorzAlign = Center
+          Text = 'Agenda'
+        end
+        object SpdBNovo: TSpeedButton
+          Align = Right
+          IconTintColor = claNavy
+          Margins.Right = 5.000000000000000000
+          Position.X = 277.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'addtoolbutton'
+          OnClick = SpdBNovoClick
+        end
+        object SpdBVoltarPesquisa: TSpeedButton
+          Align = Left
+          IconTintColor = claNavy
+          Margins.Left = 8.000000000000000000
+          Position.X = 8.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'backtoolbutton'
+          OnClick = SpdBVoltarPesquisaClick
+        end
+      end
+    end
+    object TbItemEdicao: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 165.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Edicao'
+      ExplicitSize.cx = 165.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+      object Label5: TLabel
+        Align = Top
+        StyledSettings = [Style]
+        Margins.Left = 4.000000000000000000
+        Margins.Top = 4.000000000000000000
+        Position.X = 4.000000000000000000
+        Position.Y = 52.000000000000000000
+        Size.Width = 326.000000000000000000
+        Size.Height = 35.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Family = 'Arial'
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.FontColor = claNavy
+        Text = 'Mensagem: '
+      end
+      object Memo1: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Align = Top
+        Position.Y = 87.000000000000000000
+        Size.Width = 330.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        OnExit = Memo1Exit
+        Viewport.Width = 322.000000000000000000
+        Viewport.Height = 42.000000000000000000
+      end
+      object ToolBar2: TToolBar
+        Size.Width = 330.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        TintColor = claSilver
+        object Label7: TLabel
+          Align = Contents
+          StyledSettings = []
+          Size.Width = 330.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.Font.StyleExt = {04070000000000000004000000}
+          TextSettings.FontColor = claNavy
+          TextSettings.HorzAlign = Center
+        end
+        object SpdBEditarEdicao: TSpeedButton
+          Align = Right
+          IconTintColor = claNavy
+          Margins.Right = 8.000000000000000000
+          Position.X = 218.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'composetoolbutton'
+          OnClick = SpdBEditarEdicaoClick
+        end
+        object SpdBConfirmarEdicao: TSpeedButton
+          Align = Right
+          IconTintColor = claNavy
+          Margins.Right = 8.000000000000000000
+          Position.X = 274.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'donetoolbutton'
+          OnClick = SpdBConfirmarEdicaoClick
+        end
+        object SpdBVoltarEdicao: TSpeedButton
+          Align = Left
+          IconTintColor = claNavy
+          Margins.Left = 8.000000000000000000
+          Position.X = 8.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'backtoolbutton'
+          OnClick = SpdBVoltarEdicaoClick
+        end
+      end
+      object Layout1: TLayout
+        Align = Top
+        Position.Y = 174.000000000000000000
+        Size.Width = 330.000000000000000000
+        Size.Height = 43.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        object DateEdit1: TDateEdit
+          Date = 43349.000000000000000000
+          TodayDefault = True
+          Align = Left
+          Margins.Left = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 6.000000000000000000
+          Size.Width = 121.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          OnEnter = DateEdit1Enter
+        end
+        object TimeEdit1: TTimeEdit
+          Time = 0.876388888888888800
+          Align = Left
+          Margins.Left = 10.000000000000000000
+          Position.X = 136.000000000000000000
+          Position.Y = 6.000000000000000000
+          Size.Width = 73.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          OnEnter = TimeEdit1Enter
+        end
+      end
+      object Label6: TLabel
+        Align = Top
+        StyledSettings = [Style]
+        Margins.Left = 4.000000000000000000
+        Margins.Top = 4.000000000000000000
+        Position.X = 4.000000000000000000
+        Position.Y = 141.000000000000000000
+        Size.Width = 326.000000000000000000
+        Size.Height = 33.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Family = 'Arial'
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.FontColor = claNavy
+        Text = 'Data e Hora: '
+      end
+      object Label8: TLabel
+        Align = Top
+        StyledSettings = [Style]
+        Margins.Left = 4.000000000000000000
+        Margins.Top = 4.000000000000000000
+        Position.X = 4.000000000000000000
+        Position.Y = 221.000000000000000000
+        Size.Width = 326.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Family = 'Arial'
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.FontColor = claNavy
+        Text = 'Status:'
+      end
+      object ComboBoxStatus: TComboBox
+        Align = Top
+        Items.Strings = (
+          'Aberto'
+          'Resolvido')
+        ItemIndex = 0
+        Margins.Left = 4.000000000000000000
+        Margins.Right = 4.000000000000000000
+        Position.X = 4.000000000000000000
+        Position.Y = 251.000000000000000000
+        Size.Width = 322.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        OnEnter = ComboBoxStatusEnter
+      end
+    end
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = DM.FDQConsAgenda
+    ScopeMappings = <>
+    Left = 48
+    Top = 368
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 44
+    Top = 309
+    object LinkListControlToField1: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'mensagem'
+      Control = ListView1
+      FillExpressions = <
+        item
+          SourceMemberName = 'data_agend'
+          ControlMemberName = 'Detail1'
+        end
+        item
+          SourceMemberName = 'id'
+          ControlMemberName = 'Detail2'
+        end>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+  end
+  object NotificationCenter1: TNotificationCenter
+    Left = 48
+    Top = 426
+  end
+  object ActionList1: TActionList
+    Left = 48
+    Top = 242
+    object ActMudarAba: TChangeTabAction
+      Category = 'Tab'
+    end
+  end
+end

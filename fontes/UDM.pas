@@ -309,6 +309,29 @@ type
     FDQCadBaixaContasReceberdata: TDateTimeField;
     FDQCadBaixaContasRecebervalor: TBCDField;
     FDQCadBaixaContasReceberid_forma_pag: TIntegerField;
+    FDQMaxIdAgenda: TFDQuery;
+    FDQMaxIdAgendamaxid: TLargeintField;
+    FDQConsValidAgenda: TFDQuery;
+    FDQConsValidAgendaid: TFDAutoIncField;
+    FDQConsValidAgendamensagem: TWideMemoField;
+    FDQConsValidAgendadata_cad: TDateTimeField;
+    FDQConsValidAgendadata_agend: TDateTimeField;
+    FDQConsValidAgendadata_resolv: TDateTimeField;
+    FDQConsValidAgendastatus: TStringField;
+    FDQCadAgenda: TFDQuery;
+    FDQCadAgendaid: TFDAutoIncField;
+    FDQCadAgendamensagem: TWideMemoField;
+    FDQCadAgendadata_cad: TDateTimeField;
+    FDQCadAgendadata_agend: TDateTimeField;
+    FDQCadAgendadata_resolv: TDateTimeField;
+    FDQCadAgendastatus: TStringField;
+    FDQConsAgenda: TFDQuery;
+    FDQConsAgendaid: TFDAutoIncField;
+    FDQConsAgendamensagem: TWideMemoField;
+    FDQConsAgendadata_cad: TDateTimeField;
+    FDQConsAgendadata_agend: TDateTimeField;
+    FDQConsAgendadata_resolv: TDateTimeField;
+    FDQConsAgendastatus: TStringField;
     FDQConsContaPagarid: TFDAutoIncField;
     FDQConsContaPagarid_fornecedor: TIntegerField;
     FDQConsContaPagarid_tipo_despesa: TIntegerField;
@@ -318,6 +341,7 @@ type
     FDQConsContaPagarvalor_acresc: TBCDField;
     FDQConsContaPagarvalor_pago: TBCDField;
     FDQConsContaPagarvalor_saldo: TBCDField;
+    FDQConsContaPagardata_cad: TDateTimeField;
     FDQConsContaPagardata_venc: TDateField;
     FDQConsContaPagardata_quitacao: TDateTimeField;
     FDQConsContaPagarquitado: TStringField;
@@ -338,7 +362,7 @@ type
     FDQConsContaPagaremail: TStringField;
     FDQConsContaPagarobs: TWideMemoField;
     FDQConsContaPagarstatus: TStringField;
-    FDQConsContaPagardata_cad: TDateField;
+    FDQConsContaPagardata_cad_1: TDateField;
     FDQCadContaPagarid: TFDAutoIncField;
     FDQCadContaPagarid_fornecedor: TIntegerField;
     FDQCadContaPagarid_tipo_despesa: TIntegerField;
@@ -348,6 +372,7 @@ type
     FDQCadContaPagarvalor_acresc: TBCDField;
     FDQCadContaPagarvalor_pago: TBCDField;
     FDQCadContaPagarvalor_saldo: TBCDField;
+    FDQCadContaPagardata_cad: TDateTimeField;
     FDQCadContaPagardata_venc: TDateField;
     FDQCadContaPagardata_quitacao: TDateTimeField;
     FDQCadContaPagarquitado: TStringField;
@@ -374,14 +399,14 @@ procedure TDM.DataModuleCreate(Sender: TObject);
 begin
   with FDConnection1 do
   begin
-  {$IF DEFINED(IOS) or DEFINED(ANDROID)}
+{$IF DEFINED(IOS) or DEFINED(ANDROID)}
     Params.Values['Database'] := GetHomePath + PathDelim + 'calorytcc.s3db';
     Connected := True;
-  {$ENDIF}
-  {$IFDEF MSWINDOWS}
+{$ENDIF}
+{$IFDEF MSWINDOWS}
     Params.Values['Database'] := 'C:\projeto tcc\bd\calorytcc.s3db';
     Connected := True;
-  {$ENDIF}
+{$ENDIF}
   end;
 end;
 

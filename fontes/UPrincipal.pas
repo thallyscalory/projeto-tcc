@@ -65,6 +65,11 @@ type
     ImgCadContasPagar: TImage;
     Layout2: TLayout;
     LblCadContasPagar: TLabel;
+    ListBoxItem10: TListBoxItem;
+    RoundRectAgenda: TRoundRect;
+    ImgAgenda: TImage;
+    LytAgenda: TLayout;
+    LblTituloAgenda: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure RoundRectVendasClick(Sender: TObject);
     procedure ImgVendaClick(Sender: TObject);
@@ -86,6 +91,8 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RoundRectCadContasPagarClick(Sender: TObject);
     procedure ImgCadContasPagarClick(Sender: TObject);
+    procedure RoundRectAgendaClick(Sender: TObject);
+    procedure ImgAgendaClick(Sender: TObject);
   private
     { Private declarations }
     FActiveForm: TForm;
@@ -105,7 +112,7 @@ implementation
 {$R *.fmx}
 
 uses UDM, UVenda, UCadCli, UConsultaProduto, UInfo, UVenda1, UCadContasReceber,
-  UAuxiliar, UCadFornecedor, UCadContasPagar;
+  UAuxiliar, UCadFornecedor, UCadContasPagar, UAgenda;
 
 procedure TFPrincipal.AbrirForm(AFormClass: TComponentClass);
 begin
@@ -129,8 +136,9 @@ begin
     FCadCli.DisposeOf;
   if Assigned(FCadFornecedor) then
     FCadFornecedor.DisposeOf;
-  if Assigned(FConsProduto) then
-    FConsProduto.DisposeOf;
+  if Assigned(FAgenda) then
+    FAgenda.DisposeOf;
+
 
 end;
 
@@ -196,6 +204,18 @@ procedure TFPrincipal.FormVirtualKeyboardShown(Sender: TObject;
 KeyboardVisible: Boolean; const Bounds: TRect);
 begin
   TecladoVirtualVisible := True;
+end;
+
+procedure TFPrincipal.ImgAgendaClick(Sender: TObject);
+begin
+  Application.CreateForm(TFAgenda, FAgenda);
+  if not Assigned(FAgenda) then
+    FAgenda := TFAgenda.Create(nil);
+  FAgenda.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
 end;
 
 procedure TFPrincipal.ImgCadCliClick(Sender: TObject);
@@ -274,6 +294,18 @@ procedure TFPrincipal.MudarAba(ATabItem: TTabItem; Sender: TObject);
 begin
   ActMudarAba.Tab := ATabItem;
   ActMudarAba.ExecuteTarget(Sender);
+end;
+
+procedure TFPrincipal.RoundRectAgendaClick(Sender: TObject);
+begin
+  Application.CreateForm(TFAgenda, FAgenda);
+  if not Assigned(FAgenda) then
+    FAgenda := TFAgenda.Create(nil);
+  FAgenda.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
 end;
 
 procedure TFPrincipal.RoundRectCadCliClick(Sender: TObject);

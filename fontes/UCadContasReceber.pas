@@ -316,6 +316,7 @@ begin
     on E: Exception do
       ShowMessage('Erro!' + #13#10 + E.Message);
   end;
+
   if not DM.FDQConsContasReceber.IsEmpty then
   begin
     DM.FDQConsContasReceber.First;

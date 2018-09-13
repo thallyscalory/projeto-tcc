@@ -31,6 +31,7 @@ Visible=True
 
 [DM.FDQFiltroCadCLi]
 Coordinates=320,590,136,476
+Visible=False
 
 [DM.FDQDetalheProd]
 Coordinates=346,382,115,123

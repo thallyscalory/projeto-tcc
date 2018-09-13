@@ -3,6 +3,7 @@ inherited FCadContasPagar: TFCadContasPagar
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
+      TabIndex = 1
       Sizes = (
         330s
         431s
@@ -11,6 +12,7 @@ inherited FCadContasPagar: TFCadContasPagar
         330s
         431s)
       inherited TbItemListagem: TTabItem
+        IsSelected = False
         Size.Width = 110.000000000000000000
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
@@ -160,6 +162,7 @@ inherited FCadContasPagar: TFCadContasPagar
         end
       end
       inherited TbItemedicao: TTabItem
+        IsSelected = True
         Size.Width = 110.000000000000000000
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
@@ -171,6 +174,58 @@ inherited FCadContasPagar: TFCadContasPagar
           TabOrder = 0
           Viewport.Width = 330.000000000000000000
           Viewport.Height = 383.000000000000000000
+          object ListBox1: TListBox
+            Align = Client
+            Size.Width = 330.000000000000000000
+            Size.Height = 383.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            DisableFocusEffect = True
+            DefaultItemStyles.ItemStyle = ''
+            DefaultItemStyles.GroupHeaderStyle = ''
+            DefaultItemStyles.GroupFooterStyle = ''
+            Viewport.Width = 325.000000000000000000
+            Viewport.Height = 383.000000000000000000
+            object ListBoxItem1: TListBoxItem
+              TabOrder = 0
+            end
+            object ListBoxItem2: TListBoxItem
+              Position.Y = 44.000000000000000000
+              TabOrder = 1
+            end
+            object ListBoxItem3: TListBoxItem
+              Position.Y = 88.000000000000000000
+              TabOrder = 2
+            end
+            object ListBoxItem4: TListBoxItem
+              Position.Y = 132.000000000000000000
+              TabOrder = 3
+            end
+            object ListBoxItem5: TListBoxItem
+              Position.Y = 176.000000000000000000
+              TabOrder = 4
+            end
+            object ListBoxItem6: TListBoxItem
+              Position.Y = 220.000000000000000000
+              TabOrder = 5
+            end
+            object ListBoxItem7: TListBoxItem
+              Position.Y = 264.000000000000000000
+              TabOrder = 6
+            end
+            object ListBoxItem8: TListBoxItem
+              Position.Y = 308.000000000000000000
+              TabOrder = 7
+            end
+            object ListBoxItem9: TListBoxItem
+              Position.Y = 352.000000000000000000
+              TabOrder = 8
+            end
+            object ListBoxItem10: TListBoxItem
+              Position.Y = 396.000000000000000000
+              TabOrder = 9
+            end
+          end
         end
         object ToolBar1: TToolBar
           Size.Width = 330.000000000000000000

@@ -9,6 +9,7 @@ object DM: TDM
       'OpenMode=ReadWrite'
       'LockingMode=Normal'
       'DriverID=SQLite')
+    Connected = True
     LoginPrompt = False
     Left = 40
     Top = 8
@@ -1993,7 +1994,6 @@ object DM: TDM
       FieldName = 'id'
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
     end
     object FDQConsContaPagarid_fornecedor: TIntegerField
       FieldName = 'id_fornecedor'
@@ -2039,6 +2039,10 @@ object DM: TDM
       Required = True
       Precision = 9
       Size = 2
+    end
+    object FDQConsContaPagardata_cad: TDateTimeField
+      FieldName = 'data_cad'
+      Origin = 'data_cad'
     end
     object FDQConsContaPagardata_venc: TDateField
       FieldName = 'data_venc'
@@ -2192,9 +2196,9 @@ object DM: TDM
       FixedChar = True
       Size = 1
     end
-    object FDQConsContaPagardata_cad: TDateField
+    object FDQConsContaPagardata_cad_1: TDateField
       AutoGenerateValue = arDefault
-      FieldName = 'data_cad'
+      FieldName = 'data_cad_1'
       Origin = 'data_cad'
       ProviderFlags = []
       ReadOnly = True
@@ -2210,7 +2214,6 @@ object DM: TDM
       FieldName = 'id'
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
     end
     object FDQCadContaPagarid_fornecedor: TIntegerField
       FieldName = 'id_fornecedor'
@@ -2257,6 +2260,10 @@ object DM: TDM
       Precision = 9
       Size = 2
     end
+    object FDQCadContaPagardata_cad: TDateTimeField
+      FieldName = 'data_cad'
+      Origin = 'data_cad'
+    end
     object FDQCadContaPagardata_venc: TDateField
       FieldName = 'data_venc'
       Origin = 'data_venc'
@@ -2269,6 +2276,152 @@ object DM: TDM
     object FDQCadContaPagarquitado: TStringField
       FieldName = 'quitado'
       Origin = 'quitado'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object FDQMaxIdAgenda: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select max(id) from agendamento')
+    Left = 1392
+    Top = 72
+    object FDQMaxIdAgendamaxid: TLargeintField
+      AutoGenerateValue = arDefault
+      FieldName = 'max(id)'
+      Origin = '"max(id)"'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+  end
+  object FDQConsValidAgenda: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      
+        'select * from agendamento where status = '#39'A'#39' and data_agend = :P' +
+        'DateAgend')
+    Left = 1392
+    Top = 208
+    ParamData = <
+      item
+        Name = 'PDATEAGEND'
+        DataType = ftDateTime
+        ParamType = ptInput
+        Size = 20
+      end>
+    object FDQConsValidAgendaid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQConsValidAgendamensagem: TWideMemoField
+      FieldName = 'mensagem'
+      Origin = 'mensagem'
+      BlobType = ftWideMemo
+    end
+    object FDQConsValidAgendadata_cad: TDateTimeField
+      FieldName = 'data_cad'
+      Origin = 'data_cad'
+    end
+    object FDQConsValidAgendadata_agend: TDateTimeField
+      FieldName = 'data_agend'
+      Origin = 'data_agend'
+    end
+    object FDQConsValidAgendadata_resolv: TDateTimeField
+      FieldName = 'data_resolv'
+      Origin = 'data_resolv'
+    end
+    object FDQConsValidAgendastatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object FDQCadAgenda: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from agendamento')
+    Left = 1392
+    Top = 144
+    object FDQCadAgendaid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQCadAgendamensagem: TWideMemoField
+      FieldName = 'mensagem'
+      Origin = 'mensagem'
+      BlobType = ftWideMemo
+    end
+    object FDQCadAgendadata_cad: TDateTimeField
+      FieldName = 'data_cad'
+      Origin = 'data_cad'
+    end
+    object FDQCadAgendadata_agend: TDateTimeField
+      FieldName = 'data_agend'
+      Origin = 'data_agend'
+    end
+    object FDQCadAgendadata_resolv: TDateTimeField
+      FieldName = 'data_resolv'
+      Origin = 'data_resolv'
+    end
+    object FDQCadAgendastatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object FDQConsAgenda: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      
+        'select * from agendamento where status = '#39'A'#39' and data_agend betw' +
+        'een :PDataVencInicio and :PDataVencFinal order by data_agend;')
+    Left = 1392
+    Top = 16
+    ParamData = <
+      item
+        Name = 'PDATAVENCINICIO'
+        DataType = ftDateTime
+        ParamType = ptInput
+        Size = 10
+      end
+      item
+        Name = 'PDATAVENCFINAL'
+        DataType = ftDateTime
+        ParamType = ptInput
+        Size = 10
+      end>
+    object FDQConsAgendaid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQConsAgendamensagem: TWideMemoField
+      FieldName = 'mensagem'
+      Origin = 'mensagem'
+      BlobType = ftWideMemo
+    end
+    object FDQConsAgendadata_cad: TDateTimeField
+      FieldName = 'data_cad'
+      Origin = 'data_cad'
+    end
+    object FDQConsAgendadata_agend: TDateTimeField
+      FieldName = 'data_agend'
+      Origin = 'data_agend'
+    end
+    object FDQConsAgendadata_resolv: TDateTimeField
+      FieldName = 'data_resolv'
+      Origin = 'data_resolv'
+    end
+    object FDQConsAgendastatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
       FixedChar = True
       Size = 1
     end

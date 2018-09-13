@@ -1,215 +1,227 @@
 ﻿[ActMudarAba]
-Coordinates=174,1,81,33
+Coordinates=174,1,92,36
 
 [ToolBar1]
-Coordinates=343,302,58,33
+Coordinates=343,302,67,36
 Visible=False
 
 [LytBase]
-Coordinates=272,302,54,33
+Coordinates=272,302,61,36
 Visible=False
 
 [ToolBarsuperior]
-Coordinates=156,302,94,33
+Coordinates=156,302,106,36
 Visible=False
 
 [ImageList1]
-Coordinates=193,111,68,33
+Coordinates=193,111,77,36
 
 [ActionList1]
-Coordinates=174,151,70,33
+Coordinates=174,151,78,36
 
 [TbControlCadModelo]
-Coordinates=10,302,119,33
+Coordinates=10,302,136,36
 Visible=False
 
 [TbItemedicao]
-Coordinates=541,256,80,33
+Coordinates=541,256,92,36
 Visible=False
 
 [TbItemListagem]
-Coordinates=424,256,93,33
+Coordinates=424,256,107,36
 Visible=False
 
 [VertScrollBox1]
-Coordinates=314,256,88,33
+Coordinates=314,256,100,36
 Visible=False
 
 [SpBVoltar]
-Coordinates=399,10,64,33
+Coordinates=399,10,72,36
 Visible=False
 
 [LblTitulo]
-Coordinates=436,188,57,33
+Coordinates=436,188,64,36
 Visible=False
 
 [DateEdtFiltroVencFinalContasPagar]
-Coordinates=544,10,191,33
+Coordinates=544,10,222,36
 Visible=False
 
 [ComboBoxFiltroFornContasPagar]
-Coordinates=380,640,181,123
+Coordinates=380,640,208,146
 
 [ListViewCadContasPagar]
-Coordinates=10,10,139,231
+Coordinates=450,20,161,278
 Visible=True
 
 [Label1]
-Coordinates=373,188,46,33
+Coordinates=373,188,53,36
 Visible=False
 
 [LytFiltroClienteContasReceber]
-Coordinates=10,256,165,33
+Coordinates=10,256,190,36
 Visible=False
 
 [DateEdtFiltroVencInicialContasPagar]
-Coordinates=10,188,196,33
+Coordinates=10,188,227,36
 Visible=False
 
 [Label2]
-Coordinates=481,10,46,33
+Coordinates=481,10,53,36
 Visible=False
 
 [Label4]
-Coordinates=310,188,46,33
+Coordinates=310,188,53,36
 Visible=False
 
 [Label3]
-Coordinates=247,188,46,33
+Coordinates=247,188,53,36
 Visible=False
 
 [LytFiltroDataVencContasReceber]
-Coordinates=510,188,178,33
+Coordinates=510,188,206,36
 Visible=False
 
 []
 Coordinates=605,1084,82,33
 
 [DM.FDQConsAtendente]
-Coordinates=555,1290,131,33
+Coordinates=555,1290,153,36
 Visible=False
 
 [DM.FDQPedido]
-Coordinates=0,0,89,33
+Coordinates=0,0,105,36
 Visible=False
 
 [DM.FDQConsFornecedor]
-Coordinates=650,640,137,33
+Coordinates=650,640,160,36
 Visible=False
 
 [DM.FDQConsItemPedido]
-Coordinates=473,305,136,33
+Coordinates=473,305,160,36
 Visible=False
 
 [DM.FDQCadFornecedor]
-Coordinates=473,877,131,33
+Coordinates=473,877,154,36
 Visible=False
 
 [DM.FDQCadCli]
-Coordinates=42,626,87,33
+Coordinates=42,626,103,36
 Visible=False
 
 [DM.FDQConsFormaPag]
-Coordinates=694,269,131,33
+Coordinates=694,269,154,36
 Visible=False
 
 [DM.FDQCadContasReceber]
-Coordinates=175,1057,149,33
+Coordinates=175,1057,177,36
 Visible=False
 
 [DM.FDQConsContasReceber]
-Coordinates=279,152,156,33
+Coordinates=279,152,184,36
 Visible=False
 
 [DM.FDQFiltroCadCLi]
-Coordinates=131,366,116,33
+Coordinates=131,366,136,36
 Visible=False
 
 [DM.FDQMaxIdItemPedido]
-Coordinates=26,1290,139,33
+Coordinates=26,1290,165,36
 Visible=False
 
 [DM.FDQDetalheProdCodBar]
-Coordinates=473,609,152,33
+Coordinates=473,609,179,36
 Visible=False
 
 [DM.FDQCadPedido]
-Coordinates=22,376,108,33
+Coordinates=22,376,128,36
 Visible=False
 
 [DM.FDQProdItemPedido]
-Coordinates=694,1,133,33
+Coordinates=694,1,157,36
 Visible=False
 
 [DM.FDQAuxiliar]
-Coordinates=893,357,92,33
+Coordinates=893,357,107,36
 Visible=False
 
 [DM.FDQConsContasReceberBaixa]
-Coordinates=473,1,183,33
+Coordinates=473,1,216,36
 Visible=False
 
 [DM.FDQMaxIdBaixaContaReceber]
-Coordinates=1038,1,181,33
+Coordinates=1038,1,214,36
 Visible=False
 
 [DM.FDQCadBaixaContasReceber]
-Coordinates=694,1177,177,33
+Coordinates=694,1177,209,36
 Visible=False
 
 [DM.FDQCadFormaPag]
-Coordinates=344,817,124,33
+Coordinates=344,817,148,36
 Visible=False
 
 [DM.FDQCadContaPagar]
-Coordinates=694,679,132,33
+Coordinates=694,679,156,36
 Visible=False
 
 [DM.FDQuery1]
-Coordinates=260,797,82,33
+Coordinates=260,797,97,36
 Visible=False
 
 [DM.FDQMaxIdContasReceber]
-Coordinates=694,1089,159,33
+Coordinates=694,1089,189,36
 Visible=False
 
 [DM.FDQConsAvistaFormaPag]
-Coordinates=30,660,161,141
+Coordinates=30,660,189,168
 
 [DM.FDQConsContaPagar]
-Coordinates=220,10,138,33
+Coordinates=220,10,163,36
 Visible=False
 
 [DM.FDQConsultaProd]
-Coordinates=131,797,122,33
+Coordinates=131,797,143,36
 Visible=False
 
 [DM.FDQMaxIdPedido]
-Coordinates=56,1084,118,33
+Coordinates=56,1084,140,36
 Visible=False
 
 [DM.FDQMaxIdProd]
-Coordinates=893,269,107,33
+Coordinates=893,269,127,36
 Visible=False
 
 [DM.FDQCadItemPedido]
-Coordinates=131,152,129,33
+Coordinates=131,152,153,36
 Visible=False
 
 [DM.FDQCadProd]
-Coordinates=893,1,97,33
+Coordinates=893,1,115,36
 Visible=False
 
 [BindSourceDB1]
-Coordinates=220,10,125,609
+Coordinates=220,10,150,740
 
 [BindingsList1]
-Coordinates=168,260,82,33
+Coordinates=168,260,91,36
 
 [BindSourceDB2]
-Coordinates=650,640,123,393
+Coordinates=650,640,147,476
 
 [TbItemBaixa]
-Coordinates=210,256,81,33
+Coordinates=210,256,87,36
 Visible=False
+
+[DM.FDQMaxIdAgenda]
+Coordinates=727,456,144,80
+
+[DM.FDQCadAgenda]
+Coordinates=509,928,132,190
+
+[DM.FDQConsValidAgenda]
+Coordinates=509,1135,167,190
+
+[DM.FDQConsAgenda]
+Coordinates=0,0,139,190
 

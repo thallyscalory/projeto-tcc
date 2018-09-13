@@ -34,14 +34,26 @@ type
     LinkListControlToField1: TLinkListControlToField;
     BindSourceDB2: TBindSourceDB;
     LinkListControlToField2: TLinkListControlToField;
+    ListBox1: TListBox;
+    ListBoxItem1: TListBoxItem;
+    ListBoxItem2: TListBoxItem;
+    ListBoxItem3: TListBoxItem;
+    ListBoxItem4: TListBoxItem;
+    ListBoxItem5: TListBoxItem;
+    ListBoxItem6: TListBoxItem;
+    ListBoxItem7: TListBoxItem;
+    ListBoxItem8: TListBoxItem;
+    ListBoxItem9: TListBoxItem;
+    ListBoxItem10: TListBoxItem;
     procedure ComboBoxFiltroFornContasPagarEnter(Sender: TObject);
     procedure ComboBoxFiltroFornContasPagarClosePopup(Sender: TObject);
     procedure SpBVoltarClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure DateEdtFiltroVencFinalContasPagarClosePicker(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
-    filtro: string;
+    filtroPag: string;
 
     { Private declarations }
   public
@@ -61,7 +73,7 @@ procedure TFCadContasPagar.ComboBoxFiltroFornContasPagarClosePopup
   (Sender: TObject);
 begin
   inherited;
-  filtro := 'forn';
+  filtroPag := 'forn';
 
   if ComboBoxFiltroFornContasPagar.Selected.Text = '*Todos*' then
   begin
@@ -110,7 +122,7 @@ var
   dataVencInicio, dataVencFinal: TDateTime;
 begin
   inherited;
-  filtro := 'VENC';
+  filtroPag := 'VENC';
 
   dataVencInicio := DateEdtFiltroVencInicialContasPagar.DateTime;
   dataVencFinal := DateEdtFiltroVencFinalContasPagar.DateTime;
@@ -119,8 +131,39 @@ begin
   begin
     ShowMessage('Processo Cancelado!' + #13#10 +
       'A data inicial não pode ser maior que a data final.');
+  end
+  else if ComboBoxFiltroFornContasPagar.Selected.Text = '*Todos*' then
+  begin
+    DM.FDQConsContaPagar.Active := False;
+    DM.FDQConsContaPagar.Close;
+    DM.FDQConsContaPagar.ParamByName('PFornContaPagar2').Value := Null;
+    DM.FDQConsContaPagar.ParamByName('PFornContaPagar1').Value := '%';
+    DM.FDQConsContaPagar.ParamByName('PDataVencInicio').Value := dataVencInicio;
+    DM.FDQConsContaPagar.ParamByName('PDataVencFinal').Value := dataVencFinal;
+    DM.FDQConsContaPagar.Open();
+    DM.FDQConsContaPagar.Active := True;
+  end
+  else
+  begin
+    DM.FDQConsContaPagar.Active := False;
+    DM.FDQConsContaPagar.Close;
+    DM.FDQConsContaPagar.ParamByName('PFornContaPagar2').Value := Null;
+    DM.FDQConsContaPagar.ParamByName('PFornContaPagar1').Value :=
+      ComboBoxFiltroFornContasPagar.Selected.Text;
+    DM.FDQConsContaPagar.ParamByName('PDataVencInicio').Value := dataVencInicio;
+    DM.FDQConsContaPagar.ParamByName('PDataVencFinal').Value := dataVencFinal;
+    DM.FDQConsContaPagar.Open();
+    DM.FDQConsContaPagar.Active := True;
   end;
+end;
 
+procedure TFCadContasPagar.FormCreate(Sender: TObject);
+begin
+  inherited;
+  ComboBoxFiltroFornContasPagarEnter(Sender);
+  ComboBoxFiltroFornContasPagar.ItemIndex := 0;
+  DateEdtFiltroVencInicialContasPagar.Date := Date;
+  DateEdtFiltroVencFinalContasPagar.Date := Date;
 end;
 
 procedure TFCadContasPagar.FormKeyUp(Sender: TObject; var Key: Word;
