@@ -376,6 +376,31 @@ type
     FDQCadContaPagardata_venc: TDateField;
     FDQCadContaPagardata_quitacao: TDateTimeField;
     FDQCadContaPagarquitado: TStringField;
+    FDQFornecedor: TFDQuery;
+    FDQFornecedorid: TFDAutoIncField;
+    FDQFornecedortipo_pessoa: TStringField;
+    FDQFornecedornome: TStringField;
+    FDQFornecedornome_fantasia: TStringField;
+    FDQFornecedorcpf_cnpj: TStringField;
+    FDQFornecedorrg_ie: TStringField;
+    FDQFornecedorfone: TStringField;
+    FDQFornecedorendereco: TStringField;
+    FDQFornecedornumero: TStringField;
+    FDQFornecedorcomplemento: TStringField;
+    FDQFornecedorbairro: TStringField;
+    FDQFornecedorcep: TStringField;
+    FDQFornecedorcidade: TStringField;
+    FDQFornecedoruf: TStringField;
+    FDQFornecedoremail: TStringField;
+    FDQFornecedorobs: TWideMemoField;
+    FDQFornecedorstatus: TStringField;
+    FDQFornecedordata_cad: TDateField;
+    FDQConsDespesas: TFDQuery;
+    FDQCadDespesas: TFDQuery;
+    FDQConsDespesasid: TFDAutoIncField;
+    FDQConsDespesasdescricao: TStringField;
+    FDQCadDespesasid: TFDAutoIncField;
+    FDQCadDespesasdescricao: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

@@ -2,14 +2,13 @@ object DM: TDM
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   Height = 442
-  Width = 1505
+  Width = 1652
   object FDConnection1: TFDConnection
     Params.Strings = (
       'Database=C:\projeto tcc\bd\calorytcc.s3db'
       'OpenMode=ReadWrite'
       'LockingMode=Normal'
       'DriverID=SQLite')
-    Connected = True
     LoginPrompt = False
     Left = 40
     Top = 8
@@ -1994,6 +1993,7 @@ object DM: TDM
       FieldName = 'id'
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQConsContaPagarid_fornecedor: TIntegerField
       FieldName = 'id_fornecedor'
@@ -2214,6 +2214,7 @@ object DM: TDM
       FieldName = 'id'
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQCadContaPagarid_fornecedor: TIntegerField
       FieldName = 'id_fornecedor'
@@ -2424,6 +2425,141 @@ object DM: TDM
       Origin = 'status'
       FixedChar = True
       Size = 1
+    end
+  end
+  object FDQFornecedor: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from fornecedor')
+    Left = 1120
+    Top = 80
+    object FDQFornecedorid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object FDQFornecedortipo_pessoa: TStringField
+      FieldName = 'tipo_pessoa'
+      Origin = 'tipo_pessoa'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQFornecedornome: TStringField
+      FieldName = 'nome'
+      Origin = 'nome'
+      Required = True
+      Size = 60
+    end
+    object FDQFornecedornome_fantasia: TStringField
+      FieldName = 'nome_fantasia'
+      Origin = 'nome_fantasia'
+      Size = 40
+    end
+    object FDQFornecedorcpf_cnpj: TStringField
+      FieldName = 'cpf_cnpj'
+      Origin = 'cpf_cnpj'
+      Size = 15
+    end
+    object FDQFornecedorrg_ie: TStringField
+      FieldName = 'rg_ie'
+      Origin = 'rg_ie'
+    end
+    object FDQFornecedorfone: TStringField
+      FieldName = 'fone'
+      Origin = 'fone'
+      Size = 10
+    end
+    object FDQFornecedorendereco: TStringField
+      FieldName = 'endereco'
+      Origin = 'endereco'
+      Size = 50
+    end
+    object FDQFornecedornumero: TStringField
+      FieldName = 'numero'
+      Origin = 'numero'
+      Size = 10
+    end
+    object FDQFornecedorcomplemento: TStringField
+      FieldName = 'complemento'
+      Origin = 'complemento'
+      Size = 30
+    end
+    object FDQFornecedorbairro: TStringField
+      FieldName = 'bairro'
+      Origin = 'bairro'
+      Size = 30
+    end
+    object FDQFornecedorcep: TStringField
+      FieldName = 'cep'
+      Origin = 'cep'
+      Size = 15
+    end
+    object FDQFornecedorcidade: TStringField
+      FieldName = 'cidade'
+      Origin = 'cidade'
+      Size = 30
+    end
+    object FDQFornecedoruf: TStringField
+      FieldName = 'uf'
+      Origin = 'uf'
+      FixedChar = True
+      Size = 2
+    end
+    object FDQFornecedoremail: TStringField
+      FieldName = 'email'
+      Origin = 'email'
+      Size = 60
+    end
+    object FDQFornecedorobs: TWideMemoField
+      FieldName = 'obs'
+      Origin = 'obs'
+      BlobType = ftWideMemo
+    end
+    object FDQFornecedorstatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQFornecedordata_cad: TDateField
+      FieldName = 'data_cad'
+      Origin = 'data_cad'
+    end
+  end
+  object FDQConsDespesas: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from tipo_despesa')
+    Left = 1520
+    Top = 16
+    object FDQConsDespesasid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object FDQConsDespesasdescricao: TStringField
+      FieldName = 'descricao'
+      Origin = 'descricao'
+      Required = True
+      Size = 30
+    end
+  end
+  object FDQCadDespesas: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from tipo_despesa')
+    Left = 1520
+    Top = 144
+    object FDQCadDespesasid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object FDQCadDespesasdescricao: TStringField
+      FieldName = 'descricao'
+      Origin = 'descricao'
+      Required = True
+      Size = 30
     end
   end
 end

@@ -23,6 +23,17 @@ inherited FCadContasPagar: TFCadContasPagar
           inherited SpBVoltar: TSpeedButton
             OnClick = SpBVoltarClick
           end
+          object SpdBNovo: TSpeedButton
+            Align = Right
+            IconTintColor = claNavy
+            Margins.Right = 8.000000000000000000
+            Position.X = 274.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'addtoolbutton'
+            OnClick = SpdBNovoClick
+          end
         end
         object LytFiltroDataVencContasReceber: TLayout
           Align = Top
@@ -188,42 +199,258 @@ inherited FCadContasPagar: TFCadContasPagar
             Viewport.Height = 383.000000000000000000
             object ListBoxItem1: TListBoxItem
               TabOrder = 0
+              object Label5: TLabel
+                Align = Left
+                Margins.Left = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Size.Width = 108.000000000000000000
+                Size.Height = 44.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Fornecedor: '
+              end
+              object ComboBoxForn: TComboBox
+                Align = Client
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 2.000000000000000000
+                Size.Width = 207.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 0
+                OnEnter = ComboBoxFornEnter
+              end
             end
             object ListBoxItem2: TListBoxItem
               Position.Y = 44.000000000000000000
               TabOrder = 1
+              object Label6: TLabel
+                Align = Left
+                Margins.Left = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Size.Width = 108.000000000000000000
+                Size.Height = 44.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Despesa: '
+              end
+              object ComboBoxDespesa: TComboBox
+                Align = Client
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 2.000000000000000000
+                Size.Width = 207.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+                OnEnter = ComboBoxDespesaEnter
+              end
             end
             object ListBoxItem3: TListBoxItem
               Position.Y = 88.000000000000000000
               TabOrder = 2
+              object Label7: TLabel
+                Align = Left
+                Margins.Left = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Size.Width = 108.000000000000000000
+                Size.Height = 44.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Num. Doc: '
+              end
+              object EdtNumDoc: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                ReturnKeyType = Next
+                Margins.Left = 2.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 2.000000000000000000
+                Size.Width = 209.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                OnKeyUp = EdtNumDocKeyUp
+              end
             end
             object ListBoxItem4: TListBoxItem
               Position.Y = 132.000000000000000000
               TabOrder = 3
+              object Label8: TLabel
+                Align = Left
+                Margins.Left = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Size.Width = 108.000000000000000000
+                Size.Height = 44.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Valor Doc: '
+              end
+              object EdtValorDoc: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                ReturnKeyType = Next
+                Margins.Left = 2.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 2.000000000000000000
+                Size.Width = 209.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                OnTyping = EdtValorDocTyping
+                OnKeyUp = EdtValorDocKeyUp
+              end
             end
             object ListBoxItem5: TListBoxItem
               Position.Y = 176.000000000000000000
               TabOrder = 4
+              object Label9: TLabel
+                Align = Left
+                Margins.Left = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Size.Width = 108.000000000000000000
+                Size.Height = 44.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Valor Desc: '
+              end
+              object EdtValorDesc: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                ReturnKeyType = Next
+                Margins.Left = 2.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 2.000000000000000000
+                Size.Width = 209.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                OnTyping = EdtValorDescTyping
+                OnKeyUp = EdtValorDescKeyUp
+              end
             end
             object ListBoxItem6: TListBoxItem
               Position.Y = 220.000000000000000000
               TabOrder = 5
+              object Label10: TLabel
+                Align = Left
+                Margins.Left = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Size.Width = 111.000000000000000000
+                Size.Height = 44.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Valor Acresc: '
+              end
+              object EdtValorAcresc: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                ReturnKeyType = Done
+                Margins.Left = 2.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 2.000000000000000000
+                Size.Width = 206.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                KillFocusByReturn = True
+                OnTyping = EdtValorAcrescTyping
+              end
             end
             object ListBoxItem7: TListBoxItem
               Position.Y = 264.000000000000000000
               TabOrder = 6
+              object Label11: TLabel
+                Align = Left
+                Margins.Left = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Size.Width = 108.000000000000000000
+                Size.Height = 44.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Valor Pago: '
+              end
+              object EdtValorPago: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                ReturnKeyType = Next
+                Enabled = False
+                Margins.Left = 2.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 2.000000000000000000
+                Size.Width = 209.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+              end
             end
             object ListBoxItem8: TListBoxItem
               Position.Y = 308.000000000000000000
               TabOrder = 7
+              object Label12: TLabel
+                Align = Left
+                Margins.Left = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Size.Width = 108.000000000000000000
+                Size.Height = 44.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Valor Saldo: '
+              end
+              object EdtValorSaldo: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                Enabled = False
+                Margins.Left = 2.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 2.000000000000000000
+                Size.Width = 209.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+              end
             end
             object ListBoxItem9: TListBoxItem
               Position.Y = 352.000000000000000000
               TabOrder = 8
+              object Label13: TLabel
+                Align = Left
+                Margins.Left = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Size.Width = 108.000000000000000000
+                Size.Height = 44.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Data Venc: '
+              end
+              object DateEditDataVenc: TDateEdit
+                Date = 43358.000000000000000000
+                Align = Left
+                Margins.Left = 2.000000000000000000
+                Margins.Right = 2.000000000000000000
+                Position.X = 114.000000000000000000
+                Position.Y = 6.000000000000000000
+                Size.Width = 116.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+              end
             end
             object ListBoxItem10: TListBoxItem
               Position.Y = 396.000000000000000000
               TabOrder = 9
+              object Label14: TLabel
+                Align = Left
+                Margins.Left = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Size.Width = 108.000000000000000000
+                Size.Height = 44.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Data Cad: '
+              end
+              object EdtDataCad: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 0
+                Enabled = False
+                Margins.Left = 2.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 2.000000000000000000
+                Size.Width = 209.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+              end
             end
           end
         end
@@ -233,6 +460,52 @@ inherited FCadContasPagar: TFCadContasPagar
           Size.PlatformDefault = False
           TabOrder = 1
           TintColor = claSilver
+          object LblTituloEdicao: TLabel
+            Align = Contents
+            StyledSettings = [Size]
+            Size.Width = 330.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 18.000000000000000000
+            TextSettings.Font.StyleExt = {04070000000000000004000000}
+            TextSettings.FontColor = claNavy
+            TextSettings.HorzAlign = Center
+            Text = 'Edi'#231#227'o'
+          end
+          object SpdBVoltarEdicao: TSpeedButton
+            Align = Left
+            IconTintColor = claNavy
+            Margins.Left = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'backtoolbutton'
+            OnClick = SpdBVoltarEdicaoClick
+          end
+          object SpdBEditar: TSpeedButton
+            Align = Right
+            IconTintColor = claNavy
+            Margins.Right = 8.000000000000000000
+            Position.X = 274.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'composetoolbutton'
+            OnClick = SpdBEditarClick
+          end
+          object SpdBConfirmar: TSpeedButton
+            Align = Right
+            IconTintColor = claNavy
+            Margins.Right = 8.000000000000000000
+            Position.X = 218.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'donetoolbutton'
+            OnClick = SpdBConfirmarClick
+          end
         end
       end
       object TbItemBaixa: TTabItem
@@ -301,11 +574,41 @@ inherited FCadContasPagar: TFCadContasPagar
       FillHeaderExpressions = <>
       FillBreakGroups = <>
     end
+    object LinkListControlToField3: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB3
+      FieldName = 'nome_fantasia'
+      Control = ComboBoxForn
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+    object LinkListControlToField4: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB4
+      FieldName = 'descricao'
+      Control = ComboBoxDespesa
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
   end
   object BindSourceDB2: TBindSourceDB
     DataSet = DM.FDQConsFornecedor
     ScopeMappings = <>
     Left = 16
     Top = 240
+  end
+  object BindSourceDB3: TBindSourceDB
+    DataSet = DM.FDQFornecedor
+    ScopeMappings = <>
+    Left = 16
+    Top = 168
+  end
+  object BindSourceDB4: TBindSourceDB
+    DataSet = DM.FDQConsDespesas
+    ScopeMappings = <>
+    Left = 152
+    Top = 224
   end
 end
