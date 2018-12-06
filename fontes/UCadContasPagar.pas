@@ -444,6 +444,7 @@ begin
 {$ENDIF}
   LimpaCampos;
   HabilitaCampos;
+  LblTituloEdicao.Text := 'Novo Cadastro';
   MudarAbaModelo(TbItemedicao, Sender);
 end;
 
