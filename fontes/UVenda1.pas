@@ -317,7 +317,7 @@ begin
         DM.FDQCadPedido.Close;
         DM.FDQCadPedido.Open();
         DM.FDQCadPedido.Append;
-        DM.FDQCadPedidoid_pedido.AsInteger := maxIdPedido;
+        //DM.FDQCadPedidoid_pedido.AsInteger := maxIdPedido;
         DM.FDQCadPedidoid_cli_pedido.AsInteger :=
           StrToInt(LblCodCliPedido.Text);
         DM.FDQCadPedidodatahora_pedido.AsDateTime := StrToDateTime(DataHora);
@@ -358,7 +358,7 @@ begin
           DM.FDQCadItemPedido.Close;
           DM.FDQCadItemPedido.Open();
           DM.FDQCadItemPedido.Append;
-          DM.FDQCadItemPedidoid_item_pedido.AsInteger := maxIdItemPedido;
+          //DM.FDQCadItemPedidoid_item_pedido.AsInteger := maxIdItemPedido;
           DM.FDQCadItemPedidoid_pedido_item.AsInteger := maxIdPedido;
           DM.FDQCadItemPedidoid_produto_item.AsInteger :=
             StrToInt(ListViewItemPedido.Items[I].Detail);
@@ -513,7 +513,7 @@ begin
           DM.FDQCadContasReceber.Close;
           DM.FDQCadContasReceber.Open();
           DM.FDQCadContasReceber.Append;
-          DM.FDQCadContasReceberid.AsInteger := maxIdContasReceber;
+          //DM.FDQCadContasReceberid.AsInteger := maxIdContasReceber;
           DM.FDQCadContasReceberid_pedido.AsInteger := maxIdPedido;
           DM.FDQCadContasReceberid_cliente.AsInteger :=
             StrToInt(LblCodCliPedido.Text);
@@ -539,7 +539,7 @@ begin
           DM.FDQCadBaixaContasReceber.Close;
           DM.FDQCadBaixaContasReceber.Open();
           DM.FDQCadBaixaContasReceber.Append;
-          DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
+          //DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
           DM.FDQCadBaixaContasReceberid_conta_receber.AsInteger :=
             maxIdContasReceber;
           DM.FDQCadBaixaContasReceberdata.AsDateTime :=
@@ -554,7 +554,7 @@ begin
           DM.FDQCadContasReceber.Close;
           DM.FDQCadContasReceber.Open();
           DM.FDQCadContasReceber.Append;
-          DM.FDQCadContasReceberid.AsInteger := maxIdContasReceber;
+          //DM.FDQCadContasReceberid.AsInteger := maxIdContasReceber;
           DM.FDQCadContasReceberid_pedido.AsInteger := maxIdPedido;
           DM.FDQCadContasReceberid_cliente.AsInteger :=
             StrToInt(LblCodCliPedido.Text);

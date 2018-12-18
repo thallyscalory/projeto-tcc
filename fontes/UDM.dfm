@@ -1,8 +1,8 @@
 object DM: TDM
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 442
-  Width = 1652
+  Height = 440
+  Width = 1816
   object FDConnection1: TFDConnection
     Params.Strings = (
       'Database=C:\projeto tcc\bd\calorytcc.s3db'
@@ -291,7 +291,7 @@ object DM: TDM
     Connection = FDConnection1
     SQL.Strings = (
       'select * from cliente')
-    Left = 288
+    Left = 280
     Top = 144
     object FDQCadCliid_cli: TIntegerField
       FieldName = 'id_cli'
@@ -1647,8 +1647,8 @@ object DM: TDM
     Connection = FDConnection1
     SQL.Strings = (
       'select * from conta_receber where id = :PIdContaReceber;')
-    Left = 960
-    Top = 8
+    Left = 816
+    Top = 224
     ParamData = <
       item
         Name = 'PIDCONTARECEBER'
@@ -1948,7 +1948,7 @@ object DM: TDM
     Connection = FDConnection1
     SQL.Strings = (
       'select * from conta_pagar cp '
-      'inner join fornecedor f on cp.id = f.id '
+      'inner join fornecedor f on cp.id_fornecedor = f.id '
       
         'where cp.quitado = '#39'N'#39' and (f.nome_fantasia like :PFornContaPaga' +
         'r1 and cp.data_venc between :PDataVencInicio and :PDataVencFinal' +
@@ -2285,8 +2285,8 @@ object DM: TDM
     Connection = FDConnection1
     SQL.Strings = (
       'select max(id) from agendamento')
-    Left = 1392
-    Top = 72
+    Left = 1718
+    Top = 104
     object FDQMaxIdAgendamaxid: TLargeintField
       AutoGenerateValue = arDefault
       FieldName = 'max(id)'
@@ -2301,8 +2301,8 @@ object DM: TDM
       
         'select * from agendamento where status = '#39'A'#39' and data_agend = :P' +
         'DateAgend')
-    Left = 1392
-    Top = 208
+    Left = 1568
+    Top = 232
     ParamData = <
       item
         Name = 'PDATEAGEND'
@@ -2344,8 +2344,8 @@ object DM: TDM
     Connection = FDConnection1
     SQL.Strings = (
       'select * from agendamento')
-    Left = 1392
-    Top = 144
+    Left = 1568
+    Top = 176
     object FDQCadAgendaid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -2382,8 +2382,8 @@ object DM: TDM
       
         'select * from agendamento where status = '#39'A'#39' and data_agend betw' +
         'een :PDataVencInicio and :PDataVencFinal order by data_agend;')
-    Left = 1392
-    Top = 16
+    Left = 1568
+    Top = 24
     ParamData = <
       item
         Name = 'PDATAVENCINICIO'
@@ -2431,12 +2431,13 @@ object DM: TDM
     Connection = FDConnection1
     SQL.Strings = (
       'select * from fornecedor')
-    Left = 1120
-    Top = 80
+    Left = 1112
+    Top = 288
     object FDQFornecedorid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQFornecedortipo_pessoa: TStringField
       FieldName = 'tipo_pessoa'
@@ -2530,12 +2531,13 @@ object DM: TDM
     Connection = FDConnection1
     SQL.Strings = (
       'select * from tipo_despesa')
-    Left = 1520
-    Top = 16
+    Left = 1726
+    Top = 24
     object FDQConsDespesasid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQConsDespesasdescricao: TStringField
       FieldName = 'descricao'
@@ -2548,18 +2550,284 @@ object DM: TDM
     Connection = FDConnection1
     SQL.Strings = (
       'select * from tipo_despesa')
-    Left = 1520
-    Top = 144
+    Left = 1710
+    Top = 176
     object FDQCadDespesasid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQCadDespesasdescricao: TStringField
       FieldName = 'descricao'
       Origin = 'descricao'
       Required = True
       Size = 30
+    end
+  end
+  object FDQFornEditContaPagar: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from fornecedor where nome_fantasia = :PNomeFantasia')
+    Left = 1120
+    Top = 224
+    ParamData = <
+      item
+        Name = 'PNOMEFANTASIA'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 60
+      end>
+    object FDQFornEditContaPagarid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQFornEditContaPagartipo_pessoa: TStringField
+      FieldName = 'tipo_pessoa'
+      Origin = 'tipo_pessoa'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQFornEditContaPagarnome: TStringField
+      FieldName = 'nome'
+      Origin = 'nome'
+      Required = True
+      Size = 60
+    end
+    object FDQFornEditContaPagarnome_fantasia: TStringField
+      FieldName = 'nome_fantasia'
+      Origin = 'nome_fantasia'
+      Size = 40
+    end
+    object FDQFornEditContaPagarcpf_cnpj: TStringField
+      FieldName = 'cpf_cnpj'
+      Origin = 'cpf_cnpj'
+      Size = 15
+    end
+    object FDQFornEditContaPagarrg_ie: TStringField
+      FieldName = 'rg_ie'
+      Origin = 'rg_ie'
+    end
+    object FDQFornEditContaPagarfone: TStringField
+      FieldName = 'fone'
+      Origin = 'fone'
+      Size = 10
+    end
+    object FDQFornEditContaPagarendereco: TStringField
+      FieldName = 'endereco'
+      Origin = 'endereco'
+      Size = 50
+    end
+    object FDQFornEditContaPagarnumero: TStringField
+      FieldName = 'numero'
+      Origin = 'numero'
+      Size = 10
+    end
+    object FDQFornEditContaPagarcomplemento: TStringField
+      FieldName = 'complemento'
+      Origin = 'complemento'
+      Size = 30
+    end
+    object FDQFornEditContaPagarbairro: TStringField
+      FieldName = 'bairro'
+      Origin = 'bairro'
+      Size = 30
+    end
+    object FDQFornEditContaPagarcep: TStringField
+      FieldName = 'cep'
+      Origin = 'cep'
+      Size = 15
+    end
+    object FDQFornEditContaPagarcidade: TStringField
+      FieldName = 'cidade'
+      Origin = 'cidade'
+      Size = 30
+    end
+    object FDQFornEditContaPagaruf: TStringField
+      FieldName = 'uf'
+      Origin = 'uf'
+      FixedChar = True
+      Size = 2
+    end
+    object FDQFornEditContaPagaremail: TStringField
+      FieldName = 'email'
+      Origin = 'email'
+      Size = 60
+    end
+    object FDQFornEditContaPagarobs: TWideMemoField
+      FieldName = 'obs'
+      Origin = 'obs'
+      BlobType = ftWideMemo
+    end
+    object FDQFornEditContaPagarstatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQFornEditContaPagardata_cad: TDateField
+      FieldName = 'data_cad'
+      Origin = 'data_cad'
+    end
+  end
+  object FDQDespesaEditContaPagar: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from tipo_despesa where descricao = :PDescricao;')
+    Left = 1710
+    Top = 248
+    ParamData = <
+      item
+        Name = 'PDESCRICAO'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 30
+      end>
+    object FDQDespesaEditContaPagarid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQDespesaEditContaPagardescricao: TStringField
+      FieldName = 'descricao'
+      Origin = 'descricao'
+      Required = True
+      Size = 30
+    end
+  end
+  object FDQConsContasPagarBaixa: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from conta_pagar where id = :PIdContaPagar')
+    Left = 1264
+    Top = 224
+    ParamData = <
+      item
+        Name = 'PIDCONTAPAGAR'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 30
+      end>
+    object FDQConsContasPagarBaixaid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object FDQConsContasPagarBaixaid_fornecedor: TIntegerField
+      FieldName = 'id_fornecedor'
+      Origin = 'id_fornecedor'
+    end
+    object FDQConsContasPagarBaixaid_tipo_despesa: TIntegerField
+      FieldName = 'id_tipo_despesa'
+      Origin = 'id_tipo_despesa'
+    end
+    object FDQConsContasPagarBaixan_doc: TStringField
+      FieldName = 'n_doc'
+      Origin = 'n_doc'
+      Size = 30
+    end
+    object FDQConsContasPagarBaixavalor_doc: TBCDField
+      FieldName = 'valor_doc'
+      Origin = 'valor_doc'
+      Required = True
+      Precision = 9
+      Size = 2
+    end
+    object FDQConsContasPagarBaixavalor_descmoeda: TBCDField
+      FieldName = 'valor_descmoeda'
+      Origin = 'valor_descmoeda'
+      Precision = 9
+      Size = 2
+    end
+    object FDQConsContasPagarBaixavalor_acresc: TBCDField
+      FieldName = 'valor_acresc'
+      Origin = 'valor_acresc'
+      Precision = 9
+      Size = 2
+    end
+    object FDQConsContasPagarBaixavalor_pago: TBCDField
+      FieldName = 'valor_pago'
+      Origin = 'valor_pago'
+      Precision = 9
+      Size = 2
+    end
+    object FDQConsContasPagarBaixavalor_saldo: TBCDField
+      FieldName = 'valor_saldo'
+      Origin = 'valor_saldo'
+      Required = True
+      Precision = 9
+      Size = 2
+    end
+    object FDQConsContasPagarBaixadata_cad: TDateTimeField
+      FieldName = 'data_cad'
+      Origin = 'data_cad'
+    end
+    object FDQConsContasPagarBaixadata_venc: TDateField
+      FieldName = 'data_venc'
+      Origin = 'data_venc'
+      Required = True
+    end
+    object FDQConsContasPagarBaixadata_quitacao: TDateTimeField
+      FieldName = 'data_quitacao'
+      Origin = 'data_quitacao'
+    end
+    object FDQConsContasPagarBaixaquitado: TStringField
+      FieldName = 'quitado'
+      Origin = 'quitado'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object FDQCadBaixaContaPagar: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from baixa_conta_pagar')
+    Left = 1408
+    Top = 168
+    object FDQCadBaixaContaPagarid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object FDQCadBaixaContaPagarid_conta_pagar: TIntegerField
+      FieldName = 'id_conta_pagar'
+      Origin = 'id_conta_pagar'
+      Required = True
+    end
+    object FDQCadBaixaContaPagardata: TDateTimeField
+      FieldName = 'data'
+      Origin = 'data'
+      Required = True
+    end
+    object FDQCadBaixaContaPagarvalor: TBCDField
+      FieldName = 'valor'
+      Origin = 'valor'
+      Required = True
+      Precision = 9
+      Size = 2
+    end
+    object FDQCadBaixaContaPagarid_forma_pag: TIntegerField
+      FieldName = 'id_forma_pag'
+      Origin = 'id_forma_pag'
+      Required = True
+    end
+  end
+  object FDQMaxIdBaixaContaPagar: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select max(id) from baixa_conta_pagar')
+    Left = 1408
+    Top = 104
+    object FDQMaxIdBaixaContaPagarmaxid: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'max(id)'
+      Origin = '"max(id)"'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 32767
     end
   end
 end

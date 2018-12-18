@@ -78,6 +78,7 @@ type
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure FormShow(Sender: TObject);
+    procedure ComboBoxTipoReceitaClosePopup(Sender: TObject);
   private
     saldoContasReceber, idContasReceber, idCliContasReceber: array of string;
     tamanhoArray, contadorArray, controleCheckmark: integer;
@@ -243,6 +244,12 @@ begin
   // ComboBoxFiltroClienteContasReceber.ItemIndex := 0;
 end;
 
+procedure TFCadContasReceber.ComboBoxTipoReceitaClosePopup(Sender: TObject);
+begin
+  inherited;
+  SpdBConfirmaBaixaContasREceberEdicao.Visible := True;
+end;
+
 procedure TFCadContasReceber.ComboBoxTipoReceitaEnter(Sender: TObject);
 begin
   inherited;
@@ -250,8 +257,6 @@ begin
   DM.FDQConsAvistaFormaPag.Close;
   DM.FDQConsAvistaFormaPag.Open();
   DM.FDQConsAvistaFormaPag.Active := True;
-
-  SpdBConfirmaBaixaContasREceberEdicao.Visible := True;
 end;
 
 procedure TFCadContasReceber.DateEdtFiltroVencFinalContasReceberClosePicker
@@ -476,8 +481,6 @@ begin
 
   if AItem.Detail.IsEmpty then
   begin
-    AItem.Objects.AccessoryObject.Visible := True;
-
     controleCheckmark := controleCheckmark + 1;
     tamanhoArray := tamanhoArray + 1;
     SetLength(saldoContasReceber, tamanhoArray);
@@ -559,7 +562,7 @@ end;
 procedure TFCadContasReceber.SpdBConfirmaBaixaContasREceberEdicaoClick
   (Sender: TObject);
 var
-  valorTotal, valorPago, valorSaldo, valorDesc, ValorAcresc: Double;
+  valorTotal, valorPago, valorSaldo, valorDesc, ValorAcresc, valorBaixa: Double;
   I, maxIdBaixa, primeiro: integer;
   Data: TDateTime;
   quitado, valida: string;
@@ -657,7 +660,7 @@ begin
               DM.FDQCadBaixaContasReceber.Close;
               DM.FDQCadBaixaContasReceber.Open();
               DM.FDQCadBaixaContasReceber.Append;
-              DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
+              // DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
               DM.FDQCadBaixaContasReceberid_conta_receber.AsInteger :=
                 StrToInt(idContasReceber[I]);
               DM.FDQCadBaixaContasReceberdata.AsDateTime := Data;
@@ -704,6 +707,8 @@ begin
                 if (valorTotal + valorDesc) >= StrToFloat(saldoContasReceber[I])
                 then
                 begin
+                  valorBaixa := StrToFloat(saldoContasReceber[I]) - valorDesc;
+
                   valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
                     (StrToFloat(saldoContasReceber[I]) - valorDesc);
 
@@ -716,6 +721,8 @@ begin
                 end
                 else
                 begin
+                  valorBaixa := valorTotal;
+
                   valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
                     valorTotal;
 
@@ -764,11 +771,11 @@ begin
                 DM.FDQCadBaixaContasReceber.Close;
                 DM.FDQCadBaixaContasReceber.Open();
                 DM.FDQCadBaixaContasReceber.Append;
-                DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
+                // DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
                 DM.FDQCadBaixaContasReceberid_conta_receber.AsInteger :=
                   StrToInt(idContasReceber[I]);
                 DM.FDQCadBaixaContasReceberdata.AsDateTime := Data;
-                DM.FDQCadBaixaContasRecebervalor.AsFloat := valorTotal;
+                DM.FDQCadBaixaContasRecebervalor.AsFloat := valorBaixa;
                 DM.FDQCadBaixaContasReceberid_forma_pag.AsInteger :=
                   DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
                 DM.FDQCadBaixaContasReceber.Post;
@@ -779,6 +786,8 @@ begin
 
                 if valorTotal >= StrToFloat(saldoContasReceber[I]) then
                 begin
+                  valorBaixa := StrToFloat(saldoContasReceber[I]) + ValorAcresc;
+
                   valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
                     (StrToFloat(saldoContasReceber[I]) + ValorAcresc);
 
@@ -791,6 +800,8 @@ begin
                 end
                 else
                 begin
+                  valorBaixa := valorTotal;
+
                   valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
                     valorTotal;
 
@@ -839,11 +850,11 @@ begin
                 DM.FDQCadBaixaContasReceber.Close;
                 DM.FDQCadBaixaContasReceber.Open();
                 DM.FDQCadBaixaContasReceber.Append;
-                DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
+                // DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
                 DM.FDQCadBaixaContasReceberid_conta_receber.AsInteger :=
                   StrToInt(idContasReceber[I]);
                 DM.FDQCadBaixaContasReceberdata.AsDateTime := Data;
-                DM.FDQCadBaixaContasRecebervalor.AsFloat := valorTotal;
+                DM.FDQCadBaixaContasRecebervalor.AsFloat := valorBaixa;
                 DM.FDQCadBaixaContasReceberid_forma_pag.AsInteger :=
                   DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
                 DM.FDQCadBaixaContasReceber.Post;
@@ -852,6 +863,8 @@ begin
               begin
                 if valorTotal >= StrToFloat(saldoContasReceber[I]) then
                 begin
+                  valorBaixa := StrToFloat(saldoContasReceber[I]);
+
                   valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
                     StrToFloat(saldoContasReceber[I]);
 
@@ -863,6 +876,8 @@ begin
                 end
                 else
                 begin
+                  valorBaixa := valorTotal;
+
                   valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
                     valorTotal;
 
@@ -906,11 +921,11 @@ begin
                 DM.FDQCadBaixaContasReceber.Close;
                 DM.FDQCadBaixaContasReceber.Open();
                 DM.FDQCadBaixaContasReceber.Append;
-                DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
+                // DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
                 DM.FDQCadBaixaContasReceberid_conta_receber.AsInteger :=
                   StrToInt(idContasReceber[I]);
                 DM.FDQCadBaixaContasReceberdata.AsDateTime := Data;
-                DM.FDQCadBaixaContasRecebervalor.AsFloat := valorTotal;
+                DM.FDQCadBaixaContasRecebervalor.AsFloat := valorBaixa;
                 DM.FDQCadBaixaContasReceberid_forma_pag.AsInteger :=
                   DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
                 DM.FDQCadBaixaContasReceber.Post;
@@ -920,6 +935,8 @@ begin
             begin
               if valorTotal >= StrToFloat(saldoContasReceber[I]) then
               begin
+                valorBaixa := StrToFloat(saldoContasReceber[I]);
+
                 valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
                   StrToFloat(saldoContasReceber[I]);
 
@@ -931,6 +948,8 @@ begin
               end
               else
               begin
+                valorBaixa := valorTotal;
+
                 valorPago := DM.FDQConsContasReceberBaixavalor_pago.AsFloat +
                   valorTotal;
 
@@ -973,11 +992,11 @@ begin
               DM.FDQCadBaixaContasReceber.Close;
               DM.FDQCadBaixaContasReceber.Open();
               DM.FDQCadBaixaContasReceber.Append;
-              DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
+              // DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
               DM.FDQCadBaixaContasReceberid_conta_receber.AsInteger :=
                 StrToInt(idContasReceber[I]);
               DM.FDQCadBaixaContasReceberdata.AsDateTime := Data;
-              DM.FDQCadBaixaContasRecebervalor.AsFloat := valorTotal;
+              DM.FDQCadBaixaContasRecebervalor.AsFloat := valorBaixa;
               DM.FDQCadBaixaContasReceberid_forma_pag.AsInteger :=
                 DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
               DM.FDQCadBaixaContasReceber.Post;

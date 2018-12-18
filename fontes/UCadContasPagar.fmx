@@ -3,6 +3,7 @@ inherited FCadContasPagar: TFCadContasPagar
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
+      TabIndex = 2
       Sizes = (
         330s
         431s
@@ -11,6 +12,7 @@ inherited FCadContasPagar: TFCadContasPagar
         330s
         431s)
       inherited TbItemListagem: TTabItem
+        IsSelected = False
         Size.Width = 110.000000000000000000
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
@@ -169,6 +171,28 @@ inherited FCadContasPagar: TFCadContasPagar
           Size.Height = 252.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 5
+          OnItemClickEx = ListViewCadContasPagarItemClickEx
+        end
+        object BtnBaixarContaPagar: TButton
+          Align = Bottom
+          StyledSettings = [Size, Style]
+          Margins.Left = 8.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 8.000000000000000000
+          Margins.Bottom = 8.000000000000000000
+          Position.X = 8.000000000000000000
+          Position.Y = 379.000000000000000000
+          Size.Width = 314.000000000000000000
+          Size.Height = 44.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 6
+          Text = 'Baixar'
+          TextSettings.Font.Family = 'Arial'
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.FontColor = claWhite
+          TintColor = claNavy
+          Visible = False
+          OnClick = BtnBaixarContaPagarClick
         end
       end
       inherited TbItemedicao: TTabItem
@@ -345,7 +369,6 @@ inherited FCadContasPagar: TFCadContasPagar
                 Size.Width = 206.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
-                KillFocusByReturn = True
                 OnTyping = EdtValorAcrescTyping
               end
             end
@@ -365,14 +388,13 @@ inherited FCadContasPagar: TFCadContasPagar
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
-                ReturnKeyType = Next
-                Enabled = False
                 Margins.Left = 2.000000000000000000
                 Margins.Top = 8.000000000000000000
                 Margins.Right = 2.000000000000000000
                 Size.Width = 209.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
+                OnTyping = EdtValorPagoTyping
               end
             end
             object ListBoxItem8: TListBoxItem
@@ -510,7 +532,7 @@ inherited FCadContasPagar: TFCadContasPagar
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 110.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -519,6 +541,227 @@ inherited FCadContasPagar: TFCadContasPagar
         Text = 'Baixa'
         ExplicitSize.cx = 43.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
+        object ToolBar2: TToolBar
+          Size.Width = 330.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          TintColor = claSilver
+          object LblTituloContasPagarBaixa: TLabel
+            Align = Contents
+            StyledSettings = [Size]
+            Size.Width = 330.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 18.000000000000000000
+            TextSettings.Font.StyleExt = {04070000000000000004000000}
+            TextSettings.FontColor = claNavy
+            TextSettings.HorzAlign = Center
+            Text = 'Baixar'
+          end
+          object SpdBVoltarContasPagarBaixa: TSpeedButton
+            Align = Left
+            IconTintColor = claNavy
+            Margins.Left = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'backtoolbutton'
+            OnClick = SpdBVoltarContasPagarBaixaClick
+          end
+          object SpdBConfirmaContasPagarBaixa: TSpeedButton
+            Align = Right
+            IconTintColor = claNavy
+            Margins.Right = 8.000000000000000000
+            Position.X = 274.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'donetoolbutton'
+            OnClick = SpdBConfirmaContasPagarBaixaClick
+          end
+        end
+        object VertScrollBox2: TVertScrollBox
+          Align = Client
+          Size.Width = 330.000000000000000000
+          Size.Height = 383.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Viewport.Width = 330.000000000000000000
+          Viewport.Height = 383.000000000000000000
+          object ListBoxbaixaContasReceberEdicao: TListBox
+            Align = Client
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Size.Width = 322.000000000000000000
+            Size.Height = 375.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            DisableFocusEffect = True
+            DefaultItemStyles.ItemStyle = ''
+            DefaultItemStyles.GroupHeaderStyle = ''
+            DefaultItemStyles.GroupFooterStyle = ''
+            Viewport.Width = 322.000000000000000000
+            Viewport.Height = 375.000000000000000000
+            object ListBoxItem11: TListBoxItem
+              Size.Width = 322.000000000000000000
+              Size.Height = 44.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object LblVlSaldoContasPagarBaixa: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Size.Width = 84.000000000000000000
+                Size.Height = 44.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Valor Saldo:'
+              end
+              object EditValorSaldoBaixa: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                KeyboardType = NumbersAndPunctuation
+                ReturnKeyType = Done
+                Enabled = False
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Size.Width = 226.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                KillFocusByReturn = True
+              end
+            end
+            object ListBoxItem12: TListBoxItem
+              Position.Y = 44.000000000000000000
+              TabOrder = 4
+              object LblAcrescimoMoedaContasPagarBaixa: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Size.Width = 76.000000000000000000
+                Size.Height = 44.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Acrescimo:'
+              end
+              object EdtAcrescimoBaixa: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                KeyboardType = NumbersAndPunctuation
+                ReturnKeyType = Done
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Size.Width = 234.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = '0,00'
+                KillFocusByReturn = True
+              end
+            end
+            object ListBoxItem13: TListBoxItem
+              Position.Y = 88.000000000000000000
+              TabOrder = 1
+              object LblDescMoedaContasPagarBaixa: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 44.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Desconto:'
+              end
+              object EdtDescontoBaixa: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                KeyboardType = NumbersAndPunctuation
+                ReturnKeyType = Done
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Size.Width = 241.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TextPrompt = '0,00'
+                KillFocusByReturn = True
+              end
+            end
+            object ListBoxItem14: TListBoxItem
+              Position.Y = 132.000000000000000000
+              TabOrder = 2
+              object LblVlTotalContasPagarBaixa: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Size.Width = 99.000000000000000000
+                Size.Height = 44.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Valor a Pagar:'
+              end
+              object EdtValorPagarBaixa: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                KeyboardType = NumbersAndPunctuation
+                ReturnKeyType = Done
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Size.Width = 211.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                KillFocusByReturn = True
+              end
+            end
+            object ListBoxItem15: TListBoxItem
+              Position.Y = 176.000000000000000000
+              TabOrder = 3
+              object LblTipoReceitaContasPagarBaixa: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Size.Width = 112.000000000000000000
+                Size.Height = 44.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                TextSettings.Font.Size = 14.000000000000000000
+                Text = 'Tipo de Receita:'
+              end
+              object ComboBoxTipoReceita: TComboBox
+                Align = Client
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Size.Width = 198.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 2
+                OnClosePopup = ComboBoxTipoReceitaClosePopup
+                OnEnter = ComboBoxTipoReceitaEnter
+              end
+            end
+          end
+        end
       end
     end
   end
@@ -590,6 +833,15 @@ inherited FCadContasPagar: TFCadContasPagar
       FillHeaderExpressions = <>
       FillBreakGroups = <>
     end
+    object LinkListControlToField5: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB5
+      FieldName = 'descricao_forma_pag'
+      Control = ComboBoxTipoReceita
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
   end
   object BindSourceDB2: TBindSourceDB
     DataSet = DM.FDQConsFornecedor
@@ -608,5 +860,11 @@ inherited FCadContasPagar: TFCadContasPagar
     ScopeMappings = <>
     Left = 152
     Top = 224
+  end
+  object BindSourceDB5: TBindSourceDB
+    DataSet = DM.FDQConsAvistaFormaPag
+    ScopeMappings = <>
+    Left = 160
+    Top = 232
   end
 end
