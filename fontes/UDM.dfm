@@ -1,7 +1,7 @@
 object DM: TDM
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 440
+  Height = 528
   Width = 1816
   object FDConnection1: TFDConnection
     Params.Strings = (
@@ -11,7 +11,7 @@ object DM: TDM
       'DriverID=SQLite')
     LoginPrompt = False
     Left = 40
-    Top = 8
+    Top = 16
   end
   object FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink
     Left = 32
@@ -2530,9 +2530,24 @@ object DM: TDM
   object FDQConsDespesas: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
-      'select * from tipo_despesa')
+      
+        'select * from tipo_despesa where descricao like :PDescricaoDespe' +
+        'sa or id like :PIdDespesa order by descricao')
     Left = 1726
     Top = 24
+    ParamData = <
+      item
+        Name = 'PDESCRICAODESPESA'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 60
+      end
+      item
+        Name = 'PIDDESPESA'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 30
+      end>
     object FDQConsDespesasid: TFDAutoIncField
       FieldName = 'id'
       Origin = 'id'
@@ -2544,6 +2559,17 @@ object DM: TDM
       Origin = 'descricao'
       Required = True
       Size = 30
+    end
+    object FDQConsDespesasstatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsDespesasdataCad: TDateTimeField
+      FieldName = 'dataCad'
+      Origin = 'dataCad'
     end
   end
   object FDQCadDespesas: TFDQuery
@@ -2563,6 +2589,17 @@ object DM: TDM
       Origin = 'descricao'
       Required = True
       Size = 30
+    end
+    object FDQCadDespesasstatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object FDQCadDespesasdataCad: TDateTimeField
+      FieldName = 'dataCad'
+      Origin = 'dataCad'
     end
   end
   object FDQFornEditContaPagar: TFDQuery
@@ -2676,8 +2713,8 @@ object DM: TDM
     Connection = FDConnection1
     SQL.Strings = (
       'select * from tipo_despesa where descricao = :PDescricao;')
-    Left = 1710
-    Top = 248
+    Left = 1262
+    Top = 288
     ParamData = <
       item
         Name = 'PDESCRICAO'
@@ -2715,6 +2752,7 @@ object DM: TDM
       FieldName = 'id'
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQConsContasPagarBaixaid_fornecedor: TIntegerField
       FieldName = 'id_fornecedor'
@@ -2791,6 +2829,7 @@ object DM: TDM
       FieldName = 'id'
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQCadBaixaContaPagarid_conta_pagar: TIntegerField
       FieldName = 'id_conta_pagar'
@@ -2828,6 +2867,35 @@ object DM: TDM
       ProviderFlags = []
       ReadOnly = True
       Size = 32767
+    end
+  end
+  object FDQConsDespesaContaPagar: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from tipo_despesa where status = '#39'A'#39';')
+    Left = 1256
+    Top = 344
+    object FDQConsDespesaContaPagarid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object FDQConsDespesaContaPagardescricao: TStringField
+      FieldName = 'descricao'
+      Origin = 'descricao'
+      Required = True
+      Size = 30
+    end
+    object FDQConsDespesaContaPagarstatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsDespesaContaPagardataCad: TDateTimeField
+      FieldName = 'dataCad'
+      Origin = 'dataCad'
     end
   end
 end

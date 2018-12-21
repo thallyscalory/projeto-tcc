@@ -228,12 +228,12 @@ inherited FCadCli: TFCadCli
           Viewport.Height = 383.000000000000000000
           object ListBoxEdicaoCadCli: TListBox
             Align = Client
-            Margins.Left = 8.000000000000000000
-            Margins.Top = 8.000000000000000000
-            Margins.Right = 8.000000000000000000
-            Margins.Bottom = 8.000000000000000000
-            Size.Width = 314.000000000000000000
-            Size.Height = 367.000000000000000000
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Size.Width = 322.000000000000000000
+            Size.Height = 375.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'listboxstyle'
             TabOrder = 0
@@ -241,10 +241,10 @@ inherited FCadCli: TFCadCli
             DefaultItemStyles.ItemStyle = ''
             DefaultItemStyles.GroupHeaderStyle = ''
             DefaultItemStyles.GroupFooterStyle = ''
-            Viewport.Width = 309.000000000000000000
-            Viewport.Height = 367.000000000000000000
+            Viewport.Width = 317.000000000000000000
+            Viewport.Height = 375.000000000000000000
             object ListBoxItem1: TListBoxItem
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 0
@@ -258,7 +258,7 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 244.000000000000000000
+                Size.Width = 252.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Nome / Razao Social'
@@ -291,7 +291,7 @@ inherited FCadCli: TFCadCli
             end
             object ListBoxItem2: TListBoxItem
               Position.Y = 40.000000000000000000
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 1
@@ -304,7 +304,7 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 224.000000000000000000
+                Size.Width = 232.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TabOrder = 1
@@ -326,7 +326,7 @@ inherited FCadCli: TFCadCli
             end
             object ListBoxItem3: TListBoxItem
               Position.Y = 80.000000000000000000
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 2
@@ -341,7 +341,7 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 228.000000000000000000
+                Size.Width = 236.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Cpf / Cnpj'
@@ -374,7 +374,7 @@ inherited FCadCli: TFCadCli
             end
             object ListBoxItem4: TListBoxItem
               Position.Y = 120.000000000000000000
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 3
@@ -388,7 +388,7 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 228.000000000000000000
+                Size.Width = 236.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Rg / I.E'
@@ -421,7 +421,7 @@ inherited FCadCli: TFCadCli
             end
             object ListBoxItem5: TListBoxItem
               Position.Y = 160.000000000000000000
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 4
@@ -435,7 +435,7 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 228.000000000000000000
+                Size.Width = 236.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Apelido / Nome Fantasia'
@@ -468,7 +468,7 @@ inherited FCadCli: TFCadCli
             end
             object ListBoxItem6: TListBoxItem
               Position.Y = 200.000000000000000000
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 5
@@ -483,7 +483,7 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 228.000000000000000000
+                Size.Width = 236.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Telefone / Celular'
@@ -516,7 +516,7 @@ inherited FCadCli: TFCadCli
             end
             object ListBoxItem7: TListBoxItem
               Position.Y = 240.000000000000000000
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 6
@@ -530,7 +530,7 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 228.000000000000000000
+                Size.Width = 236.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Endereco'
@@ -563,7 +563,7 @@ inherited FCadCli: TFCadCli
             end
             object ListBoxItem8: TListBoxItem
               Position.Y = 280.000000000000000000
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 7
@@ -577,7 +577,7 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 228.000000000000000000
+                Size.Width = 236.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Numero'
@@ -610,7 +610,7 @@ inherited FCadCli: TFCadCli
             end
             object ListBoxItem9: TListBoxItem
               Position.Y = 320.000000000000000000
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 8
@@ -624,7 +624,7 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 204.000000000000000000
+                Size.Width = 212.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Complemento'
@@ -657,7 +657,7 @@ inherited FCadCli: TFCadCli
             end
             object ListBoxItem10: TListBoxItem
               Position.Y = 360.000000000000000000
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 9
@@ -671,7 +671,7 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 228.000000000000000000
+                Size.Width = 236.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Bairro'
@@ -704,7 +704,7 @@ inherited FCadCli: TFCadCli
             end
             object ListBoxItem11: TListBoxItem
               Position.Y = 400.000000000000000000
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 10
@@ -719,7 +719,7 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 228.000000000000000000
+                Size.Width = 236.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Cep'
@@ -752,7 +752,7 @@ inherited FCadCli: TFCadCli
             end
             object ListBoxItem12: TListBoxItem
               Position.Y = 440.000000000000000000
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 11
@@ -766,7 +766,7 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 228.000000000000000000
+                Size.Width = 236.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Cidade'
@@ -799,7 +799,7 @@ inherited FCadCli: TFCadCli
             end
             object ListBoxItem13: TListBoxItem
               Position.Y = 480.000000000000000000
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 12
@@ -813,7 +813,7 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 228.000000000000000000
+                Size.Width = 236.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Uf'
@@ -846,7 +846,7 @@ inherited FCadCli: TFCadCli
             end
             object ListBoxItem14: TListBoxItem
               Position.Y = 520.000000000000000000
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 13
@@ -861,7 +861,7 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 228.000000000000000000
+                Size.Width = 236.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Email'
@@ -894,7 +894,7 @@ inherited FCadCli: TFCadCli
             end
             object ListBoxItem15: TListBoxItem
               Position.Y = 560.000000000000000000
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 14
@@ -938,7 +938,7 @@ inherited FCadCli: TFCadCli
             end
             object ListBoxItem16: TListBoxItem
               Position.Y = 600.000000000000000000
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 70.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 15
@@ -965,17 +965,17 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 8.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 256.000000000000000000
+                Size.Width = 264.000000000000000000
                 Size.Height = 58.000000000000000000
                 Size.PlatformDefault = False
                 TabOrder = 0
-                Viewport.Width = 248.000000000000000000
+                Viewport.Width = 256.000000000000000000
                 Viewport.Height = 50.000000000000000000
               end
             end
             object ListBoxItem17: TListBoxItem
               Position.Y = 670.000000000000000000
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 16
@@ -988,7 +988,7 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 230.000000000000000000
+                Size.Width = 238.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
               end
@@ -1009,7 +1009,7 @@ inherited FCadCli: TFCadCli
             end
             object ListBoxItem18: TListBoxItem
               Position.Y = 710.000000000000000000
-              Size.Width = 309.000000000000000000
+              Size.Width = 317.000000000000000000
               Size.Height = 130.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 17
@@ -1019,7 +1019,7 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 301.000000000000000000
+                Size.Width = 309.000000000000000000
                 Size.Height = 122.000000000000000000
                 Size.PlatformDefault = False
                 TabOrder = 0

@@ -71,7 +71,6 @@ type
     BindSourceDB3: TBindSourceDB;
     LinkListControlToField3: TLinkListControlToField;
     BindSourceDB4: TBindSourceDB;
-    LinkListControlToField4: TLinkListControlToField;
     SpdBNovo: TSpeedButton;
     EdtValorPago: TEdit;
     BtnBaixarContaPagar: TButton;
@@ -98,6 +97,8 @@ type
     ComboBoxTipoReceita: TComboBox;
     BindSourceDB5: TBindSourceDB;
     LinkListControlToField5: TLinkListControlToField;
+    BindSourceDB6: TBindSourceDB;
+    LinkListControlToField4: TLinkListControlToField;
     procedure ComboBoxFiltroFornContasPagarEnter(Sender: TObject);
     procedure ComboBoxFiltroFornContasPagarClosePopup(Sender: TObject);
     procedure SpBVoltarClick(Sender: TObject);
@@ -165,7 +166,6 @@ begin
   ListBoxItem14.Height := 44;
   ListBoxItem15.Height := 44;
 {$ENDIF}
-
   saldoTotal := 0;
   for I := 0 to contadorArray - 1 do
   begin
@@ -216,10 +216,10 @@ end;
 procedure TFCadContasPagar.ComboBoxDespesaEnter(Sender: TObject);
 begin
   inherited;
-  DM.FDQConsDespesas.Active := False;
-  DM.FDQConsDespesas.Close;
-  DM.FDQConsDespesas.Open();
-  DM.FDQConsDespesas.Active := True;
+  DM.FDQConsDespesaContaPagar.Active := False;
+  DM.FDQConsDespesaContaPagar.Close;
+  DM.FDQConsDespesaContaPagar.Open();
+  DM.FDQConsDespesaContaPagar.Active := True;
 end;
 
 procedure TFCadContasPagar.ComboBoxFiltroFornContasPagarClosePopup
@@ -528,6 +528,8 @@ begin
   ComboBoxFiltroFornContasPagar.ItemIndex := 0;
   DateEdtFiltroVencInicialContasPagar.Date := Date;
   DateEdtFiltroVencFinalContasPagar.Date := Date;
+  TbControlCadModelo.ActiveTab := TbItemListagem;
+  TbControlCadModelo.TabPosition := TTabPosition.None;
 end;
 
 procedure TFCadContasPagar.FormKeyUp(Sender: TObject; var Key: Word;
@@ -559,11 +561,11 @@ begin
       end
       else if TbControlCadModelo.ActiveTab = TbItemedicao then
       begin
-        // SpBVoltarEdicaoClick(Sender);
+        SpdBVoltarEdicaoClick(Sender);
       end
       else if TbControlCadModelo.ActiveTab = TbItemBaixa then
       begin
-        // SpBVoltarBaixaClick(Sender);
+        SpdBVoltarContasPagarBaixaClick(Sender);
       end;
     end;
   end;
@@ -713,6 +715,8 @@ begin
   inherited;
   DM.FDQConsContaPagar.Active := False;
   DM.FDQConsFornecedor.Active := False;
+  DM.FDQFornecedor.Active := False;
+  DM.FDQConsDespesaContaPagar.Active := False;
   Close;
 end;
 
@@ -1260,6 +1264,8 @@ begin
         DM.FDConnection1.CommitRetaining;
         LimpaCampos;
         DesabilitaCampos;
+        DM.FDQFornecedor.Active := False;
+        DM.FDQConsDespesaContaPagar.Active := False;
         MudarAbaModelo(TbItemListagem, Sender);
       end
       else if crud = 'editar' then
@@ -1317,6 +1323,8 @@ begin
         DM.FDQAuxiliar.ExecSQL;
         DM.FDConnection1.CommitRetaining;
 
+        DM.FDQFornecedor.Active := False;
+        DM.FDQConsDespesaContaPagar.Active := False;
         LimpaCampos;
         DesabilitaCampos;
         MudarAbaModelo(TbItemListagem, Sender);
@@ -1382,6 +1390,7 @@ begin
   SetLength(idContasPagar, 0);
   SetLength(idFornContasPagar, 0);
   limpaArray := 'S';
+  marcadoBaixa := 'N';
 
   if filtroPag = 'Forn' then
   begin
@@ -1404,6 +1413,11 @@ end;
 procedure TFCadContasPagar.SpdBVoltarEdicaoClick(Sender: TObject);
 begin
   inherited;
+  marcadoBaixa := 'N';
+  DM.FDQFornecedor.Active := False;
+  DM.FDQConsDespesaContaPagar.Active := False;
+  LimpaCampos;
+  DesabilitaCampos;
   MudarAbaModelo(TbItemListagem, Sender);
 end;
 

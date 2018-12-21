@@ -508,7 +508,7 @@ inherited FConsProduto: TFConsProduto
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
-                KeyboardType = NumbersAndPunctuation
+                KeyboardType = NumberPad
                 ReturnKeyType = Next
                 MaxLength = 15
                 Margins.Left = 4.000000000000000000
@@ -558,7 +558,7 @@ inherited FConsProduto: TFConsProduto
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
-                KeyboardType = NumbersAndPunctuation
+                KeyboardType = NumberPad
                 ReturnKeyType = Next
                 MaxLength = 15
                 Margins.Left = 4.000000000000000000
@@ -608,7 +608,7 @@ inherited FConsProduto: TFConsProduto
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
-                KeyboardType = NumbersAndPunctuation
+                KeyboardType = NumberPad
                 ReturnKeyType = Done
                 MaxLength = 15
                 Margins.Left = 4.000000000000000000

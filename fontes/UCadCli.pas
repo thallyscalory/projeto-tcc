@@ -886,7 +886,7 @@ begin
     TipoPessoa := 'J'
   else
     TipoPessoa := 'F';
-  if crud = 'iserir' then
+  if crud = 'inserir' then
   begin
     try
       DM.FDQCadCli.Close;
@@ -1001,7 +1001,7 @@ procedure TFCadCli.SpdBNovoCadCliClick(Sender: TObject);
 begin
   inherited;
   DM.FDQFiltroCadCLi.Active := False;
-  crud := 'iserir';
+  crud := 'inserir';
   SpdBEditar.Visible := False;
   SpdBConfirmar.Visible := True;
   lblTituloEdicao.Text := 'Novo Cadastro';

@@ -365,7 +365,7 @@ inherited FCadContasReceber: TFCadContasReceber
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
-                KeyboardType = NumbersAndPunctuation
+                KeyboardType = NumberPad
                 ReturnKeyType = Done
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 8.000000000000000000
@@ -397,7 +397,7 @@ inherited FCadContasReceber: TFCadContasReceber
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
-                KeyboardType = NumbersAndPunctuation
+                KeyboardType = NumberPad
                 ReturnKeyType = Done
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 8.000000000000000000
@@ -429,7 +429,7 @@ inherited FCadContasReceber: TFCadContasReceber
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
-                KeyboardType = NumbersAndPunctuation
+                KeyboardType = NumberPad
                 ReturnKeyType = Done
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 8.000000000000000000

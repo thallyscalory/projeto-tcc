@@ -1,5 +1,4 @@
 ﻿[DM.FDQConsultaProd]
-Visible=False
 
 [DM.FDQConsContasReceber]
 Visible=False
@@ -23,5 +22,20 @@ Visible=False
 Visible=False
 
 [DM.FDQConsAvistaFormaPag]
+Visible=False
+
+[DM.FDQConsContaPagar]
+Visible=False
+
+[DM.FDQConsFornecedor]
+Visible=False
+
+[DM.FDQFornecedor]
+Visible=False
+
+[DM.FDQConsDespesas]
+Visible=False
+
+[DM.FDQConsDespesaContaPagar]
 Visible=False
 

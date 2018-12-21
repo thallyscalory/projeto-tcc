@@ -1,0 +1,310 @@
+inherited FCadDespesa: TFCadDespesa
+  Caption = 'FCadModelo1'
+  DesignerMasterStyle = 3
+  inherited LytBase: TLayout
+    inherited TbControlCadModelo: TTabControl
+      Sizes = (
+        330s
+        431s
+        330s
+        431s)
+      inherited TbItemListagem: TTabItem
+        ExplicitSize.cx = 165.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        inherited ToolBarsuperior: TToolBar
+          inherited LblTitulo: TLabel
+            TextSettings.Font.StyleExt = {04070000000000000004000000}
+            Text = 'Despesas'
+          end
+          inherited SpBVoltar: TSpeedButton
+            OnClick = SpBVoltarClick
+          end
+          object SpdBNovoCadDespesa: TSpeedButton
+            Align = Right
+            IconTintColor = claNavy
+            Margins.Left = 4.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Position.X = 274.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'addtoolbutton'
+            OnClick = SpdBNovoCadDespesaClick
+          end
+        end
+        object Layout1: TLayout
+          Align = Top
+          Position.Y = 48.000000000000000000
+          Size.Width = 330.000000000000000000
+          Size.Height = 124.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object EditFiltroNomeCadDespesa: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            StyleLookup = 'searchedit'
+            TabOrder = 0
+            ReturnKeyType = Done
+            Position.X = 4.000000000000000000
+            Margins.Left = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Scale.Y = 1.200000047683716000
+            Size.Width = 322.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Filtrar pelo nome'
+            KillFocusByReturn = True
+            OnTyping = EditFiltroNomeCadDespesaTyping
+          end
+          object EditFiltroCodCadDespesa: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            StyleLookup = 'searchedit'
+            TabOrder = 1
+            KeyboardType = NumberPad
+            ReturnKeyType = Done
+            Position.X = 4.000000000000000000
+            Position.Y = 38.400001525878910000
+            ClipParent = True
+            Margins.Left = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Scale.Y = 1.200000047683716000
+            Size.Width = 322.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Filtrar pelo c'#243'digo'
+            KillFocusByReturn = True
+            OnTyping = EditFiltroCodCadDespesaTyping
+          end
+          object BtnFiltrarDespesa: TButton
+            Align = Top
+            StyledSettings = [Family, Size, Style]
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 76.800003051757810000
+            Size.Width = 290.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            Text = 'Filtrar Todos'
+            TextSettings.FontColor = claWhite
+            TintColor = claNavy
+            OnClick = BtnFiltrarDespesaClick
+          end
+        end
+        object ListViewCadDespesa: TListView
+          Touch.InteractiveGestures = [DoubleTap]
+          ItemAppearanceClassName = 'TImageListItemRightButtonAppearance'
+          ItemEditAppearanceClassName = 'TImageListItemRightButtonDeleteAppearance'
+          HeaderAppearanceClassName = 'TListHeaderObjects'
+          FooterAppearanceClassName = 'TListHeaderObjects'
+          Align = Client
+          Margins.Left = 4.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 4.000000000000000000
+          Margins.Bottom = 4.000000000000000000
+          Size.Width = 322.000000000000000000
+          Size.Height = 251.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          ItemAppearanceObjects.ItemObjects.TextButton.Text = '>'
+          ItemAppearanceObjects.ItemEditObjects.TextButton.Text = '>'
+          ItemAppearanceObjects.ItemEditObjects.Image.Visible = False
+          OnButtonClick = ListViewCadDespesaButtonClick
+        end
+      end
+      inherited TbItemedicao: TTabItem
+        ExplicitSize.cx = 165.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        object ToolBar1: TToolBar
+          Size.Width = 330.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          TintColor = claSilver
+          object lblTituloEdicaoCadDespesa: TLabel
+            Align = Contents
+            StyledSettings = []
+            Size.Width = 330.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 18.000000000000000000
+            TextSettings.Font.StyleExt = {04070000000000000004000000}
+            TextSettings.FontColor = claNavy
+            TextSettings.HorzAlign = Center
+            Text = 'Detalhes'
+          end
+          object SpBVoltarEdicaoCadDespesa: TSpeedButton
+            Align = Left
+            IconTintColor = claNavy
+            Margins.Left = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'backtoolbutton'
+            OnClick = SpBVoltarEdicaoCadDespesaClick
+          end
+          object SpdBEditarCadDespesa: TSpeedButton
+            Align = MostRight
+            IconTintColor = claNavy
+            Position.X = 282.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'composetoolbutton'
+            OnClick = SpdBEditarCadDespesaClick
+          end
+          object SpdBConfirmarCadDespesa: TSpeedButton
+            Align = MostRight
+            IconTintColor = claNavy
+            Position.X = 234.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'donetoolbutton'
+            OnClick = SpdBConfirmarCadDespesaClick
+          end
+        end
+        object VertScrollBox1: TVertScrollBox
+          Align = Client
+          Size.Width = 330.000000000000000000
+          Size.Height = 383.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Viewport.Width = 330.000000000000000000
+          Viewport.Height = 383.000000000000000000
+          object ListBox1: TListBox
+            Align = Client
+            Margins.Left = 4.000000000000000000
+            Margins.Top = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Margins.Bottom = 4.000000000000000000
+            Size.Width = 322.000000000000000000
+            Size.Height = 375.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            DisableFocusEffect = True
+            DefaultItemStyles.ItemStyle = ''
+            DefaultItemStyles.GroupHeaderStyle = ''
+            DefaultItemStyles.GroupFooterStyle = ''
+            Viewport.Width = 322.000000000000000000
+            Viewport.Height = 375.000000000000000000
+            object ListBoxItem1: TListBoxItem
+              TabOrder = 0
+              object LblDescricaoCadDespesa: TLabel
+                Align = Left
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 89.000000000000000000
+                Size.Height = 36.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Descricao: '
+              end
+              object EdtDescricaoCadDespesa: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                ReturnKeyType = Done
+                Margins.Left = 2.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Size.Width = 219.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                KillFocusByReturn = True
+              end
+            end
+            object ListBoxItem2: TListBoxItem
+              Position.Y = 44.000000000000000000
+              TabOrder = 1
+              object LblStatusCadDespesa: TLabel
+                Align = Left
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 89.000000000000000000
+                Size.Height = 36.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Status:'
+              end
+              object CbStatusCadDespesa: TComboBox
+                Align = Client
+                Items.Strings = (
+                  'Ativo'
+                  'Inativo')
+                Margins.Left = 2.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Size.Width = 219.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+              end
+            end
+            object ListBoxItem3: TListBoxItem
+              Position.Y = 88.000000000000000000
+              TabOrder = 2
+              object LblDataCadDespesa: TLabel
+                Align = Left
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 89.000000000000000000
+                Size.Height = 36.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Data Cad:'
+              end
+              object EdtDataCadDespesa: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                Enabled = False
+                Margins.Left = 2.000000000000000000
+                Margins.Top = 8.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Size.Width = 219.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = DM.FDQConsDespesas
+    ScopeMappings = <>
+    Left = 152
+    Top = 224
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 20
+    Top = 5
+    object LinkListControlToField1: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'descricao'
+      Control = ListViewCadDespesa
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillHeaderFieldName = 'id'
+      FillBreakGroups = <>
+    end
+  end
+end

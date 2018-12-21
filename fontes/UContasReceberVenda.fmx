@@ -81,7 +81,7 @@ object FContasReceberVenda: TFContasReceberVenda
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           Align = Client
           TabOrder = 1
-          KeyboardType = NumbersAndPunctuation
+          KeyboardType = NumberPad
           ReturnKeyType = Done
           Margins.Top = 10.000000000000000000
           Margins.Right = 8.000000000000000000

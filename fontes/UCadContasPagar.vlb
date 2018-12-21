@@ -175,8 +175,8 @@ Coordinates=694,1089,159,33
 Visible=False
 
 [DM.FDQConsAvistaFormaPag]
-Coordinates=1191,310,161,33
-Visible=True
+Coordinates=850,30,147,159
+Visible=False
 
 [DM.FDQConsContaPagar]
 Coordinates=220,10,138,33
@@ -383,26 +383,32 @@ Coordinates=490,790,122,33
 Visible=False
 
 [BindSourceDB4]
-Coordinates=490,790,116,105
+Coordinates=490,790,92,33
+Visible=False
 
 [SpdBNovo]
 Coordinates=727,1188,66,33
 Visible=False
 
 [EdtValorPago]
-Coordinates=384,1111,81,51
+Coordinates=384,1111,81,33
+Visible=False
 
 [BtnBaixarContaPagar]
-Coordinates=694,983,120,51
+Coordinates=694,983,120,33
+Visible=False
 
 [DM.FDQDespesaEditContaPagar]
-Coordinates=330,1290,174,87
+Coordinates=330,1290,174,33
+Visible=False
 
 [DM.FDQFornEditContaPagar]
-Coordinates=909,1491,155,375
+Coordinates=909,1491,155,33
+Visible=False
 
 [VertScrollBox2]
 Coordinates=694,1053,88,33
+Visible=False
 
 [LblAcrescimoMoedaContasPagarBaixa]
 Coordinates=1038,222,206,33
@@ -410,6 +416,7 @@ Visible=False
 
 [ListBoxItem11]
 Coordinates=209,1380,84,33
+Visible=False
 
 [ComboBoxTipoReceita]
 Coordinates=650,30,127,123
@@ -433,9 +440,11 @@ Visible=False
 
 [ListBoxItem13]
 Coordinates=120,1380,84,33
+Visible=False
 
 [ListBoxItem12]
 Coordinates=31,1380,84,33
+Visible=False
 
 [ListBoxItem14]
 Coordinates=1069,362,84,33
@@ -453,29 +462,51 @@ Coordinates=1069,152,155,33
 Visible=False
 
 [BindSourceDB5]
-Coordinates=850,40,147,159
+Coordinates=850,30,147,159
 
 [EditValorSaldoBaixa]
-Coordinates=466,1380,87,51
+Coordinates=466,1380,115,33
+Visible=False
 
 [EdtAcrescimoBaixa]
-Coordinates=298,1380,83,51
+Coordinates=298,1380,111,33
+Visible=False
 
 [EdtDescontoBaixa]
-Coordinates=387,1380,77,51
+Coordinates=387,1380,105,33
+Visible=False
 
 [LblTituloContasPagarBaixa]
-Coordinates=1282,549,194,33
+Coordinates=1282,549,148,33
 Visible=False
 
 [SpdBVoltarContasPagarBaixa]
-Coordinates=1038,292,207,33
+Coordinates=1038,292,161,33
 Visible=False
 
 [SpdBConfirmaContasPagarBaixa]
-Coordinates=1069,479,224,33
+Coordinates=1069,479,177,33
 Visible=False
 
 [EdtValorPagarBaixa]
-Coordinates=705,1380,97,51
+Coordinates=705,1380,112,33
+Visible=False
+
+[DM.FDQMaxIdBaixaContaPagar]
+Coordinates=1061,549,169,33
+Visible=False
+
+[DM.FDQCadBaixaContaPagar]
+Coordinates=773,429,159,33
+Visible=False
+
+[DM.FDQConsContasPagarBaixa]
+Coordinates=0,0,171,285
+
+[DM.FDQConsDespesaContaPagar]
+Coordinates=500,790,180,33
+Visible=False
+
+[BindSourceDB6]
+Coordinates=500,790,166,141
 

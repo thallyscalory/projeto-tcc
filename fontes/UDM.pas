@@ -445,6 +445,15 @@ type
     FDQCadBaixaContaPagarid_forma_pag: TIntegerField;
     FDQMaxIdBaixaContaPagar: TFDQuery;
     FDQMaxIdBaixaContaPagarmaxid: TWideStringField;
+    FDQConsDespesasstatus: TStringField;
+    FDQConsDespesasdataCad: TDateTimeField;
+    FDQConsDespesaContaPagar: TFDQuery;
+    FDQConsDespesaContaPagarid: TFDAutoIncField;
+    FDQConsDespesaContaPagardescricao: TStringField;
+    FDQConsDespesaContaPagarstatus: TStringField;
+    FDQConsDespesaContaPagardataCad: TDateTimeField;
+    FDQCadDespesasstatus: TStringField;
+    FDQCadDespesasdataCad: TDateTimeField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

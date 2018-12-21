@@ -70,11 +70,19 @@ type
     ImgAgenda: TImage;
     LytAgenda: TLayout;
     LblTituloAgenda: TLabel;
+    ListBoxItem11: TListBoxItem;
+    RoundRectCadDespesa: TRoundRect;
+    ImgCadDespesa: TImage;
+    LytCadDespesa: TLayout;
+    LblCadDespesa: TLabel;
+    ListBoxItem12: TListBoxItem;
+    RoundRectCadTipoReceita: TRoundRect;
+    ImgCadTipoReceita: TImage;
+    LytCadTipoReceita: TLayout;
+    LblCadTipoReceita: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure RoundRectVendasClick(Sender: TObject);
     procedure ImgVendaClick(Sender: TObject);
-    procedure RoundRectConsProdClick(Sender: TObject);
-    procedure ImgConsProdClick(Sender: TObject);
     procedure SpdBInfoClick(Sender: TObject);
     procedure RoundRectCadContasReceberClick(Sender: TObject);
     procedure ImgCadContasReceberClick(Sender: TObject);
@@ -93,6 +101,12 @@ type
     procedure ImgCadContasPagarClick(Sender: TObject);
     procedure RoundRectAgendaClick(Sender: TObject);
     procedure ImgAgendaClick(Sender: TObject);
+    procedure RoundRectCadDespesaClick(Sender: TObject);
+    procedure ImgCadDespesaClick(Sender: TObject);
+    procedure RoundRectCadTipoReceitaClick(Sender: TObject);
+    procedure ImgCadTipoReceitaClick(Sender: TObject);
+    procedure RoundRectConsProdClick(Sender: TObject);
+    procedure ImgConsProdClick(Sender: TObject);
   private
     { Private declarations }
     FActiveForm: TForm;
@@ -112,7 +126,8 @@ implementation
 {$R *.fmx}
 
 uses UDM, UVenda, UCadCli, UConsultaProduto, UInfo, UVenda1, UCadContasReceber,
-  UAuxiliar, UCadFornecedor, UCadContasPagar, UAgenda;
+  UAuxiliar, UCadFornecedor, UCadContasPagar, UAgenda, UCadDespesa,
+  UCadTipoReceita;
 
 procedure TFPrincipal.AbrirForm(AFormClass: TComponentClass);
 begin
@@ -128,17 +143,30 @@ procedure TFPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   if Assigned(FVenda1) then
     FVenda1.DisposeOf;
+
   if Assigned(FCadContasReceber) then
     FCadContasReceber.DisposeOf;
+
   if Assigned(FCadContasPagar) then
     FCadContasPagar.DisposeOf;
+
   if Assigned(FCadCli) then
     FCadCli.DisposeOf;
+
   if Assigned(FCadFornecedor) then
     FCadFornecedor.DisposeOf;
+
+  if Assigned(FConsProduto) then
+    FConsProduto.DisposeOf;
+
+  if Assigned(FCadDespesa) then
+    FCadDespesa.DisposeOf;
+
+  if Assigned(FCadTipoReceita) then
+    FCadTipoReceita.DisposeOf;
+
   if Assigned(FAgenda) then
     FAgenda.DisposeOf;
-
 
 end;
 
@@ -242,6 +270,30 @@ begin
     end);
 end;
 
+procedure TFPrincipal.ImgCadTipoReceitaClick(Sender: TObject);
+begin
+  Application.CreateForm(TFCadTipoReceita, FCadTipoReceita);
+  if not Assigned(FCadTipoReceita) then
+    FCadTipoReceita := TFCadTipoReceita.Create(nil);
+  FCadTipoReceita.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
+end;
+
+procedure TFPrincipal.ImgConsProdClick(Sender: TObject);
+begin
+  Application.CreateForm(TFConsProduto, FConsProduto);
+  if not Assigned(FConsProduto) then
+    FConsProduto := TFConsProduto.Create(nil);
+  FConsProduto.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
+end;
+
 procedure TFPrincipal.ImgCadContasPagarClick(Sender: TObject);
 begin
   Application.CreateForm(TFCadContasPagar, FCadContasPagar);
@@ -266,12 +318,12 @@ begin
     end);
 end;
 
-procedure TFPrincipal.ImgConsProdClick(Sender: TObject);
+procedure TFPrincipal.ImgCadDespesaClick(Sender: TObject);
 begin
-  Application.CreateForm(TFConsProduto, FConsProduto);
-  if not Assigned(FConsProduto) then
-    FConsProduto := TFConsProduto.Create(nil);
-  FConsProduto.ShowModal(
+  Application.CreateForm(TFCadDespesa, FCadDespesa);
+  if not Assigned(FCadDespesa) then
+    FCadDespesa := TFCadDespesa.Create(nil);
+  FCadDespesa.ShowModal(
     procedure(modalResult: TModalResult)
     begin
 
@@ -332,6 +384,30 @@ begin
     end);
 end;
 
+procedure TFPrincipal.RoundRectCadTipoReceitaClick(Sender: TObject);
+begin
+  Application.CreateForm(TFCadTipoReceita, FCadTipoReceita);
+  if not Assigned(FCadTipoReceita) then
+    FCadTipoReceita := TFCadTipoReceita.Create(nil);
+  FCadTipoReceita.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
+end;
+
+procedure TFPrincipal.RoundRectConsProdClick(Sender: TObject);
+begin
+  Application.CreateForm(TFConsProduto, FConsProduto);
+  if not Assigned(FConsProduto) then
+    FConsProduto := TFConsProduto.Create(nil);
+  FConsProduto.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
+end;
+
 procedure TFPrincipal.RoundRectCadContasPagarClick(Sender: TObject);
 begin
   Application.CreateForm(TFCadContasPagar, FCadContasPagar);
@@ -356,12 +432,12 @@ begin
     end);
 end;
 
-procedure TFPrincipal.RoundRectConsProdClick(Sender: TObject);
+procedure TFPrincipal.RoundRectCadDespesaClick(Sender: TObject);
 begin
-  Application.CreateForm(TFConsProduto, FConsProduto);
-  if not Assigned(FConsProduto) then
-    FConsProduto := TFConsProduto.Create(nil);
-  FConsProduto.ShowModal(
+  Application.CreateForm(TFCadDespesa, FCadDespesa);
+  if not Assigned(FCadDespesa) then
+    FCadDespesa := TFCadDespesa.Create(nil);
+  FCadDespesa.ShowModal(
     procedure(modalResult: TModalResult)
     begin
 
@@ -382,6 +458,7 @@ end;
 
 procedure TFPrincipal.SpdBInfoClick(Sender: TObject);
 begin
+  Application.CreateForm(TFInfo, FInfo);
   if not Assigned(FInfo) then
     FInfo := TFInfo.Create(nil);
   FInfo.ShowModal(

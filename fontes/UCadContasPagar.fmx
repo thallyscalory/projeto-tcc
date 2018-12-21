@@ -3,7 +3,6 @@ inherited FCadContasPagar: TFCadContasPagar
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
-      TabIndex = 2
       Sizes = (
         330s
         431s
@@ -12,7 +11,6 @@ inherited FCadContasPagar: TFCadContasPagar
         330s
         431s)
       inherited TbItemListagem: TTabItem
-        IsSelected = False
         Size.Width = 110.000000000000000000
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
@@ -308,6 +306,7 @@ inherited FCadContasPagar: TFCadContasPagar
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
+                KeyboardType = NumberPad
                 ReturnKeyType = Next
                 Margins.Left = 2.000000000000000000
                 Margins.Top = 8.000000000000000000
@@ -335,6 +334,7 @@ inherited FCadContasPagar: TFCadContasPagar
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
+                KeyboardType = NumberPad
                 ReturnKeyType = Next
                 Margins.Left = 2.000000000000000000
                 Margins.Top = 8.000000000000000000
@@ -362,6 +362,7 @@ inherited FCadContasPagar: TFCadContasPagar
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
+                KeyboardType = NumberPad
                 ReturnKeyType = Done
                 Margins.Left = 2.000000000000000000
                 Margins.Top = 8.000000000000000000
@@ -369,6 +370,7 @@ inherited FCadContasPagar: TFCadContasPagar
                 Size.Width = 206.000000000000000000
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
+                KillFocusByReturn = True
                 OnTyping = EdtValorAcrescTyping
               end
             end
@@ -388,6 +390,7 @@ inherited FCadContasPagar: TFCadContasPagar
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
+                KeyboardType = NumberPad
                 Margins.Left = 2.000000000000000000
                 Margins.Top = 8.000000000000000000
                 Margins.Right = 2.000000000000000000
@@ -413,6 +416,7 @@ inherited FCadContasPagar: TFCadContasPagar
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
+                KeyboardType = NumberPad
                 Enabled = False
                 Margins.Left = 2.000000000000000000
                 Margins.Top = 8.000000000000000000
@@ -532,7 +536,7 @@ inherited FCadContasPagar: TFCadContasPagar
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 110.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -659,7 +663,7 @@ inherited FCadContasPagar: TFCadContasPagar
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
-                KeyboardType = NumbersAndPunctuation
+                KeyboardType = NumberPad
                 ReturnKeyType = Done
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 8.000000000000000000
@@ -690,7 +694,7 @@ inherited FCadContasPagar: TFCadContasPagar
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
-                KeyboardType = NumbersAndPunctuation
+                KeyboardType = NumberPad
                 ReturnKeyType = Done
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 8.000000000000000000
@@ -721,7 +725,7 @@ inherited FCadContasPagar: TFCadContasPagar
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
-                KeyboardType = NumbersAndPunctuation
+                KeyboardType = NumberPad
                 ReturnKeyType = Done
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 8.000000000000000000
@@ -824,20 +828,20 @@ inherited FCadContasPagar: TFCadContasPagar
       FillHeaderExpressions = <>
       FillBreakGroups = <>
     end
-    object LinkListControlToField4: TLinkListControlToField
-      Category = 'Quick Bindings'
-      DataSource = BindSourceDB4
-      FieldName = 'descricao'
-      Control = ComboBoxDespesa
-      FillExpressions = <>
-      FillHeaderExpressions = <>
-      FillBreakGroups = <>
-    end
     object LinkListControlToField5: TLinkListControlToField
       Category = 'Quick Bindings'
       DataSource = BindSourceDB5
       FieldName = 'descricao_forma_pag'
       Control = ComboBoxTipoReceita
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+    object LinkListControlToField4: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB6
+      FieldName = 'descricao'
+      Control = ComboBoxDespesa
       FillExpressions = <>
       FillHeaderExpressions = <>
       FillBreakGroups = <>
@@ -866,5 +870,11 @@ inherited FCadContasPagar: TFCadContasPagar
     ScopeMappings = <>
     Left = 160
     Top = 232
+  end
+  object BindSourceDB6: TBindSourceDB
+    DataSet = DM.FDQConsDespesaContaPagar
+    ScopeMappings = <>
+    Left = 168
+    Top = 240
   end
 end
