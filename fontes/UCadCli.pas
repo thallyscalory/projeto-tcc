@@ -121,6 +121,9 @@ type
     LinkControlToField15: TLinkControlToField;
     VertScrollBox1: TVertScrollBox;
     ImgRelatorioCli: TImage;
+    ListBoxItem19: TListBoxItem;
+    LblStatusCadCli: TLabel;
+    CBStatusCadCli: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure SpBVoltarEdicaoClick(Sender: TObject);
     procedure SpBVoltarClick(Sender: TObject);
@@ -182,6 +185,20 @@ type
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure ImgRelatorioCliClick(Sender: TObject);
+    procedure EdtNomeCliClick(Sender: TObject);
+    procedure EdtCpfCliClick(Sender: TObject);
+    procedure EdtRgCliClick(Sender: TObject);
+    procedure EdtApelidoCliClick(Sender: TObject);
+    procedure EdtFoneCliClick(Sender: TObject);
+    procedure EdtEnderecoCliClick(Sender: TObject);
+    procedure EdtNumCliClick(Sender: TObject);
+    procedure EdtCompCliClick(Sender: TObject);
+    procedure EdtBairroCliClick(Sender: TObject);
+    procedure EdtCepCliClick(Sender: TObject);
+    procedure EdtCidadeCliClick(Sender: TObject);
+    procedure EdtUfCliClick(Sender: TObject);
+    procedure EdtEmailCliClick(Sender: TObject);
+    procedure MemoObsCadCliClick(Sender: TObject);
   private
     clickBotao: Boolean;
     DataHora: TDateTime;
@@ -211,7 +228,8 @@ uses UDM, UPrincipal, UVenda1;
 
 uses UDM, UPrincipal, UVenda1, Androidapi.JNI.GraphicsContentViewText,
   Androidapi.JNI.JavaTypes,
-  Androidapi.JNI.Net, Androidapi.Helpers, System.IOUtils;
+  Androidapi.JNI.Net, Androidapi.Helpers, System.IOUtils, FGX.Graphics,
+  FGX.Toasts;
 {$ENDIF}
 
 procedure TFCadCli.BtnFiltrarCliClick(Sender: TObject);
@@ -223,6 +241,7 @@ begin
   DM.FDQFiltroCadCLi.Close;
   DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := '%';
   DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
+  DM.FDQFiltroCadCLi.ParamByName('PStatus').Value := '%';
   DM.FDQFiltroCadCLi.Open();
   DM.FDQFiltroCadCLi.Active := True;
 end;
@@ -249,6 +268,7 @@ begin
   RadioBLiberaAprazoN.Enabled := False;
   LblObsCli.Enabled := False;
   MemoObsCadCli.ReadOnly := True;
+  CBStatusCadCli.Enabled := False;
   SpdBFotoCli.Visible := False;
   ImgRelatorioCli.Visible := True;
   EdtDataCadCli.Enabled := False;
@@ -270,12 +290,14 @@ begin
   begin
     DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
     DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := Null;
+    DM.FDQFiltroCadCLi.ParamByName('PStatus').Value := Null;
   end
   else
   begin
     DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value :=
       EditFiltroCodCadCli.Text;
     DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := Null;
+    DM.FDQFiltroCadCLi.ParamByName('PStatus').Value := '%';
   end;
   DM.FDQFiltroCadCLi.Open();
   DM.FDQFiltroCadCLi.Active := True;
@@ -297,15 +319,23 @@ begin
   begin
     DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := Null;
     DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
+    DM.FDQFiltroCadCLi.ParamByName('PStatus').Value := Null;
   end
   else
   begin
     DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value :=
       '%' + EditFiltroNomeCadCli.Text + '%';
     DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
+    DM.FDQFiltroCadCLi.ParamByName('PStatus').Value := '%';
   end;
   DM.FDQFiltroCadCLi.Open();
   DM.FDQFiltroCadCLi.Active := True;
+end;
+
+procedure TFCadCli.EdtApelidoCliClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtApelidoCli);
 end;
 
 procedure TFCadCli.EdtApelidoCliKeyUp(Sender: TObject; var Key: Word;
@@ -314,6 +344,12 @@ begin
   inherited;
   if Key = vkReturn then
     EdtFoneCli.SetFocus;
+end;
+
+procedure TFCadCli.EdtBairroCliClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtBairroCli);
 end;
 
 procedure TFCadCli.EdtBairroCliKeyUp(Sender: TObject; var Key: Word;
@@ -403,12 +439,24 @@ begin
   EdtEmailCli.SetFocus;
 end;
 
+procedure TFCadCli.EdtCepCliClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtCepCli);
+end;
+
 procedure TFCadCli.EdtCepCliKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
   if Key = vkReturn then
     EdtCidadeCli.SetFocus;
+end;
+
+procedure TFCadCli.EdtCidadeCliClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtCidadeCli);
 end;
 
 procedure TFCadCli.EdtCidadeCliKeyUp(Sender: TObject; var Key: Word;
@@ -419,12 +467,24 @@ begin
     EdtUfCli.SetFocus;
 end;
 
+procedure TFCadCli.EdtCompCliClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtCompCli);
+end;
+
 procedure TFCadCli.EdtCompCliKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
   if Key = vkReturn then
     EdtBairroCli.SetFocus;
+end;
+
+procedure TFCadCli.EdtCpfCliClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtCpfCli);
 end;
 
 procedure TFCadCli.EdtCpfCliKeyUp(Sender: TObject; var Key: Word;
@@ -435,12 +495,24 @@ begin
     EdtRgCli.SetFocus;
 end;
 
+procedure TFCadCli.EdtEmailCliClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtEmailCli);
+end;
+
 procedure TFCadCli.EdtEmailCliKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
   if Key = vkReturn then
     MemoObsCadCli.SetFocus;
+end;
+
+procedure TFCadCli.EdtEnderecoCliClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtEnderecoCli);
 end;
 
 procedure TFCadCli.EdtEnderecoCliKeyUp(Sender: TObject; var Key: Word;
@@ -451,12 +523,24 @@ begin
     EdtNumCli.SetFocus;
 end;
 
+procedure TFCadCli.EdtFoneCliClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtFoneCli);
+end;
+
 procedure TFCadCli.EdtFoneCliKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
   if Key = vkReturn then
     EdtEnderecoCli.SetFocus;
+end;
+
+procedure TFCadCli.EdtNomeCliClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtNomeCli);
 end;
 
 procedure TFCadCli.EdtNomeCliKeyUp(Sender: TObject; var Key: Word;
@@ -467,6 +551,12 @@ begin
     EdtCpfCli.SetFocus;
 end;
 
+procedure TFCadCli.EdtNumCliClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtNumCli);
+end;
+
 procedure TFCadCli.EdtNumCliKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
@@ -475,12 +565,24 @@ begin
     EdtCompCli.SetFocus;
 end;
 
+procedure TFCadCli.EdtRgCliClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtRgCli);
+end;
+
 procedure TFCadCli.EdtRgCliKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
   if Key = vkReturn then
     EdtApelidoCli.SetFocus;
+end;
+
+procedure TFCadCli.EdtUfCliClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtUfCli);
 end;
 
 procedure TFCadCli.EdtUfCliKeyUp(Sender: TObject; var Key: Word;
@@ -496,6 +598,7 @@ begin
   inherited;
   TbControlCadModelo.ActiveTab := TbItemListagem;
   TbControlCadModelo.TabPosition := TTabPosition.None;
+  crud := EmptyStr;
   if venda = 'S' then
   begin
     SpBVoltar.Visible := False;
@@ -557,6 +660,7 @@ begin
   RadioBLiberaAprazoS.Enabled := True;
   RadioBLiberaAprazoN.Enabled := True;
   MemoObsCadCli.ReadOnly := False;
+  CBStatusCadCli.Enabled := True;
   SpdBFotoCli.Visible := True;
   ImgRelatorioCli.Visible := False;
   EdtDataCadCli.Enabled := False;
@@ -759,6 +863,7 @@ begin
   RadioBLiberaAprazoN.IsChecked := True;
   ImgFotoCli.Bitmap := nil;
   MemoObsCadCli.Lines.Clear;
+  CBStatusCadCli.ItemIndex := 0;
   EdtDataCadCli.Text := EmptyStr;
 end;
 
@@ -833,14 +938,22 @@ begin
     lblTituloEdicao.Text := 'Detalhes';
     SpdBEditar.Visible := True;
     SpdBConfirmar.Visible := False;
+
     if DM.FDQFiltroCadCLitipo_cli.AsString = 'F' then
       ComboBoxTipoPessoaCli.ItemIndex := 0
-    else
+    else if DM.FDQFiltroCadCLitipo_cli.AsString = 'J' then
       ComboBoxTipoPessoaCli.ItemIndex := 1;
+
     if DM.FDQFiltroCadCLiliberaaprazo_cli.AsString = 'S' then
       RadioBLiberaAprazoS.IsChecked := True
-    else
+    else if DM.FDQFiltroCadCLiliberaaprazo_cli.AsString = 'N' then
       RadioBLiberaAprazoN.IsChecked := True;
+
+    if DM.FDQFiltroCadCListatus.AsString = 'A' then
+      CBStatusCadCli.ItemIndex := 0
+    else if DM.FDQFiltroCadCListatus.AsString = 'I' then
+      CBStatusCadCli.ItemIndex := 1;
+
     // EditFiltroNomeCadCli.Text := EmptyStr;
     // EditFiltroCodCadCli.Text := EmptyStr;
     EdtNomeCli.SetFocus;
@@ -850,12 +963,19 @@ begin
 
 end;
 
+procedure TFCadCli.MemoObsCadCliClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(MemoObsCadCli);
+end;
+
 procedure TFCadCli.SpBVoltarClick(Sender: TObject);
 begin
   inherited;
   DM.FDQFiltroCadCLi.Active := False;
   EditFiltroNomeCadCli.Text := EmptyStr;
   EditFiltroCodCadCli.Text := EmptyStr;
+  crud := EmptyStr;
   Close;
 end;
 
@@ -864,12 +984,16 @@ begin
   inherited;
   LimpaCampos;
   MudarAbaModelo(TbItemListagem, Sender);
-
+{$IFDEF ANDROID}
+  if (crud = 'inserir') or (crud = 'editar') then
+    TfgToast.Show('Processo cancelado!');
+{$ENDIF}
+  crud := EmptyStr;
 end;
 
 procedure TFCadCli.SpdBConfirmarClick(Sender: TObject);
 var
-  sql, LiberaAprazo, TipoPessoa, DataHora: string;
+  sql, LiberaAprazo, TipoPessoa, DataHora, status: string;
   MaxId: Integer;
   Data: TDateTime;
   data1: string;
@@ -878,14 +1002,22 @@ begin
   EsconderTeclado;
   FPrincipal.ksLoadingIndicator1.ShowLoading;
   DataHora := DateTimeToStr(Now);
+
   if RadioBLiberaAprazoS.IsChecked then
     LiberaAprazo := 'S'
   else
     LiberaAprazo := 'N';
+
   if ComboBoxTipoPessoaCli.ItemIndex = 1 then
     TipoPessoa := 'J'
   else
     TipoPessoa := 'F';
+
+  if CBStatusCadCli.ItemIndex = 0 then
+    status := 'A'
+  else
+    status := 'I';
+
   if crud = 'inserir' then
   begin
     try
@@ -910,11 +1042,15 @@ begin
       DM.FDQCadCliobs_cli.AsString := MemoObsCadCli.Text;
       DM.FDQCadClidata_cad_cli.AsDateTime := StrToDateTime(DataHora);
       DM.FDQCadClifoto_cli.Assign(FotoCli);
+      DM.FDQCadClistatus.AsString := status;
       DM.FDQCadCli.Post;
 
       DM.FDConnection1.CommitRetaining;
       DM.FDQFiltroCadCLi.Active := False;
       MudarAbaModelo(TbItemListagem, Sender);
+{$IFDEF ANDROID}
+      TfgToast.Show('Novo cliente cadastrado com sucesso!');
+{$ENDIF}
       FPrincipal.ksLoadingIndicator1.HideLoading;
     except
       on E: Exception do
@@ -944,7 +1080,8 @@ begin
       DM.FDQAuxiliar.sql.Add(' liberaaprazo_cli = :LiberaAprazo,');
       if not FotoCli.IsEmpty then
         DM.FDQAuxiliar.sql.Add(' foto_cli = :Foto,');
-      DM.FDQAuxiliar.sql.Add(' obs_cli = :Obs');
+      DM.FDQAuxiliar.sql.Add(' obs_cli = :Obs,');
+      DM.FDQAuxiliar.sql.Add(' status = :Status');
       DM.FDQAuxiliar.sql.Add(' where id_cli = :IdCli');
 
       DM.FDQAuxiliar.Params.ParamByName('TipoCli').AsString := TipoPessoa;
@@ -969,6 +1106,7 @@ begin
       if not FotoCli.IsEmpty then
         DM.FDQAuxiliar.Params.ParamByName('Foto').Assign(FotoCli);
       DM.FDQAuxiliar.Params.ParamByName('Obs').AsString := MemoObsCadCli.Text;
+      DM.FDQAuxiliar.Params.ParamByName('Status').AsString := status;
       DM.FDQAuxiliar.Params.ParamByName('IdCli').AsInteger :=
         DM.FDQFiltroCadCLiid_cli.AsInteger;
 
@@ -977,6 +1115,9 @@ begin
       DM.FDConnection1.CommitRetaining;
       DM.FDQFiltroCadCLi.Active := False;
       MudarAbaModelo(TbItemListagem, Sender);
+{$IFDEF ANDROID}
+      TfgToast.Show('cadastrado alterado com sucesso!');
+{$ENDIF}
       FPrincipal.ksLoadingIndicator1.HideLoading;
     except
       on E: Exception do

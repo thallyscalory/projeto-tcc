@@ -24,7 +24,7 @@ object FVenda1: TFVenda1
       Size.Height = 480.000000000000000000
       Size.PlatformDefault = False
       TabHeight = 49.000000000000000000
-      TabIndex = 4
+      TabIndex = 1
       TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
@@ -144,6 +144,7 @@ object FVenda1: TFVenda1
           TabOrder = 1
           ItemAppearanceObjects.ItemObjects.Image.Visible = True
           ItemAppearanceObjects.ItemEditObjects.Image.Visible = True
+          ItemAppearanceObjects.HeaderObjects.Text.TextColor = claNavy
           OnItemClick = ListViewPedidoItemClick
         end
       end
@@ -151,7 +152,7 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 66.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -426,6 +427,7 @@ object FVenda1: TFVenda1
                 Size.PlatformDefault = False
                 KillFocusByReturn = True
                 OnTyping = EdtNumParcelaPedidoTyping
+                OnClick = EdtNumParcelaPedidoClick
               end
             end
             object ListBoxItem5: TListBoxItem
@@ -579,7 +581,9 @@ object FVenda1: TFVenda1
           Size.Height = 383.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
+          ItemAppearanceObjects.HeaderObjects.Text.TextColor = claNavy
           ItemAppearanceObjects.HeaderObjects.Text.Opacity = 1.500000000000000000
+          OnItemClick = ListViewItemPedidoItemClick
           PullToRefresh = True
         end
         object LytGeralEdicaoItens: TLayout
@@ -682,6 +686,7 @@ object FVenda1: TFVenda1
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               KillFocusByReturn = True
+              OnClick = EdtValorItemClick
             end
           end
           object LytQteItem: TLayout
@@ -819,7 +824,7 @@ object FVenda1: TFVenda1
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 66.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -856,8 +861,8 @@ object FVenda1: TFVenda1
               Size.PlatformDefault = False
               TextPrompt = 'Filtrar pelo nome'
               KillFocusByReturn = True
-              OnTyping = edttttttTyping
-              OnClick = edttttttClick
+              OnTyping = EditFiltroNomeCadCliVendaTyping
+              OnClick = EditFiltroNomeCadCliVendaClick
             end
             object EditFiltroCodCadCliVenda: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -877,8 +882,8 @@ object FVenda1: TFVenda1
               Size.PlatformDefault = False
               TextPrompt = 'Filtrar pelo c'#243'digo'
               KillFocusByReturn = True
-              OnTyping = eddsssTyping
-              OnClick = eddsssClick
+              OnTyping = EditFiltroCodCadCliVendaTyping
+              OnClick = EditFiltroCodCadCliVendaClick
             end
             object BtnFiltrarCliVenda: TButton
               Align = Top
@@ -894,7 +899,7 @@ object FVenda1: TFVenda1
               Text = 'Filtrar Todos'
               TextSettings.FontColor = claWhite
               TintColor = claNavy
-              OnClick = dsadaClick
+              OnClick = BtnFiltrarCliVendaClick
             end
           end
           object ListViewCadCliVenda: TListView
@@ -916,7 +921,8 @@ object FVenda1: TFVenda1
             ItemAppearanceObjects.ItemObjects.Accessory.Visible = False
             ItemAppearanceObjects.ItemEditObjects.Image.Visible = True
             ItemAppearanceObjects.ItemEditObjects.Accessory.Visible = False
-            OnItemClick = listviewItemClick
+            ItemAppearanceObjects.HeaderObjects.Text.TextColor = claNavy
+            OnItemClick = ListViewCadCliVendaItemClick
           end
           object ToolBar4: TToolBar
             Size.Width = 330.000000000000000000

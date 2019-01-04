@@ -8,7 +8,8 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Layouts,
   FMX.StdCtrls, FMX.Controls.Presentation, FMX.ListView.Types,
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
-  FMX.DateTimeCtrls, FMX.Edit, FMX.ListBox, MultiDetailAppearanceU;
+  FMX.DateTimeCtrls, FMX.Edit, FMX.ListBox, MultiDetailAppearanceU,
+  FMX.VirtualKeyboard, FMX.Platform;
 
 type
   TFContasReceberVenda = class(TForm)
@@ -37,10 +38,13 @@ type
       KeyboardVisible: Boolean; const Bounds: TRect);
     procedure FormVirtualKeyboardShown(Sender: TObject;
       KeyboardVisible: Boolean; const Bounds: TRect);
+    procedure EdtValorCadContasReceberClick(Sender: TObject);
   private
     { Private declarations }
   public
     itemIndexCostasReceber: integer;
+
+    procedure MostrarTeclado(const AControl: TFmxObject);
     { Public declarations }
   end;
 
@@ -85,16 +89,22 @@ begin
   DM.FDQConsFormaPag.Close;
   DM.FDQConsFormaPag.ParamByName('PIdFormaPag').Value := '%';
   DM.FDQConsFormaPag.ParamByName('PDescricaoFormaPag').Value := Null;
+  DM.FDQConsFormaPag.ParamByName('PStatusFormaPag').Value := 'A';
   DM.FDQConsFormaPag.Open();
-  for I := 1 to DM.FDQConsFormaPag.RowsAffected do
+
+  DM.FDQConsFormaPag.First;
+  while not DM.FDQConsFormaPag.Eof do
   begin
-    DM.FDQConsFormaPag.Close;
-    DM.FDQConsFormaPag.ParamByName('PIdFormaPag').Value := IntToStr(I);
-    DM.FDQConsFormaPag.ParamByName('PDescricaoFormaPag').Value := Null;
-    DM.FDQConsFormaPag.Open();
     ComboBoxTipoReceitaCadContasReceber.Items.Add
       (DM.FDQConsFormaPagdescricao_forma_pag.AsString);
+
+    DM.FDQConsFormaPag.Next;
   end;
+end;
+
+procedure TFContasReceberVenda.EdtValorCadContasReceberClick(Sender: TObject);
+begin
+  MostrarTeclado(EdtValorCadContasReceber);
 end;
 
 procedure TFContasReceberVenda.FormCreate(Sender: TObject);
@@ -186,22 +196,24 @@ end;
 procedure TFContasReceberVenda.ListViewCadContasReceberGesture(Sender: TObject;
   const EventInfo: TGestureEventInfo; var Handled: Boolean);
 begin
-  if EventInfo.GestureID = igiLongTap then
-  begin
+  { if EventInfo.GestureID = igiLongTap then
+    begin
     itemIndexCostasReceber := ListViewCadContasReceber.ItemIndex;
 
     EdtDataVencCadContasReceber.Text := ListViewCadContasReceber.Items
-      [itemIndexCostasReceber].Text;
+    [itemIndexCostasReceber].Text;
     EdtValorCadContasReceber.Text := ListViewCadContasReceber.Items
-      [itemIndexCostasReceber].Data
-      [TMultiDetailAppearanceNames.Detail1].ToString;
+    [itemIndexCostasReceber].Data
+    [TMultiDetailAppearanceNames.Detail1].ToString;
+
+    ComboBoxTipoReceitaCadContasReceber.Items.Clear;
     ComboBoxTipoReceitaCadContasReceber.Items.Add
-      (ListViewCadContasReceber.Items[itemIndexCostasReceber].Data
-      [TMultiDetailAppearanceNames.Detail2].ToString);
+    (ListViewCadContasReceber.Items[itemIndexCostasReceber].Data
+    [TMultiDetailAppearanceNames.Detail2].ToString);
     ComboBoxTipoReceitaCadContasReceber.ItemIndex := 0;
 
     LytGeralEdicaoContasReceber.Visible := True;
-  end;
+    end; }
 
 end;
 
@@ -214,12 +226,24 @@ begin
     [itemIndexCostasReceber].Text;
   EdtValorCadContasReceber.Text := ListViewCadContasReceber.Items
     [itemIndexCostasReceber].Data[TMultiDetailAppearanceNames.Detail1].ToString;
+
+  ComboBoxTipoReceitaCadContasReceber.Items.Clear;
   ComboBoxTipoReceitaCadContasReceber.Items.Add
     (ListViewCadContasReceber.Items[itemIndexCostasReceber].Data
     [TMultiDetailAppearanceNames.Detail2].ToString);
   ComboBoxTipoReceitaCadContasReceber.ItemIndex := 0;
 
   LytGeralEdicaoContasReceber.Visible := True;
+end;
+
+procedure TFContasReceberVenda.MostrarTeclado(const AControl: TFmxObject);
+var
+  keyboard: IFMXVirtualKeyboardService;
+begin
+  TPlatformServices.Current.SupportsPlatformService(IFMXVirtualKeyboardService,
+    IInterface(keyboard));
+  if (keyboard <> nil) then
+    keyboard.ShowVirtualKeyboard(AControl);
 end;
 
 end.

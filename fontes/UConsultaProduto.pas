@@ -138,6 +138,15 @@ type
     procedure BtnFiltrarProdClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
+    procedure EdtNomeProdClick(Sender: TObject);
+    procedure EdtDescProdClick(Sender: TObject);
+    procedure EdtUnProdClick(Sender: TObject);
+    procedure EdtSiglaGrupoProdClick(Sender: TObject);
+    procedure EdtGrupoProdClick(Sender: TObject);
+    procedure EdtCodBarraProdClick(Sender: TObject);
+    procedure EdtVrPrazaProdClick(Sender: TObject);
+    procedure EdtVrVistaProdClick(Sender: TObject);
+    procedure EdtVrPromocaoProdClick(Sender: TObject);
   private
     crud: String;
 
@@ -166,15 +175,20 @@ begin
   inherited;
   EdtFiltroNomeProd.Text := EmptyStr;
   EdtFiltroCodProd.Text := EmptyStr;
+
   DM.FDQConsultaProd.Active := False;
   DM.FDQConsultaProd.Close;
-
   DM.FDQConsultaProd.ParamByName('PNomeProd').Value := '%';
   DM.FDQConsultaProd.ParamByName('PCodProd').Value := Null;
   DM.FDQConsultaProd.ParamByName('PCodBar').Value := Null;
-
   DM.FDQConsultaProd.Open();
   DM.FDQConsultaProd.Active := True;
+
+  if itemPedido = 'S' then
+  begin
+    ListViewConsProd.ItemAppearanceObjects.ItemObjects.Accessory.
+      Visible := False;
+  end;
 end;
 
 procedure TFConsProduto.DesabilitaCampos;
@@ -247,12 +261,24 @@ begin
   EdtVrPromocaoProd.SetFocus;
 end;
 
+procedure TFConsProduto.EdtCodBarraProdClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtCodBarraProd);
+end;
+
 procedure TFConsProduto.EdtCodBarraProdKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
   if Key = vkReturn then
     EdtVrPrazaProd.SetFocus;
+end;
+
+procedure TFConsProduto.EdtDescProdClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtDescProd);
 end;
 
 procedure TFConsProduto.EdtDescProdKeyUp(Sender: TObject; var Key: Word;
@@ -289,6 +315,12 @@ begin
   end;
   DM.FDQConsultaProd.Open();
   DM.FDQConsultaProd.Active := True;
+
+  if itemPedido = 'S' then
+  begin
+    ListViewConsProd.ItemAppearanceObjects.ItemObjects.Accessory.
+      Visible := False;
+  end;
 end;
 
 procedure TFConsProduto.EdtFiltroNomeProdClick(Sender: TObject);
@@ -318,6 +350,18 @@ begin
   end;
   DM.FDQConsultaProd.Open();
   DM.FDQConsultaProd.Active := True;
+
+  if itemPedido = 'S' then
+  begin
+    ListViewConsProd.ItemAppearanceObjects.ItemObjects.Accessory.
+      Visible := False;
+  end;
+end;
+
+procedure TFConsProduto.EdtGrupoProdClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtGrupoProd);
 end;
 
 procedure TFConsProduto.EdtGrupoProdKeyUp(Sender: TObject; var Key: Word;
@@ -326,6 +370,12 @@ begin
   inherited;
   if Key = vkReturn then
     EdtCodBarraProd.SetFocus;
+end;
+
+procedure TFConsProduto.EdtNomeProdClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtNomeProd);
 end;
 
 procedure TFConsProduto.EdtNomeProdKeyUp(Sender: TObject; var Key: Word;
@@ -337,6 +387,12 @@ begin
 
 end;
 
+procedure TFConsProduto.EdtSiglaGrupoProdClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtSiglaGrupoProd);
+end;
+
 procedure TFConsProduto.EdtSiglaGrupoProdKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
@@ -345,12 +401,24 @@ begin
     EdtGrupoProd.SetFocus;
 end;
 
+procedure TFConsProduto.EdtUnProdClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtUnProd);
+end;
+
 procedure TFConsProduto.EdtUnProdKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
   inherited;
   if Key = vkReturn then
     EdtSiglaGrupoProd.SetFocus;
+end;
+
+procedure TFConsProduto.EdtVrPrazaProdClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtVrPrazaProd);
 end;
 
 procedure TFConsProduto.EdtVrPrazaProdExit(Sender: TObject);
@@ -374,6 +442,12 @@ begin
     EdtVrVistaProd.SetFocus;
 end;
 
+procedure TFConsProduto.EdtVrPromocaoProdClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtVrPromocaoProd);
+end;
+
 procedure TFConsProduto.EdtVrPromocaoProdExit(Sender: TObject);
 var
   iAuxPromocao: Double;
@@ -385,6 +459,12 @@ begin
   if TryStrToFloat(EdtVrPromocaoProd.Text, iAuxPromocao) then
     EdtVrPromocaoProd.Text :=
       DisplayFormatter(StrToFloat(EdtVrPromocaoProd.Text), ('#0.00'));
+end;
+
+procedure TFConsProduto.EdtVrVistaProdClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtVrVistaProd);
 end;
 
 procedure TFConsProduto.EdtVrVistaProdExit(Sender: TObject);
@@ -855,6 +935,7 @@ begin
   if FObrConsProd.BarcodeCount = 0 then
     ShowMessage('Não encontrado nenhum codigo de barras!')
   else
+  begin
     for I := 0 to FObrConsProd.BarcodeCount - 1 do
     begin
       barcode := FObrConsProd.barcode[I];
@@ -871,8 +952,14 @@ begin
         // lista.Text := barcode.DataUtf8;  => para pegar o codigo de barras
         // lista.Detail := barcode.SymbologyName;  => para pegar o tipo do codigo de barras
       end;
-
     end;
+
+    if itemPedido = 'S' then
+    begin
+      ListViewConsProd.ItemAppearanceObjects.ItemObjects.Accessory.
+        Visible := False;
+    end;
+  end;
 end;
 
 procedure TFConsProduto.TakePhotoFromCameraAction2DidFinishTaking

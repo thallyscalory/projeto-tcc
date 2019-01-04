@@ -127,7 +127,7 @@ implementation
 
 uses UDM, UVenda, UCadCli, UConsultaProduto, UInfo, UVenda1, UCadContasReceber,
   UAuxiliar, UCadFornecedor, UCadContasPagar, UAgenda, UCadDespesa,
-  UCadTipoReceita;
+  UCadTipoReceita, FGX.Toasts, FGX.Graphics;
 
 procedure TFPrincipal.AbrirForm(AFormClass: TComponentClass);
 begin

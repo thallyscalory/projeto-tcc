@@ -3,14 +3,14 @@ inherited FCadFornecedor: TFCadFornecedor
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
-      TabIndex = 1
+      TabIndex = 0
       Sizes = (
         330s
         431s
         330s
         431s)
       inherited TbItemListagem: TTabItem
-        IsSelected = False
+        IsSelected = True
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         inherited ToolBarsuperior: TToolBar
@@ -111,11 +111,12 @@ inherited FCadFornecedor: TFCadFornecedor
           Size.Height = 251.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
+          ItemAppearanceObjects.HeaderObjects.Text.TextColor = claNavy
           OnItemClickEx = ListViewFornecedorItemClickEx
         end
       end
       inherited TbItemedicao: TTabItem
-        IsSelected = True
+        IsSelected = False
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object ToolBar1: TToolBar
@@ -214,6 +215,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Nome / Razao Social'
+                OnClick = EdtNomeFornClick
                 object EdtBNomeCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -295,6 +297,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Cpf / Cnpj'
+                OnClick = EdtCpfFornClick
                 object EdtBCpfCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -340,6 +343,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Rg / I.E'
+                OnClick = EdtRgFornClick
                 object EdtBRgCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -385,6 +389,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Apelido / Nome Fantasia'
+                OnClick = EdtApelidoFornClick
                 object EdtBApelidoCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -431,6 +436,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Telefone / Celular'
+                OnClick = EdtFoneFornClick
                 object EdtBFoneCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -476,6 +482,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Endereco'
+                OnClick = EdtEnderecoFornClick
                 object EdtBEndCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -521,6 +528,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Numero'
+                OnClick = EdtNumFornClick
                 object EdtBNumCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -566,6 +574,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Complemento'
+                OnClick = EdtCompFornClick
                 object EdtBCompCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -611,6 +620,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Bairro'
+                OnClick = EdtBairroFornClick
                 object EdtBBairroCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -657,6 +667,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Cep'
+                OnClick = EdtCepFornClick
                 object EdtBCepCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -702,6 +713,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Cidade'
+                OnClick = EdtCidadeFornClick
                 object EdtBCidadeCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -747,6 +759,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Uf'
+                OnClick = EdtUfFornClick
                 object EdtBUfCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -793,6 +806,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Email'
+                OnClick = EdtEmailFornClick
                 object EdtBEmailCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -886,6 +900,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Size.Height = 58.000000000000000000
                 Size.PlatformDefault = False
                 TabOrder = 0
+                OnClick = MemoObsFornClick
                 Viewport.Width = 248.000000000000000000
                 Viewport.Height = 50.000000000000000000
               end

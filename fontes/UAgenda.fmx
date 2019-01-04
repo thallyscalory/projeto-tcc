@@ -84,8 +84,9 @@ object FAgenda: TFAgenda
           Text = 'De:'
         end
         object DateEdtFiltroVencInicialContasReceber: TDateEdit
-          Date = 43349.000000000000000000
+          Date = 43462.000000000000000000
           TodayDefault = True
+          OnClosePicker = DateEdtFiltroVencInicialContasReceberClosePicker
           Align = Left
           Margins.Right = 8.000000000000000000
           Position.X = 41.000000000000000000
@@ -110,7 +111,7 @@ object FAgenda: TFAgenda
           Text = 'A:'
         end
         object DateEdtFiltroVencFinalContasReceber: TDateEdit
-          Date = 43349.000000000000000000
+          Date = 43462.000000000000000000
           TodayDefault = True
           OnClosePicker = DateEdtFiltroVencFinalContasReceberClosePicker
           Align = Left
@@ -136,6 +137,7 @@ object FAgenda: TFAgenda
         Size.Height = 310.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 5
+        ItemAppearanceObjects.HeaderObjects.Text.TextColor = claNavy
         OnItemClickEx = ListView1ItemClickEx
       end
       object ToolBar1: TToolBar
@@ -219,6 +221,7 @@ object FAgenda: TFAgenda
         Size.PlatformDefault = False
         TabOrder = 1
         OnExit = Memo1Exit
+        OnClick = Memo1Click
         Viewport.Width = 322.000000000000000000
         Viewport.Height = 42.000000000000000000
       end
@@ -282,7 +285,7 @@ object FAgenda: TFAgenda
         Size.PlatformDefault = False
         TabOrder = 3
         object DateEdit1: TDateEdit
-          Date = 43349.000000000000000000
+          Date = 43462.000000000000000000
           TodayDefault = True
           Align = Left
           Margins.Left = 5.000000000000000000

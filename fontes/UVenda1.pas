@@ -140,19 +140,23 @@ type
     procedure SpdBVoltarCadCOntasReceberClick(Sender: TObject);
     procedure BtnConfirmaCadContasReceberClick(Sender: TObject);
     procedure ComboBoxFormaPagVendaClosePopup(Sender: TObject);
-    procedure edttttttClick(Sender: TObject);
-    procedure eddsssClick(Sender: TObject);
-    procedure edttttttTyping(Sender: TObject);
-    procedure eddsssTyping(Sender: TObject);
-    procedure dsadaClick(Sender: TObject);
-    procedure listviewItemClick(const Sender: TObject;
-      const AItem: TListViewItem);
     procedure SpdBVoltarConsCliVendaApoioClick(Sender: TObject);
     procedure EdtDescontoMoedaPedidoKeyUp(Sender: TObject; var Key: Word;
       var KeyChar: Char; Shift: TShiftState);
     procedure EdtDescontoMoedaPedidoClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
+    procedure ListViewItemPedidoItemClick(const Sender: TObject;
+      const AItem: TListViewItem);
+    procedure BtnFiltrarCliVendaClick(Sender: TObject);
+    procedure EditFiltroNomeCadCliVendaClick(Sender: TObject);
+    procedure EditFiltroCodCadCliVendaClick(Sender: TObject);
+    procedure EditFiltroNomeCadCliVendaTyping(Sender: TObject);
+    procedure EditFiltroCodCadCliVendaTyping(Sender: TObject);
+    procedure ListViewCadCliVendaItemClick(const Sender: TObject;
+      const AItem: TListViewItem);
+    procedure EdtNumParcelaPedidoClick(Sender: TObject);
+    procedure EdtValorItemClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -317,7 +321,7 @@ begin
         DM.FDQCadPedido.Close;
         DM.FDQCadPedido.Open();
         DM.FDQCadPedido.Append;
-        //DM.FDQCadPedidoid_pedido.AsInteger := maxIdPedido;
+        // DM.FDQCadPedidoid_pedido.AsInteger := maxIdPedido;
         DM.FDQCadPedidoid_cli_pedido.AsInteger :=
           StrToInt(LblCodCliPedido.Text);
         DM.FDQCadPedidodatahora_pedido.AsDateTime := StrToDateTime(DataHora);
@@ -358,7 +362,7 @@ begin
           DM.FDQCadItemPedido.Close;
           DM.FDQCadItemPedido.Open();
           DM.FDQCadItemPedido.Append;
-          //DM.FDQCadItemPedidoid_item_pedido.AsInteger := maxIdItemPedido;
+          // DM.FDQCadItemPedidoid_item_pedido.AsInteger := maxIdItemPedido;
           DM.FDQCadItemPedidoid_pedido_item.AsInteger := maxIdPedido;
           DM.FDQCadItemPedidoid_produto_item.AsInteger :=
             StrToInt(ListViewItemPedido.Items[I].Detail);
@@ -470,7 +474,7 @@ begin
             DM.FDQCadItemPedido.Close;
             DM.FDQCadItemPedido.Open();
             DM.FDQCadItemPedido.Append;
-            DM.FDQCadItemPedidoid_item_pedido.AsInteger := maxIdItemPedido;
+            // DM.FDQCadItemPedidoid_item_pedido.AsInteger := maxIdItemPedido;
             DM.FDQCadItemPedidoid_pedido_item.AsInteger :=
               StrToInt(ListBoxItemNumPedidoVenda.ItemData.Detail);
             DM.FDQCadItemPedidoid_produto_item.AsInteger :=
@@ -513,7 +517,7 @@ begin
           DM.FDQCadContasReceber.Close;
           DM.FDQCadContasReceber.Open();
           DM.FDQCadContasReceber.Append;
-          //DM.FDQCadContasReceberid.AsInteger := maxIdContasReceber;
+          // DM.FDQCadContasReceberid.AsInteger := maxIdContasReceber;
           DM.FDQCadContasReceberid_pedido.AsInteger := maxIdPedido;
           DM.FDQCadContasReceberid_cliente.AsInteger :=
             StrToInt(LblCodCliPedido.Text);
@@ -539,7 +543,7 @@ begin
           DM.FDQCadBaixaContasReceber.Close;
           DM.FDQCadBaixaContasReceber.Open();
           DM.FDQCadBaixaContasReceber.Append;
-          //DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
+          // DM.FDQCadBaixaContasReceberid.AsInteger := maxIdBaixa;
           DM.FDQCadBaixaContasReceberid_conta_receber.AsInteger :=
             maxIdContasReceber;
           DM.FDQCadBaixaContasReceberdata.AsDateTime :=
@@ -554,7 +558,7 @@ begin
           DM.FDQCadContasReceber.Close;
           DM.FDQCadContasReceber.Open();
           DM.FDQCadContasReceber.Append;
-          //DM.FDQCadContasReceberid.AsInteger := maxIdContasReceber;
+          // DM.FDQCadContasReceberid.AsInteger := maxIdContasReceber;
           DM.FDQCadContasReceberid_pedido.AsInteger := maxIdPedido;
           DM.FDQCadContasReceberid_cliente.AsInteger :=
             StrToInt(LblCodCliPedido.Text);
@@ -638,7 +642,7 @@ begin
   end;
 end;
 
-procedure TFVenda1.dsadaClick(Sender: TObject);
+procedure TFVenda1.BtnFiltrarCliVendaClick(Sender: TObject);
 begin
   EditFiltroNomeCadCliVenda.Text := EmptyStr;
   EditFiltroCodCadCliVenda.Text := EmptyStr;
@@ -646,6 +650,7 @@ begin
   DM.FDQFiltroCadCLi.Close;
   DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := '%';
   DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
+  DM.FDQFiltroCadCLi.ParamByName('PStatus').Value := 'A';
   DM.FDQFiltroCadCLi.Open();
   DM.FDQFiltroCadCLi.Active := True;
 end;
@@ -655,14 +660,14 @@ var
   I: integer;
 begin
   ComboBoxAtendenteItem.Items.Clear;
-  DM.FDQConsAtendente.Active := False;
+  // DM.FDQConsAtendente.Active := False;
   DM.FDQConsAtendente.Close;
   DM.FDQConsAtendente.ParamByName('PIdAtendente').Value := '%';
   DM.FDQConsAtendente.ParamByName('PUsuario').Value := Null;
   DM.FDQConsAtendente.Open();
   for I := 1 to DM.FDQConsAtendente.RowsAffected do
   begin
-    DM.FDQConsAtendente.Active := False;
+    // DM.FDQConsAtendente.Active := False;
     DM.FDQConsAtendente.Close;
     DM.FDQConsAtendente.ParamByName('PIdAtendente').Value := IntToStr(I);
     DM.FDQConsAtendente.ParamByName('PUsuario').Value := Null;
@@ -739,6 +744,7 @@ begin
   DM.FDQConsFormaPag.ParamByName('PIdFormaPag').Value := Null;
   DM.FDQConsFormaPag.ParamByName('PDescricaoFormaPag').Value :=
     ComboBoxFormaPagVenda.Selected.Text;
+  DM.FDQConsFormaPag.ParamByName('PStatusFromaPag').Value := 'A';
   DM.FDQConsFormaPag.Open();
 
   if (DM.FDQConsFormaPagavista_forma_pag.AsString = 'N') and
@@ -755,22 +761,21 @@ begin
 end;
 
 procedure TFVenda1.ComboBoxFormaPagVendaEnter(Sender: TObject);
-var
-  I: integer;
 begin
   ComboBoxFormaPagVenda.Items.Clear;
   DM.FDQConsFormaPag.Close;
   DM.FDQConsFormaPag.ParamByName('PIdFormaPag').Value := '%';
   DM.FDQConsFormaPag.ParamByName('PDescricaoFormaPag').Value := Null;
+  DM.FDQConsFormaPag.ParamByName('PStatusFormaPag').Value := 'A';
   DM.FDQConsFormaPag.Open();
-  for I := 1 to DM.FDQConsFormaPag.RowsAffected do
+
+  DM.FDQConsFormaPag.First;
+  while not DM.FDQConsFormaPag.Eof do
   begin
-    DM.FDQConsFormaPag.Close;
-    DM.FDQConsFormaPag.ParamByName('PIdFormaPag').Value := IntToStr(I);
-    DM.FDQConsFormaPag.ParamByName('PDescricaoFormaPag').Value := Null;
-    DM.FDQConsFormaPag.Open();
     ComboBoxFormaPagVenda.Items.Add
       (DM.FDQConsFormaPagdescricao_forma_pag.AsString);
+
+    DM.FDQConsFormaPag.Next;
   end;
   // DM.FDQConsFormaPag.Active := True;
 end;
@@ -803,12 +808,12 @@ begin
 
 end;
 
-procedure TFVenda1.eddsssClick(Sender: TObject);
+procedure TFVenda1.EditFiltroCodCadCliVendaClick(Sender: TObject);
 begin
   MostrarTeclado(EditFiltroCodCadCliVenda);
 end;
 
-procedure TFVenda1.eddsssTyping(Sender: TObject);
+procedure TFVenda1.EditFiltroCodCadCliVendaTyping(Sender: TObject);
 begin
   EditFiltroNomeCadCliVenda.Text := EmptyStr;
   DM.FDQFiltroCadCLi.Active := False;
@@ -817,23 +822,25 @@ begin
   begin
     DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
     DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := Null;
+    DM.FDQFiltroCadCLi.ParamByName('PStatus').Value := Null;
   end
   else
   begin
     DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value :=
       EditFiltroCodCadCliVenda.Text;
     DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := Null;
+    DM.FDQFiltroCadCLi.ParamByName('PStatus').Value := 'A';
   end;
   DM.FDQFiltroCadCLi.Open();
   DM.FDQFiltroCadCLi.Active := True;
 end;
 
-procedure TFVenda1.edttttttClick(Sender: TObject);
+procedure TFVenda1.EditFiltroNomeCadCliVendaClick(Sender: TObject);
 begin
   MostrarTeclado(EditFiltroNomeCadCliVenda);
 end;
 
-procedure TFVenda1.edttttttTyping(Sender: TObject);
+procedure TFVenda1.EditFiltroNomeCadCliVendaTyping(Sender: TObject);
 begin
   EditFiltroCodCadCliVenda.Text := EmptyStr;
   DM.FDQFiltroCadCLi.Active := False;
@@ -842,12 +849,14 @@ begin
   begin
     DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := Null;
     DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
+    DM.FDQFiltroCadCLi.ParamByName('PStatus').Value := Null;
   end
   else
   begin
     DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value :=
       '%' + EditFiltroNomeCadCliVenda.Text + '%';
     DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
+    DM.FDQFiltroCadCLi.ParamByName('PStatus').Value := 'A';
   end;
   DM.FDQFiltroCadCLi.Open();
   DM.FDQFiltroCadCLi.Active := True;
@@ -911,6 +920,11 @@ begin
   end;
 end;
 
+procedure TFVenda1.EdtNumParcelaPedidoClick(Sender: TObject);
+begin
+  MostrarTeclado(EdtNumParcelaPedido);
+end;
+
 procedure TFVenda1.EdtNumParcelaPedidoTyping(Sender: TObject);
 begin
   if not EdtNumParcelaPedido.Text.IsEmpty then
@@ -932,6 +946,11 @@ begin
     ListBoxItemParcelasVenda.Text := EmptyStr;
     ListBoxItemParcelasVenda.ItemData.Detail := EmptyStr;
   end;
+end;
+
+procedure TFVenda1.EdtValorItemClick(Sender: TObject);
+begin
+  MostrarTeclado(EdtValorItem);
 end;
 
 procedure TFVenda1.EsconderTeclado;
@@ -1097,7 +1116,7 @@ begin
   ComboBoxAtendentePedido.Items.Clear;
 end;
 
-procedure TFVenda1.listviewItemClick(const Sender: TObject;
+procedure TFVenda1.ListViewCadCliVendaItemClick(const Sender: TObject;
   const AItem: TListViewItem);
 begin
   MessageDlg('Você deseja adicionar este cliente ao pedido?',
@@ -1129,22 +1148,46 @@ procedure TFVenda1.ListViewItemPedidoGesture(Sender: TObject;
 const EventInfo: TGestureEventInfo; var Handled: Boolean);
 
 begin
-  if EventInfo.GestureID = igiLongTap then
-  begin
+  { if EventInfo.GestureID = igiLongTap then
+    begin
     itemIndexList := ListViewItemPedido.ItemIndex;
     LblNomeItem.Text := ListViewItemPedido.Items
-      [ListViewItemPedido.ItemIndex].Text;
+    [ListViewItemPedido.ItemIndex].Text;
     EdtQteItem.Text := ListViewItemPedido.Items[ListViewItemPedido.ItemIndex]
-      .Data[TMultiDetailAppearanceNames.Detail1].ToString;
+    .Data[TMultiDetailAppearanceNames.Detail1].ToString;
     EdtValorItem.Text := ListViewItemPedido.Items[ListViewItemPedido.ItemIndex]
-      .Data[TMultiDetailAppearanceNames.Detail2].ToString;
+    .Data[TMultiDetailAppearanceNames.Detail2].ToString;
+
+    // DM.FDQConsAtendente.Active := False;
+
     ComboBoxAtendenteItem.Items.Clear;
     ComboBoxAtendenteItem.Items.Add(ListViewItemPedido.Items
-      [ListViewItemPedido.ItemIndex].Data[TMultiDetailAppearanceNames.Detail3]
-      .ToString);
+    [ListViewItemPedido.ItemIndex].Data[TMultiDetailAppearanceNames.Detail3]
+    .ToString);
     ComboBoxAtendenteItem.ItemIndex := 0;
     LytGeralEdicaoItens.Visible := True;
-  end;
+    end; }
+end;
+
+procedure TFVenda1.ListViewItemPedidoItemClick(const Sender: TObject;
+const AItem: TListViewItem);
+begin
+  itemIndexList := ListViewItemPedido.ItemIndex;
+  LblNomeItem.Text := ListViewItemPedido.Items
+    [ListViewItemPedido.ItemIndex].Text;
+  EdtQteItem.Text := ListViewItemPedido.Items[ListViewItemPedido.ItemIndex].Data
+    [TMultiDetailAppearanceNames.Detail1].ToString;
+  EdtValorItem.Text := ListViewItemPedido.Items[ListViewItemPedido.ItemIndex]
+    .Data[TMultiDetailAppearanceNames.Detail2].ToString;
+
+  // DM.FDQConsAtendente.Active := False;
+
+  ComboBoxAtendenteItem.Items.Clear;
+  ComboBoxAtendenteItem.Items.Add(ListViewItemPedido.Items
+    [ListViewItemPedido.ItemIndex].Data[TMultiDetailAppearanceNames.Detail3]
+    .ToString);
+  ComboBoxAtendenteItem.ItemIndex := 0;
+  LytGeralEdicaoItens.Visible := True;
 end;
 
 procedure TFVenda1.ListViewPedidoItemClick(const Sender: TObject;
@@ -1894,7 +1937,7 @@ begin
                   DM.FDQCadPedido.Close;
                   DM.FDQCadPedido.Open();
                   DM.FDQCadPedido.Append;
-                  DM.FDQCadPedidoid_pedido.AsInteger := maxIdPedido;
+                  // DM.FDQCadPedidoid_pedido.AsInteger := maxIdPedido;
                   DM.FDQCadPedidoid_cli_pedido.AsInteger :=
                     StrToInt(LblCodCliPedido.Text);
                   DM.FDQCadPedidodatahora_pedido.AsDateTime :=
@@ -1937,8 +1980,7 @@ begin
                     DM.FDQCadItemPedido.Close;
                     DM.FDQCadItemPedido.Open();
                     DM.FDQCadItemPedido.Append;
-                    DM.FDQCadItemPedidoid_item_pedido.AsInteger :=
-                      maxIdItemPedido;
+                    // DM.FDQCadItemPedidoid_item_pedido.AsInteger := maxIdItemPedido;
                     DM.FDQCadItemPedidoid_pedido_item.AsInteger := maxIdPedido;
                     DM.FDQCadItemPedidoid_produto_item.AsInteger :=
                       StrToInt(ListViewItemPedido.Items[I].Detail);
@@ -2060,8 +2102,7 @@ begin
                       DM.FDQCadItemPedido.Close;
                       DM.FDQCadItemPedido.Open();
                       DM.FDQCadItemPedido.Append;
-                      DM.FDQCadItemPedidoid_item_pedido.AsInteger :=
-                        maxIdItemPedido;
+                      // DM.FDQCadItemPedidoid_item_pedido.AsInteger := maxIdItemPedido;
                       DM.FDQCadItemPedidoid_pedido_item.AsInteger :=
                         StrToInt(ListBoxItemNumPedidoVenda.ItemData.Detail);
                       DM.FDQCadItemPedidoid_produto_item.AsInteger :=

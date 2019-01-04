@@ -128,6 +128,20 @@ type
     procedure SpdBConfirmaEdicaoCadFornecedorClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
+    procedure EdtNomeFornClick(Sender: TObject);
+    procedure EdtCpfFornClick(Sender: TObject);
+    procedure EdtRgFornClick(Sender: TObject);
+    procedure EdtApelidoFornClick(Sender: TObject);
+    procedure EdtFoneFornClick(Sender: TObject);
+    procedure EdtEnderecoFornClick(Sender: TObject);
+    procedure EdtNumFornClick(Sender: TObject);
+    procedure EdtCompFornClick(Sender: TObject);
+    procedure EdtBairroFornClick(Sender: TObject);
+    procedure EdtCepFornClick(Sender: TObject);
+    procedure EdtCidadeFornClick(Sender: TObject);
+    procedure EdtUfFornClick(Sender: TObject);
+    procedure EdtEmailFornClick(Sender: TObject);
+    procedure MemoObsFornClick(Sender: TObject);
   private
     crud: string;
 
@@ -235,6 +249,84 @@ begin
   DM.FDQConsFornecedor.Open();
   DM.FDQConsFornecedor.Active := True;
 
+end;
+
+procedure TFCadFornecedor.EdtApelidoFornClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtApelidoForn);
+end;
+
+procedure TFCadFornecedor.EdtBairroFornClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtBairroForn);
+end;
+
+procedure TFCadFornecedor.EdtCepFornClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtCepForn);
+end;
+
+procedure TFCadFornecedor.EdtCidadeFornClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtCidadeForn);
+end;
+
+procedure TFCadFornecedor.EdtCompFornClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtCompForn);
+end;
+
+procedure TFCadFornecedor.EdtCpfFornClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtCpfForn);
+end;
+
+procedure TFCadFornecedor.EdtEmailFornClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtEmailForn);
+end;
+
+procedure TFCadFornecedor.EdtEnderecoFornClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtEnderecoForn);
+end;
+
+procedure TFCadFornecedor.EdtFoneFornClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtFoneForn);
+end;
+
+procedure TFCadFornecedor.EdtNomeFornClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtNomeForn);
+end;
+
+procedure TFCadFornecedor.EdtNumFornClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtNumForn);
+end;
+
+procedure TFCadFornecedor.EdtRgFornClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtRgForn);
+end;
+
+procedure TFCadFornecedor.EdtUfFornClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtUfForn);
 end;
 
 procedure TFCadFornecedor.FormCreate(Sender: TObject);
@@ -351,6 +443,12 @@ begin
     MudarAbaModelo(TbItemedicao, Sender);
   end;
 
+end;
+
+procedure TFCadFornecedor.MemoObsFornClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(MemoObsForn);
 end;
 
 procedure TFCadFornecedor.SpBVoltarClick(Sender: TObject);

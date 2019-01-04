@@ -3,14 +3,12 @@ inherited FConsProduto: TFConsProduto
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
-      TabIndex = 1
       Sizes = (
         330s
         431s
         330s
         431s)
       inherited TbItemListagem: TTabItem
-        IsSelected = False
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         inherited ToolBarsuperior: TToolBar
@@ -85,6 +83,7 @@ inherited FConsProduto: TFConsProduto
             Size.PlatformDefault = False
             TabOrder = 2
             ItemAppearanceObjects.ItemEditObjects.Image.Visible = True
+            ItemAppearanceObjects.HeaderObjects.Text.TextColor = claNavy
             OnDblClick = ListViewConsProdDblClick
             OnItemClickEx = ListViewConsProdItemClickEx
             OnButtonClick = ListViewConsProdButtonClick
@@ -127,7 +126,6 @@ inherited FConsProduto: TFConsProduto
         end
       end
       inherited TbItemedicao: TTabItem
-        IsSelected = True
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object ToolBar1: TToolBar
@@ -228,6 +226,7 @@ inherited FConsProduto: TFConsProduto
                 Size.PlatformDefault = False
                 TextPrompt = 'Nome Produto'
                 OnKeyUp = EdtNomeProdKeyUp
+                OnClick = EdtNomeProdClick
                 object EdtBNomeProd: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -276,6 +275,7 @@ inherited FConsProduto: TFConsProduto
                 Size.PlatformDefault = False
                 TextPrompt = 'Descricao Produto'
                 OnKeyUp = EdtDescProdKeyUp
+                OnClick = EdtDescProdClick
                 object EdtBDescProd: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -324,6 +324,7 @@ inherited FConsProduto: TFConsProduto
                 Size.PlatformDefault = False
                 TextPrompt = 'Und Produto'
                 OnKeyUp = EdtUnProdKeyUp
+                OnClick = EdtUnProdClick
                 object EdtBUnProd: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -372,6 +373,7 @@ inherited FConsProduto: TFConsProduto
                 Size.PlatformDefault = False
                 TextPrompt = 'Sigla Grupo'
                 OnKeyUp = EdtSiglaGrupoProdKeyUp
+                OnClick = EdtSiglaGrupoProdClick
                 object EdtBSiglaGrupoProd: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -420,6 +422,7 @@ inherited FConsProduto: TFConsProduto
                 Size.PlatformDefault = False
                 TextPrompt = 'Grupo Produto'
                 OnKeyUp = EdtGrupoProdKeyUp
+                OnClick = EdtGrupoProdClick
                 object EdtBGrupoProd: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -469,6 +472,7 @@ inherited FConsProduto: TFConsProduto
                 Size.PlatformDefault = False
                 TextPrompt = 'Codigo De barras'
                 OnKeyUp = EdtCodBarraProdKeyUp
+                OnClick = EdtCodBarraProdClick
                 object EdtBCodBarraProd: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -489,8 +493,8 @@ inherited FConsProduto: TFConsProduto
                 Margins.Left = 4.000000000000000000
                 Position.X = 3.200000047683716000
                 Position.Y = 1.000000000000000000
-                Scale.X = 0.800000011920929000
-                Scale.Y = 0.800000011920929000
+                Scale.X = 0.800000011920928900
+                Scale.Y = 0.800000011920928900
                 Size.Width = 48.000000000000000000
                 Size.Height = 48.000000000000000000
                 Size.PlatformDefault = False
@@ -520,6 +524,7 @@ inherited FConsProduto: TFConsProduto
                 Size.PlatformDefault = False
                 TextPrompt = 'Valor Aprazo'
                 OnKeyUp = EdtVrPrazaProdKeyUp
+                OnClick = EdtVrPrazaProdClick
                 OnExit = EdtVrPrazaProdExit
                 object EdtBVrPrazaProd: TEditButton
                   CanFocus = False
@@ -570,6 +575,7 @@ inherited FConsProduto: TFConsProduto
                 Size.PlatformDefault = False
                 TextPrompt = 'Valor Avista'
                 OnKeyUp = EdtVrVistaProdKeyUp
+                OnClick = EdtVrVistaProdClick
                 OnExit = EdtVrVistaProdExit
                 object EdtBVrVistaProd: TEditButton
                   CanFocus = False
@@ -620,6 +626,7 @@ inherited FConsProduto: TFConsProduto
                 Size.PlatformDefault = False
                 TextPrompt = 'Valor Promocao'
                 KillFocusByReturn = True
+                OnClick = EdtVrPromocaoProdClick
                 OnExit = EdtVrPromocaoProdExit
                 object EdtBVrPromocaoProd: TEditButton
                   CanFocus = False

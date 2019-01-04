@@ -4,14 +4,14 @@ inherited FCadCli: TFCadCli
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
-      TabIndex = 1
+      TabIndex = 0
       Sizes = (
         330s
         431s
         330s
         431s)
       inherited TbItemListagem: TTabItem
-        IsSelected = False
+        IsSelected = True
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         inherited ToolBarsuperior: TToolBar
@@ -120,7 +120,7 @@ inherited FCadCli: TFCadCli
         end
       end
       inherited TbItemedicao: TTabItem
-        IsSelected = True
+        IsSelected = False
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object ToolBar1: TToolBar
@@ -263,6 +263,7 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 TextPrompt = 'Nome / Razao Social'
                 OnKeyUp = EdtNomeCliKeyUp
+                OnClick = EdtNomeCliClick
                 object EdtBNomeCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -346,6 +347,7 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 TextPrompt = 'Cpf / Cnpj'
                 OnKeyUp = EdtCpfCliKeyUp
+                OnClick = EdtCpfCliClick
                 object EdtBCpfCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -393,6 +395,7 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 TextPrompt = 'Rg / I.E'
                 OnKeyUp = EdtRgCliKeyUp
+                OnClick = EdtRgCliClick
                 object EdtBRgCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -440,6 +443,7 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 TextPrompt = 'Apelido / Nome Fantasia'
                 OnKeyUp = EdtApelidoCliKeyUp
+                OnClick = EdtApelidoCliClick
                 object EdtBApelidoCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -488,6 +492,7 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 TextPrompt = 'Telefone / Celular'
                 OnKeyUp = EdtFoneCliKeyUp
+                OnClick = EdtFoneCliClick
                 object EdtBFoneCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -535,6 +540,7 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 TextPrompt = 'Endereco'
                 OnKeyUp = EdtEnderecoCliKeyUp
+                OnClick = EdtEnderecoCliClick
                 object EdtBEndCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -582,6 +588,7 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 TextPrompt = 'Numero'
                 OnKeyUp = EdtNumCliKeyUp
+                OnClick = EdtNumCliClick
                 object EdtBNumCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -629,6 +636,7 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 TextPrompt = 'Complemento'
                 OnKeyUp = EdtCompCliKeyUp
+                OnClick = EdtCompCliClick
                 object EdtBCompCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -676,6 +684,7 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 TextPrompt = 'Bairro'
                 OnKeyUp = EdtBairroCliKeyUp
+                OnClick = EdtBairroCliClick
                 object EdtBBairroCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -724,6 +733,7 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 TextPrompt = 'Cep'
                 OnKeyUp = EdtCepCliKeyUp
+                OnClick = EdtCepCliClick
                 object EdtBCepCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -771,6 +781,7 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 TextPrompt = 'Cidade'
                 OnKeyUp = EdtCidadeCliKeyUp
+                OnClick = EdtCidadeCliClick
                 object EdtBCidadeCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -818,6 +829,7 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 TextPrompt = 'Uf'
                 OnKeyUp = EdtUfCliKeyUp
+                OnClick = EdtUfCliClick
                 object EdtBUfCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -866,6 +878,7 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 TextPrompt = 'Email'
                 OnKeyUp = EdtEmailCliKeyUp
+                OnClick = EdtEmailCliClick
                 object EdtBEmailCli: TEditButton
                   CanFocus = False
                   Cursor = crArrow
@@ -969,12 +982,45 @@ inherited FCadCli: TFCadCli
                 Size.Height = 58.000000000000000000
                 Size.PlatformDefault = False
                 TabOrder = 0
+                OnClick = MemoObsCadCliClick
                 Viewport.Width = 256.000000000000000000
                 Viewport.Height = 50.000000000000000000
               end
             end
-            object ListBoxItem17: TListBoxItem
+            object ListBoxItem19: TListBoxItem
               Position.Y = 670.000000000000000000
+              TabOrder = 18
+              object LblStatusCadCli: TLabel
+                Align = Left
+                StyledSettings = [Style, FontColor]
+                Margins.Left = 4.000000000000000000
+                Margins.Top = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Position.X = 4.000000000000000000
+                Position.Y = 4.000000000000000000
+                Size.Width = 69.000000000000000000
+                Size.Height = 36.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Family = 'Arial'
+                Text = 'Status :'
+              end
+              object CBStatusCadCli: TComboBox
+                Align = Client
+                Items.Strings = (
+                  'Ativo'
+                  'Inativo')
+                ItemIndex = 1
+                Margins.Top = 4.000000000000000000
+                Margins.Right = 4.000000000000000000
+                Margins.Bottom = 4.000000000000000000
+                Size.Width = 240.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+              end
+            end
+            object ListBoxItem17: TListBoxItem
+              Position.Y = 714.000000000000000000
               Size.Width = 317.000000000000000000
               Size.Height = 40.000000000000000000
               Size.PlatformDefault = False
@@ -1008,7 +1054,7 @@ inherited FCadCli: TFCadCli
               end
             end
             object ListBoxItem18: TListBoxItem
-              Position.Y = 710.000000000000000000
+              Position.Y = 754.000000000000000000
               Size.Width = 317.000000000000000000
               Size.Height = 130.000000000000000000
               Size.PlatformDefault = False

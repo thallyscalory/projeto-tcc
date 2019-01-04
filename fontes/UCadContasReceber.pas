@@ -79,6 +79,10 @@ type
       Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure ComboBoxTipoReceitaClosePopup(Sender: TObject);
+    procedure DateEdtFiltroVencInicialContasReceberClosePicker(Sender: TObject);
+    procedure EdtAcrescimoClick(Sender: TObject);
+    procedure EdtDescontoClick(Sender: TObject);
+    procedure EdtValorReceberClick(Sender: TObject);
   private
     saldoContasReceber, idContasReceber, idCliContasReceber: array of string;
     tamanhoArray, contadorArray, controleCheckmark: integer;
@@ -235,6 +239,7 @@ begin
   DM.FDQFiltroCadCLi.Close;
   DM.FDQFiltroCadCLi.ParamByName('PNomeCadCli').Value := '%';
   DM.FDQFiltroCadCLi.ParamByName('PCodCadCli').Value := Null;
+  DM.FDQFiltroCadCLi.ParamByName('PStatus').Value := 'A';
   DM.FDQFiltroCadCLi.Open();
   DM.FDQFiltroCadCLi.Active := True;
 
@@ -344,6 +349,19 @@ begin
   end;
 end;
 
+procedure TFCadContasReceber.DateEdtFiltroVencInicialContasReceberClosePicker
+  (Sender: TObject);
+begin
+  inherited;
+  DateEdtFiltroVencFinalContasReceberClosePicker(Sender);
+end;
+
+procedure TFCadContasReceber.EdtAcrescimoClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtAcrescimo);
+end;
+
 procedure TFCadContasReceber.EdtAcrescimoTyping(Sender: TObject);
 var
   result: Double;
@@ -363,6 +381,12 @@ begin
   EdtDesconto.Text := EmptyStr;
 end;
 
+procedure TFCadContasReceber.EdtDescontoClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtDesconto);
+end;
+
 procedure TFCadContasReceber.EdtDescontoTyping(Sender: TObject);
 var
   result: Double;
@@ -380,6 +404,12 @@ begin
   end;
 
   EdtAcrescimo.Text := EmptyStr;
+end;
+
+procedure TFCadContasReceber.EdtValorReceberClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtValorReceber);
 end;
 
 procedure TFCadContasReceber.FormCreate(Sender: TObject);

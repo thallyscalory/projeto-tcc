@@ -3,6 +3,7 @@ inherited FCadContasPagar: TFCadContasPagar
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
+      TabIndex = 2
       Sizes = (
         330s
         431s
@@ -79,6 +80,7 @@ inherited FCadContasPagar: TFCadContasPagar
           end
           object DateEdtFiltroVencInicialContasPagar: TDateEdit
             Date = 43312.000000000000000000
+            OnClosePicker = DateEdtFiltroVencInicialContasPagarClosePicker
             Align = Left
             Margins.Right = 8.000000000000000000
             Position.X = 41.000000000000000000
@@ -169,6 +171,8 @@ inherited FCadContasPagar: TFCadContasPagar
           Size.Height = 252.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 5
+          ItemAppearanceObjects.HeaderObjects.Text.TextAlign = Center
+          ItemAppearanceObjects.HeaderObjects.Text.TextColor = claNavy
           OnItemClickEx = ListViewCadContasPagarItemClickEx
         end
         object BtnBaixarContaPagar: TButton
@@ -194,6 +198,7 @@ inherited FCadContasPagar: TFCadContasPagar
         end
       end
       inherited TbItemedicao: TTabItem
+        IsSelected = False
         Size.Width = 110.000000000000000000
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
@@ -288,6 +293,7 @@ inherited FCadContasPagar: TFCadContasPagar
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 OnKeyUp = EdtNumDocKeyUp
+                OnClick = EdtNumDocClick
               end
             end
             object ListBoxItem4: TListBoxItem
@@ -316,6 +322,7 @@ inherited FCadContasPagar: TFCadContasPagar
                 Size.PlatformDefault = False
                 OnTyping = EdtValorDocTyping
                 OnKeyUp = EdtValorDocKeyUp
+                OnClick = EdtValorDocClick
               end
             end
             object ListBoxItem5: TListBoxItem
@@ -344,6 +351,7 @@ inherited FCadContasPagar: TFCadContasPagar
                 Size.PlatformDefault = False
                 OnTyping = EdtValorDescTyping
                 OnKeyUp = EdtValorDescKeyUp
+                OnClick = EdtValorDescClick
               end
             end
             object ListBoxItem6: TListBoxItem
@@ -372,6 +380,7 @@ inherited FCadContasPagar: TFCadContasPagar
                 Size.PlatformDefault = False
                 KillFocusByReturn = True
                 OnTyping = EdtValorAcrescTyping
+                OnClick = EdtValorAcrescClick
               end
             end
             object ListBoxItem7: TListBoxItem
@@ -536,7 +545,7 @@ inherited FCadContasPagar: TFCadContasPagar
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 110.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False
@@ -673,6 +682,7 @@ inherited FCadContasPagar: TFCadContasPagar
                 Size.PlatformDefault = False
                 TextPrompt = '0,00'
                 KillFocusByReturn = True
+                OnClick = EdtAcrescimoBaixaClick
               end
             end
             object ListBoxItem13: TListBoxItem
@@ -704,6 +714,7 @@ inherited FCadContasPagar: TFCadContasPagar
                 Size.PlatformDefault = False
                 TextPrompt = '0,00'
                 KillFocusByReturn = True
+                OnClick = EdtDescontoBaixaClick
               end
             end
             object ListBoxItem14: TListBoxItem
@@ -734,6 +745,7 @@ inherited FCadContasPagar: TFCadContasPagar
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 KillFocusByReturn = True
+                OnClick = EdtValorPagarBaixaClick
               end
             end
             object ListBoxItem15: TListBoxItem

@@ -33,6 +33,7 @@ object FContasReceberVenda: TFContasReceberVenda
       Size.Height = 472.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
+      ItemAppearanceObjects.HeaderObjects.Text.TextColor = claNavy
       OnItemClick = ListViewCadContasReceberItemClick
     end
     object LytGeralEdicaoContasReceber: TLayout
@@ -89,6 +90,7 @@ object FContasReceberVenda: TFContasReceberVenda
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
           KillFocusByReturn = True
+          OnClick = EdtValorCadContasReceberClick
         end
         object LblValorCadContasReceber: TLabel
           Align = Left

@@ -39,3 +39,6 @@ Visible=False
 [DM.FDQConsDespesaContaPagar]
 Visible=False
 
+[DM.FDQConsAgenda]
+Visible=False
+

@@ -16,12 +16,365 @@ inherited FCadTipoReceita: TFCadTipoReceita
             TextSettings.Font.StyleExt = {04070000000000000004000000}
             Text = 'Tipo de Receita'
           end
+          inherited SpBVoltar: TSpeedButton
+            OnClick = SpBVoltarClick
+          end
+        end
+        object Layout1: TLayout
+          Align = Top
+          Position.Y = 48.000000000000000000
+          Size.Width = 330.000000000000000000
+          Size.Height = 124.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object EditFiltroNomeCadTipoReceita: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            StyleLookup = 'searchedit'
+            TabOrder = 0
+            ReturnKeyType = Done
+            Position.X = 4.000000000000000000
+            Margins.Left = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Scale.Y = 1.200000047683716000
+            Size.Width = 322.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Filtrar pelo nome'
+            KillFocusByReturn = True
+            OnTyping = EditFiltroNomeCadTipoReceitaTyping
+            OnClick = EditFiltroNomeCadTipoReceitaClick
+          end
+          object EditFiltroCodCadTipoReceita: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            StyleLookup = 'searchedit'
+            TabOrder = 1
+            KeyboardType = NumberPad
+            ReturnKeyType = Done
+            Position.X = 4.000000000000000000
+            Position.Y = 38.400001525878910000
+            ClipParent = True
+            Margins.Left = 4.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Scale.Y = 1.200000047683716000
+            Size.Width = 322.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Filtrar pelo c'#243'digo'
+            KillFocusByReturn = True
+            OnTyping = EditFiltroCodCadTipoReceitaTyping
+            OnClick = EditFiltroCodCadTipoReceitaClick
+          end
+          object BtnFiltrarCadTipoReceita: TButton
+            Align = Top
+            StyledSettings = [Family, Size, Style]
+            Margins.Left = 20.000000000000000000
+            Margins.Right = 20.000000000000000000
+            Position.X = 20.000000000000000000
+            Position.Y = 76.800003051757810000
+            Size.Width = 290.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            Text = 'Filtrar Todos'
+            TextSettings.FontColor = claWhite
+            TintColor = claNavy
+            OnClick = BtnFiltrarCadTipoReceitaClick
+          end
+        end
+        object ListViewCadTipoReceita: TListView
+          Touch.InteractiveGestures = [DoubleTap]
+          ItemAppearanceClassName = 'TImageListItemRightButtonAppearance'
+          ItemEditAppearanceClassName = 'TImageListItemRightButtonDeleteAppearance'
+          HeaderAppearanceClassName = 'TListHeaderObjects'
+          FooterAppearanceClassName = 'TListHeaderObjects'
+          Align = Client
+          Margins.Left = 4.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 4.000000000000000000
+          Margins.Bottom = 4.000000000000000000
+          Size.Width = 322.000000000000000000
+          Size.Height = 251.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          ItemAppearanceObjects.ItemObjects.TextButton.Text = '>'
+          ItemAppearanceObjects.ItemEditObjects.TextButton.Text = '>'
+          ItemAppearanceObjects.ItemEditObjects.Image.Visible = False
+          ItemAppearanceObjects.HeaderObjects.Text.TextColor = claNavy
+          OnButtonClick = ListViewCadTipoReceitaButtonClick
         end
       end
       inherited TbItemedicao: TTabItem
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
+        object ToolBar1: TToolBar
+          Size.Width = 330.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          TintColor = claSilver
+          object lblTituloEdicaoCadTipoReceita: TLabel
+            Align = Contents
+            StyledSettings = []
+            Size.Width = 330.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Arial'
+            TextSettings.Font.Size = 18.000000000000000000
+            TextSettings.Font.StyleExt = {04070000000000000004000000}
+            TextSettings.FontColor = claNavy
+            TextSettings.HorzAlign = Center
+            Text = 'Detalhes'
+          end
+          object SpBVoltarEdicaoCadTipoReceita: TSpeedButton
+            Align = Left
+            IconTintColor = claNavy
+            Margins.Left = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'backtoolbutton'
+          end
+          object SpdBEditarCadTipoReceita: TSpeedButton
+            Align = MostRight
+            IconTintColor = claNavy
+            Position.X = 282.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'composetoolbutton'
+          end
+          object SpdBConfirmarCadTipoReceita: TSpeedButton
+            Align = MostRight
+            IconTintColor = claNavy
+            Position.X = 234.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'donetoolbutton'
+          end
+        end
+        object ListBoxEdicaoCadTipoReceita: TListBox
+          Align = Client
+          Margins.Left = 4.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 4.000000000000000000
+          Margins.Bottom = 4.000000000000000000
+          Size.Width = 322.000000000000000000
+          Size.Height = 375.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          DisableFocusEffect = True
+          DefaultItemStyles.ItemStyle = ''
+          DefaultItemStyles.GroupHeaderStyle = ''
+          DefaultItemStyles.GroupFooterStyle = ''
+          Viewport.Width = 322.000000000000000000
+          Viewport.Height = 375.000000000000000000
+          object ListBoxItem1: TListBoxItem
+            TabOrder = 0
+            object LblDescricaoCadTipoReceita: TLabel
+              Align = Left
+              Margins.Left = 4.000000000000000000
+              Margins.Top = 4.000000000000000000
+              Margins.Bottom = 4.000000000000000000
+              Position.X = 4.000000000000000000
+              Position.Y = 4.000000000000000000
+              Size.Width = 106.000000000000000000
+              Size.Height = 36.000000000000000000
+              Size.PlatformDefault = False
+              Text = 'Descri'#231#227'o :'
+            end
+            object EdtDescricaoCadTipoReceita: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Client
+              TabOrder = 1
+              ReturnKeyType = Done
+              MaxLength = 30
+              Margins.Top = 8.000000000000000000
+              Margins.Right = 4.000000000000000000
+              Size.Width = 208.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TextPrompt = 'Descri'#231#227'o'
+              KillFocusByReturn = True
+              OnClick = EdtDescricaoCadTipoReceitaClick
+            end
+          end
+          object ListBoxItem2: TListBoxItem
+            Position.Y = 44.000000000000000000
+            TabOrder = 1
+            object LblGeraContaCadTipoReceita: TLabel
+              Align = Left
+              Margins.Left = 4.000000000000000000
+              Margins.Top = 4.000000000000000000
+              Margins.Bottom = 4.000000000000000000
+              Position.X = 4.000000000000000000
+              Position.Y = 4.000000000000000000
+              Size.Width = 127.000000000000000000
+              Size.Height = 36.000000000000000000
+              Size.PlatformDefault = False
+              Text = 'Gerar Conta :'
+            end
+            object CBGeraContaCadTipoReceita: TComboBox
+              Align = Client
+              Items.Strings = (
+                'Sim'
+                'N'#226'o')
+              Margins.Top = 8.000000000000000000
+              Margins.Right = 4.000000000000000000
+              Size.Width = 187.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 2
+            end
+          end
+          object ListBoxItem3: TListBoxItem
+            Position.Y = 88.000000000000000000
+            TabOrder = 2
+            object LblAvistaCadTipoReceita: TLabel
+              Align = Left
+              Margins.Left = 4.000000000000000000
+              Margins.Top = 4.000000000000000000
+              Margins.Bottom = 4.000000000000000000
+              Position.X = 4.000000000000000000
+              Position.Y = 4.000000000000000000
+              Size.Width = 106.000000000000000000
+              Size.Height = 36.000000000000000000
+              Size.PlatformDefault = False
+              Text = 'Avista :'
+            end
+            object CBAvistaCadTipoReceita: TComboBox
+              Align = Client
+              Items.Strings = (
+                'Sim'
+                'N'#226'o')
+              Margins.Top = 8.000000000000000000
+              Margins.Right = 4.000000000000000000
+              Size.Width = 208.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 2
+            end
+          end
+          object ListBoxItem4: TListBoxItem
+            Position.Y = 132.000000000000000000
+            TabOrder = 3
+            object LblCondicionalCadTipoReceita: TLabel
+              Align = Left
+              Margins.Left = 4.000000000000000000
+              Margins.Top = 4.000000000000000000
+              Margins.Bottom = 4.000000000000000000
+              Position.X = 4.000000000000000000
+              Position.Y = 4.000000000000000000
+              Size.Width = 126.000000000000000000
+              Size.Height = 36.000000000000000000
+              Size.PlatformDefault = False
+              Text = 'Condicional :'
+            end
+            object CBCondicionalCadTipoReceita: TComboBox
+              Align = Client
+              Items.Strings = (
+                'Sim'
+                'N'#226'o')
+              Margins.Top = 8.000000000000000000
+              Margins.Right = 4.000000000000000000
+              Size.Width = 188.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 2
+            end
+          end
+          object ListBoxItem5: TListBoxItem
+            Position.Y = 176.000000000000000000
+            TabOrder = 4
+            object LblStatusCadTipoReceita: TLabel
+              Align = Left
+              Margins.Left = 4.000000000000000000
+              Margins.Top = 4.000000000000000000
+              Margins.Bottom = 4.000000000000000000
+              Position.X = 4.000000000000000000
+              Position.Y = 4.000000000000000000
+              Size.Width = 106.000000000000000000
+              Size.Height = 36.000000000000000000
+              Size.PlatformDefault = False
+              Text = 'Status :'
+            end
+            object CBStatusCadTipoReceita: TComboBox
+              Align = Client
+              Items.Strings = (
+                'Ativo'
+                'Inativo')
+              Margins.Top = 8.000000000000000000
+              Margins.Right = 4.000000000000000000
+              Size.Width = 208.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 2
+            end
+          end
+          object ListBoxItem6: TListBoxItem
+            Position.Y = 220.000000000000000000
+            TabOrder = 5
+            object LblDataCadCadTipoReceita: TLabel
+              Align = Left
+              Margins.Left = 4.000000000000000000
+              Margins.Top = 4.000000000000000000
+              Margins.Bottom = 4.000000000000000000
+              Position.X = 4.000000000000000000
+              Position.Y = 4.000000000000000000
+              Size.Width = 106.000000000000000000
+              Size.Height = 36.000000000000000000
+              Size.PlatformDefault = False
+              Text = 'Data Cad :'
+            end
+            object EdtDataCadTipoReceita: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Align = Client
+              TabOrder = 1
+              ReturnKeyType = Done
+              MaxLength = 30
+              Margins.Top = 8.000000000000000000
+              Margins.Right = 4.000000000000000000
+              Size.Width = 208.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              KillFocusByReturn = True
+            end
+          end
+        end
       end
+    end
+  end
+  inherited ActionList1: TActionList
+    Left = 16
+    Top = 416
+  end
+  inherited ImageList1: TImageList
+    Left = 16
+    Top = 368
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = DM.FDQConsFormaPag
+    ScopeMappings = <>
+    Left = 24
+    Top = 304
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 20
+    Top = 245
+    object LinkListControlToField1: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      FieldName = 'descricao_forma_pag'
+      Control = ListViewCadTipoReceita
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillHeaderFieldName = 'id_forma_pag'
+      FillBreakGroups = <>
     end
   end
 end

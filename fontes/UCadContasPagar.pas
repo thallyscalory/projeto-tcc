@@ -130,6 +130,14 @@ type
     procedure ComboBoxTipoReceitaClosePopup(Sender: TObject);
     procedure SpdBConfirmaContasPagarBaixaClick(Sender: TObject);
     procedure SpdBVoltarContasPagarBaixaClick(Sender: TObject);
+    procedure DateEdtFiltroVencInicialContasPagarClosePicker(Sender: TObject);
+    procedure EdtNumDocClick(Sender: TObject);
+    procedure EdtValorDocClick(Sender: TObject);
+    procedure EdtValorDescClick(Sender: TObject);
+    procedure EdtValorAcrescClick(Sender: TObject);
+    procedure EdtAcrescimoBaixaClick(Sender: TObject);
+    procedure EdtDescontoBaixaClick(Sender: TObject);
+    procedure EdtValorPagarBaixaClick(Sender: TObject);
   private
     saldoContasPagar, idContasPagar, idFornContasPagar: array of string;
     tamanhoArray, contadorArray, controleCheckmark, nParc: Integer;
@@ -344,6 +352,13 @@ begin
   end;
 end;
 
+procedure TFCadContasPagar.DateEdtFiltroVencInicialContasPagarClosePicker(
+  Sender: TObject);
+begin
+  inherited;
+  DateEdtFiltroVencFinalContasPagarClosePicker(Sender);
+end;
+
 procedure TFCadContasPagar.DesabilitaCampos;
 begin
   SpdBEditar.Visible := True;
@@ -360,6 +375,24 @@ begin
   EdtDataCad.Enabled := False;
 end;
 
+procedure TFCadContasPagar.EdtAcrescimoBaixaClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtAcrescimoBaixa);
+end;
+
+procedure TFCadContasPagar.EdtDescontoBaixaClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtDescontoBaixa);
+end;
+
+procedure TFCadContasPagar.EdtNumDocClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtNumDoc);
+end;
+
 procedure TFCadContasPagar.EdtNumDocKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
@@ -367,6 +400,12 @@ begin
   if Key = vkReturn then
     EdtValorDoc.SetFocus;
 
+end;
+
+procedure TFCadContasPagar.EdtValorAcrescClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtValorAcresc);
 end;
 
 procedure TFCadContasPagar.EdtValorAcrescTyping(Sender: TObject);
@@ -394,6 +433,12 @@ begin
   begin
     EdtValorSaldo.Text := EdtValorDoc.Text;
   end;
+end;
+
+procedure TFCadContasPagar.EdtValorDescClick(Sender: TObject);
+begin
+  inherited;
+MostrarTeclado(EdtValorDesc);
 end;
 
 procedure TFCadContasPagar.EdtValorDescKeyUp(Sender: TObject; var Key: Word;
@@ -451,6 +496,12 @@ begin
   end;
 end;
 
+procedure TFCadContasPagar.EdtValorDocClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtValorDoc);
+end;
+
 procedure TFCadContasPagar.EdtValorDocKeyUp(Sender: TObject; var Key: Word;
   var KeyChar: Char; Shift: TShiftState);
 begin
@@ -478,6 +529,12 @@ begin
     end;
 
   end;
+end;
+
+procedure TFCadContasPagar.EdtValorPagarBaixaClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtValorPagarBaixa);
 end;
 
 procedure TFCadContasPagar.EdtValorPagoTyping(Sender: TObject);
@@ -1209,7 +1266,7 @@ begin
             DM.FDQCadContaPagarid_fornecedor.AsInteger :=
               DM.FDQFornecedorid.AsInteger;
             DM.FDQCadContaPagarid_tipo_despesa.AsInteger :=
-              DM.FDQConsDespesasid.AsInteger;
+              DM.FDQConsDespesaContaPagarid.AsInteger;
             DM.FDQCadContaPagarn_doc.AsString := EdtNumDoc.Text;
             DM.FDQCadContaPagarvalor_doc.AsFloat :=
               StrToFloat(EdtValorDoc.Text);

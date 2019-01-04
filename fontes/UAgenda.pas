@@ -72,6 +72,8 @@ type
     procedure TimeEdit1Enter(Sender: TObject);
     procedure ComboBoxStatusEnter(Sender: TObject);
     procedure Memo1Exit(Sender: TObject);
+    procedure DateEdtFiltroVencInicialContasReceberClosePicker(Sender: TObject);
+    procedure Memo1Click(Sender: TObject);
   private
     crud: string;
     TecladoVirtualVisible: Boolean;
@@ -82,6 +84,8 @@ type
     procedure DesabilitaCampos;
     procedure LimpaCampos;
     procedure EsconderTeclado;
+    procedure MostrarTeclado(const AControl: TFmxObject);
+
   public
     { Public declarations }
   end;
@@ -93,7 +97,7 @@ implementation
 
 {$R *.fmx}
 
-uses UDM, UPrincipal;
+uses UDM, UPrincipal, FGX.Toasts, FGX.Graphics;
 
 procedure TFAgenda.Button1Click(Sender: TObject);
 begin
@@ -141,6 +145,12 @@ begin
     on E: Exception do
       ShowMessage('Erro!' + #13#10 + E.Message);
   end;
+end;
+
+procedure TFAgenda.DateEdtFiltroVencInicialContasReceberClosePicker
+  (Sender: TObject);
+begin
+  DateEdtFiltroVencFinalContasReceberClosePicker(Sender);
 end;
 
 procedure TFAgenda.DesabilitaCampos;
@@ -313,9 +323,24 @@ begin
   end;
 end;
 
+procedure TFAgenda.Memo1Click(Sender: TObject);
+begin
+  MostrarTeclado(Memo1);
+end;
+
 procedure TFAgenda.Memo1Exit(Sender: TObject);
 begin
   EsconderTeclado;
+end;
+
+procedure TFAgenda.MostrarTeclado(const AControl: TFmxObject);
+var
+  keyboard: IFMXVirtualKeyboardService;
+begin
+  TPlatformServices.Current.SupportsPlatformService(IFMXVirtualKeyboardService,
+    IInterface(keyboard));
+  if (keyboard <> nil) then
+    keyboard.ShowVirtualKeyboard(AControl);
 end;
 
 procedure TFAgenda.MudarAba(ATabItem: TTabItem; Sender: TObject);
@@ -386,6 +411,9 @@ begin
         DM.FDConnection1.CommitRetaining;
         LimpaCampos;
         DateEdtFiltroVencFinalContasReceberClosePicker(Sender);
+
+        TfgToast.Show('Compromisso agendado com sucesso!');
+
         MudarAba(TbItemPesquisa, Sender);
       end
       else if crud = 'editar' then

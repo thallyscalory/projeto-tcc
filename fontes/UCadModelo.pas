@@ -56,7 +56,7 @@ implementation
 
 {$R *.fmx}
 
-uses UDM, UPrincipal, UVenda, System.IOUtils;
+uses UDM, UPrincipal, UVenda, System.IOUtils, FGX.Graphics, FGX.Toasts;
 
 
 

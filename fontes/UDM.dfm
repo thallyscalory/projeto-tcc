@@ -11,11 +11,11 @@ object DM: TDM
       'DriverID=SQLite')
     LoginPrompt = False
     Left = 40
-    Top = 16
+    Top = 24
   end
   object FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink
-    Left = 32
-    Top = 64
+    Left = 40
+    Top = 112
   end
   object FDQuery1: TFDQuery
     Connection = FDConnection1
@@ -173,8 +173,8 @@ object DM: TDM
     Connection = FDConnection1
     SQL.Strings = (
       
-        'select * from cliente where id_cli like :PCodCadCli or nome_cli ' +
-        'like :PNomeCadCli order by nome_cli;')
+        'select * from cliente where (id_cli like :PCodCadCli or nome_cli' +
+        ' like :PNomeCadCli) and status like :PStatus order by nome_cli;')
     Left = 280
     Top = 8
     ParamData = <
@@ -182,13 +182,19 @@ object DM: TDM
         Name = 'PCODCADCLI'
         DataType = ftString
         ParamType = ptInput
-        Size = 10
+        Size = 30
       end
       item
         Name = 'PNOMECADCLI'
         DataType = ftString
         ParamType = ptInput
-        Size = 30
+        Size = 60
+      end
+      item
+        Name = 'PSTATUS'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 10
       end>
     object FDQFiltroCadCLiid_cli: TIntegerField
       FieldName = 'id_cli'
@@ -285,6 +291,12 @@ object DM: TDM
     object FDQFiltroCadCLifoto_cli: TBlobField
       FieldName = 'foto_cli'
       Origin = 'foto_cli'
+    end
+    object FDQFiltroCadCListatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      FixedChar = True
+      Size = 1
     end
   end
   object FDQCadCli: TFDQuery
@@ -388,6 +400,12 @@ object DM: TDM
     object FDQCadClifoto_cli: TBlobField
       FieldName = 'foto_cli'
       Origin = 'foto_cli'
+    end
+    object FDQCadClistatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      FixedChar = True
+      Size = 1
     end
   end
   object FDQConsultaProd: TFDQuery
@@ -740,8 +758,9 @@ object DM: TDM
     Connection = FDConnection1
     SQL.Strings = (
       
-        'select * from forma_pag where id_forma_pag like :PIdFormaPag or ' +
-        'descricao_forma_pag = :PDescricaoFormaPag;')
+        'select * from forma_pag where (id_forma_pag like :PIdFormaPag or' +
+        ' descricao_forma_pag like :PDescricaoFormaPag) and status like :' +
+        'PStatusFormaPag;')
     Left = 584
     Top = 8
     ParamData = <
@@ -756,6 +775,12 @@ object DM: TDM
         DataType = ftString
         ParamType = ptInput
         Size = 30
+      end
+      item
+        Name = 'PSTATUSFORMAPAG'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 10
       end>
     object FDQConsFormaPagid_forma_pag: TIntegerField
       FieldName = 'id_forma_pag'
@@ -786,6 +811,16 @@ object DM: TDM
       Origin = 'condicional_forma_pag'
       FixedChar = True
       Size = 1
+    end
+    object FDQConsFormaPagstatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsFormaPagdataCad: TDateTimeField
+      FieldName = 'dataCad'
+      Origin = 'dataCad'
     end
   end
   object FDQCadFormaPag: TFDQuery
@@ -1189,8 +1224,8 @@ object DM: TDM
   end
   object FDQAuxiliar: TFDQuery
     Connection = FDConnection1
-    Left = 40
-    Top = 128
+    Left = 32
+    Top = 200
   end
   object FDQConsContasReceber: TFDQuery
     Connection = FDConnection1
@@ -1608,8 +1643,8 @@ object DM: TDM
     Connection = FDConnection1
     SQL.Strings = (
       
-        'select * from forma_pag where geraconta_forma_pag = '#39'S'#39' and avis' +
-        'ta_forma_pag = '#39'S'#39';')
+        'select * from forma_pag where (geraconta_forma_pag = '#39'S'#39' and avi' +
+        'sta_forma_pag = '#39'S'#39') and status = '#39'A'#39';')
     Left = 584
     Top = 216
     object FDQConsAvistaFormaPagid_forma_pag: TIntegerField
@@ -1641,6 +1676,16 @@ object DM: TDM
       Origin = 'condicional_forma_pag'
       FixedChar = True
       Size = 1
+    end
+    object FDQConsAvistaFormaPagstatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsAvistaFormaPagdataCad: TDateTimeField
+      FieldName = 'dataCad'
+      Origin = 'dataCad'
     end
   end
   object FDQConsContasReceberBaixa: TFDQuery
@@ -2879,6 +2924,7 @@ object DM: TDM
       FieldName = 'id'
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object FDQConsDespesaContaPagardescricao: TStringField
       FieldName = 'descricao'

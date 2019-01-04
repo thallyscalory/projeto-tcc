@@ -12,7 +12,7 @@ uses
   FMX.ListView, FMX.Edit, System.Rtti, System.Bindings.Outputs,
   FMX.Bind.Editors, Data.Bind.EngExt, FMX.Bind.DBEngExt, Data.Bind.Components,
   Data.Bind.DBScope, FMX.ListBox, FMX.VirtualKeyboard, System.Math,
-  FMX.Platform;
+  FMX.Platform, FMX.DateTimeCtrls, FMX.Colors, FMX.Effects, FMX.Objects;
 
 type
   TFCadDespesa = class(TFCadModelo)
@@ -31,14 +31,14 @@ type
     SpdBEditarCadDespesa: TSpeedButton;
     SpdBConfirmarCadDespesa: TSpeedButton;
     VertScrollBox1: TVertScrollBox;
-    ListBox1: TListBox;
+    ListBoxEdicaoCadDespesa: TListBox;
     ListBoxItem1: TListBoxItem;
-    ListBoxItem2: TListBoxItem;
-    ListBoxItem3: TListBoxItem;
     LblDescricaoCadDespesa: TLabel;
     EdtDescricaoCadDespesa: TEdit;
+    ListBoxItem2: TListBoxItem;
     LblStatusCadDespesa: TLabel;
     CbStatusCadDespesa: TComboBox;
+    ListBoxItem3: TListBoxItem;
     LblDataCadDespesa: TLabel;
     EdtDataCadDespesa: TEdit;
     procedure EditFiltroNomeCadDespesaTyping(Sender: TObject);
@@ -54,6 +54,9 @@ type
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
     procedure FormCreate(Sender: TObject);
+    procedure EditFiltroNomeCadDespesaClick(Sender: TObject);
+    procedure EditFiltroCodCadDespesaClick(Sender: TObject);
+    procedure EdtDescricaoCadDespesaClick(Sender: TObject);
   private
     crud: string;
 
@@ -73,7 +76,7 @@ implementation
 
 {$R *.fmx}
 
-uses UAuxiliar, UDM, UPrincipal;
+uses UAuxiliar, UDM, UPrincipal, FGX.Toasts, FGX.Graphics;
 
 procedure TFCadDespesa.BtnFiltrarDespesaClick(Sender: TObject);
 begin
@@ -97,6 +100,12 @@ begin
   SpdBConfirmarCadDespesa.Visible := False;
 end;
 
+procedure TFCadDespesa.EditFiltroCodCadDespesaClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EditFiltroCodCadDespesa);
+end;
+
 procedure TFCadDespesa.EditFiltroCodCadDespesaTyping(Sender: TObject);
 begin
   inherited;
@@ -116,6 +125,12 @@ begin
   end;
   DM.FDQConsDespesas.Open();
   DM.FDQConsDespesas.Active := True;
+end;
+
+procedure TFCadDespesa.EditFiltroNomeCadDespesaClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EditFiltroNomeCadDespesa);
 end;
 
 procedure TFCadDespesa.EditFiltroNomeCadDespesaTyping(Sender: TObject);
@@ -138,6 +153,12 @@ begin
   DM.FDQConsDespesas.Open();
   DM.FDQConsDespesas.Active := True;
 
+end;
+
+procedure TFCadDespesa.EdtDescricaoCadDespesaClick(Sender: TObject);
+begin
+  inherited;
+  MostrarTeclado(EdtDescricaoCadDespesa);
 end;
 
 procedure TFCadDespesa.FormCreate(Sender: TObject);
@@ -196,7 +217,7 @@ end;
 procedure TFCadDespesa.LimpaCampos;
 begin
   EdtDescricaoCadDespesa.Text := EmptyStr;
-  CbStatusCadDespesa.ItemIndex := -1;
+  CbStatusCadDespesa.ItemIndex := 0;
   EdtDataCadDespesa.Text := EmptyStr;
 end;
 
@@ -232,12 +253,17 @@ begin
   EditFiltroCodCadDespesa.Text := EmptyStr;
   LimpaCampos;
   DesabilitaCampos;
+
   MudarAbaModelo(TbItemListagem, Sender);
+
+  if (crud = 'inserir') or (crud = 'editar') then
+    TfgToast.Show('Processo cancelado!');
 end;
 
 procedure TFCadDespesa.SpdBConfirmarCadDespesaClick(Sender: TObject);
 var
   status, valida: string;
+  Toast: TfgToast;
 begin
   inherited;
   try
@@ -270,8 +296,10 @@ begin
         EditFiltroNomeCadDespesa.Text := EmptyStr;
         EditFiltroCodCadDespesa.Text := EmptyStr;
         LimpaCampos;
-        DesabilitaCampos;
+
         MudarAbaModelo(TbItemListagem, Sender);
+
+        TfgToast.Show('Nova despesa cadastrada com sucesso!');
       end
       else if crud = 'editar' then
       begin
@@ -296,11 +324,15 @@ begin
         EditFiltroCodCadDespesa.Text := EmptyStr;
         LimpaCampos;
         DesabilitaCampos;
+
         MudarAbaModelo(TbItemListagem, Sender);
+
+        TfgToast.Show('Cadastro alterado com sucesso!');
       end;
     end;
   except
     on E: Exception do
+      ShowMessage('Erro!' + #13#10 + E.Message);
   end;
 
 end;

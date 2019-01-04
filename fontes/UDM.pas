@@ -454,6 +454,12 @@ type
     FDQConsDespesaContaPagardataCad: TDateTimeField;
     FDQCadDespesasstatus: TStringField;
     FDQCadDespesasdataCad: TDateTimeField;
+    FDQFiltroCadCListatus: TStringField;
+    FDQCadClistatus: TStringField;
+    FDQConsFormaPagstatus: TStringField;
+    FDQConsFormaPagdataCad: TDateTimeField;
+    FDQConsAvistaFormaPagstatus: TStringField;
+    FDQConsAvistaFormaPagdataCad: TDateTimeField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

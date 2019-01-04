@@ -27,8 +27,5 @@ begin
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TFSplash, FSplash);
   Application.CreateForm(TFPrincipal, FPrincipal);
-  Application.CreateForm(TFAgenda, FAgenda);
-  Application.CreateForm(TFCadDespesa, FCadDespesa);
-  Application.CreateForm(TFCadTipoReceita, FCadTipoReceita);
   Application.Run;
 end.
