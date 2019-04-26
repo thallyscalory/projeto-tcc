@@ -37,7 +37,8 @@ type
   protected
     FActiveForm: TForm;
 
-    const DoneBarHeight = 66;
+  const
+    DoneBarHeight = 66;
 
     function DisplayFormatter(AValue: double; ADisplayFormar: String): String;
     function FocusedControl: TControl;
@@ -55,11 +56,14 @@ var
 implementation
 
 {$R *.fmx}
+{$IFDEF MSWINDOWS}
+
+uses UDM, UPrincipal, UVenda, System.IOUtils;
+{$ENDIF}
+{$IFDEF ANDROID}
 
 uses UDM, UPrincipal, UVenda, System.IOUtils, FGX.Graphics, FGX.Toasts;
-
-
-
+{$ENDIF}
 { procedure TFCadModelo.AbrirFormModelo(AFormClass: TComponentClass);
   var
   LayoutBase, BotaoMenu: TComponent;
@@ -148,7 +152,7 @@ end;
 procedure TFCadModelo.FormVirtualKeyboardShown(Sender: TObject;
   KeyboardVisible: Boolean; const Bounds: TRect);
 var
-  O: TFMXObject;
+  O: TFmxObject;
 begin
   inherited;
   { ListBoxEdicaoCadCli.Align := TAlignLayout.Top;

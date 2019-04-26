@@ -96,8 +96,14 @@ var
 implementation
 
 {$R *.fmx}
+{$IFDEF ANDROID}
 
 uses UDM, UPrincipal, FGX.Toasts, FGX.Graphics;
+{$ENDIF}
+{$IFDEF MSWINDOWS}
+
+uses UDM, UPrincipal;
+{$ENDIF}
 
 procedure TFAgenda.Button1Click(Sender: TObject);
 begin
@@ -412,8 +418,9 @@ begin
         LimpaCampos;
         DateEdtFiltroVencFinalContasReceberClosePicker(Sender);
 
+{$IFDEF ANDROID}
         TfgToast.Show('Compromisso agendado com sucesso!');
-
+{$ENDIF}
         MudarAba(TbItemPesquisa, Sender);
       end
       else if crud = 'editar' then

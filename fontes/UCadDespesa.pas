@@ -75,9 +75,12 @@ var
 implementation
 
 {$R *.fmx}
-
+{$IFDEF ANDROID}
 uses UAuxiliar, UDM, UPrincipal, FGX.Toasts, FGX.Graphics;
-
+{$ENDIF}
+{$IFDEF MSWINDOWS}
+uses UAuxiliar, UDM, UPrincipal;
+{$ENDIF}
 procedure TFCadDespesa.BtnFiltrarDespesaClick(Sender: TObject);
 begin
   inherited;
@@ -256,14 +259,15 @@ begin
 
   MudarAbaModelo(TbItemListagem, Sender);
 
+  {$IFDEF ANDROID}
   if (crud = 'inserir') or (crud = 'editar') then
     TfgToast.Show('Processo cancelado!');
+  {$ENDIF}
 end;
 
 procedure TFCadDespesa.SpdBConfirmarCadDespesaClick(Sender: TObject);
 var
   status, valida: string;
-  Toast: TfgToast;
 begin
   inherited;
   try
@@ -299,7 +303,9 @@ begin
 
         MudarAbaModelo(TbItemListagem, Sender);
 
+        {$IFDEF ANDROID}
         TfgToast.Show('Nova despesa cadastrada com sucesso!');
+        {$ENDIF}
       end
       else if crud = 'editar' then
       begin
@@ -327,7 +333,9 @@ begin
 
         MudarAbaModelo(TbItemListagem, Sender);
 
+        {$IFDEF ANDROID}
         TfgToast.Show('Cadastro alterado com sucesso!');
+        {$ENDIF}
       end;
     end;
   except

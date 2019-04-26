@@ -46,6 +46,7 @@ type
     BindSourceDB1: TBindSourceDB;
     BindingsList1: TBindingsList;
     LinkListControlToField1: TLinkListControlToField;
+    SpdBNovoCadTipoReceita: TSpeedButton;
     procedure EditFiltroNomeCadTipoReceitaClick(Sender: TObject);
     procedure EditFiltroCodCadTipoReceitaClick(Sender: TObject);
     procedure EdtDescricaoCadTipoReceitaClick(Sender: TObject);
@@ -55,7 +56,9 @@ type
     procedure SpBVoltarClick(Sender: TObject);
     procedure ListViewCadTipoReceitaButtonClick(const Sender: TObject;
       const AItem: TListItem; const AObject: TListItemSimpleControl);
+    procedure SpdBNovoCadTipoReceitaClick(Sender: TObject);
   private
+    crud: string;
 
     procedure LimpaCampos;
     procedure HabilitaCampos;
@@ -184,6 +187,14 @@ procedure TFCadTipoReceita.ListViewCadTipoReceitaButtonClick
   const AObject: TListItemSimpleControl);
 begin
   inherited;
+{$IFDEF MSWINDOWS}
+  ListBoxItem1.Height := 44;
+  ListBoxItem2.Height := 44;
+  ListBoxItem3.Height := 44;
+  ListBoxItem4.Height := 44;
+  ListBoxItem5.Height := 44;
+  ListBoxItem6.Height := 44;
+{$ENDIF}
   EdtDescricaoCadTipoReceita.Text :=
     DM.FDQConsFormaPagdescricao_forma_pag.AsString;
 
@@ -220,6 +231,26 @@ begin
   EditFiltroNomeCadTipoReceita.Text := EmptyStr;
   EditFiltroCodCadTipoReceita.Text := EmptyStr;
   Close;
+end;
+
+procedure TFCadTipoReceita.SpdBNovoCadTipoReceitaClick(Sender: TObject);
+begin
+  inherited;
+{$IFDEF MSWINDOWS}
+  ListBoxItem1.Height := 44;
+  ListBoxItem2.Height := 44;
+  ListBoxItem3.Height := 44;
+  ListBoxItem4.Height := 44;
+  ListBoxItem5.Height := 44;
+  ListBoxItem6.Height := 44;
+{$ENDIF}
+  crud := 'inserir';
+  DM.FDQConsFormaPag.Active := False;
+  lblTituloEdicaoCadTipoReceita.Text := 'Novo Cadastro';
+  LimpaCampos;
+  HabilitaCampos;
+  MudarAbaModelo(TbItemedicao, Sender);
+  EdtDescricaoCadTipoReceita.SetFocus;
 end;
 
 end.
