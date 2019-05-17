@@ -157,6 +157,7 @@ type
       const AItem: TListViewItem);
     procedure EdtNumParcelaPedidoClick(Sender: TObject);
     procedure EdtValorItemClick(Sender: TObject);
+    procedure EdtDescontoMoedaPedidoExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -744,7 +745,7 @@ begin
   DM.FDQConsFormaPag.ParamByName('PIdFormaPag').Value := Null;
   DM.FDQConsFormaPag.ParamByName('PDescricaoFormaPag').Value :=
     ComboBoxFormaPagVenda.Selected.Text;
-  DM.FDQConsFormaPag.ParamByName('PStatusFromaPag').Value := 'A';
+  DM.FDQConsFormaPag.ParamByName('PStatusFormaPag').Value := 'A';
   DM.FDQConsFormaPag.Open();
 
   if (DM.FDQConsFormaPagavista_forma_pag.AsString = 'N') and
@@ -865,6 +866,12 @@ end;
 procedure TFVenda1.EdtDescontoMoedaPedidoClick(Sender: TObject);
 begin
   MostrarTeclado(EdtDescontoMoedaPedido);
+end;
+
+procedure TFVenda1.EdtDescontoMoedaPedidoExit(Sender: TObject);
+begin
+  //EdtDescontoMoedaPedido.Text := FormatFloat('###,###,##0.00',
+    //StrToFloat(EdtDescontoMoedaPedido.Text));
 end;
 
 procedure TFVenda1.EdtDescontoMoedaPedidoKeyUp(Sender: TObject; var Key: Word;
