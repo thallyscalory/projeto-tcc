@@ -104,7 +104,6 @@ object FCadModelo: TFCadModelo
       item
         MultiResBitmap.Height = 100
         MultiResBitmap.Width = 100
-        MultiResBitmap.LoadSize = 2
         MultiResBitmap = <
           item
             Width = 100

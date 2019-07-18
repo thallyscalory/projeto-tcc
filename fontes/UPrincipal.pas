@@ -8,7 +8,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.ListBox, FMX.StdCtrls, FMX.Layouts, FMX.Controls.Presentation,
   FMX.Effects,
-  FMX.TabControl, System.Actions, FMX.ActnList, ksTypes, ksLoadingIndicator,
+  FMX.TabControl, System.Actions, FMX.ActnList, //ksTypes, ksLoadingIndicator,
   FMX.VirtualKeyboard, System.Math, FMX.Platform;
 
 type
@@ -50,7 +50,7 @@ type
     LblTituloConsProd: TLabel;
     LblTituloConsAdm: TLabel;
     LblTituloContProd: TLabel;
-    ksLoadingIndicator1: TksLoadingIndicator;
+    //ksLoadingIndicator1: TksLoadingIndicator;
     ListBoxItem6: TListBoxItem;
     RoundRectCadFornecedor: TRoundRect;
     ImgCadFornecedor: TImage;

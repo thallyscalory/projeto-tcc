@@ -62,7 +62,8 @@ uses UDM, UPrincipal, UVenda, System.IOUtils;
 {$ENDIF}
 {$IFDEF ANDROID}
 
-uses UDM, UPrincipal, UVenda, System.IOUtils, FGX.Graphics, FGX.Toasts;
+uses UDM, UPrincipal, UVenda, System.IOUtils;
+//FGX.Graphics, FGX.Toasts;
 {$ENDIF}
 { procedure TFCadModelo.AbrirFormModelo(AFormClass: TComponentClass);
   var

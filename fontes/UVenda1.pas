@@ -12,7 +12,8 @@ uses
   MultiDetailAppearanceU, Data.Bind.EngExt, FMX.Bind.DBEngExt,
   Data.Bind.Components, Data.Bind.DBScope, System.Rtti, System.Bindings.Outputs,
   FMX.Bind.Editors, FMX.ListBox, System.ImageList, FMX.ImgList, FMX.Edit,
-  ksTypes, ksLoadingIndicator, FMX.VirtualKeyboard, System.Math,
+  //ksTypes, ksLoadingIndicator,
+  FMX.VirtualKeyboard, System.Math,
   FMX.Platform, FMX.Ani;
 
 type
@@ -225,8 +226,8 @@ var
   qtdItemTotal, vlItemTotal, vlTotalPedido: Double;
   dataAgora: TDateTime;
 begin
-  FPrincipal.ksLoadingIndicator1.LoadingText.Text := 'Aguarde...';
-  FPrincipal.ksLoadingIndicator1.ShowLoading;
+  //FPrincipal.ksLoadingIndicator1.LoadingText.Text := 'Aguarde...';
+  //FPrincipal.ksLoadingIndicator1.ShowLoading;
   if itemPedido = 'S' then
   begin
     { for I := 0 to contItem - 1 do
@@ -591,7 +592,7 @@ begin
         ShowMessage('Erro!' + #13#10 + E.Message);
     end;
   end;
-  FPrincipal.ksLoadingIndicator1.HideLoading;
+  //FPrincipal.ksLoadingIndicator1.HideLoading;
 end;
 
 procedure TFVenda1.BtnConfirmaCadContasReceberClick(Sender: TObject);

@@ -185,7 +185,6 @@ inherited FCadCli: TFCadCli
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'cameratoolbutton'
-            Visible = True
           end
           object ImgRelatorioCli: TImage
             MultiResBitmap.Height = 16
@@ -983,8 +982,8 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 TabOrder = 0
                 OnClick = MemoObsCadCliClick
-                Viewport.Width = 256.000000000000000000
-                Viewport.Height = 50.000000000000000000
+                Viewport.Width = 264.000000000000000000
+                Viewport.Height = 58.000000000000000000
               end
             end
             object ListBoxItem19: TListBoxItem
@@ -1013,8 +1012,7 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Width = 240.000000000000000000
-                Size.Height = 32.000000000000000000
+                Size.Height = 36.000000000000000000
                 Size.PlatformDefault = False
                 TabOrder = 1
               end

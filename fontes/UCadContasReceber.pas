@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes,
   System.Variants,
-  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   UCadModelo, System.ImageList, FMX.ImgList, System.Actions, FMX.ActnList,
   FMX.TabControl, FMX.Controls.Presentation, FMX.Layouts, FMX.ListView.Types,
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, MultiDetailAppearanceU,
@@ -13,7 +13,7 @@ uses
   Data.Bind.EngExt, FMX.Bind.DBEngExt, Data.Bind.Components, Data.Bind.DBScope,
   FMX.ListBox, FMX.DateTimeCtrls, System.UIConsts, FMX.Edit,
   FMX.VirtualKeyboard, System.Math,
-  FMX.Platform;
+  FMX.Platform, FMX.Graphics;
 
 type
   TFCadContasReceber = class(TFCadModelo)

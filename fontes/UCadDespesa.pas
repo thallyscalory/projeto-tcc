@@ -76,7 +76,8 @@ implementation
 
 {$R *.fmx}
 {$IFDEF ANDROID}
-uses UAuxiliar, UDM, UPrincipal, FGX.Toasts, FGX.Graphics;
+uses UAuxiliar, UDM, UPrincipal;
+//FGX.Toasts, FGX.Graphics;
 {$ENDIF}
 {$IFDEF MSWINDOWS}
 uses UAuxiliar, UDM, UPrincipal;
@@ -261,7 +262,7 @@ begin
 
   {$IFDEF ANDROID}
   if (crud = 'inserir') or (crud = 'editar') then
-    TfgToast.Show('Processo cancelado!');
+    //TfgToast.Show('Processo cancelado!');
   {$ENDIF}
 end;
 
@@ -304,7 +305,7 @@ begin
         MudarAbaModelo(TbItemListagem, Sender);
 
         {$IFDEF ANDROID}
-        TfgToast.Show('Nova despesa cadastrada com sucesso!');
+        //TfgToast.Show('Nova despesa cadastrada com sucesso!');
         {$ENDIF}
       end
       else if crud = 'editar' then
@@ -334,7 +335,7 @@ begin
         MudarAbaModelo(TbItemListagem, Sender);
 
         {$IFDEF ANDROID}
-        TfgToast.Show('Cadastro alterado com sucesso!');
+        //TfgToast.Show('Cadastro alterado com sucesso!');
         {$ENDIF}
       end;
     end;
