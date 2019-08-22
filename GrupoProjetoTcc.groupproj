@@ -9,9 +9,6 @@
         <Projects Include="server\SrvProjetoTcc.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="teste conexao\TesteConexao.dproj">
-            <Dependencies/>
-        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -38,23 +35,14 @@
     <Target Name="SrvProjetoTcc:Make">
         <MSBuild Projects="server\SrvProjetoTcc.dproj" Targets="Make"/>
     </Target>
-    <Target Name="TesteConexao">
-        <MSBuild Projects="teste conexao\TesteConexao.dproj"/>
-    </Target>
-    <Target Name="TesteConexao:Clean">
-        <MSBuild Projects="teste conexao\TesteConexao.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="TesteConexao:Make">
-        <MSBuild Projects="teste conexao\TesteConexao.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Tcc;SrvProjetoTcc;TesteConexao"/>
+        <CallTarget Targets="Tcc;SrvProjetoTcc"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Tcc:Clean;SrvProjetoTcc:Clean;TesteConexao:Clean"/>
+        <CallTarget Targets="Tcc:Clean;SrvProjetoTcc:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Tcc:Make;SrvProjetoTcc:Make;TesteConexao:Make"/>
+        <CallTarget Targets="Tcc:Make;SrvProjetoTcc:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

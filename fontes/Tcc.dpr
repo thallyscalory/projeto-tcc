@@ -39,7 +39,6 @@ begin
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TFSplash, FSplash);
   Application.CreateForm(TFPrincipal, FPrincipal);
-  Application.CreateForm(TFFuncionario, FFuncionario);
   Application.CreateForm(TCM, CM);
   Application.Run;
 end.

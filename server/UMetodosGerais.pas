@@ -4,10 +4,11 @@ interface
 
 uses System.SysUtils, System.Classes, System.Json,
     DataSnap.DSProviderDataModuleAdapter,
-    Datasnap.DSServer, Datasnap.DSAuth;
+    Datasnap.DSServer, Datasnap.DSAuth, FireDAC.Stan.StorageBin;
 
 type
   TSrvMetodosGerais = class(TDSServerModule)
+    FDStanStorageBinLink1: TFDStanStorageBinLink;
   private
     { Private declarations }
   public

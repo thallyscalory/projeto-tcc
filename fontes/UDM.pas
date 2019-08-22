@@ -566,6 +566,18 @@ type
     FDQConsAvistaFormaPagreceber: TStringField;
     FDQFormaPagCaixapagar: TStringField;
     FDQFormaPagCaixareceber: TStringField;
+    FDQConsAtendentevendedor: TStringField;
+    FDQConsAtendentestatus: TStringField;
+    FDQConsAtendentenivelAcesso: TStringField;
+    FDQFuncionario: TFDQuery;
+    FDQFuncionarioid_funcionario: TFDAutoIncField;
+    FDQFuncionarionome_funcionario: TStringField;
+    FDQFuncionariocpf: TStringField;
+    FDQFuncionariousuario: TStringField;
+    FDQFuncionariosenha: TStringField;
+    FDQFuncionariovendedor: TStringField;
+    FDQFuncionariostatus: TStringField;
+    FDQFuncionarionivelAcesso: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

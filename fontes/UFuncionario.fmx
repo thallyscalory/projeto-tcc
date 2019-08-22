@@ -31,7 +31,6 @@ inherited FFuncionario: TFFuncionario
     Top = 392
     object ShowShareSheetAction1: TShowShareSheetAction
       Category = 'Media Library'
-      OnBeforeExecute = ShowShareSheetAction1BeforeExecute
     end
   end
   inherited ImageList1: TImageList

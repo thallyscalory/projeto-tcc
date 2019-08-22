@@ -9,7 +9,8 @@ uses
   FMX.ListBox, FMX.StdCtrls, FMX.Layouts, FMX.Controls.Presentation,
   FMX.Effects,
   FMX.TabControl, System.Actions, FMX.ActnList, // ksTypes, ksLoadingIndicator,
-  FMX.VirtualKeyboard, System.Math, FMX.Platform, FMX.MultiView;
+  FMX.VirtualKeyboard, System.Math, FMX.Platform, FMX.MultiView,
+  FireDAC.Stan.StorageBin, FMX.Ani, FMX.Edit;
 
 type
   TFPrincipal = class(TForm)
@@ -68,7 +69,7 @@ type
     Label2: TLabel;
     SpdBtnAlteraAtalhos: TSpeedButton;
     TabItemAlteraAtalho: TTabItem;
-    TabItemConfig: TTabItem;
+    TbItemConfig: TTabItem;
     LytAlteraAtalho: TLayout;
     VertScrollBoxTelaAlteraAtalho: TVertScrollBox;
     LytAlteraAtalhoVenda: TLayout;
@@ -177,6 +178,25 @@ type
     RoundRectAtalhoContasPagar: TRoundRect;
     VertScrollBox2: TVertScrollBox;
     Layout5: TLayout;
+    FDStanStorageBinLink1: TFDStanStorageBinLink;
+    TbItemLogin: TTabItem;
+    Layout6: TLayout;
+    Rectangle1: TRectangle;
+    Image1: TImage;
+    LytUsuarioLogin: TLayout;
+    Label17: TLabel;
+    StyleBook1: TStyleBook;
+    EdtUsuarioLogin: TEdit;
+    LytSenhaLogin: TLayout;
+    Label18: TLabel;
+    EdtSenhaLogin: TEdit;
+    ClearEditButton1: TClearEditButton;
+    ClearEditButton2: TClearEditButton;
+    LytBotoesLogin: TLayout;
+    RoundRect1: TRoundRect;
+    RoundRect2: TRoundRect;
+    SpdBtnEntrarLogin: TSpeedButton;
+    SpdBtnCancelarLogin: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure ImgMenuVendaClick(Sender: TObject);
     procedure SpdBInfoClick(Sender: TObject);
@@ -234,6 +254,10 @@ type
     procedure SpdBtnMenuCaixaClick(Sender: TObject);
     procedure ImgMenuCaixaClick(Sender: TObject);
     procedure RoundRectAtalhoFuncionarioClick(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure SpdBtnEntrarLoginClick(Sender: TObject);
+    procedure SpdBtnCancelarLoginClick(Sender: TObject);
+    procedure EdtUsuarioLoginTyping(Sender: TObject);
   private
     { Private declarations }
     FActiveForm: TForm;
@@ -253,6 +277,7 @@ var
 implementation
 
 {$R *.fmx}
+{$R *.SmXhdpiPh.fmx ANDROID}
 
 uses UDM, UVenda, UCadCli, UConsultaProduto, UInfo, UVenda1, UCadContasReceber,
   UAuxiliar, UCadFornecedor, UCadContasPagar, UAgenda, UCadDespesa,
@@ -352,6 +377,11 @@ begin
   end;
 end;
 
+procedure TFPrincipal.EdtUsuarioLoginTyping(Sender: TObject);
+begin
+  EdtUsuarioLogin.Text := UpperCase(EdtUsuarioLogin.Text);
+end;
+
 procedure TFPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   if Assigned(FVenda1) then
@@ -388,7 +418,7 @@ end;
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
-  TbControlPrincipal.ActiveTab := TbItemMenu;
+  TbControlPrincipal.ActiveTab := TbItemLogin;
   TbControlPrincipal.TabPosition := TTabPosition.None;
 
   ConfigAtalho;
@@ -435,9 +465,41 @@ begin
                 end;
             end;
           end);
+      end
+      else if TbControlPrincipal.ActiveTab = TbItemLogin then
+      begin
+        MessageDlg('Deseja encerrar o aplicativo?',
+          System.UITypes.TMsgDlgType.mtInformation,
+          [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], 0,
+          procedure(const AResult: System.UITypes.TModalResult)
+          begin
+            case AResult of
+              mrYES:
+                begin
+                  // caso sim
+                  Close;
+                end;
+              mrNo:
+                begin
+                  // caso não
+                end;
+            end;
+          end);
+      end
+      else if TbControlPrincipal.ActiveTab = TabItemAlteraAtalho then
+      begin
+        SpdBtnVoltarAlteraAtalhoClick(Sender);
       end;
     end;
   end;
+end;
+
+procedure TFPrincipal.FormResize(Sender: TObject);
+var
+  tamTela: TSize;
+begin
+  tamTela := Screen.Size;
+  Image1.Height := tamTela.cy * 0.33;
 end;
 
 procedure TFPrincipal.FormVirtualKeyboardHidden(Sender: TObject;
@@ -744,7 +806,7 @@ end;
 
 procedure TFPrincipal.RoundRectAtalhoFuncionarioClick(Sender: TObject);
 begin
-Application.CreateForm(TFFuncionario, FFuncionario);
+  Application.CreateForm(TFFuncionario, FFuncionario);
   if not Assigned(FFuncionario) then
     FFuncionario := TFFuncionario.Create(nil);
   FFuncionario.ShowModal(
@@ -917,6 +979,27 @@ begin
   finally
     DM.FDQConsAtalhos.Active := False;
   end;
+end;
+
+procedure TFPrincipal.SpdBtnCancelarLoginClick(Sender: TObject);
+begin
+  MessageDlg('Deseja encerrar o aplicativo?',
+    System.UITypes.TMsgDlgType.mtInformation, [System.UITypes.TMsgDlgBtn.mbYes,
+    System.UITypes.TMsgDlgBtn.mbNo], 0,
+    procedure(const AResult: System.UITypes.TModalResult)
+    begin
+      case AResult of
+        mrYES:
+          begin
+            // caso sim
+            Close;
+          end;
+        mrNo:
+          begin
+            // caso não
+          end;
+      end;
+    end);
 end;
 
 procedure TFPrincipal.SpdBtnConfirmaAlteraAtalhoClick(Sender: TObject);
@@ -1154,6 +1237,27 @@ begin
     DM.FDQEditAtalhos.Active := False;
   end;
 
+end;
+
+procedure TFPrincipal.SpdBtnEntrarLoginClick(Sender: TObject);
+begin
+  DM.FDQFuncionario.SQL.Clear;
+  DM.FDQFuncionario.Close;
+  DM.FDQFuncionario.Open('select * from funcionario where usuario = ' +
+    QuotedStr(EdtUsuarioLogin.Text) + ' and senha = ' +
+    QuotedStr(EdtSenhaLogin.Text) + ' and status = ' + QuotedStr('A'));
+
+  if DM.FDQFuncionario.IsEmpty then
+  begin
+{$IFDEF ANDROID}
+    TfgToast.Show('Usuario ou Senha Inválido!');
+{$ENDIF}
+{$IFDEF MSWINDOWS}
+    ShowMessage('Usuario ou Senha Inválido!');
+{$ENDIF}
+  end
+  else
+    MudarAba(TbItemMenu, Sender);
 end;
 
 procedure TFPrincipal.SpdBtnMenuAgendaClick(Sender: TObject);

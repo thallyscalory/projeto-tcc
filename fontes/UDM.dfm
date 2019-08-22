@@ -1027,6 +1027,24 @@ object DM: TDM
       Required = True
       Size = 15
     end
+    object FDQConsAtendentevendedor: TStringField
+      FieldName = 'vendedor'
+      Origin = 'vendedor'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsAtendentestatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsAtendentenivelAcesso: TStringField
+      FieldName = 'nivelAcesso'
+      Origin = 'nivelAcesso'
+      FixedChar = True
+      Size = 1
+    end
   end
   object FDQCadPedido: TFDQuery
     Connection = FDConnection1
@@ -3544,6 +3562,60 @@ object DM: TDM
     object FDQContaPagarItemCaixaidCaixa: TIntegerField
       FieldName = 'idCaixa'
       Origin = 'idCaixa'
+    end
+  end
+  object FDQFuncionario: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from funcionario')
+    Left = 688
+    Top = 88
+    object FDQFuncionarioid_funcionario: TFDAutoIncField
+      FieldName = 'id_funcionario'
+      Origin = 'id_funcionario'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQFuncionarionome_funcionario: TStringField
+      FieldName = 'nome_funcionario'
+      Origin = 'nome_funcionario'
+      Required = True
+      Size = 60
+    end
+    object FDQFuncionariocpf: TStringField
+      FieldName = 'cpf'
+      Origin = 'cpf'
+      Size = 14
+    end
+    object FDQFuncionariousuario: TStringField
+      FieldName = 'usuario'
+      Origin = 'usuario'
+      Required = True
+      Size = 10
+    end
+    object FDQFuncionariosenha: TStringField
+      FieldName = 'senha'
+      Origin = 'senha'
+      Required = True
+      Size = 60
+    end
+    object FDQFuncionariovendedor: TStringField
+      FieldName = 'vendedor'
+      Origin = 'vendedor'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQFuncionariostatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQFuncionarionivelAcesso: TStringField
+      FieldName = 'nivelAcesso'
+      Origin = 'nivelAcesso'
+      FixedChar = True
+      Size = 1
     end
   end
 end
