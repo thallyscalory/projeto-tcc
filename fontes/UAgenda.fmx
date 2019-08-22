@@ -84,7 +84,7 @@ object FAgenda: TFAgenda
           Text = 'De:'
         end
         object DateEdtFiltroVencInicialContasReceber: TDateEdit
-          Date = 43614.000000000000000000
+          Date = 43693.000000000000000000
           TodayDefault = True
           OnClosePicker = DateEdtFiltroVencInicialContasReceberClosePicker
           Align = Left
@@ -111,7 +111,7 @@ object FAgenda: TFAgenda
           Text = 'A:'
         end
         object DateEdtFiltroVencFinalContasReceber: TDateEdit
-          Date = 43614.000000000000000000
+          Date = 43693.000000000000000000
           TodayDefault = True
           OnClosePicker = DateEdtFiltroVencFinalContasReceberClosePicker
           Align = Left
@@ -215,6 +215,7 @@ object FAgenda: TFAgenda
       object Memo1: TMemo
         Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
         DataDetectorTypes = []
+        KeyboardType = Alphabet
         Align = Top
         Position.Y = 87.000000000000000000
         Size.Width = 330.000000000000000000
@@ -286,7 +287,7 @@ object FAgenda: TFAgenda
         Size.PlatformDefault = False
         TabOrder = 3
         object DateEdit1: TDateEdit
-          Date = 43614.000000000000000000
+          Date = 43693.000000000000000000
           TodayDefault = True
           Align = Left
           Margins.Left = 5.000000000000000000

@@ -3,14 +3,12 @@ inherited FCadFornecedor: TFCadFornecedor
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
-      TabIndex = 0
       Sizes = (
         330s
         431s
         330s
         431s)
       inherited TbItemListagem: TTabItem
-        IsSelected = True
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         inherited ToolBarsuperior: TToolBar
@@ -45,6 +43,7 @@ inherited FCadFornecedor: TFCadFornecedor
             Align = Top
             StyleLookup = 'searchedit'
             TabOrder = 0
+            KeyboardType = Alphabet
             ReturnKeyType = Done
             Position.X = 4.000000000000000000
             Margins.Left = 4.000000000000000000
@@ -116,7 +115,6 @@ inherited FCadFornecedor: TFCadFornecedor
         end
       end
       inherited TbItemedicao: TTabItem
-        IsSelected = False
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object ToolBar1: TToolBar
@@ -205,6 +203,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 60
                 Margins.Left = 4.000000000000000000
@@ -333,6 +332,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 20
                 Margins.Left = 4.000000000000000000
@@ -379,6 +379,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 30
                 Margins.Left = 4.000000000000000000
@@ -472,6 +473,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 50
                 Margins.Left = 4.000000000000000000
@@ -518,6 +520,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 10
                 Margins.Left = 4.000000000000000000
@@ -564,6 +567,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 30
                 Margins.Left = 4.000000000000000000
@@ -610,6 +614,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 50
                 Margins.Left = 4.000000000000000000
@@ -703,6 +708,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 30
                 Margins.Left = 4.000000000000000000
@@ -749,6 +755,7 @@ inherited FCadFornecedor: TFCadFornecedor
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 2
                 Margins.Left = 4.000000000000000000
@@ -891,6 +898,7 @@ inherited FCadFornecedor: TFCadFornecedor
               object MemoObsForn: TMemo
                 Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
                 DataDetectorTypes = []
+                KeyboardType = Alphabet
                 Align = Client
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 8.000000000000000000

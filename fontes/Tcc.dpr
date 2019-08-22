@@ -18,7 +18,17 @@ uses
   UCadContasPagar in 'UCadContasPagar.pas' {FCadContasPagar},
   UAgenda in 'UAgenda.pas' {FAgenda},
   UCadDespesa in 'UCadDespesa.pas' {FCadDespesa},
-  UCadTipoReceita in 'UCadTipoReceita.pas' {FCadTipoReceita};
+  UCadTipoReceita in 'UCadTipoReceita.pas' {FCadTipoReceita},
+  Androidapi.JNI.Toasts in 'Library\Androidapi.JNI.Toasts.pas',
+  FGX.Asserts in 'Library\FGX.Asserts.pas',
+  FGX.Consts in 'Library\FGX.Consts.pas',
+  FGX.Graphics in 'Library\FGX.Graphics.pas',
+  FGX.Helpers.Android in 'Library\FGX.Helpers.Android.pas',
+  FGX.Helpers in 'Library\FGX.Helpers.pas',
+  FGX.Toasts.Android in 'Library\FGX.Toasts.Android.pas',
+  FGX.Toasts in 'Library\FGX.Toasts.pas',
+  UCaixa in 'UCaixa.pas' {FCaixa},
+  UFuncionario in 'UFuncionario.pas' {FFuncionario};
 
 {$R *.res}
 
@@ -27,5 +37,6 @@ begin
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TFSplash, FSplash);
   Application.CreateForm(TFPrincipal, FPrincipal);
+  Application.CreateForm(TFFuncionario, FFuncionario);
   Application.Run;
 end.

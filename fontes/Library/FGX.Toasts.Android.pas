@@ -11,15 +11,18 @@
 
 unit FGX.Toasts.Android;
 
+{$IFDEF ANDROID}
+
 interface
 
 uses
-  FGX.Toasts, AndroidApi.JNI.Toasts, AndroidApi.JNI.GraphicsContentViewText, AndroidApi.JNI.Widget,
+  FGX.Toasts, AndroidApi.JNI.Toasts, AndroidApi.JNI.GraphicsContentViewText,
+  AndroidApi.JNI.Widget,
   System.UITypes;
 
 type
 
-{ TfgAndroidToast }
+  { TfgAndroidToast }
 
   TfgAndroidToast = class(TfgToast)
   private
@@ -39,17 +42,19 @@ type
     procedure CreateCustomView;
     procedure RemoveCustomView;
   public
-    constructor Create(const AMessage: string; const ADuration: TfgToastDuration);
+    constructor Create(const AMessage: string;
+      const ADuration: TfgToastDuration);
     destructor Destroy; override;
     property Toast: JToast read FToast;
   end;
 
-{ TfgAndroidToastService }
+  { TfgAndroidToastService }
 
   TfgAndroidToastService = class(TInterfacedObject, IFGXToastService)
   public
     { IFGXToastService }
-    function CreateToast(const AMessage: string; const ADuration: TfgToastDuration): TfgToast;
+    function CreateToast(const AMessage: string;
+      const ADuration: TfgToastDuration): TfgToast;
     procedure Show(const AToast: TfgToast);
     procedure Cancel(const AToast: TfgToast);
   end;
@@ -65,13 +70,16 @@ procedure UnregisterService;
 implementation
 
 uses
-  System.SysUtils, System.Types, System.IOUtils, Androidapi.Helpers, Androidapi.JNIBridge,
-  Androidapi.JNI.JavaTypes, FMX.Platform, FMX.Helpers.Android, FMX.Graphics, FMX.Surfaces, FMX.Types, FGX.Helpers.Android, FGX.Graphics,
+  System.SysUtils, System.Types, System.IOUtils, AndroidApi.Helpers,
+  AndroidApi.JNIBridge,
+  AndroidApi.JNI.JavaTypes, FMX.Platform, FMX.Helpers.Android, FMX.Graphics,
+  FMX.Surfaces, FMX.Types, FGX.Helpers.Android, FGX.Graphics,
   FGX.Asserts;
 
 procedure RegisterService;
 begin
-  TPlatformServices.Current.AddPlatformService(IFGXToastService, TfgAndroidToastService.Create);
+  TPlatformServices.Current.AddPlatformService(IFGXToastService,
+    TfgAndroidToastService.Create);
 end;
 
 procedure UnregisterService;
@@ -81,14 +89,17 @@ end;
 
 { TfgAndroidToast }
 
-constructor TfgAndroidToast.Create(const AMessage: string; const ADuration: TfgToastDuration);
+constructor TfgAndroidToast.Create(const AMessage: string;
+  const ADuration: TfgToastDuration);
 begin
   Assert(AMessage <> '');
 
   inherited Create;
-  CallInUIThreadAndWaitFinishing(procedure
+  CallInUIThreadAndWaitFinishing(
+    procedure
     begin
-      FToast := TJToast.JavaClass.makeText(TAndroidHelper.Context, StrToJCharSequence(AMessage), ADuration.ToJDuration);
+      FToast := TJToast.JavaClass.makeText(TAndroidHelper.Context,
+        StrToJCharSequence(AMessage), ADuration.ToJDuration);
     end);
   Message := AMessage;
   Duration := ADuration;
@@ -101,18 +112,22 @@ const
 var
   Layout: JLinearLayout;
   DestBitmap: JBitmap;
-  Params : JViewGroup_LayoutParams;
+  Params: JViewGroup_LayoutParams;
 begin
   RemoveCustomView;
 
   { Background }
   Layout := TJLinearLayout.JavaClass.init(TAndroidHelper.Context);
   Layout.setOrientation(TJLinearLayout.JavaClass.HORIZONTAL);
-  Layout.setPadding(Round(TfgToast.DefaultPadding.Left), Round(TfgToast.DefaultPadding.Top),
-                    Round(TfgToast.DefaultPadding.Right), Round(TfgToast.DefaultPadding.Bottom));
+  Layout.setPadding(Round(TfgToast.DefaultPadding.Left),
+    Round(TfgToast.DefaultPadding.Top), Round(TfgToast.DefaultPadding.Right),
+    Round(TfgToast.DefaultPadding.Bottom));
   Layout.setGravity(CENTER_VERTICAL);
-  Layout.setBackgroundColor(AlphaColorToJColor(TfgToast.DefaultBackgroundColor));
-  Params := TJViewGroup_LayoutParams.JavaClass.init(TJViewGroup_LayoutParams.JavaClass.WRAP_CONTENT, TJViewGroup_LayoutParams.JavaClass.WRAP_CONTENT);
+  Layout.setBackgroundColor
+    (AlphaColorToJColor(TfgToast.DefaultBackgroundColor));
+  Params := TJViewGroup_LayoutParams.JavaClass.init
+    (TJViewGroup_LayoutParams.JavaClass.WRAP_CONTENT,
+    TJViewGroup_LayoutParams.JavaClass.WRAP_CONTENT);
   Layout.setLayoutParams(Params);
   FBackgroundView := Layout;
 
@@ -123,7 +138,9 @@ begin
     FIconView := TJImageView.JavaClass.init(TAndroidHelper.Context);
     FIconView.setImageBitmap(DestBitmap);
     FIconView.setPadding(0, 0, IMAGE_MARGIN_RIGHT, 0);
-    Params := TJViewGroup_LayoutParams.JavaClass.init(TJViewGroup_LayoutParams.JavaClass.WRAP_CONTENT, TJViewGroup_LayoutParams.JavaClass.WRAP_CONTENT);
+    Params := TJViewGroup_LayoutParams.JavaClass.init
+      (TJViewGroup_LayoutParams.JavaClass.WRAP_CONTENT,
+      TJViewGroup_LayoutParams.JavaClass.WRAP_CONTENT);
     FIconView.setLayoutParams(Params);
     Layout.addView(FIconView, Params);
   end;
@@ -132,7 +149,9 @@ begin
   FMessageView := TJTextView.JavaClass.init(TAndroidHelper.Context);
   FMessageView.setText(StrToJCharSequence(Message));
   FMessageView.setTextColor(AlphaColorToJColor(MessageColor));
-  Params := TJViewGroup_LayoutParams.JavaClass.init(TJViewGroup_LayoutParams.JavaClass.WRAP_CONTENT, TJViewGroup_LayoutParams.JavaClass.WRAP_CONTENT);
+  Params := TJViewGroup_LayoutParams.JavaClass.init
+    (TJViewGroup_LayoutParams.JavaClass.WRAP_CONTENT,
+    TJViewGroup_LayoutParams.JavaClass.WRAP_CONTENT);
   FMessageView.setLayoutParams(Params);
   Layout.addView(FMessageView);
 
@@ -167,7 +186,8 @@ begin
   TfgAssert.IsNotNil(FToast);
 
   inherited;
-  CallInUIThreadAndWaitFinishing(procedure
+  CallInUIThreadAndWaitFinishing(
+    procedure
     begin
       FToast.setDuration(Duration.ToJDuration);
     end);
@@ -195,7 +215,8 @@ begin
   TfgAssert.IsNotNil(FToast);
 
   inherited;
-  CallInUIThreadAndWaitFinishing(procedure
+  CallInUIThreadAndWaitFinishing(
+    procedure
     begin
       FToast.setText(StrToJCharSequence(Message));
       if FMessageView <> nil then
@@ -239,13 +260,15 @@ begin
   TfgAssert.IsNotNil(AToast);
   TfgAssert.IsClass(AToast, TfgAndroidToast);
 
-  CallInUIThreadAndWaitFinishing(procedure
+  CallInUIThreadAndWaitFinishing(
+    procedure
     begin
-      TfgAndroidToast(AToast).Toast.cancel;
+      TfgAndroidToast(AToast).Toast.Cancel;
     end);
 end;
 
-function TfgAndroidToastService.CreateToast(const AMessage: string; const ADuration: TfgToastDuration): TfgToast;
+function TfgAndroidToastService.CreateToast(const AMessage: string;
+const ADuration: TfgToastDuration): TfgToast;
 begin
   Result := TfgAndroidToast.Create(AMessage, ADuration);
 end;
@@ -255,9 +278,10 @@ begin
   TfgAssert.IsNotNil(AToast);
   TfgAssert.IsClass(AToast, TfgAndroidToast);
 
-  CallInUIThreadAndWaitFinishing(procedure
+  CallInUIThreadAndWaitFinishing(
+    procedure
     begin
-      TfgAndroidToast(AToast).Toast.show;
+      TfgAndroidToast(AToast).Toast.Show;
     end);
 end;
 
@@ -266,11 +290,22 @@ end;
 function TfgToastDurationHelper.ToJDuration: Integer;
 begin
   case Self of
-    TfgToastDuration.Short: Result := TJToast.JavaClass.LENGTH_SHORT;
-    TfgToastDuration.Long: Result := TJToast.JavaClass.LENGTH_LONG;
+    TfgToastDuration.Short:
+      Result := TJToast.JavaClass.LENGTH_SHORT;
+    TfgToastDuration.Long:
+      Result := TJToast.JavaClass.LENGTH_LONG;
   else
     raise Exception.Create('Unknown value of [FGX.Toasts.TfgToastDuration])');
   end;
 end;
 
 end.
+{$ENDIF}
+
+{$IFDEF MSWINDOWS}
+  interface
+
+implementation
+
+end.
+{$ENDIF}

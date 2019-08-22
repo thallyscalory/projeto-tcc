@@ -2,7 +2,7 @@ object DM: TDM
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   Height = 528
-  Width = 1816
+  Width = 2202
   object FDConnection1: TFDConnection
     Params.Strings = (
       'Database=C:\projeto tcc\bd\calorytcc.s3db'
@@ -619,6 +619,7 @@ object DM: TDM
         DataType = ftString
         ParamType = ptInput
         Size = 1
+        Value = Null
       end
       item
         Name = 'PSTATUSPEDCOND'
@@ -769,6 +770,7 @@ object DM: TDM
         DataType = ftString
         ParamType = ptInput
         Size = 20
+        Value = Null
       end
       item
         Name = 'PDESCRICAOFORMAPAG'
@@ -822,6 +824,24 @@ object DM: TDM
       FieldName = 'dataCad'
       Origin = 'dataCad'
     end
+    object FDQConsFormaPagentraCaixa: TStringField
+      FieldName = 'entraCaixa'
+      Origin = 'entraCaixa'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsFormaPagpagar: TStringField
+      FieldName = 'pagar'
+      Origin = 'pagar'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsFormaPagreceber: TStringField
+      FieldName = 'receber'
+      Origin = 'receber'
+      FixedChar = True
+      Size = 1
+    end
   end
   object FDQCadFormaPag: TFDQuery
     Connection = FDConnection1
@@ -856,6 +876,34 @@ object DM: TDM
     object FDQCadFormaPagcondicional_forma_pag: TStringField
       FieldName = 'condicional_forma_pag'
       Origin = 'condicional_forma_pag'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQCadFormaPagstatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQCadFormaPagdataCad: TDateTimeField
+      FieldName = 'dataCad'
+      Origin = 'dataCad'
+    end
+    object FDQCadFormaPagentraCaixa: TStringField
+      FieldName = 'entraCaixa'
+      Origin = 'entraCaixa'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQCadFormaPagpagar: TStringField
+      FieldName = 'pagar'
+      Origin = 'pagar'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQCadFormaPagreceber: TStringField
+      FieldName = 'receber'
+      Origin = 'receber'
       FixedChar = True
       Size = 1
     end
@@ -1040,6 +1088,10 @@ object DM: TDM
       FixedChar = True
       Size = 1
     end
+    object FDQCadPedidoidCaixa: TIntegerField
+      FieldName = 'idCaixa'
+      Origin = 'idCaixa'
+    end
   end
   object FDQConsItemPedido: TFDQuery
     Connection = FDConnection1
@@ -1207,6 +1259,10 @@ object DM: TDM
       FieldName = 'id_atendente_item'
       Origin = 'id_atendente_item'
     end
+    object FDQCadItemPedidoidCaixa: TIntegerField
+      FieldName = 'idCaixa'
+      Origin = 'idCaixa'
+    end
   end
   object FDQMaxIdItemPedido: TFDQuery
     Connection = FDConnection1
@@ -1246,6 +1302,7 @@ object DM: TDM
         DataType = ftString
         ParamType = ptInput
         Size = 60
+        Value = Null
       end
       item
         Name = 'PDATAVENCINICIO'
@@ -1336,6 +1393,10 @@ object DM: TDM
       Required = True
       FixedChar = True
       Size = 1
+    end
+    object FDQConsContasReceberidCaixa: TIntegerField
+      FieldName = 'idCaixa'
+      Origin = 'idCaixa'
     end
     object FDQConsContasReceberid_cli: TIntegerField
       AutoGenerateValue = arDefault
@@ -1589,6 +1650,10 @@ object DM: TDM
       FixedChar = True
       Size = 1
     end
+    object FDQCadContasReceberidCaixa: TIntegerField
+      FieldName = 'idCaixa'
+      Origin = 'idCaixa'
+    end
   end
   object FDQCadBaixaContasReceber: TFDQuery
     Connection = FDConnection1
@@ -1624,6 +1689,10 @@ object DM: TDM
       Origin = 'id_forma_pag'
       Required = True
     end
+    object FDQCadBaixaContasReceberidcaixa: TIntegerField
+      FieldName = 'idcaixa'
+      Origin = 'idcaixa'
+    end
   end
   object FDQMaxIdBaixaContaReceber: TFDQuery
     Connection = FDConnection1
@@ -1643,8 +1712,8 @@ object DM: TDM
     Connection = FDConnection1
     SQL.Strings = (
       
-        'select * from forma_pag where (geraconta_forma_pag = '#39'S'#39' and avi' +
-        'sta_forma_pag = '#39'S'#39') and status = '#39'A'#39';')
+        'select * from forma_pag where geraconta_forma_pag = '#39'S'#39' and avis' +
+        'ta_forma_pag = '#39'S'#39' and status = '#39'A'#39';')
     Left = 584
     Top = 216
     object FDQConsAvistaFormaPagid_forma_pag: TIntegerField
@@ -1687,6 +1756,24 @@ object DM: TDM
       FieldName = 'dataCad'
       Origin = 'dataCad'
     end
+    object FDQConsAvistaFormaPagentraCaixa: TStringField
+      FieldName = 'entraCaixa'
+      Origin = 'entraCaixa'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsAvistaFormaPagpagar: TStringField
+      FieldName = 'pagar'
+      Origin = 'pagar'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQConsAvistaFormaPagreceber: TStringField
+      FieldName = 'receber'
+      Origin = 'receber'
+      FixedChar = True
+      Size = 1
+    end
   end
   object FDQConsContasReceberBaixa: TFDQuery
     Connection = FDConnection1
@@ -1700,6 +1787,7 @@ object DM: TDM
         DataType = ftString
         ParamType = ptInput
         Size = 30
+        Value = Null
       end>
     object FDQConsContasReceberBaixaid: TFDAutoIncField
       FieldName = 'id'
@@ -1772,6 +1860,10 @@ object DM: TDM
       Required = True
       FixedChar = True
       Size = 1
+    end
+    object FDQConsContasReceberBaixaidCaixa: TIntegerField
+      FieldName = 'idCaixa'
+      Origin = 'idCaixa'
     end
   end
   object FDQConsFornecedor: TFDQuery
@@ -2015,6 +2107,7 @@ object DM: TDM
         DataType = ftString
         ParamType = ptInput
         Size = 40
+        Value = Null
       end
       item
         Name = 'PDATAVENCINICIO'
@@ -2103,6 +2196,10 @@ object DM: TDM
       Origin = 'quitado'
       FixedChar = True
       Size = 1
+    end
+    object FDQConsContaPagaridCaixa: TIntegerField
+      FieldName = 'idCaixa'
+      Origin = 'idCaixa'
     end
     object FDQConsContaPagarid_1: TIntegerField
       AutoGenerateValue = arDefault
@@ -2325,13 +2422,17 @@ object DM: TDM
       FixedChar = True
       Size = 1
     end
+    object FDQCadContaPagaridCaixa: TIntegerField
+      FieldName = 'idCaixa'
+      Origin = 'idCaixa'
+    end
   end
   object FDQMaxIdAgenda: TFDQuery
     Connection = FDConnection1
     SQL.Strings = (
       'select max(id) from agendamento')
-    Left = 1718
-    Top = 104
+    Left = 1726
+    Top = 88
     object FDQMaxIdAgendamaxid: TLargeintField
       AutoGenerateValue = arDefault
       FieldName = 'max(id)'
@@ -2621,7 +2722,7 @@ object DM: TDM
     Connection = FDConnection1
     SQL.Strings = (
       'select * from tipo_despesa')
-    Left = 1710
+    Left = 1726
     Top = 176
     object FDQCadDespesasid: TFDAutoIncField
       FieldName = 'id'
@@ -2766,6 +2867,7 @@ object DM: TDM
         DataType = ftString
         ParamType = ptInput
         Size = 30
+        Value = Null
       end>
     object FDQDespesaEditContaPagarid: TFDAutoIncField
       FieldName = 'id'
@@ -2792,6 +2894,7 @@ object DM: TDM
         DataType = ftString
         ParamType = ptInput
         Size = 30
+        Value = Null
       end>
     object FDQConsContasPagarBaixaid: TFDAutoIncField
       FieldName = 'id'
@@ -2863,6 +2966,10 @@ object DM: TDM
       FixedChar = True
       Size = 1
     end
+    object FDQConsContasPagarBaixaidCaixa: TIntegerField
+      FieldName = 'idCaixa'
+      Origin = 'idCaixa'
+    end
   end
   object FDQCadBaixaContaPagar: TFDQuery
     Connection = FDConnection1
@@ -2897,6 +3004,10 @@ object DM: TDM
       FieldName = 'id_forma_pag'
       Origin = 'id_forma_pag'
       Required = True
+    end
+    object FDQCadBaixaContaPagaridCaixa: TIntegerField
+      FieldName = 'idCaixa'
+      Origin = 'idCaixa'
     end
   end
   object FDQMaxIdBaixaContaPagar: TFDQuery
@@ -2942,6 +3053,497 @@ object DM: TDM
     object FDQConsDespesaContaPagardataCad: TDateTimeField
       FieldName = 'dataCad'
       Origin = 'dataCad'
+    end
+  end
+  object FDQConsAtalhos: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from atalhos')
+    Left = 1840
+    Top = 24
+    object FDQConsAtalhosid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQConsAtalhosnome: TStringField
+      FieldName = 'nome'
+      Origin = 'nome'
+      Size = 50
+    end
+    object FDQConsAtalhostag: TIntegerField
+      FieldName = 'tag'
+      Origin = 'tag'
+    end
+    object FDQConsAtalhosativo: TStringField
+      FieldName = 'ativo'
+      Origin = 'ativo'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object FDQEditAtalhos: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from atalhos')
+    Left = 1848
+    Top = 96
+    object FDQEditAtalhosid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQEditAtalhosnome: TStringField
+      FieldName = 'nome'
+      Origin = 'nome'
+      Size = 50
+    end
+    object FDQEditAtalhostag: TIntegerField
+      FieldName = 'tag'
+      Origin = 'tag'
+    end
+    object FDQEditAtalhosativo: TStringField
+      FieldName = 'ativo'
+      Origin = 'ativo'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object FDQConsCaixa: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      
+        'select * from caixa where aberto like :PCaixaAberto order by dat' +
+        'aAbertura desc')
+    Left = 1968
+    Top = 24
+    ParamData = <
+      item
+        Name = 'PCAIXAABERTO'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 1
+        Value = ''
+      end>
+    object FDQConsCaixaid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQConsCaixadataAbertura: TDateTimeField
+      FieldName = 'dataAbertura'
+      Origin = 'dataAbertura'
+    end
+    object FDQConsCaixadataFechamento: TDateTimeField
+      FieldName = 'dataFechamento'
+      Origin = 'dataFechamento'
+    end
+    object FDQConsCaixavlAbertura: TFloatField
+      FieldName = 'vlAbertura'
+      Origin = 'vlAbertura'
+    end
+    object FDQConsCaixavlRecebimento: TFloatField
+      FieldName = 'vlRecebimento'
+      Origin = 'vlRecebimento'
+    end
+    object FDQConsCaixavlRetirada: TFloatField
+      FieldName = 'vlRetirada'
+      Origin = 'vlRetirada'
+    end
+    object FDQConsCaixavlSaldo: TFloatField
+      FieldName = 'vlSaldo'
+      Origin = 'vlSaldo'
+    end
+    object FDQConsCaixaidFuncionario: TIntegerField
+      FieldName = 'idFuncionario'
+      Origin = 'idFuncionario'
+    end
+    object FDQConsCaixaaberto: TStringField
+      FieldName = 'aberto'
+      Origin = 'aberto'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object FDQEditCaixa: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from caixa')
+    Left = 1968
+    Top = 96
+    object FDQEditCaixaid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQEditCaixadataAbertura: TDateTimeField
+      FieldName = 'dataAbertura'
+      Origin = 'dataAbertura'
+    end
+    object FDQEditCaixadataFechamento: TDateTimeField
+      FieldName = 'dataFechamento'
+      Origin = 'dataFechamento'
+    end
+    object FDQEditCaixavlAbertura: TFloatField
+      FieldName = 'vlAbertura'
+      Origin = 'vlAbertura'
+    end
+    object FDQEditCaixavlRecebimento: TFloatField
+      FieldName = 'vlRecebimento'
+      Origin = 'vlRecebimento'
+    end
+    object FDQEditCaixavlRetirada: TFloatField
+      FieldName = 'vlRetirada'
+      Origin = 'vlRetirada'
+    end
+    object FDQEditCaixavlSaldo: TFloatField
+      FieldName = 'vlSaldo'
+      Origin = 'vlSaldo'
+    end
+    object FDQEditCaixaidFuncionario: TIntegerField
+      FieldName = 'idFuncionario'
+      Origin = 'idFuncionario'
+    end
+    object FDQEditCaixaaberto: TStringField
+      FieldName = 'aberto'
+      Origin = 'aberto'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object FDQConsItemCaixa: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from itemCaixa where idCaixa = :PIdCaixa')
+    Left = 2104
+    Top = 24
+    ParamData = <
+      item
+        Name = 'PIDCAIXA'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 30
+        Value = Null
+      end>
+    object FDQConsItemCaixaid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQConsItemCaixaidCaixa: TIntegerField
+      FieldName = 'idCaixa'
+      Origin = 'idCaixa'
+    end
+    object FDQConsItemCaixadataLancamento: TDateTimeField
+      FieldName = 'dataLancamento'
+      Origin = 'dataLancamento'
+    end
+    object FDQConsItemCaixavlLancamento: TFloatField
+      FieldName = 'vlLancamento'
+      Origin = 'vlLancamento'
+    end
+    object FDQConsItemCaixadescricaoLancamento: TStringField
+      FieldName = 'descricaoLancamento'
+      Origin = 'descricaoLancamento'
+      Size = 60
+    end
+    object FDQConsItemCaixatipoLancamento: TStringField
+      FieldName = 'tipoLancamento'
+      Origin = 'tipoLancamento'
+      Size = 30
+    end
+  end
+  object FDQEditItemCaixa: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from itemCaixa')
+    Left = 2104
+    Top = 96
+    object FDQEditItemCaixaid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQEditItemCaixaidCaixa: TIntegerField
+      FieldName = 'idCaixa'
+      Origin = 'idCaixa'
+    end
+    object FDQEditItemCaixadataLancamento: TDateTimeField
+      FieldName = 'dataLancamento'
+      Origin = 'dataLancamento'
+    end
+    object FDQEditItemCaixavlLancamento: TFloatField
+      FieldName = 'vlLancamento'
+      Origin = 'vlLancamento'
+    end
+    object FDQEditItemCaixadescricaoLancamento: TStringField
+      FieldName = 'descricaoLancamento'
+      Origin = 'descricaoLancamento'
+      Size = 60
+    end
+    object FDQEditItemCaixatipoLancamento: TStringField
+      FieldName = 'tipoLancamento'
+      Origin = 'tipoLancamento'
+      Size = 30
+    end
+  end
+  object FDQFormaPagCaixa: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from forma_pag where id_forma_pag = :PFormaPagCaixa')
+    Left = 1968
+    Top = 168
+    ParamData = <
+      item
+        Name = 'PFORMAPAGCAIXA'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 20
+        Value = Null
+      end>
+    object FDQFormaPagCaixaid_forma_pag: TFDAutoIncField
+      FieldName = 'id_forma_pag'
+      Origin = 'id_forma_pag'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQFormaPagCaixadescricao_forma_pag: TStringField
+      FieldName = 'descricao_forma_pag'
+      Origin = 'descricao_forma_pag'
+      Required = True
+      Size = 30
+    end
+    object FDQFormaPagCaixageraconta_forma_pag: TStringField
+      FieldName = 'geraconta_forma_pag'
+      Origin = 'geraconta_forma_pag'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQFormaPagCaixaavista_forma_pag: TStringField
+      FieldName = 'avista_forma_pag'
+      Origin = 'avista_forma_pag'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQFormaPagCaixacondicional_forma_pag: TStringField
+      FieldName = 'condicional_forma_pag'
+      Origin = 'condicional_forma_pag'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQFormaPagCaixastatus: TStringField
+      FieldName = 'status'
+      Origin = 'status'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQFormaPagCaixadataCad: TDateTimeField
+      FieldName = 'dataCad'
+      Origin = 'dataCad'
+    end
+    object FDQFormaPagCaixaentraCaixa: TStringField
+      FieldName = 'entraCaixa'
+      Origin = 'entraCaixa'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQFormaPagCaixapagar: TStringField
+      FieldName = 'pagar'
+      Origin = 'pagar'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQFormaPagCaixareceber: TStringField
+      FieldName = 'receber'
+      Origin = 'receber'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object FDQContaReceberItemCaixa: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from conta_receber where id = :PIdContaReceber')
+    Left = 2104
+    Top = 168
+    ParamData = <
+      item
+        Name = 'PIDCONTARECEBER'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 20
+        Value = Null
+      end>
+    object FDQContaReceberItemCaixaid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQContaReceberItemCaixaid_pedido: TIntegerField
+      FieldName = 'id_pedido'
+      Origin = 'id_pedido'
+    end
+    object FDQContaReceberItemCaixaid_cliente: TIntegerField
+      FieldName = 'id_cliente'
+      Origin = 'id_cliente'
+      Required = True
+    end
+    object FDQContaReceberItemCaixaid_forma_pag: TIntegerField
+      FieldName = 'id_forma_pag'
+      Origin = 'id_forma_pag'
+    end
+    object FDQContaReceberItemCaixavalor_documento: TBCDField
+      FieldName = 'valor_documento'
+      Origin = 'valor_documento'
+      Required = True
+      Precision = 9
+      Size = 2
+    end
+    object FDQContaReceberItemCaixavalor_juro: TBCDField
+      FieldName = 'valor_juro'
+      Origin = 'valor_juro'
+      Precision = 9
+      Size = 2
+    end
+    object FDQContaReceberItemCaixavalor_desconto: TBCDField
+      FieldName = 'valor_desconto'
+      Origin = 'valor_desconto'
+      Precision = 9
+      Size = 2
+    end
+    object FDQContaReceberItemCaixavalor_pago: TBCDField
+      FieldName = 'valor_pago'
+      Origin = 'valor_pago'
+      Precision = 9
+      Size = 2
+    end
+    object FDQContaReceberItemCaixavalor_saldo: TBCDField
+      FieldName = 'valor_saldo'
+      Origin = 'valor_saldo'
+      Required = True
+      Precision = 9
+      Size = 2
+    end
+    object FDQContaReceberItemCaixadata_venc: TDateField
+      FieldName = 'data_venc'
+      Origin = 'data_venc'
+      Required = True
+    end
+    object FDQContaReceberItemCaixadata_cad: TDateField
+      FieldName = 'data_cad'
+      Origin = 'data_cad'
+      Required = True
+    end
+    object FDQContaReceberItemCaixadata_quitacao: TDateField
+      FieldName = 'data_quitacao'
+      Origin = 'data_quitacao'
+    end
+    object FDQContaReceberItemCaixaquitado: TStringField
+      FieldName = 'quitado'
+      Origin = 'quitado'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object FDQContaReceberItemCaixaidCaixa: TIntegerField
+      FieldName = 'idCaixa'
+      Origin = 'idCaixa'
+    end
+  end
+  object FDQContaPagarItemCaixa: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select * from conta_pagar where id = :PIdContaPagarItemCaixa')
+    Left = 2104
+    Top = 240
+    ParamData = <
+      item
+        Name = 'PIDCONTAPAGARITEMCAIXA'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 20
+        Value = Null
+      end>
+    object FDQContaPagarItemCaixaid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQContaPagarItemCaixaid_fornecedor: TIntegerField
+      FieldName = 'id_fornecedor'
+      Origin = 'id_fornecedor'
+    end
+    object FDQContaPagarItemCaixaid_tipo_despesa: TIntegerField
+      FieldName = 'id_tipo_despesa'
+      Origin = 'id_tipo_despesa'
+    end
+    object FDQContaPagarItemCaixan_doc: TStringField
+      FieldName = 'n_doc'
+      Origin = 'n_doc'
+      Size = 30
+    end
+    object FDQContaPagarItemCaixavalor_doc: TBCDField
+      FieldName = 'valor_doc'
+      Origin = 'valor_doc'
+      Required = True
+      Precision = 9
+      Size = 2
+    end
+    object FDQContaPagarItemCaixavalor_descmoeda: TBCDField
+      FieldName = 'valor_descmoeda'
+      Origin = 'valor_descmoeda'
+      Precision = 9
+      Size = 2
+    end
+    object FDQContaPagarItemCaixavalor_acresc: TBCDField
+      FieldName = 'valor_acresc'
+      Origin = 'valor_acresc'
+      Precision = 9
+      Size = 2
+    end
+    object FDQContaPagarItemCaixavalor_pago: TBCDField
+      FieldName = 'valor_pago'
+      Origin = 'valor_pago'
+      Precision = 9
+      Size = 2
+    end
+    object FDQContaPagarItemCaixavalor_saldo: TBCDField
+      FieldName = 'valor_saldo'
+      Origin = 'valor_saldo'
+      Required = True
+      Precision = 9
+      Size = 2
+    end
+    object FDQContaPagarItemCaixadata_cad: TDateTimeField
+      FieldName = 'data_cad'
+      Origin = 'data_cad'
+    end
+    object FDQContaPagarItemCaixadata_venc: TDateField
+      FieldName = 'data_venc'
+      Origin = 'data_venc'
+      Required = True
+    end
+    object FDQContaPagarItemCaixadata_quitacao: TDateTimeField
+      FieldName = 'data_quitacao'
+      Origin = 'data_quitacao'
+    end
+    object FDQContaPagarItemCaixaquitado: TStringField
+      FieldName = 'quitado'
+      Origin = 'quitado'
+      FixedChar = True
+      Size = 1
+    end
+    object FDQContaPagarItemCaixaidCaixa: TIntegerField
+      FieldName = 'idCaixa'
+      Origin = 'idCaixa'
     end
   end
 end

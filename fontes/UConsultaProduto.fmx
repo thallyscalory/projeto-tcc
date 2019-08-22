@@ -43,6 +43,7 @@ inherited FConsProduto: TFConsProduto
             Align = Top
             StyleLookup = 'searchedit'
             TabOrder = 0
+            KeyboardType = Alphabet
             ReturnKeyType = Done
             Scale.Y = 1.299999952316284000
             Size.Width = 330.000000000000000000
@@ -214,6 +215,7 @@ inherited FConsProduto: TFConsProduto
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 65
                 Margins.Left = 4.000000000000000000
@@ -263,6 +265,7 @@ inherited FConsProduto: TFConsProduto
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 20
                 Margins.Left = 4.000000000000000000
@@ -312,6 +315,7 @@ inherited FConsProduto: TFConsProduto
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 4
                 Margins.Left = 4.000000000000000000
@@ -361,6 +365,7 @@ inherited FConsProduto: TFConsProduto
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 6
                 Margins.Left = 4.000000000000000000
@@ -410,6 +415,7 @@ inherited FConsProduto: TFConsProduto
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 50
                 Margins.Left = 4.000000000000000000
@@ -492,8 +498,8 @@ inherited FConsProduto: TFConsProduto
                 Margins.Left = 4.000000000000000000
                 Position.X = 3.200000047683716000
                 Position.Y = 1.000000000000000000
-                Scale.X = 0.800000011920929000
-                Scale.Y = 0.800000011920929000
+                Scale.X = 0.800000011920928900
+                Scale.Y = 0.800000011920928900
                 Size.Width = 48.000000000000000000
                 Size.Height = 48.000000000000000000
                 Size.PlatformDefault = False

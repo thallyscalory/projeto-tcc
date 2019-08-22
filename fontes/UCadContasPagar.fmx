@@ -285,6 +285,7 @@ inherited FCadContasPagar: TFCadContasPagar
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 Margins.Left = 2.000000000000000000
                 Margins.Top = 8.000000000000000000

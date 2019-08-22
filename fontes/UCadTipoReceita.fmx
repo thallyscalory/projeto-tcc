@@ -3,14 +3,12 @@ inherited FCadTipoReceita: TFCadTipoReceita
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
-      TabIndex = 0
       Sizes = (
         330s
         431s
         330s
         431s)
       inherited TbItemListagem: TTabItem
-        IsSelected = True
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         inherited ToolBarsuperior: TToolBar
@@ -46,6 +44,7 @@ inherited FCadTipoReceita: TFCadTipoReceita
             Align = Top
             StyleLookup = 'searchedit'
             TabOrder = 0
+            KeyboardType = Alphabet
             ReturnKeyType = Done
             Position.X = 4.000000000000000000
             Margins.Left = 4.000000000000000000
@@ -120,7 +119,6 @@ inherited FCadTipoReceita: TFCadTipoReceita
         end
       end
       inherited TbItemedicao: TTabItem
-        IsSelected = False
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object ToolBar1: TToolBar
@@ -151,6 +149,7 @@ inherited FCadTipoReceita: TFCadTipoReceita
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'backtoolbutton'
+            OnClick = SpBVoltarEdicaoCadTipoReceitaClick
           end
           object SpdBEditarCadTipoReceita: TSpeedButton
             Align = MostRight
@@ -160,15 +159,18 @@ inherited FCadTipoReceita: TFCadTipoReceita
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'composetoolbutton'
+            OnClick = SpdBEditarCadTipoReceitaClick
           end
           object SpdBConfirmarCadTipoReceita: TSpeedButton
             Align = MostRight
             IconTintColor = claNavy
-            Position.X = 234.000000000000000000
+            Margins.Right = 4.000000000000000000
+            Position.X = 230.000000000000000000
             Size.Width = 48.000000000000000000
             Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             StyleLookup = 'donetoolbutton'
+            OnClick = SpdBConfirmarCadTipoReceitaClick
           end
         end
         object ListBoxEdicaoCadTipoReceita: TListBox
@@ -185,7 +187,7 @@ inherited FCadTipoReceita: TFCadTipoReceita
           DefaultItemStyles.ItemStyle = ''
           DefaultItemStyles.GroupHeaderStyle = ''
           DefaultItemStyles.GroupFooterStyle = ''
-          Viewport.Width = 322.000000000000000000
+          Viewport.Width = 317.000000000000000000
           Viewport.Height = 375.000000000000000000
           object ListBoxItem1: TListBoxItem
             TabOrder = 0
@@ -205,11 +207,12 @@ inherited FCadTipoReceita: TFCadTipoReceita
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               Align = Client
               TabOrder = 1
+              KeyboardType = Alphabet
               ReturnKeyType = Done
               MaxLength = 30
               Margins.Top = 8.000000000000000000
               Margins.Right = 4.000000000000000000
-              Size.Width = 208.000000000000000000
+              Size.Width = 203.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TextPrompt = 'Descri'#231#227'o'
@@ -239,7 +242,7 @@ inherited FCadTipoReceita: TFCadTipoReceita
                 'N'#226'o')
               Margins.Top = 8.000000000000000000
               Margins.Right = 4.000000000000000000
-              Size.Width = 187.000000000000000000
+              Size.Width = 182.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 2
@@ -267,7 +270,7 @@ inherited FCadTipoReceita: TFCadTipoReceita
                 'N'#226'o')
               Margins.Top = 8.000000000000000000
               Margins.Right = 4.000000000000000000
-              Size.Width = 208.000000000000000000
+              Size.Width = 203.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 2
@@ -295,14 +298,101 @@ inherited FCadTipoReceita: TFCadTipoReceita
                 'N'#226'o')
               Margins.Top = 8.000000000000000000
               Margins.Right = 4.000000000000000000
-              Size.Width = 188.000000000000000000
+              Size.Width = 183.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 2
             end
           end
-          object ListBoxItem5: TListBoxItem
+          object ListBoxItem7: TListBoxItem
             Position.Y = 176.000000000000000000
+            TabOrder = 6
+            object Label1: TLabel
+              Align = Left
+              Margins.Left = 4.000000000000000000
+              Margins.Top = 4.000000000000000000
+              Margins.Bottom = 4.000000000000000000
+              Position.X = 4.000000000000000000
+              Position.Y = 4.000000000000000000
+              Size.Width = 126.000000000000000000
+              Size.Height = 36.000000000000000000
+              Size.PlatformDefault = False
+              Text = 'Entra Caixa:'
+              TabOrder = 0
+            end
+            object CBEntraCaixaCadTipoReceita: TComboBox
+              Align = Client
+              Items.Strings = (
+                'Sim'
+                'N'#226'o')
+              Margins.Top = 8.000000000000000000
+              Margins.Right = 4.000000000000000000
+              Size.Width = 183.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+            end
+          end
+          object ListBoxItem8: TListBoxItem
+            Position.Y = 220.000000000000000000
+            TabOrder = 7
+            object Label2: TLabel
+              Align = Left
+              Margins.Left = 4.000000000000000000
+              Margins.Top = 4.000000000000000000
+              Margins.Bottom = 4.000000000000000000
+              Position.X = 4.000000000000000000
+              Position.Y = 4.000000000000000000
+              Size.Width = 126.000000000000000000
+              Size.Height = 36.000000000000000000
+              Size.PlatformDefault = False
+              Text = 'Contas Pagar: '
+              TabOrder = 0
+            end
+            object CBContaPagarCadTipoReceita: TComboBox
+              Align = Client
+              Items.Strings = (
+                'Sim'
+                'N'#226'o')
+              Margins.Top = 8.000000000000000000
+              Margins.Right = 4.000000000000000000
+              Size.Width = 183.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+            end
+          end
+          object ListBoxItem9: TListBoxItem
+            Position.Y = 264.000000000000000000
+            TabOrder = 8
+            object Label3: TLabel
+              Align = Left
+              Margins.Left = 4.000000000000000000
+              Margins.Top = 4.000000000000000000
+              Margins.Bottom = 4.000000000000000000
+              Position.X = 4.000000000000000000
+              Position.Y = 4.000000000000000000
+              Size.Width = 150.000000000000000000
+              Size.Height = 36.000000000000000000
+              Size.PlatformDefault = False
+              Text = 'Contas Receber :'
+              TabOrder = 0
+            end
+            object CBContaReceberCadTipoReceita: TComboBox
+              Align = Client
+              Items.Strings = (
+                'Sim'
+                'N'#226'o')
+              Margins.Top = 8.000000000000000000
+              Margins.Right = 4.000000000000000000
+              Size.Width = 159.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+            end
+          end
+          object ListBoxItem5: TListBoxItem
+            Position.Y = 308.000000000000000000
             TabOrder = 4
             object LblStatusCadTipoReceita: TLabel
               Align = Left
@@ -323,14 +413,14 @@ inherited FCadTipoReceita: TFCadTipoReceita
                 'Inativo')
               Margins.Top = 8.000000000000000000
               Margins.Right = 4.000000000000000000
-              Size.Width = 208.000000000000000000
+              Size.Width = 203.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               TabOrder = 2
             end
           end
           object ListBoxItem6: TListBoxItem
-            Position.Y = 220.000000000000000000
+            Position.Y = 352.000000000000000000
             TabOrder = 5
             object LblDataCadCadTipoReceita: TLabel
               Align = Left
@@ -352,7 +442,7 @@ inherited FCadTipoReceita: TFCadTipoReceita
               MaxLength = 30
               Margins.Top = 8.000000000000000000
               Margins.Right = 4.000000000000000000
-              Size.Width = 208.000000000000000000
+              Size.Width = 203.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
               KillFocusByReturn = True

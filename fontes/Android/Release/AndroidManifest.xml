@@ -3,7 +3,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="com.embarcadero.Tcc"
         android:versionCode="1"
-        android:versionName="1.0.0"
+        android:versionName="1A"
         android:installLocation="auto">
 
     <!-- This is the platform API where NativeActivity was introduced. -->

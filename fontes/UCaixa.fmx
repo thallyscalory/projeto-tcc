@@ -1,0 +1,618 @@
+inherited FCaixa: TFCaixa
+  Caption = 'FCaixa'
+  ClientHeight = 585
+  OnClose = FormClose
+  DesignerMasterStyle = 3
+  inherited LytBase: TLayout
+    Size.Height = 585.000000000000000000
+    inherited TbControlCadModelo: TTabControl
+      Size.Height = 585.000000000000000000
+      TabIndex = 0
+      Sizes = (
+        330s
+        536s
+        330s
+        536s
+        330s
+        536s)
+      inherited TbItemListagem: TTabItem
+        IsSelected = True
+        Size.Width = 110.000000000000000000
+        ExplicitSize.cx = 165.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        inherited ToolBarsuperior: TToolBar
+          inherited LblTitulo: TLabel
+            TextSettings.Font.StyleExt = {04070000000000000004000000}
+            Text = 'Caixa'
+          end
+          inherited SpBVoltar: TSpeedButton
+            OnClick = SpBVoltarClick
+          end
+          object SpdBtnNovoCaixa: TSpeedButton
+            Align = Right
+            IconTintColor = claNavy
+            Margins.Right = 4.000000000000000000
+            Position.X = 278.000000000000000000
+            Size.Width = 48.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'addtoolbutton'
+            Text = 'SpdBtnNovoCaixa'
+            OnClick = SpdBtnNovoCaixaClick
+          end
+        end
+        object Layout1: TLayout
+          Align = Client
+          Size.Width = 330.000000000000000000
+          Size.Height = 488.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object LytFiltroCaixa: TLayout
+            Align = Top
+            Margins.Left = 2.000000000000000000
+            Margins.Top = 2.000000000000000000
+            Margins.Right = 2.000000000000000000
+            Margins.Bottom = 2.000000000000000000
+            Position.X = 2.000000000000000000
+            Position.Y = 2.000000000000000000
+            Size.Width = 326.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            object LblFiltroCaixa: TLabel
+              Align = Left
+              Margins.Left = 2.000000000000000000
+              Margins.Top = 2.000000000000000000
+              Margins.Right = 2.000000000000000000
+              Margins.Bottom = 2.000000000000000000
+              Position.X = 2.000000000000000000
+              Position.Y = 2.000000000000000000
+              Size.Width = 62.000000000000000000
+              Size.Height = 46.000000000000000000
+              Size.PlatformDefault = False
+              Text = 'Filtrar:'
+              TabOrder = 0
+            end
+            object ComboBoxFiltroCaixa: TComboBox
+              Align = Client
+              Items.Strings = (
+                'Aberto'
+                'Fechado'
+                'Todos')
+              ItemIndex = 0
+              Margins.Top = 9.000000000000000000
+              Margins.Right = 2.000000000000000000
+              Size.Width = 258.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              OnClosePopup = ComboBoxFiltroCaixaClosePopup
+            end
+          end
+          object ListViewFiltroCaixa: TListView
+            ItemAppearanceClassName = 'TMultiDetailItemAppearance'
+            ItemEditAppearanceClassName = 'TMultiDetailDeleteAppearance'
+            HeaderAppearanceClassName = 'TListHeaderObjects'
+            FooterAppearanceClassName = 'TListHeaderObjects'
+            AlternatingColors = True
+            Align = Client
+            Margins.Left = 2.000000000000000000
+            Margins.Right = 2.000000000000000000
+            Margins.Bottom = 2.000000000000000000
+            Size.Width = 326.000000000000000000
+            Size.Height = 432.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            ItemAppearanceObjects.ItemEditObjects.GlyphButton.Visible = False
+            ItemAppearanceObjects.HeaderObjects.Text.TextColor = claNavy
+            ItemAppearanceObjects.FooterObjects.Text.TextColor = claNavy
+            CanSwipeDelete = False
+            OnItemClickEx = ListViewFiltroCaixaItemClickEx
+          end
+        end
+      end
+      inherited TbItemedicao: TTabItem
+        IsSelected = False
+        Size.Width = 110.000000000000000000
+        ExplicitSize.cx = 165.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        object Layout2: TLayout
+          Align = Client
+          Size.Width = 330.000000000000000000
+          Size.Height = 536.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object VertScrollBox1: TVertScrollBox
+            Align = Client
+            Size.Width = 330.000000000000000000
+            Size.Height = 488.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Viewport.Width = 330.000000000000000000
+            Viewport.Height = 488.000000000000000000
+            object Layout3: TLayout
+              Align = Top
+              Margins.Left = 2.000000000000000000
+              Margins.Top = 2.000000000000000000
+              Margins.Right = 2.000000000000000000
+              Margins.Bottom = 2.000000000000000000
+              Position.X = 2.000000000000000000
+              Position.Y = 41.000000000000000000
+              Size.Width = 321.000000000000000000
+              Size.Height = 35.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 2
+              object Label1: TLabel
+                Align = Left
+                Margins.Right = 2.000000000000000000
+                Size.Width = 114.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Dt. Abertura: '
+                TabOrder = 0
+              end
+              object LblDtAberturaCaixa: TLabel
+                Align = Client
+                Margins.Right = 2.000000000000000000
+                Size.Width = 203.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.HorzAlign = Trailing
+                TabOrder = 1
+              end
+            end
+            object Layout4: TLayout
+              Align = Top
+              Margins.Left = 2.000000000000000000
+              Margins.Top = 2.000000000000000000
+              Margins.Right = 2.000000000000000000
+              Margins.Bottom = 2.000000000000000000
+              Position.X = 2.000000000000000000
+              Position.Y = 80.000000000000000000
+              Size.Width = 321.000000000000000000
+              Size.Height = 35.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object Label2: TLabel
+                Align = Left
+                Margins.Right = 2.000000000000000000
+                Size.Width = 139.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Dt. Fechamento '
+                TabOrder = 0
+              end
+              object LblDtFechamentoCaixa: TLabel
+                Align = Client
+                Margins.Right = 2.000000000000000000
+                Size.Width = 178.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.HorzAlign = Trailing
+                TabOrder = 1
+              end
+            end
+            object Layout5: TLayout
+              Align = Top
+              Margins.Left = 2.000000000000000000
+              Margins.Top = 2.000000000000000000
+              Margins.Right = 2.000000000000000000
+              Margins.Bottom = 2.000000000000000000
+              Position.X = 2.000000000000000000
+              Position.Y = 2.000000000000000000
+              Size.Width = 321.000000000000000000
+              Size.Height = 35.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object Label3: TLabel
+                Align = Left
+                Margins.Right = 2.000000000000000000
+                Size.Width = 102.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'C'#243'd Caixa:'
+                TabOrder = 0
+              end
+              object LblCodCaixa: TLabel
+                Align = Client
+                Margins.Right = 2.000000000000000000
+                Size.Width = 215.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.HorzAlign = Trailing
+                TabOrder = 1
+              end
+            end
+            object Layout6: TLayout
+              Align = Top
+              Margins.Left = 2.000000000000000000
+              Margins.Top = 2.000000000000000000
+              Margins.Right = 2.000000000000000000
+              Margins.Bottom = 2.000000000000000000
+              Position.X = 2.000000000000000000
+              Position.Y = 119.000000000000000000
+              Size.Width = 321.000000000000000000
+              Size.Height = 35.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 3
+              object Label4: TLabel
+                Align = Left
+                Margins.Right = 2.000000000000000000
+                Size.Width = 113.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Vl Abertura: '
+                TabOrder = 0
+              end
+              object LblVlAberturaCaixa: TLabel
+                Align = Client
+                Margins.Right = 2.000000000000000000
+                Size.Width = 204.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.HorzAlign = Trailing
+                TabOrder = 1
+              end
+            end
+            object Layout7: TLayout
+              Align = Top
+              Margins.Left = 2.000000000000000000
+              Margins.Top = 2.000000000000000000
+              Margins.Right = 2.000000000000000000
+              Position.X = 2.000000000000000000
+              Position.Y = 158.000000000000000000
+              Size.Width = 321.000000000000000000
+              Size.Height = 35.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 4
+              object Label5: TLabel
+                Align = Left
+                Margins.Right = 2.000000000000000000
+                Size.Width = 156.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Vl Recebimentos: '
+                TabOrder = 0
+              end
+              object LblVlRecebimentosCaixa: TLabel
+                Align = Client
+                Margins.Right = 2.000000000000000000
+                Size.Width = 161.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.HorzAlign = Trailing
+                TabOrder = 1
+              end
+            end
+            object Layout8: TLayout
+              Align = Top
+              Margins.Left = 2.000000000000000000
+              Margins.Right = 2.000000000000000000
+              Margins.Bottom = 2.000000000000000000
+              Position.X = 2.000000000000000000
+              Position.Y = 193.000000000000000000
+              Size.Width = 321.000000000000000000
+              Size.Height = 120.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 5
+              object MemoVlRecebimentosCaixa: TMemo
+                Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+                DataDetectorTypes = []
+                ReadOnly = True
+                Align = Client
+                Size.Width = 321.000000000000000000
+                Size.Height = 120.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 0
+                Viewport.Width = 321.000000000000000000
+                Viewport.Height = 120.000000000000000000
+              end
+            end
+            object Layout9: TLayout
+              Align = Top
+              Margins.Left = 2.000000000000000000
+              Margins.Top = 2.000000000000000000
+              Margins.Right = 2.000000000000000000
+              Position.X = 2.000000000000000000
+              Position.Y = 317.000000000000000000
+              Size.Width = 321.000000000000000000
+              Size.Height = 35.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 6
+              object Label6: TLabel
+                Align = Left
+                Margins.Right = 2.000000000000000000
+                Size.Width = 121.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Vl Retiradas: '
+                TabOrder = 0
+              end
+              object LblVlRetiradasCaixa: TLabel
+                Align = Client
+                Margins.Right = 2.000000000000000000
+                Size.Width = 196.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.HorzAlign = Trailing
+                TabOrder = 1
+              end
+            end
+            object Layout10: TLayout
+              Align = Top
+              Margins.Left = 2.000000000000000000
+              Margins.Right = 2.000000000000000000
+              Margins.Bottom = 2.000000000000000000
+              Position.X = 2.000000000000000000
+              Position.Y = 352.000000000000000000
+              Size.Width = 321.000000000000000000
+              Size.Height = 120.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 7
+              object MemoVlRetiradasCaixa: TMemo
+                Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+                DataDetectorTypes = []
+                ReadOnly = True
+                Align = Client
+                Size.Width = 321.000000000000000000
+                Size.Height = 120.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 0
+                Viewport.Width = 321.000000000000000000
+                Viewport.Height = 120.000000000000000000
+              end
+            end
+            object Layout15: TLayout
+              Align = Top
+              Margins.Left = 2.000000000000000000
+              Margins.Top = 2.000000000000000000
+              Margins.Right = 2.000000000000000000
+              Margins.Bottom = 2.000000000000000000
+              Position.X = 2.000000000000000000
+              Position.Y = 476.000000000000000000
+              Size.Width = 321.000000000000000000
+              Size.Height = 35.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 8
+              object Label12: TLabel
+                Align = Left
+                Margins.Right = 2.000000000000000000
+                Size.Width = 156.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Vl Saldo: '
+                TabOrder = 0
+              end
+              object LblVlSaldoCaixa: TLabel
+                Align = Client
+                Margins.Right = 2.000000000000000000
+                Size.Width = 161.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.HorzAlign = Trailing
+                TabOrder = 1
+              end
+            end
+          end
+          object ToolBar1: TToolBar
+            Size.Width = 330.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            TintColor = claSilver
+            object Label7: TLabel
+              Align = Contents
+              StyledSettings = [Size]
+              Size.Width = 330.000000000000000000
+              Size.Height = 48.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Arial'
+              TextSettings.Font.Size = 18.000000000000000000
+              TextSettings.Font.StyleExt = {04070000000000000004000000}
+              TextSettings.FontColor = claNavy
+              TextSettings.HorzAlign = Center
+              Text = 'Info. Caixa'
+              TabOrder = 0
+            end
+            object SpdBtnVoltarInfoCaixa: TSpeedButton
+              Align = Left
+              IconTintColor = claNavy
+              Margins.Left = 4.000000000000000000
+              Position.X = 4.000000000000000000
+              Size.Width = 48.000000000000000000
+              Size.Height = 48.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'backtoolbutton'
+              OnClick = SpdBtnVoltarInfoCaixaClick
+            end
+            object SpdBtnNovoLancamentoCaixa: TSpeedButton
+              Align = Right
+              IconTintColor = claNavy
+              Margins.Right = 4.000000000000000000
+              Position.X = 278.000000000000000000
+              Size.Width = 48.000000000000000000
+              Size.Height = 48.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'addtoolbutton'
+              OnClick = SpdBtnNovoLancamentoCaixaClick
+            end
+          end
+        end
+      end
+      object TbItemLancamentoCaixa: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 110.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Lan'#231'amento'
+        ExplicitSize.cx = 87.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        object Layout11: TLayout
+          Align = Client
+          Size.Width = 330.000000000000000000
+          Size.Height = 536.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object VertScrollBox2: TVertScrollBox
+            Align = Client
+            Size.Width = 330.000000000000000000
+            Size.Height = 488.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Viewport.Width = 330.000000000000000000
+            Viewport.Height = 488.000000000000000000
+            object Layout12: TLayout
+              Align = Top
+              Margins.Left = 2.000000000000000000
+              Margins.Top = 2.000000000000000000
+              Margins.Right = 2.000000000000000000
+              Margins.Bottom = 2.000000000000000000
+              Position.X = 2.000000000000000000
+              Position.Y = 2.000000000000000000
+              Size.Width = 326.000000000000000000
+              Size.Height = 35.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object Label8: TLabel
+                Align = Left
+                Margins.Left = 2.000000000000000000
+                Margins.Right = 2.000000000000000000
+                Position.X = 2.000000000000000000
+                Size.Width = 159.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Tipo Lan'#231'amento:'
+                TabOrder = 0
+              end
+              object ComboBoxTipoLancamentoCaixa: TComboBox
+                Align = Client
+                Items.Strings = (
+                  'RECEBIMENTO'
+                  'RETIRADA')
+                Margins.Right = 2.000000000000000000
+                Size.Width = 161.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 1
+              end
+            end
+            object Layout13: TLayout
+              Align = Top
+              Margins.Left = 2.000000000000000000
+              Margins.Right = 2.000000000000000000
+              Margins.Bottom = 2.000000000000000000
+              Position.X = 2.000000000000000000
+              Position.Y = 39.000000000000000000
+              Size.Width = 326.000000000000000000
+              Size.Height = 35.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 1
+              object Label9: TLabel
+                Align = Left
+                Margins.Left = 2.000000000000000000
+                Margins.Right = 2.000000000000000000
+                Position.X = 2.000000000000000000
+                Size.Width = 159.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Vl Lan'#231'amento: '
+                TabOrder = 0
+              end
+              object EdtVlLancamentoCaixa: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                KeyboardType = NumberPad
+                Margins.Right = 2.000000000000000000
+                Size.Width = 161.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+              end
+            end
+            object Layout14: TLayout
+              Align = Top
+              Margins.Left = 2.000000000000000000
+              Margins.Right = 2.000000000000000000
+              Margins.Bottom = 2.000000000000000000
+              Position.X = 2.000000000000000000
+              Position.Y = 76.000000000000000000
+              Size.Width = 326.000000000000000000
+              Size.Height = 35.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 2
+              object Label10: TLabel
+                Align = Left
+                Margins.Left = 2.000000000000000000
+                Margins.Right = 2.000000000000000000
+                Position.X = 2.000000000000000000
+                Size.Width = 105.000000000000000000
+                Size.Height = 35.000000000000000000
+                Size.PlatformDefault = False
+                Text = 'Descri'#231#227'o: '
+                TabOrder = 0
+              end
+              object EdtDescricaoLancamento: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                KeyboardType = Alphabet
+                Margins.Right = 2.000000000000000000
+                Size.Width = 215.000000000000000000
+                Size.Height = 32.000000000000000000
+                Size.PlatformDefault = False
+              end
+            end
+          end
+          object ToolBar2: TToolBar
+            Size.Width = 330.000000000000000000
+            Size.Height = 48.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            TintColor = claSilver
+            object Label11: TLabel
+              Align = Contents
+              StyledSettings = [Size]
+              Size.Width = 330.000000000000000000
+              Size.Height = 48.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Family = 'Arial'
+              TextSettings.Font.Size = 18.000000000000000000
+              TextSettings.Font.StyleExt = {04070000000000000004000000}
+              TextSettings.FontColor = claNavy
+              TextSettings.HorzAlign = Center
+              Text = 'Lan'#231'amento'
+              TabOrder = 0
+            end
+            object SpdBtnVoltarLancamentoCaixa: TSpeedButton
+              Align = Left
+              IconTintColor = claNavy
+              Margins.Left = 4.000000000000000000
+              Position.X = 4.000000000000000000
+              Size.Width = 48.000000000000000000
+              Size.Height = 48.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'backtoolbutton'
+              OnClick = SpdBtnVoltarLancamentoCaixaClick
+            end
+            object SpdBtnConfirmaLancamentoCaixa: TSpeedButton
+              Align = Right
+              IconTintColor = claNavy
+              Margins.Right = 4.000000000000000000
+              Position.X = 278.000000000000000000
+              Size.Width = 48.000000000000000000
+              Size.Height = 48.000000000000000000
+              Size.PlatformDefault = False
+              StyleLookup = 'donetoolbutton'
+              OnClick = SpdBtnConfirmaLancamentoCaixaClick
+            end
+          end
+        end
+      end
+    end
+  end
+end

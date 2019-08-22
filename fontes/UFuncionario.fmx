@@ -1,0 +1,41 @@
+inherited FFuncionario: TFFuncionario
+  Caption = 'Funcionarios'
+  DesignerMasterStyle = 3
+  inherited LytBase: TLayout
+    inherited TbControlCadModelo: TTabControl
+      TabIndex = 0
+      Sizes = (
+        330s
+        431s
+        330s
+        431s)
+      inherited TbItemListagem: TTabItem
+        IsSelected = True
+        ExplicitSize.cx = 165.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+        inherited ToolBarsuperior: TToolBar
+          inherited LblTitulo: TLabel
+            TextSettings.Font.StyleExt = {04070000000000000004000000}
+          end
+        end
+      end
+      inherited TbItemedicao: TTabItem
+        IsSelected = False
+        ExplicitSize.cx = 165.000000000000000000
+        ExplicitSize.cy = 49.000000000000000000
+      end
+    end
+  end
+  inherited ActionList1: TActionList
+    Left = 128
+    Top = 392
+    object ShowShareSheetAction1: TShowShareSheetAction
+      Category = 'Media Library'
+      OnBeforeExecute = ShowShareSheetAction1BeforeExecute
+    end
+  end
+  inherited ImageList1: TImageList
+    Left = 32
+    Top = 392
+  end
+end

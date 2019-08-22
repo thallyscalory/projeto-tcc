@@ -9,7 +9,8 @@ uses
   FMX.Layouts, FMX.StdCtrls, FMX.Controls.Presentation, FMX.ListView.Types,
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
   System.Actions, FMX.ActnList, FMX.VirtualKeyboard, System.Math,
-  FMX.Platform, System.ImageList, FMX.ImgList, FMX.Ani;
+  FMX.Platform, System.ImageList, FMX.ImgList, FMX.Ani, FMX.DialogService,
+  System.UIConsts;
 
 type
   TFCadModelo = class(TForm)
@@ -63,7 +64,7 @@ uses UDM, UPrincipal, UVenda, System.IOUtils;
 {$IFDEF ANDROID}
 
 uses UDM, UPrincipal, UVenda, System.IOUtils;
-//FGX.Graphics, FGX.Toasts;
+// FGX.Graphics, FGX.Toasts;
 {$ENDIF}
 { procedure TFCadModelo.AbrirFormModelo(AFormClass: TComponentClass);
   var

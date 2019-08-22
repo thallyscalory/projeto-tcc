@@ -12,7 +12,7 @@ uses
   MultiDetailAppearanceU, Data.Bind.EngExt, FMX.Bind.DBEngExt,
   Data.Bind.Components, Data.Bind.DBScope, System.Rtti, System.Bindings.Outputs,
   FMX.Bind.Editors, FMX.ListBox, System.ImageList, FMX.ImgList, FMX.Edit,
-  //ksTypes, ksLoadingIndicator,
+  // ksTypes, ksLoadingIndicator,
   FMX.VirtualKeyboard, System.Math,
   FMX.Platform, FMX.Ani;
 
@@ -159,6 +159,7 @@ type
     procedure EdtNumParcelaPedidoClick(Sender: TObject);
     procedure EdtValorItemClick(Sender: TObject);
     procedure EdtDescontoMoedaPedidoExit(Sender: TObject);
+    procedure SpdBNovoFormaPagClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -195,7 +196,8 @@ implementation
 
 {$R *.fmx}
 
-uses UCadCli, UConsultaProduto, UDM, UPrincipal, UContasReceberVenda, UAuxiliar;
+uses UCadCli, UConsultaProduto, UDM, UPrincipal, UContasReceberVenda, UAuxiliar,
+  UCadTipoReceita;
 
 procedure TFVenda1.AbrirFormVenda(AFormClass: TComponentClass);
 var
@@ -226,8 +228,8 @@ var
   qtdItemTotal, vlItemTotal, vlTotalPedido: Double;
   dataAgora: TDateTime;
 begin
-  //FPrincipal.ksLoadingIndicator1.LoadingText.Text := 'Aguarde...';
-  //FPrincipal.ksLoadingIndicator1.ShowLoading;
+  // FPrincipal.ksLoadingIndicator1.LoadingText.Text := 'Aguarde...';
+  // FPrincipal.ksLoadingIndicator1.ShowLoading;
   if itemPedido = 'S' then
   begin
     { for I := 0 to contItem - 1 do
@@ -516,10 +518,16 @@ begin
 
         if DM.FDQConsFormaPagavista_forma_pag.AsString = 'S' then
         begin
+          DM.FDQConsCaixa.Close;
+          DM.FDQConsCaixa.ParamByName('PCaixaAberto').Value := 'S';
+          DM.FDQConsCaixa.Open();
+
+          // conta receber
           DM.FDQCadContasReceber.Close;
           DM.FDQCadContasReceber.Open();
           DM.FDQCadContasReceber.Append;
           // DM.FDQCadContasReceberid.AsInteger := maxIdContasReceber;
+
           DM.FDQCadContasReceberid_pedido.AsInteger := maxIdPedido;
           DM.FDQCadContasReceberid_cliente.AsInteger :=
             StrToInt(LblCodCliPedido.Text);
@@ -538,6 +546,7 @@ begin
           DM.FDQCadContasReceberquitado.AsString := 'S';
           DM.FDQCadContasReceber.Post;
 
+          // baixa conta receber
           DM.FDQMaxIdBaixaContaReceber.Close;
           DM.FDQMaxIdBaixaContaReceber.Open();
           maxIdBaixa := DM.FDQMaxIdBaixaContaRecebermaxId.AsInteger + 1;
@@ -554,6 +563,43 @@ begin
           DM.FDQCadBaixaContasReceberid_forma_pag.AsInteger :=
             DM.FDQConsFormaPagid_forma_pag.AsInteger;
           DM.FDQCadBaixaContasReceber.Post;
+
+          // lançamento caixa e item caixa
+          DM.FDQContaReceberItemCaixa.Close;
+          DM.FDQContaReceberItemCaixa.ParamByName('PIdContaReceber').Value :=
+            maxIdContasReceber;
+          DM.FDQContaReceberItemCaixa.Open();
+
+          if DM.FDQConsFormaPagentraCaixa.AsString = 'S' then
+          begin
+            // caixa
+            DM.FDQEditCaixa.sql.Clear;
+            DM.FDQEditCaixa.sql.Add('update caixa set');
+            DM.FDQEditCaixa.sql.Add(' vlRecebimento = :vlRecebimento');
+            DM.FDQEditCaixa.sql.Add(', vlSaldo = :vlSaldo');
+            DM.FDQEditCaixa.sql.Add(' where id = :id');
+
+            DM.FDQEditCaixa.Params.ParamByName('vlRecebimento').AsFloat :=
+              DM.FDQConsCaixavlRecebimento.AsFloat + StrToFloat(vlparc[I]);
+            DM.FDQEditCaixa.Params.ParamByName('vlSaldo').AsFloat :=
+              DM.FDQConsCaixavlSaldo.AsFloat + StrToFloat(vlparc[I]);
+            DM.FDQEditCaixa.Params.ParamByName('id').AsInteger :=
+              DM.FDQConsCaixaid.AsInteger;
+            DM.FDQEditCaixa.ExecSQL;
+
+            // item caixa
+            DM.FDQEditItemCaixa.Close;
+            DM.FDQEditItemCaixa.Open();
+            DM.FDQEditItemCaixa.Append;
+            DM.FDQEditItemCaixaidCaixa.AsInteger := DM.FDQConsCaixaid.AsInteger;
+            DM.FDQEditItemCaixadataLancamento.AsDateTime := Now;
+            DM.FDQEditItemCaixavlLancamento.AsFloat := StrToFloat(vlparc[I]);
+            DM.FDQEditItemCaixadescricaoLancamento.AsString :=
+              'Recebimento Venda NPed: ' + IntToStr(maxIdPedido) + ' Cli: ' +
+              LblCodCliPedido.Text;
+            DM.FDQEditItemCaixatipoLancamento.AsString := 'RECEBIMENTO';
+            DM.FDQEditItemCaixa.Post;
+          end;
         end
         else
         begin
@@ -592,7 +638,7 @@ begin
         ShowMessage('Erro!' + #13#10 + E.Message);
     end;
   end;
-  //FPrincipal.ksLoadingIndicator1.HideLoading;
+  // FPrincipal.ksLoadingIndicator1.HideLoading;
 end;
 
 procedure TFVenda1.BtnConfirmaCadContasReceberClick(Sender: TObject);
@@ -871,8 +917,8 @@ end;
 
 procedure TFVenda1.EdtDescontoMoedaPedidoExit(Sender: TObject);
 begin
-  //EdtDescontoMoedaPedido.Text := FormatFloat('###,###,##0.00',
-    //StrToFloat(EdtDescontoMoedaPedido.Text));
+  // EdtDescontoMoedaPedido.Text := FormatFloat('###,###,##0.00',
+  // StrToFloat(EdtDescontoMoedaPedido.Text));
 end;
 
 procedure TFVenda1.EdtDescontoMoedaPedidoKeyUp(Sender: TObject; var Key: Word;
@@ -930,7 +976,9 @@ end;
 
 procedure TFVenda1.EdtNumParcelaPedidoClick(Sender: TObject);
 begin
+{$IFDEF ANDROID}
   MostrarTeclado(EdtNumParcelaPedido);
+{$ENDIF}
 end;
 
 procedure TFVenda1.EdtNumParcelaPedidoTyping(Sender: TObject);
@@ -1480,6 +1528,18 @@ begin
   HabilitaCampos;
 end;
 
+procedure TFVenda1.SpdBNovoFormaPagClick(Sender: TObject);
+begin
+  Application.CreateForm(TFCadTipoReceita, FCadTipoReceita);
+  if not Assigned(FCadTipoReceita) then
+    FCadTipoReceita := TFCadTipoReceita.Create(nil);
+  FCadTipoReceita.ShowModal(
+    procedure(modalResult: TModalResult)
+    begin
+
+    end);
+end;
+
 procedure TFVenda1.SpdBNovoVendaClick(Sender: TObject);
 begin
 {$IFDEF MSWINDOWS}
@@ -1558,7 +1618,7 @@ begin
               if DM.FDQConsFormaPaggeraconta_forma_pag.AsString = 'S' then
               begin
                 if (ListViewItemPedido.ItemCount > 0) and
-                  (LblCodCliPedido.Text <> '') and
+                  (LblCodCliPedido.Text <> EmptyStr) and
                   (StrToInt(EdtNumParcelaPedido.Text) > 0) then
                 begin
                   if StrToInt(EdtNumParcelaPedido.Text) > 1 then
@@ -1640,7 +1700,7 @@ begin
               else
               begin
                 if (ListViewItemPedido.ItemCount > 0) and
-                  (LblCodCliPedido.Text <> '') and
+                  (LblCodCliPedido.Text <> EmptyStr) and
                   (StrToInt(EdtNumParcelaPedido.Text) > 0) then
                 begin
                   if crud = 'inserir' then

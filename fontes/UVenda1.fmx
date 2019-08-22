@@ -393,6 +393,7 @@ object FVenda1: TFVenda1
                 Size.Height = 48.000000000000000000
                 Size.PlatformDefault = False
                 StyleLookup = 'addtoolbutton'
+                OnClick = SpdBNovoFormaPagClick
               end
             end
             object ListBoxItem4: TListBoxItem
@@ -852,6 +853,7 @@ object FVenda1: TFVenda1
               Align = Top
               StyleLookup = 'searchedit'
               TabOrder = 0
+              KeyboardType = Alphabet
               ReturnKeyType = Done
               Position.X = 4.000000000000000000
               Margins.Left = 4.000000000000000000

@@ -228,8 +228,8 @@ uses UDM, UPrincipal, UVenda1;
 
 uses UDM, UPrincipal, UVenda1, Androidapi.JNI.GraphicsContentViewText,
   Androidapi.JNI.JavaTypes,
-  Androidapi.JNI.Net, Androidapi.Helpers, System.IOUtils;
-  //FGX.Graphics,FGX.Toasts;
+  Androidapi.JNI.Net, Androidapi.Helpers, System.IOUtils,
+  FGX.Graphics, FGX.Toasts;
 {$ENDIF}
 
 procedure TFCadCli.BtnFiltrarCliClick(Sender: TObject);
@@ -986,9 +986,9 @@ begin
   MudarAbaModelo(TbItemListagem, Sender);
 {$IFDEF ANDROID}
   if (crud = 'inserir') or (crud = 'editar') then
-    //TfgToast.Show('Processo cancelado!');
+    // TfgToast.Show('Processo cancelado!');
 {$ENDIF}
-  crud := EmptyStr;
+    crud := EmptyStr;
 end;
 
 procedure TFCadCli.SpdBConfirmarClick(Sender: TObject);
@@ -1000,7 +1000,7 @@ var
 begin
   inherited;
   EsconderTeclado;
-  //FPrincipal.ksLoadingIndicator1.ShowLoading;
+  // FPrincipal.ksLoadingIndicator1.ShowLoading;
   DataHora := DateTimeToStr(Now);
 
   if RadioBLiberaAprazoS.IsChecked then
@@ -1049,9 +1049,9 @@ begin
       DM.FDQFiltroCadCLi.Active := False;
       MudarAbaModelo(TbItemListagem, Sender);
 {$IFDEF ANDROID}
-      //TfgToast.Show('Novo cliente cadastrado com sucesso!');
+      TfgToast.Show('Novo cliente cadastrado com sucesso!');
 {$ENDIF}
-      //FPrincipal.ksLoadingIndicator1.HideLoading;
+      // FPrincipal.ksLoadingIndicator1.HideLoading;
     except
       on E: Exception do
         ShowMessage('Erro!  ' + #13#10 + E.Message);
@@ -1116,9 +1116,9 @@ begin
       DM.FDQFiltroCadCLi.Active := False;
       MudarAbaModelo(TbItemListagem, Sender);
 {$IFDEF ANDROID}
-      //TfgToast.Show('cadastrado alterado com sucesso!');
+      // TfgToast.Show('cadastrado alterado com sucesso!');
 {$ENDIF}
-      //FPrincipal.ksLoadingIndicator1.HideLoading;
+      // FPrincipal.ksLoadingIndicator1.HideLoading;
     except
       on E: Exception do
         ShowMessage('Erro!  ' + #13#10 + E.Message);

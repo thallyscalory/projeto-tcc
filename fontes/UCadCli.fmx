@@ -4,14 +4,12 @@ inherited FCadCli: TFCadCli
   DesignerMasterStyle = 3
   inherited LytBase: TLayout
     inherited TbControlCadModelo: TTabControl
-      TabIndex = 0
       Sizes = (
         330s
         431s
         330s
         431s)
       inherited TbItemListagem: TTabItem
-        IsSelected = True
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         inherited ToolBarsuperior: TToolBar
@@ -47,6 +45,7 @@ inherited FCadCli: TFCadCli
             Align = Top
             StyleLookup = 'searchedit'
             TabOrder = 0
+            KeyboardType = Alphabet
             ReturnKeyType = Done
             Position.X = 4.000000000000000000
             Margins.Left = 4.000000000000000000
@@ -120,7 +119,6 @@ inherited FCadCli: TFCadCli
         end
       end
       inherited TbItemedicao: TTabItem
-        IsSelected = False
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
         object ToolBar1: TToolBar
@@ -251,6 +249,7 @@ inherited FCadCli: TFCadCli
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 60
                 Margins.Left = 4.000000000000000000
@@ -383,6 +382,7 @@ inherited FCadCli: TFCadCli
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 20
                 Margins.Left = 4.000000000000000000
@@ -431,6 +431,7 @@ inherited FCadCli: TFCadCli
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 30
                 Margins.Left = 4.000000000000000000
@@ -528,6 +529,7 @@ inherited FCadCli: TFCadCli
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 50
                 Margins.Left = 4.000000000000000000
@@ -576,6 +578,7 @@ inherited FCadCli: TFCadCli
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 10
                 Margins.Left = 4.000000000000000000
@@ -624,6 +627,7 @@ inherited FCadCli: TFCadCli
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 30
                 Margins.Left = 4.000000000000000000
@@ -672,6 +676,7 @@ inherited FCadCli: TFCadCli
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 0
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 50
                 Margins.Left = 4.000000000000000000
@@ -769,6 +774,7 @@ inherited FCadCli: TFCadCli
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 30
                 Margins.Left = 4.000000000000000000
@@ -779,6 +785,7 @@ inherited FCadCli: TFCadCli
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Cidade'
+                CharCase = ecUpperCase
                 OnKeyUp = EdtCidadeCliKeyUp
                 OnClick = EdtCidadeCliClick
                 object EdtBCidadeCli: TEditButton
@@ -817,6 +824,7 @@ inherited FCadCli: TFCadCli
                 Touch.InteractiveGestures = [LongTap, DoubleTap]
                 Align = Client
                 TabOrder = 1
+                KeyboardType = Alphabet
                 ReturnKeyType = Next
                 MaxLength = 2
                 Margins.Left = 4.000000000000000000
@@ -827,6 +835,7 @@ inherited FCadCli: TFCadCli
                 Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TextPrompt = 'Uf'
+                CharCase = ecUpperCase
                 OnKeyUp = EdtUfCliKeyUp
                 OnClick = EdtUfCliClick
                 object EdtBUfCli: TEditButton
@@ -972,6 +981,7 @@ inherited FCadCli: TFCadCli
               object MemoObsCadCli: TMemo
                 Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
                 DataDetectorTypes = []
+                KeyboardType = Alphabet
                 Align = Client
                 Margins.Left = 4.000000000000000000
                 Margins.Top = 8.000000000000000000
@@ -982,8 +992,8 @@ inherited FCadCli: TFCadCli
                 Size.PlatformDefault = False
                 TabOrder = 0
                 OnClick = MemoObsCadCliClick
-                Viewport.Width = 264.000000000000000000
-                Viewport.Height = 58.000000000000000000
+                Viewport.Width = 256.000000000000000000
+                Viewport.Height = 50.000000000000000000
               end
             end
             object ListBoxItem19: TListBoxItem
@@ -1012,7 +1022,8 @@ inherited FCadCli: TFCadCli
                 Margins.Top = 4.000000000000000000
                 Margins.Right = 4.000000000000000000
                 Margins.Bottom = 4.000000000000000000
-                Size.Height = 36.000000000000000000
+                Size.Width = 240.000000000000000000
+                Size.Height = 32.000000000000000000
                 Size.PlatformDefault = False
                 TabOrder = 1
               end

@@ -352,8 +352,8 @@ begin
   end;
 end;
 
-procedure TFCadContasPagar.DateEdtFiltroVencInicialContasPagarClosePicker(
-  Sender: TObject);
+procedure TFCadContasPagar.DateEdtFiltroVencInicialContasPagarClosePicker
+  (Sender: TObject);
 begin
   inherited;
   DateEdtFiltroVencFinalContasPagarClosePicker(Sender);
@@ -438,7 +438,7 @@ end;
 procedure TFCadContasPagar.EdtValorDescClick(Sender: TObject);
 begin
   inherited;
-MostrarTeclado(EdtValorDesc);
+  MostrarTeclado(EdtValorDesc);
 end;
 
 procedure TFCadContasPagar.EdtValorDescKeyUp(Sender: TObject; var Key: Word;
@@ -838,7 +838,11 @@ begin
           if not idContasPagar[I].IsEmpty then
           begin
             try
-              // conta_receber
+              DM.FDQConsCaixa.Close;
+              DM.FDQConsCaixa.ParamByName('PCaixaAberto').Value := 'S';
+              DM.FDQConsCaixa.Open();
+
+              // conta_pagar
               DM.FDQConsContasPagarBaixa.Close;
               DM.FDQConsContasPagarBaixa.ParamByName('PIdContaPagar').Value :=
                 idContasPagar[I];
@@ -886,6 +890,52 @@ begin
               DM.FDQCadBaixaContaPagarid_forma_pag.AsInteger :=
                 DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
               DM.FDQCadBaixaContaPagar.Post;
+
+              // lançamento caixa e item caixa
+              DM.FDQFormaPagCaixa.Close;
+              DM.FDQFormaPagCaixa.ParamByName('PFormaPagCaixa').Value :=
+                DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
+              DM.FDQFormaPagCaixa.Open();
+
+              DM.FDQContaPagarItemCaixa.Close;
+              DM.FDQContaPagarItemCaixa.ParamByName('PIdContaPagarItemCaixa')
+                .Value := idContasPagar[I];
+              DM.FDQContaPagarItemCaixa.Open();
+
+              if DM.FDQFormaPagCaixaentraCaixa.AsString = 'S' then
+              begin
+                // caixa
+                DM.FDQEditCaixa.sql.Clear;
+                DM.FDQEditCaixa.sql.Add('update caixa set');
+                DM.FDQEditCaixa.sql.Add(' vlRetirada = :vlRetirada');
+                DM.FDQEditCaixa.sql.Add(', vlSaldo = :vlSaldo');
+                DM.FDQEditCaixa.sql.Add(' where id = :id');
+
+                DM.FDQEditCaixa.Params.ParamByName('vlRetirada').AsFloat :=
+                  DM.FDQConsCaixavlRetirada.AsFloat +
+                  StrToFloat(saldoContasPagar[I]);
+                DM.FDQEditCaixa.Params.ParamByName('vlSaldo').AsFloat :=
+                  DM.FDQConsCaixavlSaldo.AsFloat -
+                  StrToFloat(saldoContasPagar[I]);
+                DM.FDQEditCaixa.Params.ParamByName('id').AsInteger :=
+                  DM.FDQConsCaixaid.AsInteger;
+                DM.FDQEditCaixa.ExecSQL;
+
+                // item caixa
+                DM.FDQEditItemCaixa.Close;
+                DM.FDQEditItemCaixa.Open();
+                DM.FDQEditItemCaixa.Append;
+                DM.FDQEditItemCaixaidCaixa.AsInteger :=
+                  DM.FDQConsCaixaid.AsInteger;
+                DM.FDQEditItemCaixadataLancamento.AsDateTime := Now;
+                DM.FDQEditItemCaixavlLancamento.AsFloat :=
+                  StrToFloat(saldoContasPagar[I]);
+                DM.FDQEditItemCaixadescricaoLancamento.AsString :=
+                  'Pagamento ContaPagar NDoc: ' + idContasPagar[I] + ' Forn: ' +
+                  DM.FDQContaPagarItemCaixaid_fornecedor.AsString;
+                DM.FDQEditItemCaixatipoLancamento.AsString := 'RETIRADA';
+                DM.FDQEditItemCaixa.Post;
+              end;
             except
               on E: Exception do
                 ShowMessage('Erro!  ' + #13#10 + E.Message);
@@ -906,6 +956,10 @@ begin
     begin
       for I := 0 to tamanhoArray - 1 do
       begin
+        DM.FDQConsCaixa.Close;
+        DM.FDQConsCaixa.ParamByName('PCaixaAberto').Value := 'S';
+        DM.FDQConsCaixa.Open();
+
         if not idContasPagar[I].IsEmpty then
         begin
           try
@@ -996,6 +1050,49 @@ begin
                 DM.FDQCadBaixaContaPagarid_forma_pag.AsInteger :=
                   DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
                 DM.FDQCadBaixaContaPagar.Post;
+
+                // lançamento caixa e item caixa
+                DM.FDQFormaPagCaixa.Close;
+                DM.FDQFormaPagCaixa.ParamByName('PFormaPagCaixa').Value :=
+                  DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
+                DM.FDQFormaPagCaixa.Open();
+
+                DM.FDQContaPagarItemCaixa.Close;
+                DM.FDQContaPagarItemCaixa.ParamByName('PIdContaPagarItemCaixa')
+                  .Value := idContasPagar[I];
+                DM.FDQContaPagarItemCaixa.Open();
+
+                if DM.FDQFormaPagCaixaentraCaixa.AsString = 'S' then
+                begin
+                  // caixa
+                  DM.FDQEditCaixa.sql.Clear;
+                  DM.FDQEditCaixa.sql.Add('update caixa set');
+                  DM.FDQEditCaixa.sql.Add(' vlRetirada = :vlRetirada');
+                  DM.FDQEditCaixa.sql.Add(', vlSaldo = :vlSaldo');
+                  DM.FDQEditCaixa.sql.Add(' where id = :id');
+
+                  DM.FDQEditCaixa.Params.ParamByName('vlRetirada').AsFloat :=
+                    DM.FDQConsCaixavlRetirada.AsFloat + valorBaixa;
+                  DM.FDQEditCaixa.Params.ParamByName('vlSaldo').AsFloat :=
+                    DM.FDQConsCaixavlSaldo.AsFloat - valorBaixa;
+                  DM.FDQEditCaixa.Params.ParamByName('id').AsInteger :=
+                    DM.FDQConsCaixaid.AsInteger;
+                  DM.FDQEditCaixa.ExecSQL;
+
+                  // item caixa
+                  DM.FDQEditItemCaixa.Close;
+                  DM.FDQEditItemCaixa.Open();
+                  DM.FDQEditItemCaixa.Append;
+                  DM.FDQEditItemCaixaidCaixa.AsInteger :=
+                    DM.FDQConsCaixaid.AsInteger;
+                  DM.FDQEditItemCaixadataLancamento.AsDateTime := Now;
+                  DM.FDQEditItemCaixavlLancamento.AsFloat := valorBaixa;
+                  DM.FDQEditItemCaixadescricaoLancamento.AsString :=
+                    'Pagamento ContaPagar NDoc: ' + idContasPagar[I] + ' Forn: '
+                    + DM.FDQContaPagarItemCaixaid_fornecedor.AsString;
+                  DM.FDQEditItemCaixatipoLancamento.AsString := 'RETIRADA';
+                  DM.FDQEditItemCaixa.Post;
+                end;
               end
               else if not EdtAcrescimoBaixa.Text.IsEmpty then
               begin
@@ -1075,6 +1172,49 @@ begin
                 DM.FDQCadBaixaContaPagarid_forma_pag.AsInteger :=
                   DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
                 DM.FDQCadBaixaContaPagar.Post;
+
+                // lançamento caixa e item caixa
+                DM.FDQFormaPagCaixa.Close;
+                DM.FDQFormaPagCaixa.ParamByName('PFormaPagCaixa').Value :=
+                  DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
+                DM.FDQFormaPagCaixa.Open();
+
+                DM.FDQContaPagarItemCaixa.Close;
+                DM.FDQContaPagarItemCaixa.ParamByName('PIdContaPagarItemCaixa')
+                  .Value := idContasPagar[I];
+                DM.FDQContaPagarItemCaixa.Open();
+
+                if DM.FDQFormaPagCaixaentraCaixa.AsString = 'S' then
+                begin
+                  // caixa
+                  DM.FDQEditCaixa.sql.Clear;
+                  DM.FDQEditCaixa.sql.Add('update caixa set');
+                  DM.FDQEditCaixa.sql.Add(' vlRetirada = :vlRetirada');
+                  DM.FDQEditCaixa.sql.Add(', vlSaldo = :vlSaldo');
+                  DM.FDQEditCaixa.sql.Add(' where id = :id');
+
+                  DM.FDQEditCaixa.Params.ParamByName('vlRetirada').AsFloat :=
+                    DM.FDQConsCaixavlRetirada.AsFloat + valorBaixa;
+                  DM.FDQEditCaixa.Params.ParamByName('vlSaldo').AsFloat :=
+                    DM.FDQConsCaixavlSaldo.AsFloat - valorBaixa;
+                  DM.FDQEditCaixa.Params.ParamByName('id').AsInteger :=
+                    DM.FDQConsCaixaid.AsInteger;
+                  DM.FDQEditCaixa.ExecSQL;
+
+                  // item caixa
+                  DM.FDQEditItemCaixa.Close;
+                  DM.FDQEditItemCaixa.Open();
+                  DM.FDQEditItemCaixa.Append;
+                  DM.FDQEditItemCaixaidCaixa.AsInteger :=
+                    DM.FDQConsCaixaid.AsInteger;
+                  DM.FDQEditItemCaixadataLancamento.AsDateTime := Now;
+                  DM.FDQEditItemCaixavlLancamento.AsFloat := valorBaixa;
+                  DM.FDQEditItemCaixadescricaoLancamento.AsString :=
+                    'Pagamento ContaPagar NDoc: ' + idContasPagar[I] + ' Forn: '
+                    + DM.FDQContaPagarItemCaixaid_fornecedor.AsString;
+                  DM.FDQEditItemCaixatipoLancamento.AsString := 'RETIRADA';
+                  DM.FDQEditItemCaixa.Post;
+                end;
               end
               else
               begin
@@ -1146,6 +1286,49 @@ begin
                 DM.FDQCadBaixaContaPagarid_forma_pag.AsInteger :=
                   DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
                 DM.FDQCadBaixaContaPagar.Post;
+
+                // lançamento caixa e item caixa
+                DM.FDQFormaPagCaixa.Close;
+                DM.FDQFormaPagCaixa.ParamByName('PFormaPagCaixa').Value :=
+                  DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
+                DM.FDQFormaPagCaixa.Open();
+
+                DM.FDQContaPagarItemCaixa.Close;
+                DM.FDQContaPagarItemCaixa.ParamByName('PIdContaPagarItemCaixa')
+                  .Value := idContasPagar[I];
+                DM.FDQContaPagarItemCaixa.Open();
+
+                if DM.FDQFormaPagCaixaentraCaixa.AsString = 'S' then
+                begin
+                  // caixa
+                  DM.FDQEditCaixa.sql.Clear;
+                  DM.FDQEditCaixa.sql.Add('update caixa set');
+                  DM.FDQEditCaixa.sql.Add(' vlRetirada = :vlRetirada');
+                  DM.FDQEditCaixa.sql.Add(', vlSaldo = :vlSaldo');
+                  DM.FDQEditCaixa.sql.Add(' where id = :id');
+
+                  DM.FDQEditCaixa.Params.ParamByName('vlRetirada').AsFloat :=
+                    DM.FDQConsCaixavlRetirada.AsFloat + valorBaixa;
+                  DM.FDQEditCaixa.Params.ParamByName('vlSaldo').AsFloat :=
+                    DM.FDQConsCaixavlSaldo.AsFloat - valorBaixa;
+                  DM.FDQEditCaixa.Params.ParamByName('id').AsInteger :=
+                    DM.FDQConsCaixaid.AsInteger;
+                  DM.FDQEditCaixa.ExecSQL;
+
+                  // item caixa
+                  DM.FDQEditItemCaixa.Close;
+                  DM.FDQEditItemCaixa.Open();
+                  DM.FDQEditItemCaixa.Append;
+                  DM.FDQEditItemCaixaidCaixa.AsInteger :=
+                    DM.FDQConsCaixaid.AsInteger;
+                  DM.FDQEditItemCaixadataLancamento.AsDateTime := Now;
+                  DM.FDQEditItemCaixavlLancamento.AsFloat := valorBaixa;
+                  DM.FDQEditItemCaixadescricaoLancamento.AsString :=
+                    'Pagamento ContaPagar NDoc: ' + idContasPagar[I] + ' Forn: '
+                    + DM.FDQContaPagarItemCaixaid_fornecedor.AsString;
+                  DM.FDQEditItemCaixatipoLancamento.AsString := 'RETIRADA';
+                  DM.FDQEditItemCaixa.Post;
+                end;
               end;
             end
             else
@@ -1217,6 +1400,49 @@ begin
               DM.FDQCadBaixaContaPagarid_forma_pag.AsInteger :=
                 DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
               DM.FDQCadBaixaContaPagar.Post;
+
+              // lançamento caixa e item caixa
+              DM.FDQFormaPagCaixa.Close;
+              DM.FDQFormaPagCaixa.ParamByName('PFormaPagCaixa').Value :=
+                DM.FDQConsAvistaFormaPagid_forma_pag.AsInteger;
+              DM.FDQFormaPagCaixa.Open();
+
+              DM.FDQContaPagarItemCaixa.Close;
+              DM.FDQContaPagarItemCaixa.ParamByName('PIdContaPagarItemCaixa')
+                .Value := idContasPagar[I];
+              DM.FDQContaPagarItemCaixa.Open();
+
+              if DM.FDQFormaPagCaixaentraCaixa.AsString = 'S' then
+              begin
+                // caixa
+                DM.FDQEditCaixa.sql.Clear;
+                DM.FDQEditCaixa.sql.Add('update caixa set');
+                DM.FDQEditCaixa.sql.Add(' vlRetirada = :vlRetirada');
+                DM.FDQEditCaixa.sql.Add(', vlSaldo = :vlSaldo');
+                DM.FDQEditCaixa.sql.Add(' where id = :id');
+
+                DM.FDQEditCaixa.Params.ParamByName('vlRetirada').AsFloat :=
+                  DM.FDQConsCaixavlRetirada.AsFloat + valorBaixa;
+                DM.FDQEditCaixa.Params.ParamByName('vlSaldo').AsFloat :=
+                  DM.FDQConsCaixavlSaldo.AsFloat - valorBaixa;
+                DM.FDQEditCaixa.Params.ParamByName('id').AsInteger :=
+                  DM.FDQConsCaixaid.AsInteger;
+                DM.FDQEditCaixa.ExecSQL;
+
+                // item caixa
+                DM.FDQEditItemCaixa.Close;
+                DM.FDQEditItemCaixa.Open();
+                DM.FDQEditItemCaixa.Append;
+                DM.FDQEditItemCaixaidCaixa.AsInteger :=
+                  DM.FDQConsCaixaid.AsInteger;
+                DM.FDQEditItemCaixadataLancamento.AsDateTime := Now;
+                DM.FDQEditItemCaixavlLancamento.AsFloat := valorBaixa;
+                DM.FDQEditItemCaixadescricaoLancamento.AsString :=
+                  'Pagamento ContaPagar NDoc: ' + idContasPagar[I] + ' Forn: ' +
+                  DM.FDQContaPagarItemCaixaid_fornecedor.AsString;
+                DM.FDQEditItemCaixatipoLancamento.AsString := 'RETIRADA';
+                DM.FDQEditItemCaixa.Post;
+              end;
             end;
             // end;
           except
@@ -1240,7 +1466,7 @@ end;
 
 procedure TFCadContasPagar.SpdBConfirmarClick(Sender: TObject);
 var
-  I: Integer;
+  I, idForn, idDespesa: Integer;
   dataVenc: TDateTime;
 begin
   inherited;
@@ -1254,6 +1480,9 @@ begin
     end
     else
     begin
+      idForn := DM.FDQFornecedorid.AsInteger;
+      idDespesa := DM.FDQConsDespesaContaPagarid.AsInteger;
+
       if crud = 'inserir' then
       begin
         for I := 0 to nParc - 1 do
@@ -1263,10 +1492,8 @@ begin
             DM.FDQCadContaPagar.Close;
             DM.FDQCadContaPagar.Open();
             DM.FDQCadContaPagar.Append;
-            DM.FDQCadContaPagarid_fornecedor.AsInteger :=
-              DM.FDQFornecedorid.AsInteger;
-            DM.FDQCadContaPagarid_tipo_despesa.AsInteger :=
-              DM.FDQConsDespesaContaPagarid.AsInteger;
+            DM.FDQCadContaPagarid_fornecedor.AsInteger := idForn;
+            DM.FDQCadContaPagarid_tipo_despesa.AsInteger := idDespesa;
             DM.FDQCadContaPagarn_doc.AsString := EdtNumDoc.Text;
             DM.FDQCadContaPagarvalor_doc.AsFloat :=
               StrToFloat(EdtValorDoc.Text);
@@ -1293,10 +1520,8 @@ begin
             DM.FDQCadContaPagar.Close;
             DM.FDQCadContaPagar.Open();
             DM.FDQCadContaPagar.Append;
-            DM.FDQCadContaPagarid_fornecedor.AsInteger :=
-              DM.FDQFornecedorid.AsInteger;
-            DM.FDQCadContaPagarid_tipo_despesa.AsInteger :=
-              DM.FDQConsDespesasid.AsInteger;
+            DM.FDQCadContaPagarid_fornecedor.AsInteger := idForn;
+            DM.FDQCadContaPagarid_tipo_despesa.AsInteger := idDespesa;
             DM.FDQCadContaPagarn_doc.AsString := EdtNumDoc.Text;
             DM.FDQCadContaPagarvalor_doc.AsFloat :=
               StrToFloat(EdtValorDoc.Text);
