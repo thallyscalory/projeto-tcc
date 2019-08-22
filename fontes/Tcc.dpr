@@ -28,7 +28,9 @@ uses
   FGX.Toasts.Android in 'Library\FGX.Toasts.Android.pas',
   FGX.Toasts in 'Library\FGX.Toasts.pas',
   UCaixa in 'UCaixa.pas' {FCaixa},
-  UFuncionario in 'UFuncionario.pas' {FFuncionario};
+  UFuncionario in 'UFuncionario.pas' {FFuncionario},
+  UCm in 'UCm.pas' {CM: TDataModule},
+  Proxy in 'Proxy.pas';
 
 {$R *.res}
 
@@ -38,5 +40,6 @@ begin
   Application.CreateForm(TFSplash, FSplash);
   Application.CreateForm(TFPrincipal, FPrincipal);
   Application.CreateForm(TFFuncionario, FFuncionario);
+  Application.CreateForm(TCM, CM);
   Application.Run;
 end.

@@ -28,7 +28,7 @@ implementation
 
 {%CLASSGROUP 'FMX.Controls.TControl'}
 
-uses UMainTesteConex;
+uses UPrincipal;
 
 {$R *.dfm}
 
