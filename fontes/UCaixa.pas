@@ -99,6 +99,7 @@ uses FGX.Graphics, FGX.Toasts, UDM, UPrincipal;
 procedure TFCaixa.ComboBoxFiltroCaixaClosePopup(Sender: TObject);
 var
   dtF, dtA: TDate;
+  I: Integer;
 begin
   inherited;
   try
@@ -157,37 +158,41 @@ begin
 
     if not DM.FDQConsCaixa.IsEmpty then
     begin
+      I := -1;
+
       DM.FDQConsCaixa.First;
       while not DM.FDQConsCaixa.Eof do
       begin
         dtA := DM.FDQConsCaixadataAbertura.AsDateTime;
         dtF := DM.FDQConsCaixadataFechamento.AsDateTime;
 
+        I := I + 1;
+
         ListViewFiltroCaixa.BeginUpdate;
         ListViewFiltroCaixa.Items.Add;
-
-        ListViewFiltroCaixa.Items[DM.FDQConsCaixa.RecNo - 1].Text := 'Cód: ' +
-          DM.FDQConsCaixaid.AsString + ' Dt.A: ' + DateToStr(dtA);
-        if DM.FDQConsCaixaaberto.AsString = 'N' then
-          ListViewFiltroCaixa.Items[DM.FDQConsCaixa.RecNo - 1].Text :=
-            ListViewFiltroCaixa.Items[DM.FDQConsCaixa.RecNo - 1].Text +
-            ' Dt.F: ' + DateToStr(dtF);
-        ListViewFiltroCaixa.Items[DM.FDQConsCaixa.RecNo - 1].Detail :=
+        ListViewFiltroCaixa.Items[I].Text := 'Caixa: ' +
           DM.FDQConsCaixaid.AsString;
-        ListViewFiltroCaixa.Items[DM.FDQConsCaixa.RecNo - 1].Data
-          [TMultiDetailAppearanceNames.Detail1] := 'Vl Abertura: ' +
-          DM.FDQConsCaixavlAbertura.AsString + '  Vl Recebimento: ' +
-          DM.FDQConsCaixavlRecebimento.AsString;
-        ListViewFiltroCaixa.Items[DM.FDQConsCaixa.RecNo - 1].Data
-          [TMultiDetailAppearanceNames.Detail2] := 'Vl Retirada: ' +
-          DM.FDQConsCaixavlRetirada.AsString;
-        ListViewFiltroCaixa.Items[DM.FDQConsCaixa.RecNo - 1].Data
-          [TMultiDetailAppearanceNames.Detail3] := 'Vl Saldo: ' +
-          DM.FDQConsCaixavlSaldo.AsString;
+        ListViewFiltroCaixa.Items[I].Purpose := TListItemPurpose.Header;
         ListViewFiltroCaixa.EndUpdate;
 
-        ListViewFiltroCaixa.Items[DM.FDQConsCaixa.RecNo - 1]
-          .Objects.TextObject.TextColor := claNavy;
+        I := I + 1;
+
+        ListViewFiltroCaixa.BeginUpdate;
+        ListViewFiltroCaixa.Items.Add;
+        ListViewFiltroCaixa.Items[I].Text := 'Dt.A: ' + DateToStr(dtA);
+        if DM.FDQConsCaixaaberto.AsString = 'N' then
+          ListViewFiltroCaixa.Items[I].Text := ListViewFiltroCaixa.Items[I].Text
+            + ' Dt.F: ' + DateToStr(dtF);
+        ListViewFiltroCaixa.Items[I].Detail := DM.FDQConsCaixaid.AsString;
+        ListViewFiltroCaixa.Items[I].Data[TMultiDetailAppearanceNames.Detail1]
+          := 'Vl Abertura: ' + DM.FDQConsCaixavlAbertura.AsString +
+          '  Vl Recebimento: ' + DM.FDQConsCaixavlRecebimento.AsString;
+        ListViewFiltroCaixa.Items[I].Data[TMultiDetailAppearanceNames.Detail2]
+          := 'Vl Retirada: ' + DM.FDQConsCaixavlRetirada.AsString;
+        ListViewFiltroCaixa.Items[I].Data[TMultiDetailAppearanceNames.Detail3]
+          := 'Vl Saldo: ' + DM.FDQConsCaixavlSaldo.AsString;
+        ListViewFiltroCaixa.Items[I].Objects.TextObject.TextColor := claNavy;
+        ListViewFiltroCaixa.EndUpdate;
 
         DM.FDQConsCaixa.Next;
       end;
@@ -225,128 +230,157 @@ begin
     MemoVlRecebimentosCaixa.Lines.Clear;
     MemoVlRetiradasCaixa.Lines.Clear;
 
-    DM.FDQConsCaixa.RecNo := ItemIndex + 1;
-
-    LblCodCaixa.Text := ListViewFiltroCaixa.Items[ItemIndex].Detail;
-    LblDtAberturaCaixa.Text := DM.FDQConsCaixadataAbertura.AsString;
-    LblDtFechamentoCaixa.Text := DM.FDQConsCaixadataFechamento.AsString;
-    LblVlAberturaCaixa.Text := DM.FDQConsCaixavlAbertura.AsString;
-    LblVlRecebimentosCaixa.Text := DM.FDQConsCaixavlRecebimento.AsString;
-    LblVlRetiradasCaixa.Text := DM.FDQConsCaixavlRetirada.AsString;
-    LblVlSaldoCaixa.Text := DM.FDQConsCaixavlSaldo.AsString;
-
-    DM.FDQConsItemCaixa.Close;
-    DM.FDQConsItemCaixa.ParamByName('PIdCaixa').Value :=
-      ListViewFiltroCaixa.Items[ItemIndex].Detail;
-    DM.FDQConsItemCaixa.Open();
-
-    DM.FDQConsItemCaixa.First;
-    while not DM.FDQConsItemCaixa.Eof do
+    DM.FDQConsCaixa.First;
+    while not DM.FDQConsCaixa.Eof do
     begin
-      if DM.FDQConsItemCaixatipoLancamento.AsString = 'RECEBIMENTO' then
+      if DM.FDQConsCaixaid.AsString = ListViewFiltroCaixa.Items[ItemIndex].Detail
+      then
       begin
-        MemoVlRecebimentosCaixa.Lines.Add
-          (DM.FDQConsItemCaixadescricaoLancamento.AsString + '...R$ ' +
-          DM.FDQConsItemCaixavlLancamento.AsString);
-      end
-      else if DM.FDQConsItemCaixatipoLancamento.AsString = 'RETIRADA' then
-      begin
-        MemoVlRetiradasCaixa.Lines.Add
-          (DM.FDQConsItemCaixadescricaoLancamento.AsString + '...R$ ' +
-          DM.FDQConsItemCaixavlLancamento.AsString);
+        LblCodCaixa.Text := ListViewFiltroCaixa.Items[ItemIndex].Detail;
+        LblDtAberturaCaixa.Text := DM.FDQConsCaixadataAbertura.AsString;
+        LblDtFechamentoCaixa.Text := DM.FDQConsCaixadataFechamento.AsString;
+        LblVlAberturaCaixa.Text := DM.FDQConsCaixavlAbertura.AsString;
+        LblVlRecebimentosCaixa.Text := DM.FDQConsCaixavlRecebimento.AsString;
+        LblVlRetiradasCaixa.Text := DM.FDQConsCaixavlRetirada.AsString;
+        LblVlSaldoCaixa.Text := DM.FDQConsCaixavlSaldo.AsString;
+
+        DM.FDQConsItemCaixa.Close;
+        DM.FDQConsItemCaixa.ParamByName('PIdCaixa').Value :=
+          ListViewFiltroCaixa.Items[ItemIndex].Detail;
+        DM.FDQConsItemCaixa.Open();
+
+        DM.FDQConsItemCaixa.First;
+        while not DM.FDQConsItemCaixa.Eof do
+        begin
+          if DM.FDQConsItemCaixatipoLancamento.AsString = 'RECEBIMENTO' then
+          begin
+            MemoVlRecebimentosCaixa.Lines.Add
+              (DM.FDQConsItemCaixadescricaoLancamento.AsString + '...R$ ' +
+              DM.FDQConsItemCaixavlLancamento.AsString);
+          end
+          else if DM.FDQConsItemCaixatipoLancamento.AsString = 'RETIRADA' then
+          begin
+            MemoVlRetiradasCaixa.Lines.Add
+              (DM.FDQConsItemCaixadescricaoLancamento.AsString + '...R$ ' +
+              DM.FDQConsItemCaixavlLancamento.AsString);
+          end;
+
+          DM.FDQConsItemCaixa.Next;
+        end;
       end;
 
-      DM.FDQConsItemCaixa.Next;
+      DM.FDQConsCaixa.Next;
     end;
     MudarAbaModelo(TbItemedicao, Sender);
   end
   else
   begin
-    DM.FDQConsCaixa.RecNo := ItemIndex + 1;
-    if DM.FDQConsCaixaaberto.AsString = 'S' then
+    DM.FDQConsCaixa.First;
+    while not DM.FDQConsCaixa.Eof do
     begin
-      TDialogService.MessageDialog('Deseja Fechar o Caixa (' +
-        ListViewFiltroCaixa.Items[ItemIndex].Detail + ')?',
-        System.UITypes.TMsgDlgType.mtInformation,
-        [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo],
-        System.UITypes.TMsgDlgBtn.mbYes, 0,
-        procedure(const AResult: TModalResult)
+      if DM.FDQConsCaixaid.AsString = ListViewFiltroCaixa.Items[ItemIndex].Detail
+      then
+      begin
+        if DM.FDQConsCaixaaberto.AsString = 'S' then
         begin
-          case AResult of
-            mrYES:
-              begin
-                try
-                  DM.FDQEditCaixa.Close;
-                  DM.FDQEditCaixa.Open('select * from caixa');
-                  DM.FDQEditCaixa.SQL.Clear;
-                  DM.FDQEditCaixa.SQL.Add('update caixa set');
-                  DM.FDQEditCaixa.SQL.Add(' dataFechamento = :dataFechamento');
-                  DM.FDQEditCaixa.SQL.Add(', aberto = :aberto');
-                  DM.FDQEditCaixa.SQL.Add(' where id = :id');
+          TDialogService.MessageDialog('Deseja Fechar o Caixa (' +
+            ListViewFiltroCaixa.Items[ItemIndex].Detail + ')?',
+            System.UITypes.TMsgDlgType.mtInformation,
+            [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo],
+            System.UITypes.TMsgDlgBtn.mbYes, 0,
+            procedure(const AResult: TModalResult)
+            begin
+              case AResult of
+                mrYES:
+                  begin
+                    try
+                      DM.FDQEditCaixa.Close;
+                      DM.FDQEditCaixa.Open('select * from caixa');
+                      DM.FDQEditCaixa.SQL.Clear;
+                      DM.FDQEditCaixa.SQL.Add('update caixa set');
+                      DM.FDQEditCaixa.SQL.Add
+                        (' dataFechamento = :dataFechamento');
+                      DM.FDQEditCaixa.SQL.Add(', aberto = :aberto');
+                      DM.FDQEditCaixa.SQL.Add(' where id = :id');
 
-                  DM.FDQEditCaixa.Params.ParamByName('dataFechamento')
-                    .AsDateTime := Now;
-                  DM.FDQEditCaixa.Params.ParamByName('aberto').AsString := 'N';
-                  DM.FDQEditCaixa.Params.ParamByName('id').AsInteger :=
-                    StrToInt(ListViewFiltroCaixa.Items[ItemIndex].Detail);
-                  DM.FDQEditCaixa.ExecSQL;
+                      DM.FDQEditCaixa.Params.ParamByName('dataFechamento')
+                        .AsDateTime := Now;
+                      DM.FDQEditCaixa.Params.ParamByName('aberto')
+                        .AsString := 'N';
+                      DM.FDQEditCaixa.Params.ParamByName('id').AsInteger :=
+                        StrToInt(ListViewFiltroCaixa.Items[ItemIndex].Detail);
+                      DM.FDQEditCaixa.ExecSQL;
 
 {$IFDEF ANDROID}
-                  TfgToast.Show('Caixa (' + ListViewFiltroCaixa.Items[ItemIndex]
-                    .Detail + ') Fechado!');
+                      TfgToast.Show('Caixa (' + ListViewFiltroCaixa.Items
+                        [ItemIndex].Detail + ') Fechado!');
 {$ENDIF}
 {$IFDEF MSWINDOWS}
-                  ShowMessage('Caixa (' + ListViewFiltroCaixa.Items[ItemIndex]
-                    .Detail + ') Fechado!');
+                      ShowMessage('Caixa (' + ListViewFiltroCaixa.Items
+                        [ItemIndex].Detail + ') Fechado!');
 {$ENDIF}
-                  ComboBoxFiltroCaixaClosePopup(Sender);
-                except
-                  on E: Exception do
-                    ShowMessage(E.Message);
-                end;
+                      ComboBoxFiltroCaixaClosePopup(Sender);
+                    except
+                      on E: Exception do
+                        ShowMessage(E.Message);
+                    end;
+                  end;
+                mrNo:
+                  begin
+                    // ShowMessage('You chose No');
+
+                  end;
               end;
-            mrNo:
-              // ShowMessage('You chose No');
-            end;
-          end);
+            end);
         end;
       end;
 
+      DM.FDQConsCaixa.Next;
     end;
 
-    procedure TFCaixa.SpBVoltarClick(Sender: TObject);
+  end;
+
+end;
+
+procedure TFCaixa.SpBVoltarClick(Sender: TObject);
+begin
+  inherited;
+  Close;
+end;
+
+procedure TFCaixa.SpdBtnConfirmaLancamentoCaixaClick(Sender: TObject);
+var
+  valida: Boolean;
+begin
+  inherited;
+  try
+    valida := True;
+
+    if (EdtVlLancamentoCaixa.Text.IsEmpty) or
+      (EdtDescricaoLancamento.Text.IsEmpty) then
     begin
-      inherited;
-      Close;
-    end;
-
-    procedure TFCaixa.SpdBtnConfirmaLancamentoCaixaClick(Sender: TObject);
-    var
-      valida: Boolean;
-    begin
-      inherited;
-      try
-        DM.FDQConsCaixa.RecNo := itemIndexListViewCaixa + 1;
-
-        valida := True;
-
-        if (EdtVlLancamentoCaixa.Text.IsEmpty) or
-          (EdtDescricaoLancamento.Text.IsEmpty) then
-        begin
-          valida := False;
+      valida := False;
 {$IFDEF ANDROID}
-          TfgToast.Show('Os Campos Não Pode estar em Branco!');
+      TfgToast.Show('Os Campos Não Pode estar em Branco!');
 {$ENDIF}
 {$IFDEF MSWINDOWS}
-          ShowMessage('Os Campos Não Pode estar em Branco!');
+      ShowMessage('Os Campos Não Pode estar em Branco!');
 {$ENDIF}
-        end;
+    end;
 
-        if valida then
+    if valida then
+    begin
+      if ComboBoxTipoLancamentoCaixa.ItemIndex = 0 then
+      begin
+        DM.FDQConsCaixa.First;
+        while not DM.FDQConsCaixa.Eof do
         begin
-          if ComboBoxTipoLancamentoCaixa.ItemIndex = 0 then
+          if DM.FDQConsCaixaid.AsString = ListViewFiltroCaixa.Items
+            [itemIndexListViewCaixa].Detail then
           begin
             // item caixa
+            DM.FDQEditItemCaixa.SQL.Clear;
+            DM.FDQEditItemCaixa.SQL.Add('select * from itemCaixa');
             DM.FDQEditItemCaixa.Close;
             DM.FDQEditItemCaixa.Open();
             DM.FDQEditItemCaixa.Append;
@@ -380,10 +414,22 @@ begin
             DM.FDQEditCaixa.Params.ParamByName('id').AsInteger :=
               DM.FDQConsCaixaid.AsInteger;
             DM.FDQEditCaixa.ExecSQL;
-          end
-          else if ComboBoxTipoLancamentoCaixa.ItemIndex = 1 then
+          end;
+
+          DM.FDQConsCaixa.Next;
+        end;
+      end
+      else if ComboBoxTipoLancamentoCaixa.ItemIndex = 1 then
+      begin
+        DM.FDQConsCaixa.First;
+        while not DM.FDQConsCaixa.Eof do
+        begin
+          if DM.FDQConsCaixaid.AsString = ListViewFiltroCaixa.Items
+            [itemIndexListViewCaixa].Detail then
           begin
             // item caixa
+            DM.FDQEditItemCaixa.SQL.Clear;
+            DM.FDQEditItemCaixa.SQL.Add('select * from itemCaixa');
             DM.FDQEditItemCaixa.Close;
             DM.FDQEditItemCaixa.Open();
             DM.FDQEditItemCaixa.Append;
@@ -419,94 +465,101 @@ begin
             DM.FDQEditCaixa.ExecSQL;
           end;
 
-          MudarAbaModelo(TbItemListagem, Sender);
-          ComboBoxFiltroCaixaClosePopup(Sender);
+          DM.FDQConsCaixa.Next;
         end;
-      except
-        on E: Exception do
       end;
 
+      MudarAbaModelo(TbItemListagem, Sender);
+      ComboBoxFiltroCaixaClosePopup(Sender);
     end;
+  except
+    on E: Exception do
+  end;
 
-    procedure TFCaixa.SpdBtnNovoCaixaClick(Sender: TObject);
-    begin
-      inherited;
-      DM.FDQConsCaixa.Close;
-      DM.FDQConsCaixa.ParamByName('PCaixaAberto').Value := 'S';
-      DM.FDQConsCaixa.Open();
+end;
 
-      if not DM.FDQConsCaixa.IsEmpty then
-      begin
+procedure TFCaixa.SpdBtnNovoCaixaClick(Sender: TObject);
+begin
+  inherited;
+  DM.FDQConsCaixa.Close;
+  DM.FDQConsCaixa.ParamByName('PCaixaAberto').Value := 'S';
+  DM.FDQConsCaixa.Open();
+
+  if not DM.FDQConsCaixa.IsEmpty then
+  begin
 {$IFDEF ANDROID}
-        TfgToast.Show('Já Existe um Caixa Aberto!');
+    TfgToast.Show('Já Existe um Caixa Aberto!');
 {$ENDIF}
 {$IFDEF MSWINDOWS}
-        ShowMessage('Já Existe um Caixa Aberto!');
+    ShowMessage('Já Existe um Caixa Aberto!');
 {$ENDIF}
-      end
-      else
+  end
+  else
+  begin
+    TDialogService.MessageDialog('Deseja Abrir o Caixa?',
+      System.UITypes.TMsgDlgType.mtInformation,
+      [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo],
+      System.UITypes.TMsgDlgBtn.mbYes, 1,
+
+      procedure(const AResult: TModalResult)
       begin
-        TDialogService.MessageDialog('Deseja Abrir o Caixa?',
-          System.UITypes.TMsgDlgType.mtInformation,
-          [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo],
-          System.UITypes.TMsgDlgBtn.mbYes, 1,
+        case AResult of
+          mrYES:
+            // ShowMessage('You chose Yes');
+            begin
+              try
+                InputBox('Informe o Valor de Abertura:', '', '0,00',
+                  procedure(const AResult: TModalResult; const AValue: string)
+                  begin
+                    case AResult of
+                      { Detect which button was pushed and show a different message }
+                      mrOk:
+                        begin
+                          // AValue is the result of the inputbox dialog
+                          DM.FDQEditCaixa.Close;
+                          DM.FDQEditCaixa.Open('select * from caixa');
+                          DM.FDQEditCaixa.Append;
+                          DM.FDQEditCaixadataAbertura.AsDateTime := Now;
+                          DM.FDQEditCaixavlAbertura.AsFloat :=
+                            StrToFloat(AValue);
+                          DM.FDQEditCaixavlSaldo.AsFloat := StrToFloat(AValue);
+                          DM.FDQEditCaixaaberto.AsString := 'S';
+                          DM.FDQEditCaixa.Post;
 
-          procedure(const AResult: TModalResult)
-          begin
-            case AResult of
-              mrYES:
-                // ShowMessage('You chose Yes');
-                begin
-                  try
-                    InputBox('Informe o Valor de Abertura:', '', '0,00',
-                      procedure(const AResult: TModalResult;
-                        const AValue: string)
-                      begin
-                        case AResult of
-                          { Detect which button was pushed and show a different message }
-                          mrOk:
-                            begin
-                              // AValue is the result of the inputbox dialog
-                              DM.FDQEditCaixa.Close;
-                              DM.FDQEditCaixa.Open('select * from caixa');
-                              DM.FDQEditCaixa.Append;
-                              DM.FDQEditCaixadataAbertura.AsDateTime := Now;
-                              DM.FDQEditCaixavlAbertura.AsFloat :=
-                                StrToFloat(AValue);
-                              DM.FDQEditCaixavlSaldo.AsFloat :=
-                                StrToFloat(AValue);
-                              DM.FDQEditCaixaaberto.AsString := 'S';
-                              DM.FDQEditCaixa.Post;
-
-                              ComboBoxFiltroCaixa.ItemIndex := 0;
-                              ComboBoxFiltroCaixaClosePopup(Sender);
-                            end;
-                          mrCancel:
-                            begin
-
-                            end;
+                          ComboBoxFiltroCaixa.ItemIndex := 0;
+                          ComboBoxFiltroCaixaClosePopup(Sender);
                         end;
-                      end);
-                  except
-                    on E: Exception do
-                      ShowMessage(E.Message);
-                  end;
-                end;
-              mrNo:
-                // ShowMessage('You chose No');
+                      mrCancel:
+                        begin
+
+                        end;
+                    end;
+                  end);
+              except
+                on E: Exception do
+                  ShowMessage(E.Message);
               end;
-            end);
+            end;
+          mrNo:
+            // ShowMessage('You chose No');
           end;
-        end;
+        end);
+      end;
+    end;
 
-        procedure TFCaixa.SpdBtnNovoLancamentoCaixaClick(Sender: TObject);
-        var
-          validaF: Boolean;
+    procedure TFCaixa.SpdBtnNovoLancamentoCaixaClick(Sender: TObject);
+    var
+      validaF: Boolean;
+    begin
+      inherited;
+      validaF := True;
+
+      DM.FDQConsCaixa.First;
+      while not DM.FDQConsCaixa.Eof do
+      begin
+        if DM.FDQConsCaixaid.AsString = ListViewFiltroCaixa.Items
+          [itemIndexListViewCaixa].Detail then
         begin
-          inherited;
-          validaF := True;
-          DM.FDQConsCaixa.RecNo := itemIndexListViewCaixa + 1;
-
           if DM.FDQConsCaixaaberto.AsString = 'N' then
           begin
             validaF := False;
@@ -524,19 +577,24 @@ begin
             EdtVlLancamentoCaixa.Text := EmptyStr;
             EdtDescricaoLancamento.Text := EmptyStr;
             MudarAbaModelo(TbItemLancamentoCaixa, Sender);
+            Break;
           end;
         end;
 
-        procedure TFCaixa.SpdBtnVoltarInfoCaixaClick(Sender: TObject);
-        begin
-          inherited;
-          MudarAbaModelo(TbItemListagem, Sender);
-        end;
+        DM.FDQConsCaixa.Next;
+      end;
+    end;
 
-        procedure TFCaixa.SpdBtnVoltarLancamentoCaixaClick(Sender: TObject);
-        begin
-          inherited;
-          MudarAbaModelo(TbItemedicao, Sender);
-        end;
+    procedure TFCaixa.SpdBtnVoltarInfoCaixaClick(Sender: TObject);
+    begin
+      inherited;
+      MudarAbaModelo(TbItemListagem, Sender);
+    end;
+
+    procedure TFCaixa.SpdBtnVoltarLancamentoCaixaClick(Sender: TObject);
+    begin
+      inherited;
+      MudarAbaModelo(TbItemedicao, Sender);
+    end;
 
 end.

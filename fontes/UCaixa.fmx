@@ -7,7 +7,7 @@ inherited FCaixa: TFCaixa
     Size.Height = 585.000000000000000000
     inherited TbControlCadModelo: TTabControl
       Size.Height = 585.000000000000000000
-      TabIndex = 0
+      TabIndex = 2
       Sizes = (
         330s
         536s
@@ -16,7 +16,6 @@ inherited FCaixa: TFCaixa
         330s
         536s)
       inherited TbItemListagem: TTabItem
-        IsSelected = True
         Size.Width = 110.000000000000000000
         ExplicitSize.cx = 165.000000000000000000
         ExplicitSize.cy = 49.000000000000000000
@@ -128,7 +127,7 @@ inherited FCaixa: TFCaixa
             Size.Height = 488.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 0
-            Viewport.Width = 330.000000000000000000
+            Viewport.Width = 325.000000000000000000
             Viewport.Height = 488.000000000000000000
             object Layout3: TLayout
               Align = Top
@@ -304,8 +303,8 @@ inherited FCaixa: TFCaixa
                 Size.Height = 120.000000000000000000
                 Size.PlatformDefault = False
                 TabOrder = 0
-                Viewport.Width = 321.000000000000000000
-                Viewport.Height = 120.000000000000000000
+                Viewport.Width = 313.000000000000000000
+                Viewport.Height = 112.000000000000000000
               end
             end
             object Layout9: TLayout
@@ -358,8 +357,8 @@ inherited FCaixa: TFCaixa
                 Size.Height = 120.000000000000000000
                 Size.PlatformDefault = False
                 TabOrder = 0
-                Viewport.Width = 321.000000000000000000
-                Viewport.Height = 120.000000000000000000
+                Viewport.Width = 313.000000000000000000
+                Viewport.Height = 112.000000000000000000
               end
             end
             object Layout15: TLayout
@@ -443,7 +442,7 @@ inherited FCaixa: TFCaixa
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 110.000000000000000000
         Size.Height = 49.000000000000000000
         Size.PlatformDefault = False

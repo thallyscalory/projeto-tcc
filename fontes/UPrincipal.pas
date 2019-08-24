@@ -25,7 +25,6 @@ type
     SpdBInfo: TSpeedButton;
     Label1: TLabel;
     SpdBtnMenuPrincipal: TSpeedButton;
-    MultiViewMenuPrincipal: TMultiView;
     RectangleMenuVenda: TRectangle;
     ImgMenuVenda: TImage;
     SpdBtnMenuVendas: TSpeedButton;
@@ -197,6 +196,11 @@ type
     RoundRect2: TRoundRect;
     SpdBtnEntrarLogin: TSpeedButton;
     SpdBtnCancelarLogin: TSpeedButton;
+    LytUsuarioAtivo: TLayout;
+    Label19: TLabel;
+    LblCodUsuarioAtivo: TLabel;
+    LblNomeUsuarioAtivo: TLabel;
+    MultiView1: TMultiView;
     procedure FormCreate(Sender: TObject);
     procedure ImgMenuVendaClick(Sender: TObject);
     procedure SpdBInfoClick(Sender: TObject);
@@ -273,6 +277,7 @@ type
 var
   FPrincipal: TFPrincipal;
   TecladoVirtualVisible: Boolean;
+  idUsuarioAtivo: string;
 
 implementation
 
@@ -1241,23 +1246,32 @@ end;
 
 procedure TFPrincipal.SpdBtnEntrarLoginClick(Sender: TObject);
 begin
-  DM.FDQFuncionario.SQL.Clear;
-  DM.FDQFuncionario.Close;
-  DM.FDQFuncionario.Open('select * from funcionario where usuario = ' +
-    QuotedStr(EdtUsuarioLogin.Text) + ' and senha = ' +
-    QuotedStr(EdtSenhaLogin.Text) + ' and status = ' + QuotedStr('A'));
+  try
+    DM.FDQFuncionario.SQL.Clear;
+    DM.FDQFuncionario.Close;
+    DM.FDQFuncionario.Open('select * from funcionario where usuario = ' +
+      QuotedStr(EdtUsuarioLogin.Text) + ' and senha = ' +
+      QuotedStr(EdtSenhaLogin.Text) + ' and status = ' + QuotedStr('A'));
 
-  if DM.FDQFuncionario.IsEmpty then
-  begin
+    if DM.FDQFuncionario.IsEmpty then
+    begin
 {$IFDEF ANDROID}
-    TfgToast.Show('Usuario ou Senha Inválido!');
+      TfgToast.Show('Usuário ou Senha Inválido!');
 {$ENDIF}
 {$IFDEF MSWINDOWS}
-    ShowMessage('Usuario ou Senha Inválido!');
+      ShowMessage('Usuário ou Senha Inválido!');
 {$ENDIF}
-  end
-  else
-    MudarAba(TbItemMenu, Sender);
+    end
+    else
+    begin
+      idUsuarioAtivo := DM.FDQFuncionarioid_funcionario.AsString;
+      LblCodUsuarioAtivo.Text := DM.FDQFuncionarioid_funcionario.AsString;
+      LblNomeUsuarioAtivo.Text := DM.FDQFuncionariousuario.AsString;
+      MudarAba(TbItemMenu, Sender);
+    end;
+  finally
+    DM.FDQFuncionario.Close;
+  end;
 end;
 
 procedure TFPrincipal.SpdBtnMenuAgendaClick(Sender: TObject);
